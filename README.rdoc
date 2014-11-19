@@ -1,0 +1,9 @@
+== README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+== OJDBC6 Jar
+
+You must place the ojdbc6.jar file into your JRuby /lib folder in order to connect to the VACOLS database.
+You can find this jar at etc/ojdbc6.jar

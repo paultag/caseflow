@@ -1,0 +1,11 @@
+.DS_Store
+*.swo
+*.swp
+*.iml
+.idea
+.idea_modules
+/.bundle
+/log/*.log
+/tmp/**/*
+/config/database.yml
+/public/assets/**/*
