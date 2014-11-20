@@ -7,5 +7,7 @@ class Case < ActiveRecord::Base
 
   has_one :folder, foreign_key: :ticknum
 
-  has_many :issues, foreign_key: :isskey
+  has_many :issues, -> { order 'issues.issseq asc' }, foreign_key: :isskey
+  has_many :assignments, -> { order 'assign.tskdassn asc' }, foreign_key: :tsktknm
+  has_many :attachments, -> { order 'attach.imgadtm asc' }, foreign_key: :imgtkky
 end

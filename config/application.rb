@@ -19,5 +19,11 @@ module Caseflow
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.paths['config/routes.rb'] << 'config/routes/api.rb'
+    config.paths['config/routes.rb'] << 'config/routes/web.rb'
+
+    # Do not modify query parameters when empty arrays are passed
+    config.action_dispatch.perform_deep_munge = false
   end
 end
