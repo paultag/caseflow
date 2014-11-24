@@ -6,7 +6,7 @@ class Appellant < ActiveRecord::Base
 
   has_many :cases, foreign_key: :bfcorkey
   has_many :folders, foreign_key: :ticorkey
+  has_many :correspondences, -> { order 'mail.mlcorrdate asc' }, foreign_key: :mlcorkey
 
   has_many :hearings, through: :cases
-  has_many :parcels, through: :cases
 end

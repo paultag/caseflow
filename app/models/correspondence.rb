@@ -1,4 +1,4 @@
-class Parcel < ActiveRecord::Base
+class Correspondence < ActiveRecord::Base
   self.table_name = 'vacols.mail'
   self.primary_key = :mlfolder, :mlseq
 
