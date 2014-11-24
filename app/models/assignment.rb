@@ -4,4 +4,13 @@ class Assignment < ActiveRecord::Base
 
   belongs_to :case, foreign_key: :tsktknm
   belongs_to :folder, foreign_key: :tsktknm
+
+  belongs_to :assigned_to, class: StaffLocation, foreign_key: :tskstfas
+  belongs_to :added_by, class: StaffLocation, foreign_key: :tskadusr
+  belongs_to :owned_by, class: StaffLocation, foreign_key: :tskstown
+  belongs_to :changed_by, class: StaffLocation, foreign_key: :tskmdusr
+
+  # belongs_to :attachment
+  # belongs_to :hearing
+  # belongs_to :prior_location
 end
