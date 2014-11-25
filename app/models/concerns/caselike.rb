@@ -10,7 +10,7 @@ module Caselike
     has_many :attachments, -> { order 'attach.imgadtm asc' }, foreign_key: :imgtkky
     has_many :hearings, -> { order 'hearsched.hearing_date asc' }, foreign_key: :folder_nr
     has_many :correspondences, -> { order 'mail.mlseq asc' }, foreign_key: :mlfolder
-    has_many :prior_locations, -> { order 'priorloc.locdin desc nulls first' }, foreign_key: :lockey
+    has_many :prior_staff_locations, -> { order 'priorloc.locdin desc nulls first' }, class: PriorStaffLocation, foreign_key: :lockey
     has_many :remand_reasons, -> { order 'rmdrea.rmdissseq asc' }, foreign_key: :rmdkey
     has_many :representatives, -> { order 'rep.repaddtime desc' }, foreign_key: :repkey
   end
