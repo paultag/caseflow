@@ -7,3 +7,15 @@ application up and running.
 
 You must place the ojdbc6.jar file into your JRuby /lib folder in order to connect to the VACOLS database.
 You can find this jar at etc/ojdbc6.jar
+
+== Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 8 Download
+
+You must upgrade Java's default encryption library to support Unlimited Strength, due to export laws.
+
+1. Unzip the file at etc/jce_policy-8.zip
+2. Identify your JRE security path.  Look at the README file for more info.
+
+    Mac OS X with Java 8 is commonly at: /Library/Java/JavaVirtualMachines/jdk1.8.0_<PATCH VERSION>.jdk/Contents/Home/jre/lib/security
+
+3. Rename `local_policy.jar` to `local_policy.jar.back` and `US_export_policy.jar` to `US_export_policy.jar.back`
+4. Restart the application

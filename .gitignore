@@ -9,3 +9,5 @@
 /tmp/**/*
 /config/database.yml
 /public/assets/**/*
+/out
+/src
