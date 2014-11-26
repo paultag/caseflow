@@ -1,0 +1,38 @@
+//= require jquery.min
+//= require jquery_ujs
+//= require moment.min
+//= require lodash.min
+//= require angular.min
+//= require angular-route.min
+
+//= require ./configs/angular
+//= require ./configs/rails
+//= require ./configs/lodash
+
+//= require ./directives/navigation
+//= require ./directives/form
+
+//= require ./controllers/tests
+
+//= require_self
+
+(function() {
+  "use strict";
+
+  var app = angular.module('application');
+
+  app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.
+      when('/tests', {
+        templateUrl: '<%= asset_path('tests/index.html') %>',
+        controller: 'TestsController'
+      }).
+      when('/tests/:id', {
+        templateUrl: '<%= asset_path('tests/show.html') %>',
+        controller: 'TestsController'
+      }).
+      otherwise({
+        redirectTo: '/tests'
+      });
+  }]);
+})();

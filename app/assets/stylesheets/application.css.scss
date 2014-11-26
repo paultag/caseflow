@@ -3,6 +3,27 @@
 
 //= require font-awesome
 
-
 //= require_tree .
 //= require_self
+
+body {
+  padding-top: 70px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.border-bottom {
+  padding-bottom: 9px;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #eee;
+}

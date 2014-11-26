@@ -8,13 +8,18 @@
 
     = csrf_meta_tags
 
-  %body{id: params[:controller].dasherize.gsub('/', '-'), class: params[:action].dasherize}
+  %body
     .container
-
       %nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
         .container-fluid
           .navbar-header
             %a.navbar-brand(href=root_path)
-              -#%span.glyphicon.glyphicon-tasks
-              %span.fa.fa-fw.fa-yelp
+              %span.glyphicon.glyphicon-tasks
               CaseFlow
+
+          .collapse.navbar-collapse
+            %ul.nav.navbar-nav
+              %my-navigation-link(data-label="Test" data-icon="bolt" data-href="/tests")
+
+
+      %div(ng-view)
