@@ -18,4 +18,5 @@ You must upgrade Java's default encryption library to support Unlimited Strength
     Mac OS X with Java 8 is commonly at: /Library/Java/JavaVirtualMachines/jdk1.8.0_<PATCH VERSION>.jdk/Contents/Home/jre/lib/security
 
 3. Rename `local_policy.jar` to `local_policy.jar.back` and `US_export_policy.jar` to `US_export_policy.jar.back`
-4. Restart the application
+4. Place the new `local_policy.jar` and `US_export_policy.jar` into the security folder.
+5. Restart the application
