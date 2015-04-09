@@ -32,10 +32,12 @@ GEM
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9-java)
     builder (3.2.2)
+    coderay (1.1.0)
     composite_primary_keys (7.0.12)
       activerecord (~> 4.1.7)
     erubis (2.7.0)
     execjs (2.2.2)
+    ffi (1.9.8-java)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -46,11 +48,20 @@ GEM
     json (1.8.1-java)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    method_source (0.8.2)
     mime-types (2.4.3)
     minitest (5.4.3)
     multi_json (1.10.1)
+    pdf-forms (0.6.0)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
+    pry (0.10.1-java)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+      spoon (~> 0.0)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     puma (2.9.2-java)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
@@ -83,6 +94,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    slop (3.6.0)
+    spoon (0.0.4)
+      ffi
     sprockets (2.11.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -117,6 +131,9 @@ DEPENDENCIES
   composite_primary_keys
   haml
   jbuilder (~> 2.0)
+  pdf-forms
+  pry
+  pry-rails
   puma
   rails (= 4.1.8)
   sass-rails (~> 4.0.3)
