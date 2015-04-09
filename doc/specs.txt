@@ -1,7 +1,0 @@
-1. median docket date: cases in location 81, take the middle `TIADTIME`
-
-2. find cases that are at or before the median docket
-  * that have a shelf number `BFORGTIC`
-  * no open mail items, which means `MAIL.MLCOMPDATE` is null
-  * hearing is held, and it must go to that judge
-  * prefer cases that were previously decided on the judge for post-remands
