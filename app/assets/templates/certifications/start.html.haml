@@ -1,25 +1,25 @@
 %div(ng-controller="CertificationsStartController" ng-init="start.init()")
   .row
     .col.col-md-3
-      %h2(ng-bind="start.cert.fields['3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN']")
+      %h2(ng-bind="cert.fields['3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN']")
 
     .col.col-md-2
       .media
         .media-body
           .h4 Appeal ID:
-          %span(ng-bind="start.cert.info.bfcorlid")
+          %span(ng-bind="cert.info.bfcorlid")
 
     .col.col-md-2
       .media
         .media-body
           .h4 Appeal Type:
-          %span(ng-bind="start.cert.info.appeal_type")
+          %span(ng-bind="cert.info.appeal_type")
 
     .col.col-md-5
       .media
         .media-body
           .h4 File Type:
-          %span(ng-bind="start.cert.info.file_type")
+          %span(ng-bind="cert.info.file_type")
 
   .row(style="padding-top: 20px")
     .col.col-md-12
@@ -38,35 +38,35 @@
 
           %dl
             %dt NOD Date:
-            %dd(ng-bind="start.cert.info.bfdnod")
+            %dd(ng-bind="cert.info.bfdnod")
 
           %dl
             %dt SOC Date:
-            %dd(ng-bind="start.cert.info.bfdsoc")
+            %dd(ng-bind="cert.info.bfdsoc")
 
-          %dl(ng-if="start.cert.info.bfssoc1")
+          %dl(ng-if="cert.info.bfssoc1")
             %dt SSOC1 Date:
-            %dd(ng-bind="start.cert.info.bfssoc1")
+            %dd(ng-bind="cert.info.bfssoc1")
 
-          %dl(ng-if="start.cert.info.bfssoc2")
+          %dl(ng-if="cert.info.bfssoc2")
             %dt SSOC2 Date:
-            %dd(ng-bind="start.cert.info.bfssoc2")
+            %dd(ng-bind="cert.info.bfssoc2")
 
-          %dl(ng-if="start.cert.info.bfssoc3")
+          %dl(ng-if="cert.info.bfssoc3")
             %dt SSOC3 Date:
-            %dd(ng-bind="start.cert.info.bfssoc3")
+            %dd(ng-bind="cert.info.bfssoc3")
 
-          %dl(ng-if="start.cert.info.bfssoc4")
+          %dl(ng-if="cert.info.bfssoc4")
             %dt SSOC4 Date:
-            %dd(ng-bind="start.cert.info.bfssoc4")
+            %dd(ng-bind="cert.info.bfssoc4")
 
-          %dl(ng-if="start.cert.info.bfssoc5")
+          %dl(ng-if="cert.info.bfssoc5")
             %dt SSOC5 Date:
-            %dd(ng-bind="start.cert.info.bfssoc5")
+            %dd(ng-bind="cert.info.bfssoc5")
 
           %dl
             %dt Form 9 Date:
-            %dd(ng-bind="start.cert.info.bfd19")
+            %dd(ng-bind="cert.info.bfd19")
 
     .col.col-md-6
       .row
@@ -85,27 +85,27 @@
             %dd
               %strong NO DATA
 
-          %dl(ng-if="start.cert.info.bfssoc1")
+          %dl(ng-if="cert.info.bfssoc1")
             %dt SSOC1 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="start.cert.info.bfssoc2")
+          %dl(ng-if="cert.info.bfssoc2")
             %dt SSOC2 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="start.cert.info.bfssoc3")
+          %dl(ng-if="cert.info.bfssoc3")
             %dt SSOC3 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="start.cert.info.bfssoc4")
+          %dl(ng-if="cert.info.bfssoc4")
             %dt SSOC4 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="start.cert.info.bfssoc5")
+          %dl(ng-if="cert.info.bfssoc5")
             %dt SSOC5 Date:
             %dd
               %strong NO DATA
@@ -115,9 +115,11 @@
             %dd
               %strong NO DATA
 
+  %hr
+
   .input-group
     %a.my-form-button(data-label="Go Back" data-icon="chevron-left" href="#/certifications")
     &nbsp;
-    %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{start.cert.info.bfkey}}/questions")
+    %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{cert.info.bfkey}}/questions")
 
 

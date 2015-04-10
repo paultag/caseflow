@@ -51,6 +51,24 @@
     };
   });
 
+  mod.directive('myFormCheckbox', function() {
+    return {
+      restrict: 'E',
+
+      scope: true,
+      replace: true,
+      transclude: true,
+
+      templateUrl: '<%= asset_path('directives/form/checkbox.html') %>',
+
+      link: function ($scope, element, _attrs, _ctrl, transclude) {
+        element.find('input[transclude]').replaceWith(
+            transclude()
+        );
+      }
+    };
+  });
+
   mod.directive('myFormButton', function() {
     return {
       restrict: 'C',

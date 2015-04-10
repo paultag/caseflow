@@ -1,2 +1,164 @@
 %div(ng-controller="CertificationsQuestionsController" ng-init="questions.init()")
-  %h1 Questions
+  .row
+    .col.col-md-3
+      %h2(ng-bind="cert.fields['3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN']")
+
+    .col.col-md-2
+      .media
+        .media-body
+          .h4 Appeal ID:
+          %span(ng-bind="cert.info.bfcorlid")
+
+    .col.col-md-2
+      .media
+        .media-body
+          .h4 Appeal Type:
+          %span(ng-bind="cert.info.appeal_type")
+
+    .col.col-md-5
+      .media
+        .media-body
+          .h4 File Type:
+          %span(ng-bind="cert.info.file_type")
+
+  .row(style="padding-top: 20px")
+    .col.col-md-12
+      :markdown
+        Please answer the following questions to finish the certification and dispatch process for this appeal.
+
+      %hr
+
+    .col.col-md-12
+
+      .row
+        .col.col-md-12
+          :markdown
+            **8C**. THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST
+      .row
+        .col.col-md-6
+          .input-group
+            %label.checkbox-inline
+              %input(type="checkbox" ng-model="cert.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_YES']") Yes
+
+            %label.checkbox-inline
+              %input(type="checkbox" ng-model="cert.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_NO']") No
+
+      %hr
+
+      /---
+
+      .row
+        .col.col-md-12
+          :markdown
+            **9B**. IF VA FORM 646 IS NOT OF RECORD, EXPLAIN (45 CHARACTERS MAX)
+
+      .row
+        .col.col-md-6
+          %my-form-input(data-icon="info")
+            %input(type="text" ng-model="cert.fields['9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN']")
+
+      %hr
+
+      /---
+
+      .row
+        .col.col-md-12
+          :markdown
+            **10C**. IF A HEARING WAS REQUESTED BUT NOT HELD, EXPLAIN (45 CHARACTERS MAX)
+
+        .col.col-md-6
+          %my-form-input(data-icon="info")
+            %input(type="text" ng-model="cert.fields['10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN']")
+
+      %hr
+
+      /---
+
+      .row
+        .col.col-md-12
+          :markdown
+            **11B**. HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS
+
+        .col.col-md-6
+          .input-group
+            %label.checkbox-inline
+              %input(type="checkbox" ng-model="cert.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES']") Yes
+
+            %label.checkbox-inline
+              %input(type="checkbox" ng-model="cert.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_NO']") No
+
+      %hr
+
+      /---
+
+      .row
+        .col.col-md-12
+          :markdown
+            **13**. RECORDS TO BE FORWARDED TO BOARD OF VETERANS' APPEALS
+
+        .col.col-md-2
+          .input-group
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF']") CF OR XCF
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INACTIVE_CF']") INACTIVE CF
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']") OTHER
+
+        .col.col-md-2
+          .input-group
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF']") R&E F
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TRAINING_SUBF']") TRAINING SUB-F
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DEP_ED_F']") DEP. ED. F
+
+        .col.col-md-2
+          .input-group
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_LOAD_GUAR']") LOAN GUAR. F
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INSURANCE_F']") INSURANCE F
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DENTAL_F']") DENTAL F
+
+        .col.col-md-2
+          .input-group
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OUTPATIENT_F']") OUTPATIENT F
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_HOSPITAL_COR']") HOSPITAL COR.
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CLINICAL_REC']") CLINICAL REC.
+
+        .col.col-md-2
+          .input-group
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS']") X-RAYS
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES']") SLIDES
+
+            %my-form-checkbox
+              %input(type="checkbox" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS']") TISSUE BLOCKS
+
+      .row
+        .col.col-md-12
+          %my-form-input(data-icon="info" data-label="Specify Other")
+            %input(type="text" ng-model="cert.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS']")
+
+      %hr
+
+  .input-group
+    %a.my-form-button(data-label="Go Back" data-icon="chevron-left" ng-href="#/certifications/{{cert.info.bfkey}}/start")
+    &nbsp;
+    %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{cert.info.bfkey}}/generate")

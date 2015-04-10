@@ -15,13 +15,13 @@
 
       $scope.start.init = function() {
         if (certificationFactory.data) {
-          $scope.start.cert = certificationFactory.data
+          $scope.cert = certificationFactory.data
         }
         else {
           var request = $http.get('/api/certifications/start/' + $routeParams.id);
 
           request.success(function(cert) {
-            $scope.start.cert = certificationFactory.data = cert;
+            $scope.cert = certificationFactory.data = cert;
           });
 
           request.error(function() {

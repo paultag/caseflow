@@ -13,7 +13,7 @@
 
         $scope.questions.init = function() {
           if (certificationFactory.data) {
-            $scope.questions.cert = certificationFactory.data;
+            $scope.cert = certificationFactory.data;
           }
           else {
             $location.path('/certifications/' + $routeParams.id + '/start');
