@@ -29,3 +29,6 @@ module Caseflow
     config.action_dispatch.perform_deep_munge = false
   end
 end
+
+# Make sure /tmp/forms directory is constructed after app boots up, or else forms cannot be generated!
+FileUtils.mkdir_p(Rails.root + 'tmp' + 'forms') unless Dir.exist?(Rails.root + 'tmp' + 'forms')

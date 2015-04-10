@@ -32,9 +32,11 @@ class Caseflow::FormBuilder
       if attr[:type] == :check
         case fields[name]
           when true, 'true', 'yes', '1', 1
-            memo[attr[:id]] = self.class.check_symbol
+            # pdf files seem to need a special character for checkboxes, which is chosen when made
+            # if check_symbol is provided, use that for a truthy value; else use what was passed
+            memo[attr[:id]] = self.class.check_symbol || fields[name]
           else
-            # leave blank to keep unchecked
+            # just leave blank to keep unchecked
         end
       else
         memo[attr[:id]] = fields[name]
@@ -43,13 +45,22 @@ class Caseflow::FormBuilder
     end
   end
 
-  def process!
-    self.engine.fill_form((Rails.root + 'forms' + "#{self.class.form_name}.pdf"), (Rails.root + 'filled.pdf'), self.values, flatten: true)
+  def tmp_location
+    @tmp_location ||= Rails.root + 'tmp' + 'forms' + "#{self.class.form_name}-#{SecureRandom.hex}.pdf"
   end
 
-  private
+  def process!
+    self.engine.fill_form((Rails.root + 'forms' + "#{self.class.form_name}.pdf"), self.tmp_location, self.values, flatten: true)
+    self.tmp_location
+  end
 
-  def temp_location
-    Rails.root + 'tmp' + 'forms' + 
+  def destroy!
+    File.delete(self.tmp_location)
+  rescue
+    nil
+  end
+
+  def processed?
+    File.exist?(self.tmp_location)
   end
 end
