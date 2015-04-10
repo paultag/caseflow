@@ -12,6 +12,13 @@
 //= require ./directives/navigation
 //= require ./directives/form
 
+//= require ./factories/certification_factory
+
+//= require ./controllers/certifications
+//= require ./controllers/certifications/index
+//= require ./controllers/certifications/start
+//= require ./controllers/certifications/questions
+
 //= require ./controllers/tests
 
 //= require_self
@@ -23,6 +30,18 @@
 
   app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
+      when('/certifications', {
+        templateUrl: '<%= asset_path('certifications/index.html') %>',
+        controller: 'CertificationsIndexController'
+      }).
+      when('/certifications/:id/start', {
+        templateUrl: '<%= asset_path('certifications/start.html') %>',
+        controller: 'CertificationsStartController'
+      }).
+      when('/certifications/:id/questions', {
+        templateUrl: '<%= asset_path('certifications/questions.html') %>',
+        controller: 'CertificationsQuestionsController'
+      }).
       when('/tests', {
         templateUrl: '<%= asset_path('tests/index.html') %>',
         controller: 'TestsController'
@@ -32,7 +51,7 @@
         controller: 'TestsController'
       }).
       otherwise({
-        redirectTo: '/tests'
+        redirectTo: '/certifications'
       });
   }]);
 })();

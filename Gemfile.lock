@@ -46,6 +46,7 @@ GEM
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     json (1.8.1-java)
+    kramdown (1.6.0)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -131,6 +132,7 @@ DEPENDENCIES
   composite_primary_keys
   haml
   jbuilder (~> 2.0)
+  kramdown
   pdf-forms
   pry
   pry-rails

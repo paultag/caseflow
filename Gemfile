@@ -15,6 +15,7 @@ gem 'haml'
 gem 'sass-rails', '~> 4.0.3'
 gem 'jbuilder', '~> 2.0'
 gem 'pdf-forms'
+gem 'kramdown'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'sdoc', '~> 0.4.0', group: :doc

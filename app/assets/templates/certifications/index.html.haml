@@ -1,0 +1,13 @@
+%h1 Start a new Certification
+
+%div(ng-controller="CertificationsIndexController" ng-init="index.init()")
+  %form(ng-submit="index.start()")
+    .row
+      .col.col-md-3
+        %my-form-input(data-label="BFKEY" data-icon="info")
+          %input(type="text" ng-model="index.id")
+
+    .row
+      .col.col-md-3
+        .form-group
+          %button.my-form-button(data-label="Start Certification" data-icon="filter" data-color="primary" my-form-loading="index.loading")
