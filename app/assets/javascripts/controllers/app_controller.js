@@ -5,5 +5,6 @@
 
   angular.module('controllers').controller('AppController',
     ['$scope', function ($scope) {
+      $scope.app = {};
     }]);
 })();

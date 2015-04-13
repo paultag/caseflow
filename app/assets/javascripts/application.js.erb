@@ -12,47 +12,20 @@
 //= require ./directives/navigation
 //= require ./directives/form
 
-//= require ./factories/certification_factory
+//= require ./factories/certifications_factory
 
-//= require ./controllers/app
-//= require ./controllers/certifications
-//= require ./controllers/certifications/index
-//= require ./controllers/certifications/start
-//= require ./controllers/certifications/questions
+//= require ./controllers/app_controller
+//= require ./controllers/nav_controller
+//= require ./controllers/certifications/index_controller
+//= require ./controllers/certifications/start_controller
+//= require ./controllers/certifications/questions_controller
 
-//= require ./controllers/tests
+//= require ./controllers/tests_controller
+
+//= require ./routes
 
 //= require_self
 
 (function() {
   "use strict";
-
-  var app = angular.module('application');
-
-  app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.
-      when('/certifications', {
-        templateUrl: '<%= asset_path('certifications/index.html') %>',
-        controller: 'CertificationsIndexController'
-      }).
-      when('/certifications/:id/start', {
-        templateUrl: '<%= asset_path('certifications/start.html') %>',
-        controller: 'CertificationsStartController'
-      }).
-      when('/certifications/:id/questions', {
-        templateUrl: '<%= asset_path('certifications/questions.html') %>',
-        controller: 'CertificationsQuestionsController'
-      }).
-      when('/tests', {
-        templateUrl: '<%= asset_path('tests/index.html') %>',
-        controller: 'TestsController'
-      }).
-      when('/tests/:id', {
-        templateUrl: '<%= asset_path('tests/show.html') %>',
-        controller: 'TestsController'
-      }).
-      otherwise({
-        redirectTo: '/certifications'
-      });
-  }]);
 })();

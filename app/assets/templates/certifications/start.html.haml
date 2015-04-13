@@ -18,35 +18,35 @@
 
           %dl
             %dt NOD Date:
-            %dd(ng-bind="certification.info.bfdnod")
+            %dd(ng-bind="certifications.data.info.bfdnod")
 
           %dl
             %dt SOC Date:
-            %dd(ng-bind="certification.info.bfdsoc")
+            %dd(ng-bind="certifications.data.info.bfdsoc")
 
-          %dl(ng-if="certification.info.bfssoc1")
+          %dl(ng-if="certifications.data.info.bfssoc1")
             %dt SSOC1 Date:
-            %dd(ng-bind="certification.info.bfssoc1")
+            %dd(ng-bind="certifications.data.info.bfssoc1")
 
-          %dl(ng-if="certification.info.bfssoc2")
+          %dl(ng-if="certifications.data.info.bfssoc2")
             %dt SSOC2 Date:
-            %dd(ng-bind="certification.info.bfssoc2")
+            %dd(ng-bind="certifications.data.info.bfssoc2")
 
-          %dl(ng-if="certification.info.bfssoc3")
+          %dl(ng-if="certifications.data.info.bfssoc3")
             %dt SSOC3 Date:
-            %dd(ng-bind="certification.info.bfssoc3")
+            %dd(ng-bind="certifications.data.info.bfssoc3")
 
-          %dl(ng-if="certification.info.bfssoc4")
+          %dl(ng-if="certifications.data.info.bfssoc4")
             %dt SSOC4 Date:
-            %dd(ng-bind="certification.info.bfssoc4")
+            %dd(ng-bind="certifications.data.info.bfssoc4")
 
-          %dl(ng-if="certification.info.bfssoc5")
+          %dl(ng-if="certifications.data.info.bfssoc5")
             %dt SSOC5 Date:
-            %dd(ng-bind="certification.info.bfssoc5")
+            %dd(ng-bind="certifications.data.info.bfssoc5")
 
           %dl
             %dt Form 9 Date:
-            %dd(ng-bind="certification.info.bfd19")
+            %dd(ng-bind="certifications.data.info.bfd19")
 
     .col.col-md-6
       .row
@@ -65,27 +65,27 @@
             %dd
               %strong NO DATA
 
-          %dl(ng-if="certification.info.bfssoc1")
+          %dl(ng-if="certifications.data.info.bfssoc1")
             %dt SSOC1 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="certification.info.bfssoc2")
+          %dl(ng-if="certifications.data.info.bfssoc2")
             %dt SSOC2 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="certification.info.bfssoc3")
+          %dl(ng-if="certifications.data.info.bfssoc3")
             %dt SSOC3 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="certification.info.bfssoc4")
+          %dl(ng-if="certifications.data.info.bfssoc4")
             %dt SSOC4 Date:
             %dd
               %strong NO DATA
 
-          %dl(ng-if="certification.info.bfssoc5")
+          %dl(ng-if="certifications.data.info.bfssoc5")
             %dt SSOC5 Date:
             %dd
               %strong NO DATA
@@ -100,6 +100,6 @@
   .input-group
     %a.my-form-button(data-label="Go Back" data-icon="chevron-left" href="#/certifications")
     &nbsp;
-    %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{certification.info.bfkey}}/questions")
+    %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{certifications.data.info.bfkey}}/questions")
 
 
