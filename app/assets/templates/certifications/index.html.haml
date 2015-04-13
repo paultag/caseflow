@@ -1,6 +1,10 @@
-%h1 Start a new Certification
-
 %div(ng-controller="CertificationsIndexController" ng-init="index.init()")
+  %h1 Start a New Certification
+  :markdown
+    Welcome to the Caseflow Certification and Dispatch Tool. Enter a case number to start the process.
+
+  %hr
+
   %form(ng-submit="index.start()")
     .row
       .col.col-md-3

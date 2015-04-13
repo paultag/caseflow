@@ -5,6 +5,6 @@
 
   angular.module('controllers').controller('CertificationsController',
     ['$scope', function ($scope) {
-      $scope.parent = {};
+      $scope.certification = {};
     }]);
 })();

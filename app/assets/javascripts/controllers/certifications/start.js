@@ -4,10 +4,8 @@
   "use strict";
 
   angular.module('controllers').controller('CertificationsStartController',
-    ['$controller', '$scope', '$http', '$location', '$routeParams', 'certificationFactory',
-    function ($controller, $scope, $http, $location, $routeParams, certificationFactory) {
-
-      $controller('CertificationsController', {$scope: $scope});
+    ['$scope', '$http', '$location', '$routeParams', 'certificationFactory',
+    function ($scope, $http, $location, $routeParams, certificationFactory) {
 
       $scope.start = {};
 
@@ -15,13 +13,13 @@
 
       $scope.start.init = function() {
         if (certificationFactory.data) {
-          $scope.cert = certificationFactory.data
+          $scope.certification = certificationFactory.data
         }
         else {
           var request = $http.get('/api/certifications/start/' + $routeParams.id);
 
-          request.success(function(cert) {
-            $scope.cert = certificationFactory.data = cert;
+          request.success(function(certification) {
+            $scope.certification = certificationFactory.data = certification;
           });
 
           request.error(function() {

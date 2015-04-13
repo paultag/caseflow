@@ -1,21 +1,21 @@
 .row
   .col.col-md-3
-    %h2(ng-bind="cert.fields['3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN']")
+    %h2(ng-bind="certification.fields['3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN']")
 
   .col.col-md-2
     .media
       .media-body
         .h4 Appeal ID:
-        %span(ng-bind="cert.info.bfcorlid")
+        %span(ng-bind="certification.info.bfcorlid")
 
   .col.col-md-2
     .media
       .media-body
         .h4 Appeal Type:
-        %span(ng-bind="cert.info.appeal_type")
+        %span(ng-bind="certification.info.appeal_type")
 
   .col.col-md-5
     .media
       .media-body
         .h4 File Type:
-        %span(ng-bind="cert.info.file_type")
+        %span(ng-bind="certification.info.file_type")

@@ -4,10 +4,8 @@
   "use strict";
 
   angular.module('controllers').controller('CertificationsIndexController',
-    ['$controller', '$scope', '$http', '$location', 'certificationFactory',
-    function ($controller, $scope, $http, $location, certificationFactory) {
-
-      $controller('CertificationsController', {$scope: $scope});
+    ['$scope', '$http', '$location', 'certificationFactory',
+    function ($scope, $http, $location, certificationFactory) {
 
       $scope.index = {};
 
@@ -22,8 +20,8 @@
 
         var request = $http.get('/api/certifications/start/' + $scope.index.id);
 
-        request.success(function(cert) {
-          certificationFactory.data = cert;
+        request.success(function(certification) {
+          certificationFactory.data = certification;
 
           $location.path('/certifications/' + $scope.index.id + '/start');
         });
