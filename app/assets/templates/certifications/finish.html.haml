@@ -1,0 +1,12 @@
+%div#certifications-generate(ng-controller="CertificationsGenerateController" ng-init="generate.init()")
+  %div{'ng-include' => asset_path('certifications/_header.html').inspect}
+
+  .row(style="padding-top: 20px")
+    .col.col-md-12
+      :markdown
+        This appeal is now **certified** to the Board of Appeals.  You are **Finished** and can close this browser window.
+
+      %hr
+
+  .input-group
+    %a.my-form-button(data-label="Start Another Appeal" data-icon="chevron-left" ng-href="#/certifications")

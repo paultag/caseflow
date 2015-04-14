@@ -17,6 +17,12 @@
       when('/certifications/:id/questions', {
         templateUrl: '<%= asset_path('certifications/questions.html') %>'
       }).
+      when('/certifications/:id/generate', {
+        templateUrl: '<%= asset_path('certifications/generate.html') %>'
+      }).
+      when('/certifications/:id/finish', {
+        templateUrl: '<%= asset_path('certifications/finish.html') %>'
+      }).
       when('/tests', {
         templateUrl: '<%= asset_path('tests/index.html') %>',
         controller: 'TestsController'

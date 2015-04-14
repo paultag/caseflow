@@ -25,5 +25,17 @@ module Api
 
       render json: data
     end
+
+    def generate
+      certification_date = Time.now.to_s(:va_date)
+
+      fields = params[:fields]
+      fields['17C_DATE'] = certification_date
+
+      form_8 = FormVa8.new(params[:fields])
+      form_8.process!
+
+      render json: {status: 'ok', file_name: form_8.file_name, bf41stat: certification_date}, status: :created
+    end
   end
 end

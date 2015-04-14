@@ -1,0 +1,18 @@
+%div#certifications-generate(ng-controller="CertificationsGenerateController" ng-init="generate.init()")
+  %div{'ng-include' => asset_path('certifications/_header.html').inspect}
+
+  .row(style="padding-top: 20px")
+    .col.col-md-12
+      :markdown
+        Download the VA Form 8 and **verify** all the fields are **accurate**.  When finished, the appeal will be **certified** to the Board of Appeals.
+
+      %hr
+
+  %a(ng-href="/files/forms/{{certifications.data.info.file_name}}") Download Complete Form 8
+
+  %hr
+
+  .input-group
+    %a.my-form-button(data-label="Go Back" data-icon="chevron-left" ng-href="#/certifications/{{certifications.data.info.bfkey}}/questions")
+    &nbsp;
+    %a.my-form-button(data-label="Finish Certification" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{certifications.data.info.bfkey}}/finish")

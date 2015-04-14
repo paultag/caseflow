@@ -13,7 +13,7 @@ class Caseflow::FormBuilder
     attr_accessor :field_legend
   end
 
-  def initialize
+  def initialize(fields = {})
     self.fields = self.class.field_legend.reduce({}) do |memo, (name, value)|
       case value[:type]
         when :text
@@ -25,6 +25,8 @@ class Caseflow::FormBuilder
       end
       memo
     end
+
+    self.add_fields(fields)
   end
 
   def values
@@ -45,8 +47,16 @@ class Caseflow::FormBuilder
     end
   end
 
+  def add_fields(new_fields)
+    self.fields.merge!(new_fields)
+  end
+
+  def file_name
+    @file_name ||= "#{self.class.form_name}-#{SecureRandom.hex}.pdf"
+  end
+
   def tmp_location
-    @tmp_location ||= Rails.root + 'tmp' + 'forms' + "#{self.class.form_name}-#{SecureRandom.hex}.pdf"
+    @tmp_location ||= Rails.root + 'tmp' + 'forms' + file_name
   end
 
   def process!
