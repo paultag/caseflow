@@ -18,6 +18,17 @@
           }
         };
 
+        $scope.questions.invalid = function() {
+          var check = (
+            $scope.certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_YES'] === true &&
+            $scope.certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_NO']  !== true &&
+            $scope.certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES']   === true &&
+            $scope.certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_NO']    !== true
+          );
+
+          return !check;
+        };
+
         $scope.questions.go_to_generate = function() {
           $scope.questions.loading = true;
 
@@ -38,7 +49,6 @@
           request.finally(function() {
             $scope.questions.loading = false;
           });
-
         };
       }]);
 })();

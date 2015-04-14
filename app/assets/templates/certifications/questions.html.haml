@@ -13,7 +13,7 @@
       .row
         .col.col-md-12
           :markdown
-            **8C**. THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST
+            **8C. REQUIRED**. THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST
       .row
         .col.col-md-6
           .input-group
@@ -35,7 +35,7 @@
       .row
         .col.col-md-6
           %my-form-input(data-icon="info")
-            %input(type="text" ng-model="certifications.data.fields['9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN']")
+            %input(type="text" ng-model="certifications.data.fields['9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN']" maxlength="45")
 
       %hr
 
@@ -48,7 +48,7 @@
 
         .col.col-md-6
           %my-form-input(data-icon="gavel")
-            %input(type="text" ng-model="certifications.data.fields['10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN']")
+            %input(type="text" ng-model="certifications.data.fields['10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN']" maxlength="45")
 
       %hr
 
@@ -57,7 +57,7 @@
       .row
         .col.col-md-12
           :markdown
-            **11B**. HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS
+            **11B. REQUIRED**. HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS
 
         .col.col-md-6
           .input-group
@@ -132,13 +132,20 @@
               %input(type="checkbox" ng-model="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS']") TISSUE BLOCKS
 
       .row
-        .col.col-md-6
+        .col.col-md-6(ng-if="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']")
           %my-form-input(data-icon="info" data-label="Specify Other")
             %input(type="text" ng-model="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS']")
 
       %hr
 
-  .input-group
-    %a.my-form-button(data-label="Go Back" data-icon="chevron-left" ng-href="#/certifications/{{certifications.data.info.bfkey}}/start")
-    &nbsp;
-    %button.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" my-form-loading="questions.loading" ng-click="questions.go_to_generate()")
+  .row
+    .col.col-md-12
+      .input-group
+        %a.my-form-button(data-label="Go Back" data-icon="chevron-left" ng-href="#/certifications/{{certifications.data.info.bfkey}}/start")
+        &nbsp;
+        %button.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" my-form-loading="questions.loading" ng-click="questions.go_to_generate()" ng-disabled="questions.invalid()")
+
+  .row(style="padding-top: 10px;")
+    .col.col-md-12
+      :markdown
+        The Continue Button will be disabled until all **REQUIRED** questions are answered.
