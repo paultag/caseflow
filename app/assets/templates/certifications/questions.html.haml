@@ -10,34 +10,36 @@
 
     .col.col-md-12
 
-      .row
-        .col.col-md-12
-          :markdown
-            **8C. REQUIRED**. THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST
-      .row
-        .col.col-md-6
-          .input-group
-            %label.checkbox-inline
-              %input(type="checkbox" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_YES']") Yes
+      %span(ng-if="questions.checks.show_8c()")
+        .row
+          .col.col-md-12
+            :markdown
+              **8C. REQUIRED**. THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST
+        .row
+          .col.col-md-6
+            .input-group
+              %label.checkbox-inline
+                %input(type="checkbox" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_YES']") Yes
 
-            %label.checkbox-inline
-              %input(type="checkbox" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_NO']") No
+              %label.checkbox-inline
+                %input(type="checkbox" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_NO']") No
 
-      %hr
+        %hr
 
       /---
 
-      .row
-        .col.col-md-12
-          :markdown
-            **9B**. IF VA FORM 646 IS NOT OF RECORD, EXPLAIN (45 CHARACTERS MAX)
+      %span(ng-if="questions.checks.show_9b()")
+        .row
+          .col.col-md-12
+            :markdown
+              **9B**. IF VA FORM 646 IS NOT OF RECORD, EXPLAIN (45 CHARACTERS MAX)
 
-      .row
-        .col.col-md-6
-          %my-form-input(data-icon="info")
-            %input(type="text" ng-model="certifications.data.fields['9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN']" maxlength="45")
+        .row
+          .col.col-md-6
+            %my-form-input(data-icon="info")
+              %input(type="text" ng-model="certifications.data.fields['9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN']" maxlength="45")
 
-      %hr
+        %hr
 
       /---
 
@@ -135,6 +137,19 @@
         .col.col-md-6(ng-if="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']")
           %my-form-input(data-icon="info" data-label="Specify Other")
             %input(type="text" ng-model="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS']")
+
+      %hr
+
+      /---
+
+      .row
+        .col.col-md-12
+          :markdown
+            **14**. REMARKS
+
+      .row
+        .col.col-md-6
+          %textarea.form-control(ng-model="certifications.data.fields['14_REMARKS_INITIAL']" rows="3")
 
       %hr
 

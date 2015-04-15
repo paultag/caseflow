@@ -73,18 +73,14 @@ class Case < ActiveRecord::Base
   end
 
   def initial_fields
-    {
+    return @initial_fields if @initial_fields
+
+    fields = {
       '1A_NAME_OF_APPELLANT'                                              => self.correspondent.appellant_name,
       '1B_RELATIONSHIP_TO_VETERAN'                                        => self.correspondent.appellant_relationship,
       '2_FILE_NO'                                                         => self.bfcorlid,
       '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN'                     => self.correspondent.full_name,
       '4_INSURANCE_FILE_NO_OR_LOAN_NO'                                    => self.bfpdnum,
-      '5A_SERVICE_CONNECTION_FOR'                                         => '',
-      '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'                        => '',
-      '6A_INCREASED_RATING_FOR'                                           => '',
-      '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'                        => '',
-      '7A_OTHER'                                                          => '',
-      '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'                        => '',
       '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY'                        => self.vso_full,
       '8B_POWER_OF_ATTORNEY'                                              => '',
       '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_YES'   => '',
@@ -100,6 +96,22 @@ class Case < ActiveRecord::Base
       '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED'               => !self.ssoc_required?,
       '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF' => true
     }
+
+    fields['5A_SERVICE_CONNECTION_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'service connection' }.map { |i| i['full_desc'] }.join(';')
+    fields['6A_INCREASED_RATING_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'increased rating' }.map { |i| i['iss_desc'] }.join(';')
+    fields['7A_OTHER'] = issue_breakdown.select {|i| i['field_type'] == 'other' }.map { |i| i['iss_desc'] }.join(';')
+
+    if fields['5A_SERVICE_CONNECTION_FOR'].present?
+      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = Time.now.to_s(:va_date)
+    end
+    if fields['6A_INCREASED_RATING_FOR'].present?
+      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = Time.now.to_s(:va_date)
+    end
+    if fields['7A_OTHER'].present?
+      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = Time.now.to_s(:va_date)
+    end
+
+    @initial_fields = fields
   end
 
   def hearing_requested?
@@ -122,5 +134,56 @@ class Case < ActiveRecord::Base
 
   def ssoc_required?
     bfssoc1.present?
+  end
+
+  def issue_breakdown
+    return @issue_breakdown if @issue_breakdown
+
+    issues = self.class.connection.select_all(<<-SQL).to_hash
+    SELECT ISSUES.ISSSEQ,
+      ISSUES.ISSPROG,
+      ISSUES.ISSCODE,
+      ISSUES.ISSLEV1,
+      ISSUES.ISSLEV2,
+      ISSUES.ISSLEV3,
+      ISSREF.PROG_DESC,
+      ISSREF.ISS_DESC,
+      ISSREF.LEV1_DESC,
+      ISSREF.LEV2_DESC,
+      ISSREF.LEV3_DESC
+    FROM ISSUES, ISSREF
+    WHERE ISSUES.ISSPROG = ISSREF.PROG_CODE AND
+          ( ISSUES.ISSCODE = ISSREF.ISS_CODE ) AND
+          ( ISSLEV1 = LEV1_CODE OR LEV1_CODE = '##' OR LEV1_CODE IS NULL ) AND
+          ( ISSLEV2 = LEV2_CODE OR LEV2_CODE = '##' OR LEV2_CODE IS NULL ) AND
+          ( ISSLEV3 = LEV3_CODE OR LEV3_CODE = '##' OR LEV3_CODE IS NULL ) AND
+          ( ISSUES.ISSKEY = '#{self.bfkey}' AND ISSUES.ISSDC IS NULL )
+    SQL
+
+    issues.each.with_index do |issue, idx|
+      if issue['issprog'] == '02' && issue['isscode'] == '15'
+        issues[idx]['field_type'] = 'service connection'
+      elsif issue['issprog'] == '02' && issue['isscode'] == '12'
+        issues[idx]['field_type'] = 'increased rating'
+      else
+        issues[idx]['field_type'] = 'other'
+      end
+
+      if issue['isslev2'] && issue['isslev2'].length == 4
+        issues[idx]['full_desc'] = diagnostic_lookup(issue['isslev2'])
+      end
+      if issue['isslev3'] && issue['isslev3'].length == 4
+        issues[idx]['full_desc'] = diagnostic_lookup(issue['isslev3'])
+      end
+    end
+
+    @issue_breakdown = issues
+  end
+
+  private
+
+  def diagnostic_lookup(code)
+    vf = VfType.lookup(code)
+    [vf.ftkey, vf.ftdesc].join(' ')
   end
 end
