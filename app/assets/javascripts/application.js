@@ -4,6 +4,7 @@
 //= require lodash.min
 //= require angular.min
 //= require angular-route.min
+//= require angular-animate.min
 
 //= require ./configs/angular
 //= require ./configs/rails

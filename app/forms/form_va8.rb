@@ -54,7 +54,7 @@ class FormVa8 < Caseflow::FormBuilder
     '14_REMARKS_INITIAL'                                                    => {id: "form1[0].#subform[0].#area[0].TextField1[17]", type: :text},
     '15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE'                             => {id: "form1[0].#subform[0].#area[0].TextField1[18]", type: :text},
     '16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL'                          => {id: "form1[0].#subform[0].#area[0].TextField1[19]", type: :text},
-    '17A_SIGNATURE_OF_CERTIFYING_OFFICAL'                                   => {id: "form1[0].#subform[0].#area[0].TextField1[20]", type: :text},
+    '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL'                                  => {id: "form1[0].#subform[0].#area[0].TextField1[20]", type: :text},
     '17B_TITLE'                                                             => {id: "form1[0].#subform[0].#area[0].TextField1[21]", type: :text},
     '17C_DATE'                                                              => {id: "form1[0].#subform[0].#area[0].TextField1[22]", type: :text},
     '18A_SIGNATURE_OF_MEDICAL_MEMBER'                                       => {id: "form1[0].#subform[0].#area[0].TextField1[23]", type: :text},

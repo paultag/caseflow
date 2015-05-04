@@ -20,6 +20,30 @@ class Case < ActiveRecord::Base
     end
   end
 
+  def required_fields
+    fields = {}
+
+    if self.bfso == 'L'
+      # do nothing
+    elsif  ['T', 'U', 'W'].include? self.bfso
+      fields[:show_8b] = true
+      fields[:show_8c] = true
+    else
+      fields[:show_8b] = true
+    end
+
+    if !['L', 'T', 'U', 'W'].include?(self.bfso)
+      fields[:show_9a] = true
+    end
+
+    if self.hearing_requested?
+      fields[:show_10b] = true
+      fields[:show_10c] = true
+    end
+
+    fields
+  end
+
   def appeal_type
     {
         '1' => 'Original',
@@ -72,6 +96,73 @@ class Case < ActiveRecord::Base
     vso.join(' - ')
   end
 
+  def regional_office
+    hash = {
+        'RO17' => ['St. Petersburg', 'FL'],
+        'RO62' => ['Houston', 'TX'],
+        'RO49' => ['Waco', 'TX'],
+        'RO22' => ['Montgomery', 'AL'],
+        'RO16' => ['Atlanta', 'GA'],
+        'RO18' => ['Winston-Salem', 'NC'],
+        'RO39' => ['Denver', 'CO'],
+        'RO14' => ['Roanoke', 'VA'],
+        'RO25' => ['Cleveland', 'OH'],
+        'RO77' => ['San Diego', 'CA'],
+        'RO43' => ['Oakland', 'CA'],
+        'RO29' => ['Detroit', 'MI'],
+        'RO20' => ['Nashville', 'TN'],
+        'RO19' => ['Columbia', 'OH'],
+        'RO48' => ['Portland', 'OR'],
+        'RO46' => ['Seattle', 'WA'],
+        'RO51' => ['Muskogee', 'OK'],
+        'RO45' => ['Phoenix', 'AR'],
+        'RO23' => ['Jackson', 'MS'],
+        'RO10' => ['Philadelphia', 'PA'],
+        'RO28' => ['Chicago', 'IL'],
+        'RO44' => ['Los Angeles', 'CA'],
+        'RO01' => ['Boston', 'MA'],
+        'RO21' => ['New Orleans', 'LA'],
+        'RO15' => ['Huntington', 'WV'],
+        'RO30' => ['Milwaukee', 'WI'],
+        'RO31' => ['St. Louis', 'MI'],
+        'RO26' => ['Indianapolis', 'IN'],
+        'RO50' => ['Little Rock', 'AR'],
+        'RO06' => ['New York', 'NY'],
+        'RO07' => ['Buffalo', 'NY'],
+        'RO09' => ['Newark', 'NJ'],
+        'RO35' => ['St. Paul', 'MN'],
+        'RO34' => ['Lincoln', 'NE'],
+        'RO33' => ['Des Moines', 'IA'],
+        'RO27' => ['Louisville', 'KY'],
+        'RO40' => ['Albuquerque', 'NM'],
+        'RO55' => ['San Juan', 'PR'],
+        'RO04' => ['Providence', 'RI'],
+        'RO13' => ['Baltimore', 'MD'],
+        'RO47' => ['Boise', 'ID'],
+        'RO41' => ['Salt Lake City', 'UT'],
+        'RO52' => ['Wichita', 'KS'],
+        'RO59' => ['Honolulu', 'HI'],
+        'RO54' => ['Reno', 'NV'],
+        'RO11' => ['Pittsburgh', 'PA'],
+        'RO08' => ['Hartford', 'CT'],
+        'RO63' => ['Anchorage', 'AK'],
+        'RO58' => ['Manila', 'PI'],
+        'RO60' => ['Wilmington', 'DE'],
+        'RO36' => ['Ft. Harrison', 'MT'],
+        'RO38' => ['Sioux Falls', 'SD'],
+        'RO02' => ['Togus', 'ME'],
+        'RO73' => ['Manchester', 'NH'],
+        'RO37' => ['Fargo', 'ND'],
+        'RO05' => ['White River Junction', 'VT'],
+        'RO42' => ['Cheyenne', 'WY']
+    }
+    hash[bfregoff]
+  end
+
+  def regional_office_full
+    regional_office.join(', ')
+  end
+
   def initial_fields
     return @initial_fields if @initial_fields
 
@@ -87,28 +178,29 @@ class Case < ActiveRecord::Base
       '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO'    => '',
       '10A_WAS_HEARING_REQUESTED_YES'                                     => self.hearing_requested?,
       '10A_WAS_HEARING_REQUESTED_NO'                                      => !self.hearing_requested?,
-      '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_YES'                             => self.hearing_transcripts_present?,
-      '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_NO'                              => !self.hearing_transcripts_present?,
-      '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_YES'   => self.contested_claims?,
-      '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_NO'    => !self.contested_claims?,
+      # '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_YES'                             => self.hearing_transcripts_present?,
+      # '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_NO'                              => !self.hearing_transcripts_present?,
+      # '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_YES'   => self.contested_claims?,
+      # '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_NO'    => !self.contested_claims?,
       '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED'                          => self.bfdsoc_date,
       '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED'     => self.ssoc_required?,
       '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED'               => !self.ssoc_required?,
-      '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF' => true
+      '15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE'                         => self.regional_office_full,
+      '16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL'                      => self.bfregoff
     }
 
-    fields['5A_SERVICE_CONNECTION_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'service connection' }.map { |i| i['full_desc'] }.join(';')
-    fields['6A_INCREASED_RATING_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'increased rating' }.map { |i| i['iss_desc'] }.join(';')
-    fields['7A_OTHER'] = issue_breakdown.select {|i| i['field_type'] == 'other' }.map { |i| i['iss_desc'] }.join(';')
+    fields['5A_SERVICE_CONNECTION_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'service connection' }.map { |i| i['full_desc'] }.join(':')
+    fields['6A_INCREASED_RATING_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'increased rating' }.map { |i| i['iss_desc'] }.join(':')
+    fields['7A_OTHER'] = issue_breakdown.select {|i| i['field_type'] == 'other' }.map { |i| i['iss_desc'] }.join(':')
 
     if fields['5A_SERVICE_CONNECTION_FOR'].present?
-      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = Time.now.to_s(:va_date)
+      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19.to_s(:va_date)
     end
     if fields['6A_INCREASED_RATING_FOR'].present?
-      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = Time.now.to_s(:va_date)
+      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19.to_s(:va_date)
     end
     if fields['7A_OTHER'].present?
-      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = Time.now.to_s(:va_date)
+      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19.to_s(:va_date)
     end
 
     @initial_fields = fields
@@ -124,12 +216,10 @@ class Case < ActiveRecord::Base
 
   def hearing_transcripts_present?
     # TODO: Make this actually work
-    true
   end
 
   def contested_claims?
     # TODO: Make this actually work
-    true
   end
 
   def ssoc_required?

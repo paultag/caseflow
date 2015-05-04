@@ -23,6 +23,8 @@ module Api
 
       data[:fields] = kase.initial_fields
 
+      data[:required_fields] = kase.required_fields
+
       render json: data
     end
 

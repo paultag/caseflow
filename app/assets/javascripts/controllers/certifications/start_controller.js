@@ -19,7 +19,7 @@
           });
 
           request.error(function() {
-            $location.path('/certifications/');
+            $location.path('/certifications');
           });
         }
       };
