@@ -4,7 +4,7 @@ class FilesController < ApplicationController
   def show
     @filepath = Rails.root + 'tmp' + params[:type] + [params[:id], params[:format]].join('.')
 
-    send_file(@filepath, filename: params[:id], type: 'application/pdf')
+    send_file(@filepath, filename: [params[:id], 'pdf'].join('.'), type: 'application/pdf')
   rescue
     head :not_found
   end

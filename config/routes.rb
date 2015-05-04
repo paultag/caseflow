@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   namespace :files do
     get '/:type/:id', to: :show, as: :show, constraints: {type: /forms/}
   end
+
+  get '/certifications/:id/start', to: 'web#redirect'
 end

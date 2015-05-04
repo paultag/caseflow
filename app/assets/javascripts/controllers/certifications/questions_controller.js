@@ -1,4 +1,4 @@
-/* global angular,alert,_ */
+/* global angular,alert,$,_ */
 
 (function() {
   "use strict";
@@ -44,5 +44,19 @@
             $scope.questions.loading = false;
           });
         };
+
+        //function uniqueCheckboxes() {
+        //  var checkboxes = _.unique($.map($('input[type="checkbox"][data-unique]'), function(x) { return $(x).data('unique'); }));
+        //
+        //  _.each(checkboxes, function(name) {
+        //    var group = $('input[type="checkbox"][data-unique="' + name + '"]');
+        //
+        //    group.change(function() {
+        //      if (this.checked) {
+        //        group.not($(this)).prop('checked', false);
+        //      }
+        //    });
+        //  });
+        //}
       }]);
 })();

@@ -4,11 +4,43 @@
   .row(style="padding-top: 20px")
     .col.col-md-12
       :markdown
-        Please answer the following questions to finish the certification and dispatch process for this appeal.
+        Please answer the following questions to finish the certification and dispatch process for this appeal
 
       %hr
 
     .col.col-md-12
+      %span(ng-if="certifications.data.required_fields.show_8b")
+        .row
+          .col.col-md-12
+            :markdown
+              **8B**. VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS
+        .row
+          .col.col-md-6
+            .input-group
+              %label.checkbox-inline
+                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8B_POWER_OF_ATTORNEY']") Located in the veteran's appeal file
+
+              %label.checkbox-inline
+                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE']") Located in another VA file
+
+        %hr
+
+      /---
+
+      .animate-if(ng-if="certifications.data.fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE']")
+        .row
+          .col.col-md-12
+            :markdown
+              **8B. EXPLANATION**. PLEASE SPECIFY LOCATION OF THE VETERAN'S POWER OF ATTORNEY
+
+        .row
+          .col.col-md-6
+            %my-form-input(data-icon="info")
+              %input(type="text" ng-model="certifications.data.fields['8B_REMARKS']" maxlength="45")
+
+        %hr
+
+      /---
 
       %span(ng-if="certification.data.required_fields.show_8c")
         .row
@@ -19,10 +51,10 @@
           .col.col-md-6
             .input-group
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_YES']") Yes
+                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_YES']") Yes
 
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_NO']") No
+                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_NO']") No
 
         %hr
 
@@ -32,16 +64,16 @@
         .row
           .col.col-md-12
             :markdown
-              **9A**. IF REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD?
+              **9A**. REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD
 
         .row
           .col.col-md-6
             .input-group
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_YES']") Yes
+                %input(type="checkbox" data-unique="9A" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_YES']") Yes
 
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO']") No
+                %input(type="checkbox" data-unique="9A" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO']") No
 
         %hr
 
@@ -72,10 +104,10 @@
           .col.col-md-6
             .input-group
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_YES']") Yes
+                %input(type="checkbox" data-unique="10B" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_YES']") Yes
 
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_NO']") No
+                %input(type="checkbox" data-unique="10B" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_NO']") No
 
       %hr
 
@@ -98,15 +130,15 @@
       .row
         .col.col-md-12
           :markdown
-            **11A**. ARE CONTESTED CLAIMS PROCEDURES APPLICABLE IN THIS CASE?
+            **11A**. ARE CONTESTED CLAIMS PROCEDURES APPLICABLE IN THIS CASE
 
         .col.col-md-6
           .input-group
             %label.checkbox-inline
-              %input(type="checkbox" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_YES']") Yes
+              %input(type="checkbox" data-unique="11A" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_YES']") Yes
 
             %label.checkbox-inline
-              %input(type="checkbox" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_NO']") No
+              %input(type="checkbox" data-unique="11A" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_NO']") No
 
       %hr
 
@@ -121,10 +153,10 @@
           .col.col-md-6
             .input-group
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES']") Yes
+                %input(type="checkbox" data-unique="11B" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES']") Yes
 
               %label.checkbox-inline
-                %input(type="checkbox" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_NO']") No
+                %input(type="checkbox" data-unique="11B" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_NO']") No
 
         %hr
 

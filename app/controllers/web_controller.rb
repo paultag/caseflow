@@ -4,4 +4,8 @@ class WebController < ApplicationController
   def index
     render file: 'web/application'
   end
+
+  def redirect
+    redirect_to '/#/certifications/' + params[:id] + '/start'
+  end
 end
