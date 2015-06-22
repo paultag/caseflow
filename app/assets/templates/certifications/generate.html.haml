@@ -1,10 +1,12 @@
 %div#certifications-generate(ng-controller="CertificationsGenerateController" ng-init="generate.init()")
   %div{'ng-include' => asset_path('certifications/_header.html').inspect}
 
-  .row(style="padding-top: 20px")
+  %hr
+
+  .row
     .col.col-md-12
       :markdown
-        Download the VA Form 8 and **verify** all the fields are **accurate**.  When finished, the appeal will be **certified** to the Board of Appeals.
+        Download the VA Form 8 and **verify** all the fields are **accurate**.  If the form looks correct, click the **Finish Certification** button to certify and send appeal to the Board of Appeals.
 
       %hr
 
