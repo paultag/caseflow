@@ -17,6 +17,16 @@ module Api
     #       bfssoc3: kase.bfssoc3_date,
     #       bfssoc4: kase.bfssoc4_date,
     #       bfssoc5: kase.bfssoc5_date,
+
+    #       efolder_nod: kase.efolder_nod_date,
+    #       efolder_form9: kase.efolder_form9_date,
+    #       efolder_soc: kase.efolder_soc_date,
+    #       efolder_ssoc1: kase.efolder_ssoc1_date,
+    #       efolder_ssoc2: kase.efolder_ssoc2_date,
+    #       efolder_ssoc3: kase.efolder_ssoc3_date,
+    #       efolder_ssoc4: kase.efolder_ssoc4_date,
+    #       efolder_ssoc5: kase.efolder_ssoc5_date,
+
     #       appeal_type: kase.appeal_type,
     #       file_type: kase.folder.file_type
     #   }
@@ -54,6 +64,14 @@ module Api
                  "bfssoc3"=>nil,
                  "bfssoc4"=>nil,
                  "bfssoc5"=>nil,
+                 "efolder_nod"=>"02/04/2011",
+                 "efolder_form9"=>"05/01/2013",
+                 "efolder_soc"=>nil,
+                 "efolder_ssoc1"=>nil,
+                 "efolder_ssoc2"=>nil,
+                 "efolder_ssoc3"=>nil,
+                 "efolder_ssoc4"=>nil,
+                 "efolder_ssoc5"=>nil,
                  "appeal_type"=>"Post Remand",
                  "file_type"=>"Paper"},
             "fields"=>

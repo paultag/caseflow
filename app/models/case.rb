@@ -1,6 +1,8 @@
 class Case < ActiveRecord::Base
   include Caselike
 
+  attr_reader :efolder_case
+
   self.table_name = 'vacols.brieff'
   self.sequence_name = 'vacols.bfkeyseq'
   self.primary_key = 'bfkey'
@@ -16,6 +18,30 @@ class Case < ActiveRecord::Base
     define_method("#{name}_date") do
       if value = self.send(name)
         value.to_s(:va_date)
+      end
+    end
+  end
+
+  def after_initialize
+    @efolder_case = EFolder::Case.new(self.bfcorlid)
+  end
+
+  def efolder_nod_date
+    self.efolder_case.get_nod(self.bfdnod).try(:received_at).to_s(:va_date) if self.bfdnod
+  end
+
+  def efolder_form9_date
+    self.efolder_case.get_nod(self.bfd19).try(:received_at).to_s(:va_date) if self.bfd19
+  end
+
+  def efolder_soc_date
+    self.efolder_case.get_nod(self.bfdsoc).try(:received_at).to_s(:va_date) if self.bfdsoc
+  end
+
+  (1..5).each do |i|
+    define_method("#efolder_ssoc{i}_date") do
+      if value = self.send("bfssoc#{i}")
+        self.efolder_case.send(:get_ssoc, self.bfdsoc).try(:received_at).to_s(:va_date)
       end
     end
   end
