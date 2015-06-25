@@ -6,6 +6,6 @@ class WebController < ApplicationController
   end
 
   def redirect
-    redirect_to '/#/certifications/' + params[:id] + '/start'
+    redirect_to '/caseflow#/certifications/' + params[:id] + '/start'
   end
 end

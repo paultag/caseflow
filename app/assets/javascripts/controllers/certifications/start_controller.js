@@ -12,7 +12,7 @@
 
       $scope.start.init = function() {
         if (!$scope.certifications.data) {
-          var request = $http.get('/api/certifications/start/' + $routeParams.id);
+          var request = $http.get('/caseflow/api/certifications/start/' + $routeParams.id);
 
           request.success(function(certification) {
             $scope.certifications.data = certificationsFactory.data =  certification;
