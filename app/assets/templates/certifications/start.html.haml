@@ -63,42 +63,50 @@
           %dl
             %dt NOD Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_nod" ng-bind="certifications.data.info.efolder_nod")
+              %em(ng-if="!certifications.data.info.efolder_nod") Not found
 
           %dl
             %dt SOC Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_soc" ng-bind="certifications.data.info.efolder_soc")
+              %em(ng-if="!certifications.data.info.efolder_soc") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc1")
             %dt SSOC1 Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_ssoc1" ng-bind="certifications.data.info.efolder_ssoc1")
+              %em(ng-if="!certifications.data.info.efolder_ssoc1") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc2")
             %dt SSOC2 Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_ssoc2" ng-bind="certifications.data.info.efolder_ssoc2")
+              %em(ng-if="!certifications.data.info.efolder_ssoc2") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc3")
             %dt SSOC3 Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_ssoc3" ng-bind="certifications.data.info.efolder_ssoc3")
+              %em(ng-if="!certifications.data.info.efolder_ssoc3") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc4")
             %dt SSOC4 Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_ssoc4" ng-bind="certifications.data.info.efolder_ssoc4")
+              %em(ng-if="!certifications.data.info.efolder_ssoc4") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc5")
             %dt SSOC5 Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_ssoc5" ng-bind="certifications.data.info.efolder_ssoc5")
+              %em(ng-if="!certifications.data.info.efolder_ssoc5") Not found
 
           %dl
             %dt Form 9 Date:
             %dd
-              %em Not found
+              %span(ng-if="certifications.data.info.efolder_form9" ng-bind="certifications.data.info.efolder_form9")
+              %em(ng-if="!certifications.data.info.efolder_form9") Not found
 
   %hr
 
