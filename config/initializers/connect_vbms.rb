@@ -1,4 +1,4 @@
-$LOAD_PATH << Rails.root + 'vendor' + 'connect_vbms' + 'src'
+$LOAD_PATH << Rails.root + '../' + 'connect_vbms' + 'src'
 
 require 'vbms'
 
