@@ -50,6 +50,25 @@ module Api
       render json: {status: 'ok', file_name: form_8.file_name, bf41stat: certification_date}, status: :created
     end
 
+    def certify
+      kase = Case.find(params[:id])
+
+      corr = kase.correspondent
+
+      Case.transaction do
+        kase.bfdcertool = Time.now
+        kase.bf41stat   = Date.strptime(params[:cert][:certification_date], Date::DATE_FORMATS[:va_date])
+        # TODO: get save permissions
+        # kase.save
+
+        binding.pry
+
+        kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:cert][:file_name])
+      end
+
+      render json: {status: 'ok', bf41stat: kase.bf41stat.to_s(:va_date)}, status: :created
+    end
+
     # DEMO: uncomment
     # def start
     #   render json: {"info"=>

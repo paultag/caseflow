@@ -28,6 +28,8 @@ gem 'httpi'
 # gem 'libxml-jruby'
 gem 'nokogiri', '~> 1.6.6.2'
 
+gem 'connect_vbms', git: 'https://github.com/department-of-veterans-affairs/connect_vbms.git'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

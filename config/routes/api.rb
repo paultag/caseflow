@@ -4,6 +4,7 @@ Caseflow::Application.routes.draw do
       namespace :certifications do
         get '/start/:id', to: :start, as: :start
         post '/generate/:id', to: :generate, as: :generate
+        post '/certify/:id', to: :certify, as: :certify
       end
     end
   end

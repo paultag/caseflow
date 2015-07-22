@@ -42,6 +42,13 @@ module EFolder
       get_document(names, timestamp)
     end
 
+    def upload_form8(first_name, middle_init, last_name, file_name)
+      path = (Rails.root + 'tmp' + 'forms' + file_name).to_s
+
+      request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, "Form 8", path, "625", "Form 8", true)
+      $vbms.send(request)
+    end
+
     private
 
     def get_document(names, timestamp)

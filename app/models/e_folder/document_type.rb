@@ -11,10 +11,10 @@ module EFolder
       end
 
       def find(id)
-        type = @data.detect {|i| i.type_id.value == id.to_s || i.type_id.value == id.to_s.gsub(/^0+/, '') }
+        type = @data.detect {|i| i.type_id == id.to_s || i.type_id == id.to_s.gsub(/^0+/, '') }
 
         if type.present?
-          self.new(id, type.description.value)
+          self.new(id, type.description)
         else
           nil
         end

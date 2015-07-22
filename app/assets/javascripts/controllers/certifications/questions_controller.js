@@ -1,4 +1,4 @@
-/* global angular,alert,$,_ */
+/* global angular,alert,_ */
 
 (function() {
   "use strict";

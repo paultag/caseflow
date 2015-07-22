@@ -1,8 +1,6 @@
-$LOAD_PATH << Rails.root + '../' + 'connect_vbms' + 'src' + 'src'
+# $LOAD_PATH << Rails.root + '../' + 'connect_vbms' + 'src' + 'src'
 
 require 'vbms'
-
-# require Rails.root + 'vendor' + 'connect_vbms' + 'src' + 'vbms'
 
 config = case ENV['CONNECT_VBMS_ENV']
 when 'uat'

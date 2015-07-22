@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/department-of-veterans-affairs/connect_vbms.git
+  revision: 76a485e016b7ce9aedac9fd121a0b4a69e1e5383
+  specs:
+    connect_vbms (0.0.1)
+      httpi (~> 2.4)
+      nokogiri (~> 1.6)
+      xmlenc (~> 0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -125,6 +134,10 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    xmlenc (0.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      nokogiri (~> 1.6.0)
 
 PLATFORMS
   java
@@ -133,6 +146,7 @@ DEPENDENCIES
   activerecord-jdbc-adapter
   bcrypt (~> 3.1.7)
   composite_primary_keys
+  connect_vbms!
   haml
   httpi
   jbuilder (~> 2.0)
@@ -150,4 +164,4 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
 
 BUNDLED WITH
-   1.10.3
+   1.10.5

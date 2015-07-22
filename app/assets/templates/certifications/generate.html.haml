@@ -17,4 +17,4 @@
   .input-group
     %a.my-form-button(data-label="Go Back" data-icon="chevron-left" ng-href="#/certifications/{{certifications.data.info.bfkey}}/questions")
     &nbsp;
-    %a.my-form-button(data-label="Finish Certification" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{certifications.data.info.bfkey}}/finish")
+    %button.my-form-button(data-label="Finish Certification" data-icon="chevron-right" data-color="primary" my-form-loading="generate.loading" ng-click="generate.go_to_finish()")
