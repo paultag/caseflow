@@ -17,7 +17,7 @@
       $scope.index.go_to_start = function() {
         $scope.index.loading = true;
 
-        var request = $http.get('/api/certifications/start/' + $scope.index.id);
+        var request = $http.get('/caseflow/api/certifications/start/' + $scope.index.id);
 
         request.success(function(certification) {
           certificationsFactory.data = certification;

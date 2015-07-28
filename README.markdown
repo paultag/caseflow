@@ -30,3 +30,12 @@ Note: Mac OS X with Java 8 is commonly at: /Library/Java/JavaVirtualMachines/jdk
 
 You must install PDFTK before the pdf-forms gem will install.  Please see the latest up-to-date installation instructions [at the GitHub repo](https://github.com/jkraemer/pdf-forms#installation).
 
+## Java Key Store (JKS)
+
+To verify the contents of a JKS file, do the following:
+
+`keytool -list -v  -keystore client3.jks`
+
+Also, if you need to change the alias, do the following:
+
+keytool -changealias -keystore client3.jks -storepass <keypass> -alias <current alias>

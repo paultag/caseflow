@@ -1,4 +1,4 @@
-/* global angular,alert,$,_ */
+/* global angular,alert,_ */
 
 (function() {
   "use strict";
@@ -27,7 +27,7 @@
           $scope.questions.loading = true;
 
           var bfkey = $scope.certifications.data.info.bfkey;
-          var request = $http.post('/api/certifications/generate/' + bfkey, {fields: $scope.certifications.data.fields});
+          var request = $http.post('/caseflow/api/certifications/generate/' + bfkey, {fields: $scope.certifications.data.fields});
 
           request.success(function(resp) {
             $scope.certifications.data.info.bf41stat = resp.bf41stat;

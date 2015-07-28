@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  root to: 'web#index'
+  scope '/caseflow' do
+    root to: 'web#index'
 
-  namespace :files do
-    get '/:type/:id', to: :show, as: :show, constraints: {type: /forms/}
+    namespace :files do
+      get '/:type/:id', to: :show, as: :show, constraints: {type: /forms/}
+    end
+
+    get '/certifications/:id/start', to: 'web#redirect'
   end
-
-  get '/certifications/:id/start', to: 'web#redirect'
 end

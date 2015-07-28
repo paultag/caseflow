@@ -1,10 +1,12 @@
 %div#certifications-start(ng-controller="CertificationsStartController" ng-init="start.init()")
   %div{'ng-include' => asset_path('certifications/_header.html').inspect}
 
-  .row(style="padding-top: 20px")
+  %hr
+
+  .row
     .col.col-md-12
       :markdown
-        Verify that this appeal is ready for **Certification** and **Dispatch** to the Board of Appeals.
+        Verify that the dates in VACOLS and VBMS are the same this appeal, and that it is ready for **Certification** and **Dispatch** to the Board of Appeals.
 
       %hr
 
@@ -55,45 +57,56 @@
             Documents found in **VBMS**
           %hr
 
+          -# TODO: Look at using a table to show this data, so it is easier to line up the two different sources
+          -# TODO: Add ABBR tag to show what the abbreviations mean
+
           %dl
             %dt NOD Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_nod" ng-bind="certifications.data.info.efolder_nod")
+              %em(ng-if="!certifications.data.info.efolder_nod") Not found
 
           %dl
             %dt SOC Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_soc" ng-bind="certifications.data.info.efolder_soc")
+              %em(ng-if="!certifications.data.info.efolder_soc") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc1")
             %dt SSOC1 Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_ssoc1" ng-bind="certifications.data.info.efolder_ssoc1")
+              %em(ng-if="!certifications.data.info.efolder_ssoc1") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc2")
             %dt SSOC2 Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_ssoc2" ng-bind="certifications.data.info.efolder_ssoc2")
+              %em(ng-if="!certifications.data.info.efolder_ssoc2") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc3")
             %dt SSOC3 Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_ssoc3" ng-bind="certifications.data.info.efolder_ssoc3")
+              %em(ng-if="!certifications.data.info.efolder_ssoc3") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc4")
             %dt SSOC4 Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_ssoc4" ng-bind="certifications.data.info.efolder_ssoc4")
+              %em(ng-if="!certifications.data.info.efolder_ssoc4") Not found
 
           %dl(ng-if="certifications.data.info.bfssoc5")
             %dt SSOC5 Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_ssoc5" ng-bind="certifications.data.info.efolder_ssoc5")
+              %em(ng-if="!certifications.data.info.efolder_ssoc5") Not found
 
           %dl
             %dt Form 9 Date:
             %dd
-              %strong NO DATA
+              %span(ng-if="certifications.data.info.efolder_form9" ng-bind="certifications.data.info.efolder_form9")
+              %em(ng-if="!certifications.data.info.efolder_form9") Not found
 
   %hr
 
