@@ -1,7 +1,14 @@
 %div#certifications-questions(ng-controller="CertificationsQuestionsController" ng-init="questions.init()")
   %div{'ng-include' => asset_path('certifications/_header.html').inspect}
 
-  .row(style="padding-top: 20px")
+  %hr
+
+  -# TODO: Make the check boxes radio buttons
+  -# TODO: Remove all icons
+  -# TODO: Add character counter to input boxes, turn box red when too many characters are given
+  -# TODO: Give help text that helps people know what the fields actually mean
+
+  .row
     .col.col-md-12
       :markdown
         Please answer the following questions to finish the certification and dispatch process for this appeal
@@ -167,6 +174,8 @@
           :markdown
             **13**. RECORDS TO BE FORWARDED TO BOARD OF VETERANS' APPEALS
 
+        -# TODO: Add ABBR tag to show what the abbreviations mean
+
         .col.col-md-2
           .input-group
             %my-form-checkbox
@@ -273,4 +282,3 @@
         %a.my-form-button(data-label="Go Back" data-icon="chevron-left" ng-href="#/certifications/{{certifications.data.info.bfkey}}/start")
         &nbsp;
         %button.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" my-form-loading="questions.loading" ng-click="questions.go_to_generate()" ng-disabled="questions.invalid()")
-

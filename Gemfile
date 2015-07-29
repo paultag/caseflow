@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0', engine: 'jruby', engine_version: '1.7.16.1'
-#ruby=jruby-1.7.16.1
+ruby '2.0.0', engine: 'jruby', engine_version: '1.7.20'
+#ruby=jruby-1.7.20
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -22,6 +22,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'therubyrhino'
 gem 'uglifier', '>= 1.3.0'
+
+# for vbms_connect
+gem 'httpi'
+# gem 'libxml-jruby'
+gem 'nokogiri', '~> 1.6.6.2'
+
+gem 'connect_vbms', git: 'https://github.com/department-of-veterans-affairs/connect_vbms.git'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

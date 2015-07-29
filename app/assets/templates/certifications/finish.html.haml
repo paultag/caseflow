@@ -1,10 +1,11 @@
 %div#certifications-generate(ng-controller="CertificationsGenerateController" ng-init="generate.init()")
   %div{'ng-include' => asset_path('certifications/_header.html').inspect}
 
-  .row(style="padding-top: 20px")
+  %hr/
+
+  .row
     .col.col-md-12
       :markdown
         This appeal is now **certified** to the Board of Appeals.  You are **Finished** and can close this browser window.
 
   %hr/
-
