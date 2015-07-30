@@ -61,8 +61,6 @@ module Api
         # TODO: get save permissions
         # kase.save
 
-        binding.pry
-
         kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:cert][:file_name])
       end
 
