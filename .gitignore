@@ -12,3 +12,5 @@
 /out
 /src
 /priv/**/*
+
+upload.log

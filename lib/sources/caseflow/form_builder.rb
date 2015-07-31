@@ -20,6 +20,8 @@ class Caseflow::FormBuilder
           memo[name] = ''
         when :check
           memo[name] = false
+        when :radio
+          # no action
         else
           memo[name] = nil
       end
@@ -31,17 +33,31 @@ class Caseflow::FormBuilder
 
   def values
     self.class.field_legend.reduce({}) do |memo, (name, attr)|
-      if attr[:type] == :check
-        case fields[name]
-          when true, 'true', 'yes', '1', 1
-            # pdf files seem to need a special character for checkboxes, which is chosen when made
-            # if check_symbol is provided, use that for a truthy value; else use what was passed
-            memo[attr[:id]] = self.class.check_symbol || fields[name]
-          else
-            # just leave blank to keep unchecked
-        end
-      else
-        memo[attr[:id]] = fields[name]
+      case attr[:type]
+        when :check
+          case fields[name]
+            when true, 'true', 'yes', '1', 1
+              # pdf files seem to need a special character for checkboxes, which is chosen when made
+              # if check_symbol is provided, use that for a truthy value; else use what was passed
+              memo[attr[:id]] = self.class.check_symbol || fields[name]
+            else
+              # just leave blank to keep unchecked
+          end
+        when :radio
+          case fields[name]
+            when nil
+              # check neither
+            when true, 'true', 'yes', '1', 1
+              f = self.class.field_legend[name + '_YES']
+
+              memo[f[:id]] = self.class.check_symbol || fields[name]
+            else
+              f = self.class.field_legend[name + '_NO']
+
+              memo[f[:id]] = self.class.check_symbol || fields[name]
+            end
+        else
+          memo[attr[:id]] = fields[name]
       end
       memo
     end
