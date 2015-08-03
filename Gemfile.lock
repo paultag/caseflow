@@ -1,6 +1,5 @@
-GIT
-  remote: https://github.com/department-of-veterans-affairs/connect_vbms.git
-  revision: 76a485e016b7ce9aedac9fd121a0b4a69e1e5383
+PATH
+  remote: ./vendor/gems/connect_vbms
   specs:
     connect_vbms (0.0.1)
       httpi (~> 2.4)

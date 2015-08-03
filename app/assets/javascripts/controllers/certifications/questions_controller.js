@@ -18,6 +18,20 @@
           }
         };
 
+        $scope.questions.power_of_attorney = null;
+
+        $scope.$watch('questions.power_of_attorney', function(newValue) {
+          if (newValue === '8B_POWER_OF_ATTORNEY') {
+            $scope.certifications.data.fields['8B_POWER_OF_ATTORNEY'] = 'yes';
+            $scope.certifications.data.fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'] = undefined;
+          }
+
+          if (newValue === '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE') {
+            $scope.certifications.data.fields['8B_POWER_OF_ATTORNEY'] = undefined;
+            $scope.certifications.data.fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'] = 'yes';
+          }
+        });
+
 
         $scope.questions.invalid = function() {
           return _.isEmpty($scope.certifications.data.fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL']) || _.isEmpty($scope.certifications.data.fields['17B_TITLE']);
