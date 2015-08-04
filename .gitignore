@@ -12,3 +12,6 @@
 /out
 /src
 /priv/**/*
+
+upload.log
+env.sh

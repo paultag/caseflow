@@ -5,8 +5,10 @@
 //= require angular.min
 //= require angular-route.min
 //= require angular-animate.min
+//= require loading-bar.min
 
 //= require ./configs/angular
+//= require ./configs/loading-bar
 //= require ./configs/rails
 //= require ./configs/lodash
 

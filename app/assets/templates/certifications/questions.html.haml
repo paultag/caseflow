@@ -24,17 +24,17 @@
         .row
           .col.col-md-6
             .input-group
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8B_POWER_OF_ATTORNEY']") Located in the veteran's appeal file
+              %label.radio-inline
+                %input(type="radio" data-unique="8B" name="8B_POWER_OF_ATTORNEY" value="8B_POWER_OF_ATTORNEY" ng-model="questions.power_of_attorney") Located in the veteran's appeal file
 
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE']") Located in another VA file
+              %label.radio-inline
+                %input(type="radio" data-unique="8B" name="8B_POWER_OF_ATTORNEY" value="8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE" ng-model="questions.power_of_attorney") Located in another VA file
 
         %hr
 
       /---
 
-      .animate-if(ng-if="certifications.data.fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE']")
+      .animate-if(ng-if="certifications.data.fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'] === 'yes'")
         .row
           .col.col-md-12
             :markdown
@@ -57,11 +57,11 @@
         .row
           .col.col-md-6
             .input-group
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_YES']") Yes
+              %label.radio-inline
+                %input(type="radio" data-unique="8C" name="8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST" value="yes" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST']") Yes
 
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="8C" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST_NO']") No
+              %label.radio-inline
+                %input(type="radio" data-unique="8C" name="8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST" value="no" ng-model="certifications.data.fields['8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST']") No
 
         %hr
 
@@ -76,17 +76,17 @@
         .row
           .col.col-md-6
             .input-group
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="9A" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_YES']") Yes
+              %label.radio-inline
+                %input(type="radio" data-unique="9A" name="9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646" value="yes" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646']") Yes
 
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="9A" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO']") No
+              %label.radio-inline
+                %input(type="radio" data-unique="9A" name="9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646" value="no" ng-model="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646']") No
 
         %hr
 
       /---
 
-      .animate-if(ng-if="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO']")
+      .animate-if(ng-if="certifications.data.fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646'] === 'yes'")
         .row
           .col.col-md-12
             :markdown
@@ -110,17 +110,17 @@
         .row
           .col.col-md-6
             .input-group
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="10B" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_YES']") Yes
+              %label.radio-inline
+                %input(type="radio" data-unique="10B" name="10B_IF_HELD_IS_TRANSCRIPT_IN_FILE" value="yes" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE']") Yes
 
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="10B" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_NO']") No
+              %label.radio-inline
+                %input(type="radio" data-unique="10B" name="10B_IF_HELD_IS_TRANSCRIPT_IN_FILE" value="no" ng-model="certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE']") No
 
       %hr
 
       /---
 
-      %span(ng-if="certifications.data.required_fields.show_10c")
+      .animate-if(ng-if="certifications.data.required_fields.show_10c && certifications.data.fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE'] === 'no'")
         .row
           .col.col-md-12
             :markdown
@@ -130,7 +130,7 @@
             %my-form-input(data-icon="gavel")
               %input(type="text" ng-model="certifications.data.fields['10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN']" maxlength="45")
 
-      %hr
+        %hr
 
       /---
 
@@ -141,17 +141,17 @@
 
         .col.col-md-6
           .input-group
-            %label.checkbox-inline
-              %input(type="checkbox" data-unique="11A" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_YES']") Yes
+            %label.radio-inline
+              %input(type="radio" data-unique="11A" name="11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE" value="yes" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE']") Yes
 
-            %label.checkbox-inline
-              %input(type="checkbox" data-unique="11A" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_NO']") No
+            %label.radio-inline
+              %input(type="radio" data-unique="11A" name="11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE" value="no" ng-model="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE']") No
 
       %hr
 
       /---
 
-      %div.animate-if(ng-if="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_YES']")
+      %div.animate-if(ng-if="certifications.data.fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE'] === 'yes'")
         .row
           .col.col-md-12
             :markdown
@@ -159,11 +159,11 @@
 
           .col.col-md-6
             .input-group
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="11B" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES']") Yes
+              %label.radio-inline
+                %input(type="radio" data-unique="11B" name="11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES" value="yes" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES']") Yes
 
-              %label.checkbox-inline
-                %input(type="checkbox" data-unique="11B" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_NO']") No
+              %label.radio-inline
+                %input(type="radio" data-unique="11B" name="11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES" value="no" ng-model="certifications.data.fields['11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_NO']") No
 
         %hr
 
