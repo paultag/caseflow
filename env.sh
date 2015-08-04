@@ -1,0 +1,5 @@
+export JRUBY_OPTS="--2.0"
+export CONNECT_VBMS_URL="***REMOVED***"
+export CONNECT_VBMS_KEYFILE="/Users/vacoarnwis/deployments/deployment/decrypted_creds/test_creds/caseflow_test_jks"
+export CONNECT_VBMS_SAML="/Users/vacoarnwis/deployments/deployment/decrypted_creds/test_creds/caseflow_test_saml"
+export CONNECT_VBMS_KEYPASS="importkey"
