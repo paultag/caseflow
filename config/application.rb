@@ -31,6 +31,8 @@ module Caseflow
     config.paths['config/routes.rb'] << 'config/routes/api.rb'
     config.paths['config/routes.rb'] << 'config/routes/web.rb'
 
+    config.assets.prefix = "/caseflow/assets"
+
     # Do not modify query parameters when empty arrays are passed
     config.action_dispatch.perform_deep_munge = false
   end
