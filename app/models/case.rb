@@ -10,7 +10,7 @@ class Case < ActiveRecord::Base
   belongs_to :correspondent, foreign_key: :bfcorkey, primary_key: :stafkey
 
   has_one :folder, foreign_key: :ticknum
-  has_one :current_staff_location, class: StaffLocation, foreign_key: :stafkey, primary_key: :bfcurloc
+  has_one :current_staff_location, class_name: StaffLocation, foreign_key: :stafkey, primary_key: :bfcurloc
 
   has_many :correspondences, foreign_key: :mlfolder
 
