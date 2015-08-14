@@ -58,6 +58,8 @@ To generate Form 8 PDFs, Caseflow uses a library called PDFTK. [Download this fr
 
 To communicate with VBMS (Veterans Benefit Management System), Caseflow uses a library called Connect VBMS. It requires a few environment variables to be setup. They are:
 
+- `CONNECT_VBMS_ENV_DIR`: The directory that contains VBMS credentials for various environments
+- `CONNECT_VBMS_ENV`: The directory that contains the VBMS credentials within `CONNECT_VBMS_ENV_DIR`.
 - `CONNECT_VBMS_URL`: The URL to the VBMS eFolder
 - `CONNECT_VBMS_KEYFILE`: The path to the Java KeyStore File for VBMS
 - `CONNECT_VBMS_KEYPASS`: The password for the key store
@@ -66,7 +68,7 @@ To communicate with VBMS (Veterans Benefit Management System), Caseflow uses a l
 - `CONNECT_VBMS_CACERT`: (Only needed for production) The path to the CA certificate for VBMS
 - `CONNECT_VBMS_CERT`: (Only needed for production) The path to the client certificate for VBMS
 
-To get some of these files, you'll have to extract them for your desired environment from the [DSVA Deployment project](https://github.com/department-of-veterans-affairs/deployment) (this is closed source to the DSVA team for security reasons). Follow the instructions in there to extract the files.
+To get some of these files, you'll have to extract them for your desired environment from the [DSVA Deployment project](https://github.com/department-of-veterans-affairs/deployment) (this repo is closed source to the DSVA team for security reasons). Follow the instructions in there to extract the files.
 
 To help with this, a sample setup script is enclosed at `env.sh` in the Caseflow project. You can edit this file, then run `source env.sh`.
 
