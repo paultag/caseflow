@@ -33,7 +33,9 @@ def main(argv)
 
     request = HTTPI::Request.new("#{HOST}caseflow/api/certifications/start/#{case_id}")
     response = HTTPI.get(request)
-    assert response.code == 200
+    if response.code != 200
+      raise "HTTP Error: #{response.status_code}"
+    end
     data = JSON.parse(response.body)[:info]
 
     matching = RELEVANT_FIELDS.all? do |vacols_field, vbms_field|
