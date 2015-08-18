@@ -28,23 +28,25 @@ def main(argv)
 
   good = []
   bad = []
-  Spreadsheet.open(file).worksheet(0).each do |row|
-    case_id = row[0]
+  Spreadsheet.open(file) do |workbook|
+    workbook.worksheet(0).each do |row|
+      case_id = row[0]
 
-    request = HTTPI::Request.new("#{HOST}caseflow/api/certifications/start/#{case_id}")
-    response = HTTPI.get(request)
-    if response.code != 200
-      raise "HTTP Error: #{response.status_code}"
-    end
-    data = JSON.parse(response.body)["info"]
+      request = HTTPI::Request.new("#{HOST}caseflow/api/certifications/start/#{case_id}")
+      response = HTTPI.get(request)
+      if response.code != 200
+        raise "HTTP Error: #{response.status_code}"
+      end
+      data = JSON.parse(response.body)["info"]
 
-    matching = RELEVANT_FIELDS.all? do |vacols_field, vbms_field|
-      data[vacols_field] == data[vbms_field]
-    end
-    if matching
-      good << case_id
-    else
-      bad << case_id
+      matching = RELEVANT_FIELDS.all? do |vacols_field, vbms_field|
+        data[vacols_field] == data[vbms_field]
+      end
+      if matching
+        good << case_id
+      else
+        bad << case_id
+      end
     end
   end
   puts "There were #{good.length} good records and #{bad} bad records."
