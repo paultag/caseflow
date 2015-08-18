@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'json'
 
 require 'httpi'
@@ -18,7 +20,7 @@ RELEVANT_FIELDS = [
 ]
 
 def main(argv)
-  [file] = argv
+  file, = argv
 
   good = []
   bad = []
@@ -43,6 +45,6 @@ def main(argv)
   puts "There were #{good.length} good records and #{bad} bad records."
 end
 
-if $__FILE__ == $0
+if __FILE__ == $0
   main(ARGV)
 end
