@@ -9,14 +9,14 @@ require 'spreadsheet'
 
 HOST = "***REMOVED***"
 RELEVANT_FIELDS = [
-  [:bfdnod, :efolder_nod],
-  [:bfd19, :efolder_form9],
-  [:bfdsoc, :efolder_soc],
-  [:bfssoc1, :efolder_ssoc1],
-  [:bfssoc2, :efolder_ssoc2],
-  [:bfssoc3, :efolder_ssoc3],
-  [:bfssoc4, :efolder_ssoc4],
-  [:bfssoc5, :efolder_ssoc5],
+  ["bfdnod", "efolder_nod"],
+  ["bfd19", "efolder_form9"],
+  ["bfdsoc", "efolder_soc"],
+  ["bfssoc1", "efolder_ssoc1"],
+  ["bfssoc2", "efolder_ssoc2"],
+  ["bfssoc3", "efolder_ssoc3"],
+  ["bfssoc4", "efolder_ssoc4"],
+  ["bfssoc5", "efolder_ssoc5"],
 ]
 
 def main(argv)
@@ -36,7 +36,7 @@ def main(argv)
     if response.code != 200
       raise "HTTP Error: #{response.status_code}"
     end
-    data = JSON.parse(response.body)[:info]
+    data = JSON.parse(response.body)["info"]
 
     matching = RELEVANT_FIELDS.all? do |vacols_field, vbms_field|
       data[vacols_field] == data[vbms_field]
