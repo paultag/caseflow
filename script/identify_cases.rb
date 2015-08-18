@@ -20,7 +20,11 @@ RELEVANT_FIELDS = [
 ]
 
 def main(argv)
-  file, = argv
+  if argv.length != 3
+    $stderr.puts "identify_cases.rb <input-file> <good-output-file> <bad-output-file>"
+    exit(1)
+  end
+  input_file, good_output_file, bad_output_file = argv
 
   good = []
   bad = []
@@ -41,8 +45,21 @@ def main(argv)
       bad << case_id
     end
   end
-
   puts "There were #{good.length} good records and #{bad} bad records."
+
+  good_sheet = create_spreadsheet(good)
+  bad_sheet = create_spreadsheet(bad)
+
+  good_sheet.write(good_output_file)
+  bad_sheet.write(bad_output_file)
+end
+
+def create_spreadsheet(case_ids)
+  workbook = Spreadsheet::Workbook.new()
+  sheet = workbook.create_worksheet()
+  case_ids.each_with_index do |case_id, idx|
+    sheet[idx, 0] = case_id
+  end
 end
 
 if __FILE__ == $0
