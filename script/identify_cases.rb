@@ -60,6 +60,7 @@ def create_spreadsheet(case_ids)
   case_ids.each_with_index do |case_id, idx|
     sheet[idx, 0] = case_id
   end
+  return workbook
 end
 
 if __FILE__ == $0
