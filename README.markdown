@@ -64,9 +64,9 @@ To communicate with VBMS (Veterans Benefit Management System), Caseflow uses a l
 - `CONNECT_VBMS_KEYFILE`: The name of the Java KeyStore File for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
 - `CONNECT_VBMS_KEYPASS`: The name of the keypass file for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
 - `CONNECT_VBMS_SAML`: The name of the single sign on token XML file (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
-- `CONNECT_VBMS_KEY`: (Only needed for production) The name of the VBMS key file (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
-- `CONNECT_VBMS_CACERT`: (Only needed for production) The name of the CA certificate for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
-- `CONNECT_VBMS_CERT`: (Only needed for production) The name of the client certificate for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
+- `CONNECT_VBMS_KEY`: (Not needed for test environment) The name of the VBMS key file (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
+- `CONNECT_VBMS_CACERT`: (Not needed for test environment) The name of the CA certificate for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
+- `CONNECT_VBMS_CERT`: (Not needed for test environment) The name of the client certificate for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
 
 To get some of these files, you'll have to extract them for your desired environment from the [DSVA Deployment project](https://github.com/department-of-veterans-affairs/deployment) (this repo is closed source to the DSVA team for security reasons). Follow the instructions in there to extract the files.
 
