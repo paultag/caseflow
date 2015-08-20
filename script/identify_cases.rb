@@ -28,25 +28,13 @@ def main(argv)
 
   good = []
   bad = []
-  Spreadsheet.open(file) do |workbook|
-    workbook.worksheet(0).each do |row|
-      case_id = row[0]
 
-      request = HTTPI::Request.new("#{HOST}caseflow/api/certifications/start/#{case_id}")
-      response = HTTPI.get(request)
-      if response.code != 200
-        raise "HTTP Error: #{response.status_code}"
-      end
-      data = JSON.parse(response.body)["info"]
-
-      matching = RELEVANT_FIELDS.all? do |vacols_field, vbms_field|
-        data[vacols_field] == data[vbms_field]
-      end
-      if matching
-        good << case_id
-      else
-        bad << case_id
-      end
+  case_ids = extract_case_ids(file)
+  case_ids.each do |case_id|
+    if check_case_status(case_id)
+      good << case_id
+    else
+      bad << case_id
     end
   end
   puts "There were #{good.length} good records and #{bad} bad records."
@@ -56,6 +44,29 @@ def main(argv)
 
   good_sheet.write(good_output_file)
   bad_sheet.write(bad_output_file)
+end
+
+def extract_case_ids(input_file_name)
+  case_ids = []
+  Spreadsheet.open(file) do |workbook|
+    workbook.worksheet(0).each do |row|
+      case_ids << row[0]
+    end
+  end
+  return case_ids
+end
+
+def check_case_status(case_id)
+  request = HTTPI::Request.new("#{HOST}caseflow/api/certifications/start/#{case_id}")
+  response = HTTPI.get(request)
+  if response.code != 200
+    raise "HTTP Error: #{response.status_code}"
+  end
+  data = JSON.parse(response.body)["info"]
+
+  return RELEVANT_FIELDS.all? do |vacols_field, vbms_field|
+    data[vacols_field] == data[vbms_field]
+  end
 end
 
 def create_spreadsheet(case_ids)
