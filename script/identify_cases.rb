@@ -62,7 +62,7 @@ def check_case_status(case_id)
   request = HTTPI::Request.new("#{HOST}caseflow/api/certifications/start/#{case_id}")
   response = HTTPI.get(request)
   if response.code != 200
-    raise "HTTP Error: #{response.status_code}"
+    raise "HTTP Error: #{response.code}"
   end
   data = JSON.parse(response.body)["info"]
 
