@@ -45,8 +45,7 @@ module EFolder
     def upload_form8(first_name, middle_init, last_name, file_name)
       path = (Rails.root + 'tmp' + 'forms' + file_name).to_s
 
-      # Arguments: file_number, received_at, first_name, middle_name, last_name, exam_name, pdf_file, doc_type, source, new_mail
-      request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, '625', 'VACOLS', true)
+      request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, '178', 'VACOLS', true)
       $vbms.send(request)
     end
 
