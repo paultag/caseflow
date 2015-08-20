@@ -39,7 +39,7 @@ def main(argv)
       bad << case_id
     end
   end
-  puts "There were #{good.length} good records and #{bad} bad records."
+  puts "There were #{good.length} good records and #{bad.length} bad records."
 
   good_sheet = create_spreadsheet(good)
   bad_sheet = create_spreadsheet(bad)
