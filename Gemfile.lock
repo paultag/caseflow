@@ -64,6 +64,7 @@ GEM
     minitest (5.8.0)
     multi_json (1.11.2)
     nokogiri (1.6.6.2-java)
+    parallel (1.6.1)
     pdf-forms (0.6.0)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
@@ -153,6 +154,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   kramdown
   nokogiri (~> 1.6.6.2)
+  parallel (~> 1.6.1)
   pdf-forms (= 0.6.0)
   pry
   pry-rails

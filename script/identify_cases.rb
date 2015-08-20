@@ -4,6 +4,8 @@ require 'json'
 
 require 'httpi'
 
+require 'parallel'
+
 require 'spreadsheet'
 
 
@@ -30,7 +32,7 @@ def main(argv)
   bad = []
 
   case_ids = extract_case_ids(file)
-  case_ids.each do |case_id|
+  Parallel.each(case_ids, :in_threads => 8) do |case_id|
     if check_case_status(case_id)
       good << case_id
     else
