@@ -11,48 +11,41 @@ module EFolder
         @documents = nil
       end
 
-      @documents ||= $vbms.send(VBMS::Requests::ListDocuments.new(self.id)).map do |doc|
-        Document.new(
-          doc.document_id.try(:value),
-          doc.filename.try(:value),
-          doc.doc_type.try(:value),
-          doc.source.try(:value),
-          doc.received_at
-        )
-      end
+      @documents ||= $vbms.send(VBMS::Requests::ListDocuments.new(self.id))
     end
 
     def get_nod(timestamp)
-      get_document(['Notice of Disagreement'], timestamp)
+      # NOD Doc Type: 73
+      get_document('73', timestamp)
     end
 
     def get_soc(timestamp)
-      get_document(['Statement of Case (SOC)'], timestamp)
+      # SOC Doc Type: 95
+      get_document('95', timestamp)
     end
 
     def get_ssoc(timestamp)
-      get_document(['Supplemental Statement of Case (SSOC)'], timestamp)
+      # SSOC Doc Type: 97
+      get_document('97', timestamp)
     end
 
     def get_form9(timestamp)
-      get_document(['VA Form 9, Appeal to Board of Veterans Appeals'], timestamp)
-    end
-
-    def get_other(names, timestamp)
-      get_document(names, timestamp)
+      # Form 9 Doc Type: 179
+      get_document('179', timestamp)
     end
 
     def upload_form8(first_name, middle_init, last_name, file_name)
       path = (Rails.root + 'tmp' + 'forms' + file_name).to_s
 
+      # Form 8 Doc Type: 178
       request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, '178', 'VACOLS', true)
       $vbms.send(request)
     end
 
     private
 
-    def get_document(names, timestamp)
-      documents.detect{ |i| names.include?(i.type.try(:description)) && i.received_at == timestamp.to_date }
+    def get_document(doc_type, timestamp)
+      documents.detect{ |document| document.doc_type == doc_type && document.received_at == timestamp.to_date }
     end
   end
 end
