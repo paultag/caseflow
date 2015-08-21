@@ -62,7 +62,7 @@ To communicate with VBMS (Veterans Benefit Management System), Caseflow uses a l
 - `CONNECT_VBMS_ENV`: The directory that contains the VBMS credentials within `CONNECT_VBMS_ENV_DIR`.
 - `CONNECT_VBMS_URL`: The URL to the VBMS eFolder
 - `CONNECT_VBMS_KEYFILE`: The name of the Java KeyStore File for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
-- `CONNECT_VBMS_KEYPASS`: The name of the keypass file for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
+- `CONNECT_VBMS_KEYPASS`: The password for the Java KeyStore file
 - `CONNECT_VBMS_SAML`: The name of the single sign on token XML file (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
 - `CONNECT_VBMS_KEY`: (Not needed for test environment) The name of the VBMS key file (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
 - `CONNECT_VBMS_CACERT`: (Not needed for test environment) The name of the CA certificate for VBMS (contained in `CONNECT_VBMS_ENV_DIR` + `CONNECT_VBMS_ENV`)
