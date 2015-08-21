@@ -50,6 +50,20 @@ def main(argv)
 end
 
 def extract_case_ids(input_file_name)
+  # TODO: The format of the spreadsheet is: [
+  #   Appeal ID,
+  #   LAST NAME,
+  #   FIRST NAME,
+  #   SENT TO BVA,
+  #   STATUS,
+  #   RO,
+  #   Form 9,
+  #   NOD,
+  #   SOC,
+  #   Certified,
+  #   Total days,
+  #   VBMS,
+  # ]
   case_ids = []
   Spreadsheet.open(file) do |workbook|
     workbook.worksheet(0).each do |row|
