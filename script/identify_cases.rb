@@ -2,7 +2,7 @@
 
 require 'json'
 
-require 'httpi'
+require 'httpclient'
 
 require 'parallel'
 
@@ -32,8 +32,9 @@ def main(argv)
   bad = []
 
   case_ids = extract_case_ids(file)
+  h = HTTPClient.new()
   Parallel.each(case_ids, :in_threads => 8) do |case_id|
-    if check_case_status(case_id)
+    if check_case_status(h, case_id)
       good << case_id
     else
       bad << case_id
@@ -58,9 +59,8 @@ def extract_case_ids(input_file_name)
   return case_ids
 end
 
-def check_case_status(case_id)
-  request = HTTPI::Request.new("#{HOST}caseflow/api/certifications/start/#{case_id}")
-  response = HTTPI.get(request)
+def check_case_status(h, case_id)
+  response = h.get("#{HOST}caseflow/api/certifications/start/#{case_id}")
   if response.code != 200
     raise "HTTP Error: #{response.code}"
   end
