@@ -50,7 +50,7 @@ def main(argv)
 end
 
 def extract_case_ids(input_file_name)
-  # TODO: The format of the spreadsheet is: [
+  # The format of the spreadsheet is: [
   #   Appeal ID,
   #   LAST NAME,
   #   FIRST NAME,
@@ -66,14 +66,17 @@ def extract_case_ids(input_file_name)
   # ]
   case_ids = []
   Spreadsheet.open(file) do |workbook|
-    workbook.worksheet(0).each do |row|
-      case_ids << row[0]
+    workbook.worksheet(0).drop(1).each do |row|
+      case_ids << [row[0], row[6]]
     end
   end
   return case_ids
 end
 
 def check_case_status(h, case_id)
+  veteran_id, form_9_date = case_id
+  abort()
+  # TODO: SELECT bfkey FROM brieff WHERE bfcorlid = :veteran_id AND bfd19 = :form_9_date
   response = h.get("#{HOST}caseflow/api/certifications/start/#{case_id}")
   if response.code != 200
     raise "HTTP Error: #{response.code}"
