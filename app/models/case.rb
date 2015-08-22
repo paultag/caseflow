@@ -22,6 +22,10 @@ class Case < ActiveRecord::Base
     end
   end
 
+  def efolder_appellant_id
+    self.bfcorlid.gsub(/[^0-9]/, '')
+  end
+
   def efolder_case
     @efolder_case ||= EFolder::Case.new(self.bfcorlid.gsub(/[^0-9]/, ''))
   end
