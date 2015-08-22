@@ -6,7 +6,7 @@
   .row
     .col.col-md-12
       :markdown
-        Verify that the dates in VACOLS and VBMS are the same this appeal, and that it is ready for **Certification** and **Dispatch** to the Board of Appeals.
+        Verify that the dates in VACOLS and VBMS are the same for this appeal, and that it is ready for **Certification** and **Dispatch** to the Board of Appeals.
 
       %hr
 
@@ -110,7 +110,24 @@
 
   %hr
 
-  .input-group
+  .input-group(ng-show="certifications.data.info.datesMatch")
     %a.my-form-button(data-label="Go Back" data-icon="chevron-left" href="#/certifications")
     &nbsp;
     %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" ng-href="#/certifications/{{certifications.data.info.bfkey}}/questions")
+
+  .instructions(ng-show="certifications.data.info.showInstructions")
+    .row
+      .col.col-md-12
+        %p Sorry! The document dates do not match between VACOLS and VBMS. Please do the following to fix:
+        %ol
+          %li Login to VBMS.
+          %li
+            Do an eFolder search for
+            %span(ng-bind="certifications.data.info.efolder_id")
+            \.
+          %li For documents that are not found here, but exist in the eFolder, make sure that the receipt date field is set in VBMS.
+          %li For documents that have an incorrect date in VBMS, fix the receipt date in VBMS.
+          %li For documents that are not found here and not in VBMS, please work to fill out the paperwork, getting information from the appellant as needed.
+          %li After complete, refresh this page to continue certifying.
+        %p You may want to bookmark this page so that you can return here later.
+
