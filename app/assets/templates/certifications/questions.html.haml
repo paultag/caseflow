@@ -85,7 +85,7 @@
         .row
           .col.col-md-12
             :markdown
-              **9B**. IF VA FORM 646 IS NOT OF RECORD, EXPLAIN (45 CHARACTERS MAX)
+              **9B**. IF VA FORM 646 IS NOT OF RECORD, EXPLAIN
 
         .row
           .col.col-md-6
@@ -119,7 +119,7 @@
         .row
           .col.col-md-12
             :markdown
-              **10C**. IF NOT HELD, EXPLAIN (45 CHARACTERS MAX)
+              **10C**. IF NOT HELD, EXPLAIN
 
           .col.col-md-6
             %my-form-input(data-icon="gavel")
@@ -229,7 +229,7 @@
       .row
         .animate-if.col.col-md-6(ng-if="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']")
           %my-form-input(data-icon="info" data-label="Specify Other")
-            %input(type="text" ng-model="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS']")
+            %input(type="text" ng-model="certifications.data.fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS']" maxlength="45" )
 
       %hr
 
@@ -256,7 +256,7 @@
 
           .col.col-md-6
             %my-form-input(data-icon="user")
-              %input(type="text" ng-model="certifications.data.fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL']" maxlength="45")
+              %input(type="text" ng-model="certifications.data.fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL']" maxlength="40")
 
 
       %span
