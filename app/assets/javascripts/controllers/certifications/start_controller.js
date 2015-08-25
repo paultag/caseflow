@@ -19,10 +19,7 @@
           });
 
           request.error(function() {
-            alert("Sorry! The BFKEY (case ID) VACOLS sent you here with does not have a corresponding record in VBMS. " +
-                "Please return to VACOLS and verify the appellant ID/SSN is correct (and corresponds to the " +
-                "appeallant in VBMS). After adjusting the appellant ID/SSN in VACOLS, enter the BFKEY (case ID) " +
-                "on the page that will be shown after you close this error message.")
+            alert("Sorry! We could not find the appellant for this case in VBMS. Please verify that the appellant ID for this case is correct in VACOLS")
             $location.path('/certifications');
           });
         }
