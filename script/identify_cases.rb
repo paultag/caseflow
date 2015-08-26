@@ -96,6 +96,7 @@ def create_spreadsheet(case_ids)
   return workbook
 end
 
+# TODO: verify if this is the correct thing to do with `rails runner`
 if __FILE__ == $0
   main(ARGV)
 end
