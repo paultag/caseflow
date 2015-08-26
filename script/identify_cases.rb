@@ -31,7 +31,7 @@ def main(argv)
   good = []
   bad = []
 
-  case_ids = extract_case_ids(file)
+  case_ids = extract_case_ids(input_file)
   h = HTTPClient.new()
   Parallel.each(case_ids, :in_threads => 8) do |case_id|
     if check_case_status(h, case_id)
@@ -65,7 +65,7 @@ def extract_case_ids(input_file_name)
   #   VBMS,
   # ]
   case_ids = []
-  Spreadsheet.open(file) do |workbook|
+  Spreadsheet.open(input_file_name) do |workbook|
     workbook.worksheet(0).drop(1).each do |row|
       case_ids << [row[0], row[6]]
     end
