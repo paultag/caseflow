@@ -75,9 +75,8 @@ end
 
 def check_case_status(h, case_id)
   veteran_id, form_9_date = case_id
-  abort()
-  # TODO: SELECT bfkey FROM brieff WHERE bfcorlid = :veteran_id AND bfd19 = :form_9_date
-  response = h.get("#{HOST}caseflow/api/certifications/start/#{case_id}")
+  c = Case.where(bfcorlid: veteran_id, bfd19: form_9_date).first
+  response = h.get("#{HOST}caseflow/api/certifications/start/#{c.bfkey}")
   if response.code != 200
     raise "HTTP Error: #{response.code}"
   end
