@@ -1,7 +1,7 @@
 PATH
   remote: ./vendor/gems/connect_vbms
   specs:
-    connect_vbms (0.0.2)
+    connect_vbms (0.0.1)
       httpi (~> 2.4)
       nokogiri (~> 1.6)
       xmlenc (~> 0.2)
