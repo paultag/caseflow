@@ -26,7 +26,7 @@
         });
 
         request.error(function() {
-          alert("Sorry, Invalid ID!");
+          alert("Sorry! The BFKEY entered does not have a record in VACOLS or a corresponding record in VBMS, or neither.");
         });
 
         request.finally(function() {

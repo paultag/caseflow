@@ -33,6 +33,7 @@
           });
 
           request.error(function() {
+            alert("Sorry! We could not find the appellant for this case in VBMS. Please verify that the appellant ID for this case is correct in VACOLS")
             $location.path('/certifications');
           });
         }
