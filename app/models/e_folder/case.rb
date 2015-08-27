@@ -2,6 +2,12 @@ module EFolder
   class Case
     attr_reader :id
 
+    SOC_DOC_TYPE_ID = '95'
+    NOD_DOC_TYPE_ID = '73'
+    SSOC_DOC_TYPE_ID = '97'
+    FORM_9_DOC_TYPE_ID = '179'
+    FORM_8_DOC_TYPE_ID = '178'
+
     def initialize(id)
       @id = id
     end
@@ -15,30 +21,25 @@ module EFolder
     end
 
     def get_nod(timestamp)
-      # NOD Doc Type: 73
-      get_document('73', timestamp)
+      get_document(NOD_DOC_TYPE_ID, timestamp)
     end
 
     def get_soc(timestamp)
-      # SOC Doc Type: 95
-      get_document('95', timestamp)
+      get_document(SOC_DOC_TYPE_ID, timestamp)
     end
 
     def get_ssoc(timestamp)
-      # SSOC Doc Type: 97
-      get_document('97', timestamp)
+      get_document(SSOC_DOC_TYPE_ID, timestamp)
     end
 
     def get_form9(timestamp)
-      # Form 9 Doc Type: 179
-      get_document('179', timestamp)
+      get_document(FORM_9_DOC_TYPE_ID, timestamp)
     end
 
     def upload_form8(first_name, middle_init, last_name, file_name)
       path = (Rails.root + 'tmp' + 'forms' + file_name).to_s
 
-      # Form 8 Doc Type: 178
-      request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, '178', 'VACOLS', true)
+      request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, FORM_8_DOC_TYPE_ID, 'VACOLS', true)
       $vbms.send(request)
     end
 
