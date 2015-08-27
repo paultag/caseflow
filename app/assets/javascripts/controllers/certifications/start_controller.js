@@ -15,7 +15,7 @@
           var request = $http.get('/caseflow/api/certifications/start/' + $routeParams.id);
 
           request.success(function(certification) {
-              $scope.certifications.data = certificationsFactory.data =  certification;
+              $scope.certifications.data = certificationsFactory.data = certification;
 
               // Check to see if dates are equal (VACOLS <--> VBMS)
               $scope.certifications.data.info.datesMatch =
