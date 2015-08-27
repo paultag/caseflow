@@ -26,6 +26,7 @@ module Api
           efolder_ssoc3: kase.efolder_ssoc3_date,
           efolder_ssoc4: kase.efolder_ssoc4_date,
           efolder_ssoc5: kase.efolder_ssoc5_date,
+          efolder_id: kase.efolder_appellant_id,
 
           appeal_type: kase.appeal_type,
           file_type: kase.folder.file_type

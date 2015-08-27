@@ -15,7 +15,21 @@
           var request = $http.get('/caseflow/api/certifications/start/' + $routeParams.id);
 
           request.success(function(certification) {
-            $scope.certifications.data = certificationsFactory.data =  certification;
+              $scope.certifications.data = certificationsFactory.data = certification;
+
+              // Check to see if dates are equal (VACOLS <--> VBMS)
+              $scope.certifications.data.info.datesMatch =
+                  certification.info.bfdnod === certification.info.efolder_nod &&
+                  certification.info.bfdsoc === certification.info.efolder_soc &&
+                  certification.info.bfssoc1 === certification.info.efolder_ssoc1 &&
+                  certification.info.bfssoc2 === certification.info.efolder_ssoc2 &&
+                  certification.info.bfssoc3 === certification.info.efolder_ssoc3 &&
+                  certification.info.bfssoc4 === certification.info.efolder_ssoc4 &&
+                  certification.info.bfssoc5 === certification.info.efolder_ssoc5 &&
+                  certification.info.bfd19 === certification.info.efolder_form9;
+
+              // Was going to use `datesMatch` in multiple places, but Angular will only use the variable once for ng-show, so creating two
+              $scope.certifications.data.info.showInstructions = !$scope.certifications.data.info.datesMatch;
           });
 
           request.error(function() {
