@@ -1,7 +1,7 @@
 PATH
   remote: ./vendor/gems/connect_vbms
   specs:
-    connect_vbms (0.0.1)
+    connect_vbms (0.0.2)
       httpi (~> 2.4)
       nokogiri (~> 1.6)
       xmlenc (~> 0.2)
@@ -129,7 +129,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     xmlenc (0.2.0)
