@@ -1,4 +1,4 @@
-%tr(ng-if=vacols_field)
+%tr(ng-if="#{vbms_field} || #{vacols_field}")
   %td
     %i.fa.fa-check.success(ng-if="#{vbms_field} == #{vacols_field}")
     %i.fa.fa-close.error(ng-if="#{vbms_field} != #{vacols_field}")
