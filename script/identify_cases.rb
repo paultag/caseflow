@@ -74,7 +74,7 @@ def extract_case_ids(input_file_name)
   case_ids = []
   CSV.open(input_file_name) do |csv|
     csv.drop(1).each do |row|
-      case_ids << [row[0], row[6]]
+      case_ids << [row[0], Date.strptime(row[6], '%m/%d/%y')]
     end
   end
   return case_ids
@@ -83,6 +83,9 @@ end
 def check_case_status(h, case_id)
   veteran_id, form_9_date = case_id
   c = Case.where(bfcorlid: veteran_id, bfd19: form_9_date).first
+  if c.nil?
+    raise "No cases found where(bfroflid: #{veteran_id}, bfd19: #{form_9_date})"
+  end
   response = h.get("#{HOST}caseflow/api/certifications/start/#{c.bfkey}")
   if response.code != 200
     raise "HTTP Error: #{response.code}"
