@@ -30,6 +30,8 @@ gem 'nokogiri', '~> 1.6.6.2'
 
 gem 'connect_vbms', path: './vendor/gems/connect_vbms'
 
+gem 'mocha'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
