@@ -1,9 +1,9 @@
 module Api
   class CertificationsController < ApiController
     def start
-      data = {}
-      kase = Case.find(params[:id])
+      kase = get_case(params[:id])
 
+      data = {}
       data[:info] = {
           bfkey: kase.bfkey,
           bfcorlid: kase.bfcorlid,
@@ -52,7 +52,7 @@ module Api
     end
 
     def certify
-      kase = Case.find(params[:id])
+      kase = get_case(params[:id])
 
       corr = kase.correspondent
 
