@@ -35,11 +35,11 @@ class Case < ActiveRecord::Base
   end
 
   def efolder_form9_date
-    self.efolder_case.get_nod(self.bfd19).try(:received_at).try(:to_s, :va_date) if self.bfd19
+    self.efolder_case.get_form9(self.bfd19).try(:received_at).try(:to_s, :va_date) if self.bfd19
   end
 
   def efolder_soc_date
-    self.efolder_case.get_nod(self.bfdsoc).try(:received_at).try(:to_s, :va_date) if self.bfdsoc
+    self.efolder_case.get_soc(self.bfdsoc).try(:received_at).try(:to_s, :va_date) if self.bfdsoc
   end
 
   (1..5).each do |i|
