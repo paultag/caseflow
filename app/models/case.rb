@@ -22,6 +22,10 @@ class Case < ActiveRecord::Base
     end
   end
 
+  def efolder_appellant_id
+    self.bfcorlid.gsub(/[^0-9]/, '')
+  end
+
   def efolder_case
     @efolder_case ||= EFolder::Case.new(self.bfcorlid.gsub(/[^0-9]/, ''))
   end
@@ -31,11 +35,11 @@ class Case < ActiveRecord::Base
   end
 
   def efolder_form9_date
-    self.efolder_case.get_nod(self.bfd19).try(:received_at).try(:to_s, :va_date) if self.bfd19
+    self.efolder_case.get_form9(self.bfd19).try(:received_at).try(:to_s, :va_date) if self.bfd19
   end
 
   def efolder_soc_date
-    self.efolder_case.get_nod(self.bfdsoc).try(:received_at).try(:to_s, :va_date) if self.bfdsoc
+    self.efolder_case.get_soc(self.bfdsoc).try(:received_at).try(:to_s, :va_date) if self.bfdsoc
   end
 
   (1..5).each do |i|
