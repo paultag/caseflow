@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'csv'
 require 'json'
 
 require 'httpclient'
@@ -28,10 +29,16 @@ def main(argv)
   end
   input_file, good_output_file, bad_output_file = argv
 
+  if !input_file.end_with?(".csv")
+    $stderr.puts "input-file must be a CSV"
+    exit(1)
+  end
+
   good = []
   bad = []
 
   case_ids = extract_case_ids(input_file)
+  puts "Extracted #{case_ids.length} records from the input file."
   h = HTTPClient.new()
   Parallel.each(case_ids, :in_threads => 8) do |case_id|
     if check_case_status(h, case_id)
@@ -65,8 +72,8 @@ def extract_case_ids(input_file_name)
   #   VBMS,
   # ]
   case_ids = []
-  Spreadsheet.open(input_file_name) do |workbook|
-    workbook.worksheet(0).drop(1).each do |row|
+  CSV.open(input_file_name) do |csv|
+    csv.drop(1).each do |row|
       case_ids << [row[0], row[6]]
     end
   end
