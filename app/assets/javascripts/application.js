@@ -34,7 +34,7 @@
 (function() {
   "use strict";
 
-  $("body").popover({
+  $(document).popover({
     selector: "[data-toggle=popover]"
   });
 })();
