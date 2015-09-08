@@ -10,103 +10,58 @@
 
       %hr
 
-  .row
-    .col.col-md-6
-      .row
-        .col.col-md-12
-          :markdown
-            Dates in **VACOLS**
-          %hr
+  .row.section
+    .col-sm-2.col-sm-offset-1.table-label Check Documents:
 
-          %dl
-            %dt NOD Date:
-            %dd(ng-bind="certifications.data.info.bfdnod")
+    .col-sm-6
+      %table.table.table-hover
+        %tr
+          %th
+          %th Document
+          %th VACOLS
+          %th VBMS
+        = render_file "certifications/_table_row", |
+            :field_name => "NOD", |
+            :full_field_name => "Notice of Disagreement", |
+            :vacols_field => "bfdnod", |
+            :vbms_field => "efolder_nod"
+        = render_file "certifications/_table_row", |
+            :field_name => "SOC", |
+            :full_field_name => "Statement of Case", |
+            :vacols_field => "bfdsoc", |
+            :vbms_field => "efolder_soc"
 
-          %dl
-            %dt SOC Date:
-            %dd(ng-bind="certifications.data.info.bfdsoc")
+        = render_file "certifications/_table_row", |
+            :field_name => "SSOC1", |
+            :full_field_name => "Supplemental Statement of Case 1", |
+            :vacols_field => "bfssoc1", |
+            :vbms_field => "efolder_ssoc1"
+        = render_file "certifications/_table_row", |
+            :field_name => "SSOC2", |
+            :full_field_name => "Supplemental Statement of Case 2", |
+            :vacols_field => "bfssoc2", |
+            :vbms_field => "efolder_ssoc2"
+        = render_file "certifications/_table_row", |
+            :field_name => "SSOC3", |
+            :full_field_name => "Supplemental Statement of Case 3", |
+            :vacols_field => "bfssoc3", |
+            :vbms_field => "efolder_ssoc3"
+        = render_file "certifications/_table_row", |
+            :field_name => "SSOC4", |
+            :full_field_name => "Supplemental Statement of Case 4", |
+            :vacols_field => "bfssoc4", |
+            :vbms_field => "efolder_ssoc4"
+        = render_file "certifications/_table_row", |
+            :field_name => "SSOC5", |
+            :full_field_name => "Supplemental Statement of Case 5", |
+            :vacols_field => "bfssoc5", |
+            :vbms_field => "efolder_ssoc5"
 
-          %dl(ng-if="certifications.data.info.bfssoc1")
-            %dt SSOC1 Date:
-            %dd(ng-bind="certifications.data.info.bfssoc1")
-
-          %dl(ng-if="certifications.data.info.bfssoc2")
-            %dt SSOC2 Date:
-            %dd(ng-bind="certifications.data.info.bfssoc2")
-
-          %dl(ng-if="certifications.data.info.bfssoc3")
-            %dt SSOC3 Date:
-            %dd(ng-bind="certifications.data.info.bfssoc3")
-
-          %dl(ng-if="certifications.data.info.bfssoc4")
-            %dt SSOC4 Date:
-            %dd(ng-bind="certifications.data.info.bfssoc4")
-
-          %dl(ng-if="certifications.data.info.bfssoc5")
-            %dt SSOC5 Date:
-            %dd(ng-bind="certifications.data.info.bfssoc5")
-
-          %dl
-            %dt Form 9 Date:
-            %dd(ng-bind="certifications.data.info.bfd19")
-
-    .col.col-md-6
-      .row
-        .col.col-md-12
-          :markdown
-            Documents found in **VBMS**
-          %hr
-
-          -# TODO: Look at using a table to show this data, so it is easier to line up the two different sources
-          -# TODO: Add ABBR tag to show what the abbreviations mean
-
-          %dl
-            %dt NOD Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_nod" ng-bind="certifications.data.info.efolder_nod")
-              %em(ng-if="!certifications.data.info.efolder_nod") Not found
-
-          %dl
-            %dt SOC Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_soc" ng-bind="certifications.data.info.efolder_soc")
-              %em(ng-if="!certifications.data.info.efolder_soc") Not found
-
-          %dl(ng-if="certifications.data.info.bfssoc1")
-            %dt SSOC1 Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_ssoc1" ng-bind="certifications.data.info.efolder_ssoc1")
-              %em(ng-if="!certifications.data.info.efolder_ssoc1") Not found
-
-          %dl(ng-if="certifications.data.info.bfssoc2")
-            %dt SSOC2 Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_ssoc2" ng-bind="certifications.data.info.efolder_ssoc2")
-              %em(ng-if="!certifications.data.info.efolder_ssoc2") Not found
-
-          %dl(ng-if="certifications.data.info.bfssoc3")
-            %dt SSOC3 Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_ssoc3" ng-bind="certifications.data.info.efolder_ssoc3")
-              %em(ng-if="!certifications.data.info.efolder_ssoc3") Not found
-
-          %dl(ng-if="certifications.data.info.bfssoc4")
-            %dt SSOC4 Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_ssoc4" ng-bind="certifications.data.info.efolder_ssoc4")
-              %em(ng-if="!certifications.data.info.efolder_ssoc4") Not found
-
-          %dl(ng-if="certifications.data.info.bfssoc5")
-            %dt SSOC5 Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_ssoc5" ng-bind="certifications.data.info.efolder_ssoc5")
-              %em(ng-if="!certifications.data.info.efolder_ssoc5") Not found
-
-          %dl
-            %dt Form 9 Date:
-            %dd
-              %span(ng-if="certifications.data.info.efolder_form9" ng-bind="certifications.data.info.efolder_form9")
-              %em(ng-if="!certifications.data.info.efolder_form9") Not found
+        = render_file "certifications/_table_row", |
+            :field_name => "Form 9", |
+            :full_field_name => "Form 9", |
+            :vacols_field => "bfd19", |
+            :vbms_field => "efolder_form9"
 
   %hr
 
@@ -128,4 +83,3 @@
           %li For documents that have "Not Found" listed above and are not actually in VBMS, please fill out the paperwork, getting information from the appellant as needed.
           %li After complete, refresh this page to continue certifying.
         %p You may want to bookmark this page so that you can return here later.
-
