@@ -6,6 +6,7 @@
 //= require angular-route.min
 //= require angular-animate.min
 //= require loading-bar.min
+//= require bootstrap-sprockets
 
 //= require ./configs/angular
 //= require ./configs/loading-bar
@@ -33,4 +34,9 @@
 
 (function() {
   "use strict";
+
+  $(document).popover({
+    selector: "[data-toggle=popover]",
+    trigger: "focus"
+  });
 })();
