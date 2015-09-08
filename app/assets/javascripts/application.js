@@ -23,6 +23,7 @@
 //= require ./controllers/certifications/start_controller
 //= require ./controllers/certifications/questions_controller
 //= require ./controllers/certifications/generate_controller
+//= require ./controllers/certifications/finish_controller
 
 //= require ./controllers/tests_controller
 
