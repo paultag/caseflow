@@ -35,6 +35,7 @@
   "use strict";
 
   $(document).popover({
-    selector: "[data-toggle=popover]"
+    selector: "[data-toggle=popover]",
+    trigger: "focus"
   });
 })();
