@@ -4,11 +4,15 @@
   "use strict";
 
   angular.module('controllers').controller('CertificationsStartController',
-    ['$scope', '$http', '$location', '$routeParams', 'certificationsFactory',
-    function ($scope, $http, $location, $routeParams, certificationsFactory) {
+    ['$scope', '$http', '$window', '$location', '$routeParams', 'certificationsFactory',
+    function ($scope, $http, $window, $location, $routeParams, certificationsFactory) {
       $scope.certifications = certificationsFactory;
 
       $scope.start = {};
+
+      $scope.reloadRoute = function() {
+        $window.location.reload();
+      };
 
       $scope.start.init = function() {
         if (!$scope.certifications.data) {

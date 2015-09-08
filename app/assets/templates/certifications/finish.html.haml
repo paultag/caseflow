@@ -1,11 +1,10 @@
-%div#certifications-generate(ng-controller="CertificationsGenerateController" ng-init="generate.init()")
+%div#certifications-generate(ng-controller="CertificationsFinishController" ng-init="finish.init()")
   %div{'ng-include' => asset_path('certifications/_header.html').inspect}
 
   %hr/
 
   .row
-    .col.col-md-12
-      :markdown
-        This appeal is now **certified** to the Board of Appeals.  You are **Finished** and can close this browser window.
-
-  %hr/
+    .col-sm-6.col-sm-offset-3
+      %h1 This case has been certified!
+      %p This appeal has been sent to the Board of Veteran's Appeals for adjudication.
+      %p You can now close this page and open another case in VACOLS.

@@ -70,16 +70,36 @@
 
   .instructions(ng-show="certifications.data.info.showInstructions")
     .row
-      .col.col-md-12
-        %p Sorry! The document dates do not match between VACOLS and VBMS. Please do the following to fix:
-        %ol
-          %li Login to VBMS.
-          %li
-            Do an eFolder search for
-            %span(ng-bind="certifications.data.info.efolder_id")
-            \.
-          %li For documents that have "Not Found" listed above, but do actually exist in the eFolder, make sure that the receipt date field is set in VBMS.
-          %li For documents that have an incorrect date in VBMS, fix the receipt date in VBMS.
-          %li For documents that have "Not Found" listed above and are not actually in VBMS, please fill out the paperwork, getting information from the appellant as needed.
-          %li After complete, refresh this page to continue certifying.
-        %p You may want to bookmark this page so that you can return here later.
+      .col-sm-6.col-sm-offset-3
+        .alert.alert-danger(role="alert")
+          %span.glyphicon.glyphicon-exclamation-sign(aria-hidden="true")
+          Some of the files listed in VACOLS could not be found in VBMS.
+        %p
+          %strong Check to see if the missing file is in the appellant's eFolder:
+          %ol
+            %li
+              %a(href="https://www.vbms.vba.va.gov/vbmsp2/") Open and sign into VBMS.
+            %li
+              Search for this eFolder using the following ID:
+              %code(ng-bind="certifications.data.info.efolder_id")
+            %li Look for the missing file.
+        %p
+          %strong If you find the missing file:
+          %ol
+            %li
+              Open the file in VBMS.
+              = render_file "certifications/_help_icon", :text => "Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+            %li
+              Open the document properties
+              = render_file "certifications/_help_icon", :text => "Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+            %li
+              Change the file's receipt date to match the one listed in the VACOLS column above.
+              = render_file "certifications/_help_icon", :text => "Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+            %li
+              After you've changed the receipt date
+              %a(href="" ng-click="reloadRoute()") refresh
+              this page and a green checkmark should appear in the file's row above
+              = render_file "certifications/_help_icon", :text => "Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+        %p
+          If you can't find the missing file in VBMS
+          %a(href="#") click here to report this case as un-certifiable.
