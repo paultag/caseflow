@@ -71,14 +71,14 @@
   .instructions(ng-show="certifications.data.info.showInstructions")
     .row
       .col-sm-6.col-sm-offset-3
-        .alert.alert-danger{:role => "alert"}
-          %span.glyphicon.glyphicon-exclamation-sign{:"aria-hidden" => "true"}
+        .alert.alert-danger(role="alert")
+          %span.glyphicon.glyphicon-exclamation-sign(aria-hidden="true")
           Some of the files listed in VACOLS could not be found in VBMS.
         %p
           %strong Check to see if the missing file is in the appellant's eFolder:
           %ol
             %li
-              %a{:href => "#"} Open and sign into VBMS.
+              %a(href="https://www.vbms.vba.va.gov/vbmsp2/") Open and sign into VBMS.
             %li
               Search for this eFolder using the following ID:
               %code(ng-bind="certifications.data.info.efolder_id")
@@ -102,4 +102,4 @@
               = render_file "certifications/_help_icon", :text => "Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
         %p
           If you can't find the missing file in VBMS
-          %a{:href => "#"} click here to report this case as un-certifiable.
+          %a(href="#") click here to report this case as un-certifiable.
