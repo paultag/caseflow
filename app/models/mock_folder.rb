@@ -5,6 +5,7 @@
 
 class MockFolder
   def file_type
+    # Possible values: 'Paper', 'VBMS', 'VVA'
     'VBMS'
   end
 end
