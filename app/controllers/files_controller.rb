@@ -3,7 +3,7 @@ class FilesController < ApplicationController
 
   def show
     @filepath = Rails.root + 'tmp' + params[:type] + [params[:id], params[:format]].join('.')
-    if !@filepath.start_with?(Rails.root + 'tmp')
+    if !@filepath.to_s.start_with?((Rails.root + 'tmp').to_s)
       head :not_found
     end
 
