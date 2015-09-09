@@ -41,6 +41,8 @@ module EFolder
 
       request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, FORM_8_DOC_TYPE_ID, 'VACOLS', true)
       $vbms.send(request)
+
+      File.delete(path)
     end
 
     private

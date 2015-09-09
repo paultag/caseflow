@@ -5,7 +5,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 #### View a case with an incorrect BFKEY
 
 1. Open Caseflow at the base URL.
-1. Enter a invalid BFKEY.
+1. Enter an invalid BFKEY.
 1. Error pops, describing that no record was found.
 
 #### View a complete case without any SSOCs
@@ -67,7 +67,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 1. When Form 8 is generated, user can download the Form 8 by clicking the "Download Complete Form 8" link.  The Form 8 can then be printed and added to the paper file.
 
 
-#### View a incomplete case (Missing Notice of Disagreement)
+#### View an incomplete case (Missing Notice of Disagreement)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
@@ -87,7 +87,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 1. As all dates do not match, "Continue" button is disabled.
 
 
-#### View a incomplete case (Missing Statement of the Case)
+#### View an incomplete case (Missing Statement of the Case)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
@@ -107,7 +107,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 1. As all dates do not match, "Continue" button is disabled.
 
 
-#### View a incomplete case (Missing VA Form 9)
+#### View an incomplete case (Missing VA Form 9)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
@@ -127,7 +127,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 1. As all dates do not match, "Continue" button is disabled.
 
 
-#### View a incomplete case (Missing Notice of Disagreement and Statement of the Case)
+#### View an incomplete case (Missing Notice of Disagreement and Statement of the Case)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
@@ -148,7 +148,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 
 
 
-#### View a incomplete case (Missing Notice of Disagreement and VA Form 9)
+#### View an incomplete case (Missing Notice of Disagreement and VA Form 9)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
@@ -168,7 +168,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 1. As all dates do not match, "Continue" button is disabled.
 
 
-#### View a incomplete case (Statement of the Case and VA Form 9)
+#### View an incomplete case (Statement of the Case and VA Form 9)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
@@ -188,7 +188,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 1. As all dates do not match, "Continue" button is disabled.
 
 
-#### View a incomplete case (Notice of Disagreement, Statement of the Case and VA Form 9)
+#### View an incomplete case (Notice of Disagreement, Statement of the Case and VA Form 9)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
@@ -208,7 +208,7 @@ This document contains user tests that can be used to verify that Caseflow is wo
 1. As all dates do not match, "Continue" button is disabled.
 
 
-#### View a incomplete case (Missing Everything)
+#### View an incomplete case (Missing Everything)
 
 1. Open Caseflow at the base URL.
 1. Enter a valid BFKEY.
