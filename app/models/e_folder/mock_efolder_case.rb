@@ -4,7 +4,7 @@
 # See: ApplicationController::make_mock_case
 
 module EFolder
-  class MockEfolderCase < EFolder::Case
+  class MockEfolderCase
 
     def initialize
     end

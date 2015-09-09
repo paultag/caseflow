@@ -4,7 +4,7 @@
 # See: ApplicationController::make_mock_case
 
 
-class MockCorrespondent < Correspondent
+class MockCorrespondent
   def appellant_name
     'Joe Snuffy'
   end

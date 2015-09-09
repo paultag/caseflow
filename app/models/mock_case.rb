@@ -177,7 +177,7 @@ class MockCase < Case
 
   # When Caseflow has been used on a case
   def bfdcertool=(val)
-    Date.parse('2015-09-01')
+    val
   end
 
   def bfdcertool
@@ -186,7 +186,7 @@ class MockCase < Case
 
   # VACOLS certification date
   def bf41stat=(val)
-    Date.parse('2015-09-01').to_s(:va_date)
+    val
   end
 
   def bf41stat
