@@ -54,7 +54,7 @@ def main(argv)
     [case_id]
   end
   bad_sheet = create_spreadsheet(bad) do |case_id, fields|
-    [row[0], "Unmatched fields: #{fields.join(', ')}"]
+    [case_id, "Unmatched fields: #{fields.join(', ')}"]
   end
 
   good_sheet.write(good_output_file)
