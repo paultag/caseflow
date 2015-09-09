@@ -12,14 +12,14 @@ require 'spreadsheet'
 
 HOST = "***REMOVED***"
 RELEVANT_FIELDS = [
-  ["bfdnod", "efolder_nod"],
-  ["bfd19", "efolder_form9"],
-  ["bfdsoc", "efolder_soc"],
-  ["bfssoc1", "efolder_ssoc1"],
-  ["bfssoc2", "efolder_ssoc2"],
-  ["bfssoc3", "efolder_ssoc3"],
-  ["bfssoc4", "efolder_ssoc4"],
-  ["bfssoc5", "efolder_ssoc5"],
+  ["bfdnod", "efolder_nod", "NOD"],
+  ["bfd19", "efolder_form9", "Form 9"],
+  ["bfdsoc", "efolder_soc", "SOC"],
+  ["bfssoc1", "efolder_ssoc1", "SSOC1"],
+  ["bfssoc2", "efolder_ssoc2", "SSOC2"],
+  ["bfssoc3", "efolder_ssoc3", "SSOC3"],
+  ["bfssoc4", "efolder_ssoc4", "SSOC4"],
+  ["bfssoc5", "efolder_ssoc5", "SSOC5"],
 ]
 
 def main(argv)
@@ -41,16 +41,21 @@ def main(argv)
   puts "Extracted #{case_ids.length} records from the input file."
   h = HTTPClient.new()
   Parallel.each(case_ids, :in_threads => 8) do |case_id|
-    if check_case_status(h, case_id)
+    status = check_case_status(h, case_id)
+    if status.nil?
       good << case_id
     else
-      bad << case_id
+      bad << [case_id, status]
     end
   end
   puts "There were #{good.length} good records and #{bad.length} bad records."
 
-  good_sheet = create_spreadsheet(good)
-  bad_sheet = create_spreadsheet(bad)
+  good_sheet = create_spreadsheet(good) do |case_id|
+    [case_id]
+  end
+  bad_sheet = create_spreadsheet(bad) do |case_id, fields|
+    [row[0], "Unmatched fields: #{fields.join(', ')}"]
+  end
 
   good_sheet.write(good_output_file)
   bad_sheet.write(bad_output_file)
@@ -92,16 +97,25 @@ def check_case_status(h, case_id)
   end
   data = JSON.parse(response.body)["info"]
 
-  return RELEVANT_FIELDS.all? do |vacols_field, vbms_field|
-    data[vacols_field] == data[vbms_field]
+  bad_fields = RELEVANT_FIELDS.select do |vacols_field, vbms_field|
+    data[vacols_field] != data[vbms_field]
+  end
+
+  if bad_fields.empty?
+    return nil
+  else
+    return bad_fields.map { |_, _, field_name| field_name }
   end
 end
 
-def create_spreadsheet(case_ids)
+def create_spreadsheet(rows)
   workbook = Spreadsheet::Workbook.new()
   sheet = workbook.create_worksheet()
-  case_ids.each_with_index do |case_id, idx|
-    sheet[idx, 0] = case_id
+  rows.each_with_index do |row, idx|
+    columns = yield row
+    columns.each_with_index do |col, col_num|
+      sheet[idx, col_num] = col
+    end
   end
   return workbook
 end
