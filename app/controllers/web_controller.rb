@@ -2,10 +2,26 @@ class WebController < ApplicationController
   protect_from_forgery with: :exception
 
   def index
-    render file: 'web/application'
+    raise ActionController::RoutingError.new('Not Found')
   end
 
-  def redirect
-    redirect_to '/caseflow#/certifications/' + params[:id] + '/start'
+  def start
+    kase = Case.find(params[:id])
+
+    if kase.ready_to_certify?
+      return redirect_to action: :questions, params: params
+    end
+
+    render_case('start', kase)
   end
+
+  def questions
+    kase = Case.find(params[:id])
+    render_case('questions', kase)
+  end
+
+  def render_case(file, kase)
+    render file: "web/#{file}", layout: 'application', locals: {kase: kase}
+  end
+
 end

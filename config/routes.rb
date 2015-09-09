@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get '/:type/:id', to: :show, as: :show, constraints: {type: /forms/}
     end
 
-    get '/certifications/:id/start', to: 'web#redirect'
+    get '/certifications/:id/start', to: 'web#start'
+    get '/certifications/:id/questions', to: 'web#questions'
   end
 end
