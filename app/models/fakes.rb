@@ -91,6 +91,11 @@ module Caseflow
         ::Case
         Caseflow.required_fields_for_case(self)
       end
+
+      def ready_to_certify?
+        ::Case
+        Caseflow.ready_to_certify?(self)
+      end
     end
 
     class Folder
