@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def get_case(bfkey)
-    Case.find(bfkey)
+    if ENV['CASEFLOW_TEST']
+      Caseflow::Fakes::Case.find(bfkey)
+    else
+      Case.find(bfkey)
+    end
   end
 end
