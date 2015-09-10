@@ -7,9 +7,11 @@ module Caseflow
         return Caseflow::Fakes::DATA[bfkey]
       end
 
-      def initialize(bfkey, bfcorlid, bfac, bfmpro, bfdnod, bfd19, bfdsoc,
-                     efolder_nod, efolder_form9, efolder_soc,
-                     efolder_appellant_id, appeal_type, folder)
+      # TODO: when we have Ruby 2.1, use required keyword arguments.
+      def initialize(bfkey: nil, bfcorlid: nil, bfac: nil, bfmpro: nil,
+                     bfdnod: nil, bfd19: nil, bfdsoc: nil, efolder_nod: nil,
+                     efolder_form9: nil, efolder_soc: nil,
+                     efolder_appellant_id: nil, appeal_type: nil, folder: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -63,19 +65,19 @@ module Caseflow
 
     DATA = {
       "joe-snuffy" => Case.new(
-        "abc",
-        "22222222C",
-        "3",
-        "ADV",
-        Date.parse('2015-09-01'),
-        Date.parse('2015-09-01'),
-        Date.parse('2015-09-01'),
-        Date.parse('2015-09-01'),
-        Date.parse('2015-09-01'),
-        Date.parse('2015-09-01'),
-        "22222222",
-        "Post Remand",
-        Folder.new("VBMS"),
+        bfkey: "abc",
+        bfcorlid: "22222222C",
+        bfac: "3",
+        bfmpro: "ADV",
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-01'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-01'),
+        efolder_appellant_id: "22222222",
+        appeal_type: "Post Remand",
+        folder: Folder.new("VBMS"),
       )
     }
   end
