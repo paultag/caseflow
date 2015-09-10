@@ -14,8 +14,7 @@
 
     The following are optional arguments:
     - div_id: The ID attribute of the containing div
-    - option1_callback: Javascript action if option 1 is selected
-    - option2_callback: Javascript action if option 2 is selected
+    - callback: Javascript action triggered when selection changes (onchange handler)
 %>
 
 <div class="form8-two-radio" id="<%= div_id if defined?(div_id) %>">
@@ -29,11 +28,11 @@
       <div class="col col-md-6">
         <div class="input-group">
           <label>
-            <input type="radio" name="<%= input_name %>" value="<%= option1_value %>" onselect="<%= option1_callback if defined?(option1_callback) %>">
+            <input type="radio" name="<%= input_name %>" value="<%= option1_value %>" onchange="<%= callback if defined?(callback) %>">
             <%= option1_label %>
           </label>
           <label>
-            <input type="radio" name="<%= input_name %>" value="<%= option2_value %>" onselect="<%= option2_callback if defined?(option2_callback) %>">
+            <input type="radio" name="<%= input_name %>" value="<%= option2_value %>" onchange="<%= callback if defined?(callback) %>">
             <%= option2_label %>
           </label>
         </div>
