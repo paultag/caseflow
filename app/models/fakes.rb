@@ -71,8 +71,9 @@ module Caseflow
       end
 
       def required_fields
-        # TODO: factor logic out of case.rb
-        {}
+        # TODO: needed to trigger autoload of case.rb
+        ::Case
+        Caseflow.required_fields_for_case(self)
       end
     end
 

@@ -34,6 +34,28 @@ module Caseflow
 
     fields
   end
+
+  def self.required_fields_for_case(kase)
+    fields = {}
+
+    if ['T', 'U', 'W'].include?(kase.bfso)
+      fields[:show_8b] = true
+      fields[:show_8c] = true
+    elsif self.bfso != 'L'
+      fields[:show_8b] = true
+    end
+
+    if !['L', 'T', 'U', 'W'].include?(kase.bfso)
+      fields[:show_9a] = true
+    end
+
+    if kase.hearing_requested?
+      fields[:show_10b] = true
+      fields[:show_10c] = true
+    end
+
+    fields
+  end
 end
 
 class Case < ActiveRecord::Base
@@ -89,27 +111,7 @@ class Case < ActiveRecord::Base
   end
 
   def required_fields
-    fields = {}
-
-    if self.bfso == 'L'
-      # do nothing
-    elsif  ['T', 'U', 'W'].include? self.bfso
-      fields[:show_8b] = true
-      fields[:show_8c] = true
-    else
-      fields[:show_8b] = true
-    end
-
-    if !['L', 'T', 'U', 'W'].include?(self.bfso)
-      fields[:show_9a] = true
-    end
-
-    if self.hearing_requested?
-      fields[:show_10b] = true
-      fields[:show_10c] = true
-    end
-
-    fields
+    return Caseflow.required_fields_for_case(self)
   end
 
   def appeal_type
