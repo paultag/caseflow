@@ -56,6 +56,17 @@ module Caseflow
 
     fields
   end
+
+  def self.ready_to_certify?(kase)
+    kase.bfdnod_date == kase.efolder_nod_date &&
+        kase.bfdsoc_date == kase.efolder_soc_date &&
+        kase.bfssoc1_date == kase.efolder_ssoc1_date &&
+        kase.bfssoc2_date == kase.efolder_ssoc2_date &&
+        kase.bfssoc3_date == kase.efolder_ssoc3_date &&
+        kase.bfssoc4_date == kase.efolder_ssoc4_date &&
+        kase.bfssoc5_date == kase.efolder_ssoc5_date &&
+        kase.bfd19_date == kase.efolder_form9_date
+  end
 end
 
 class Case < ActiveRecord::Base
@@ -112,6 +123,10 @@ class Case < ActiveRecord::Base
 
   def required_fields
     Caseflow.required_fields_for_case(self)
+  end
+  
+  def ready_to_certify?
+    Caseflow.ready_to_certify?(self)
   end
 
   def appeal_type
