@@ -117,4 +117,4 @@ To enable this, add this environment variable:
 CASEFLOW_TEST=true
 ```
 
-You can add new fake data in `app/models/fakes/case.rb`.
+You can add new fake data in `app/models/fakes.rb`.
