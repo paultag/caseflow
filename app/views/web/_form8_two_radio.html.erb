@@ -15,7 +15,7 @@
     The following are optional arguments:
     - div_id: The ID attribute of the containing div
     - div_class: The class attribute of the containing div
-    - onselect: Javascript action triggered when selection changes (onchange handler)
+    - input_onselect: Javascript action triggered when selection changes (onchange handler)
 %>
 
 <div class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
@@ -29,11 +29,11 @@
       <div class="col col-md-6">
         <div class="input-group">
           <label>
-            <input type="radio" name="<%= input_name %>" value="<%= option1_value %>" onchange="<%= onselect if defined?(onselect) %>">
+            <input type="radio" name="<%= input_name %>" value="<%= option1_value %>" onchange="<%= input_onselect if defined?(input_onselect) %>">
             <%= option1_label %>
           </label>
           <label>
-            <input type="radio" name="<%= input_name %>" value="<%= option2_value %>" onchange="<%= onselect if defined?(onselect) %>">
+            <input type="radio" name="<%= input_name %>" value="<%= option2_value %>" onchange="<%= input_onselect if defined?(input_onselect) %>">
             <%= option2_label %>
           </label>
         </div>
