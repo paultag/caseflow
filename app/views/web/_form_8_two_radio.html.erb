@@ -8,30 +8,35 @@
     - option1_label: Text for the first option
     - option1_name: Input name attribute for the first option
     - option1_value: Input value attribute for the first option
-    - option1_callback: Javascript action if option 1 is selected
     - option2_label: Text for the second option
     - option2_name: Input name attribute for the second option
     - option2_value: Input value attribute for the second option
+
+    The following are optional arguments:
+    - div_id: The ID attribute of the containing div
+    - option1_callback: Javascript action if option 1 is selected
     - option2_callback: Javascript action if option 2 is selected
 %>
 
-<div class="row">
-  <div class="col col-md-12">
-    <strong><%= field_num %></strong>
-    <%= question %>
-  </div>
-</div>
-<div class="row">
-  <div class="col col-md-6">
-    <div class="input-group">
-      <label>
-        <input type="radio" name="<%= field_name %>" value="<%= option1_value %>" onselect="<%= option1_callback if option1_callback %>">
-        <%= option1_label %>
-      </label>
-      <label>
-        <input type="radio" name="<%= field_name %>" value="<%= option2_value %>" onselect="<%= option2_callback if option2_callback %>">
-        <%= option2_label %>
-      </label>
+<div class="form8-two-radio" id="<%= div_id if defined?(div_id) %>">
+    <div class="row">
+      <div class="col col-md-12">
+        <strong><%= field_num %></strong>
+        <%= question %>
+      </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="input-group">
+          <label>
+            <input type="radio" name="<%= field_name %>" value="<%= option1_value %>" onselect="<%= option1_callback if defined?(option1_callback) %>">
+            <%= option1_label %>
+          </label>
+          <label>
+            <input type="radio" name="<%= field_name %>" value="<%= option2_value %>" onselect="<%= option2_callback if defined?(option2_callback) %>">
+            <%= option2_label %>
+          </label>
+        </div>
+      </div>
+    </div>
 </div>
