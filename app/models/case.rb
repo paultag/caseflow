@@ -1,3 +1,41 @@
+module Caseflow
+  def initial_fields_for_case(kase)
+    fields = {
+      '1A_NAME_OF_APPELLANT' => kase.correspondent.appellant_name,
+      '1B_RELATIONSHIP_TO_VETERAN' => kase.correspondent.appellant_relationship,
+      '2_FILE_NO' => kase.bfcorlid,
+      '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN' => kase.correspondent.full_name,
+      '4_INSURANCE_FILE_NO_OR_LOAN_NO' => kase.bfpdnum,
+      '5A_SERVICE_CONNECTION_FOR' => kase.issue_breakdown.select {|i| i['field_type'] == 'service connection' }.map { |i| i['full_desc'] }.join(':'),
+      '6A_INCREASED_RATING_FOR' => kase.issue_breakdown.select {|i| i['field_type'] == 'increased rating' }.map { |i| i['iss_desc'] }.join(':'),
+      '7A_OTHER' => kase.issue_breakdown.select {|i| i['field_type'] == 'other' }.map { |i| i['iss_desc'] }.join(':'),
+      '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY' => kase.vso_full,
+      '8B_POWER_OF_ATTORNEY' => '',
+      '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_YES' => '',
+      '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO' => '',
+      '10A_WAS_HEARING_REQUESTED_YES' => kase.hearing_requested?,
+      '10A_WAS_HEARING_REQUESTED_NO' => !kase.hearing_requested?,
+      '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED' => kase.bfdsoc_date,
+      '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED' => kase.ssoc_required?,
+      '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED' => !kase.ssoc_required?,
+      '15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE' => kase.regional_office_full,
+      '16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL' => kase.bfregoff
+    }
+
+    if fields['5A_SERVICE_CONNECTION_FOR'].present?
+      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+    end
+    if fields['6A_INCREASED_RATING_FOR'].present?
+      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+    end
+    if fields['7A_OTHER'].present?
+      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+    end
+
+    fields
+  end
+end
+
 class Case < ActiveRecord::Base
   include Caselike
 
@@ -195,41 +233,7 @@ class Case < ActiveRecord::Base
 
   def initial_fields
     return @initial_fields if @initial_fields
-
-    fields = {
-      '1A_NAME_OF_APPELLANT'                                              => self.correspondent.appellant_name,
-      '1B_RELATIONSHIP_TO_VETERAN'                                        => self.correspondent.appellant_relationship,
-      '2_FILE_NO'                                                         => self.bfcorlid,
-      '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN'                     => self.correspondent.full_name,
-      '4_INSURANCE_FILE_NO_OR_LOAN_NO'                                    => self.bfpdnum,
-      '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY'                        => self.vso_full,
-      '8B_POWER_OF_ATTORNEY'                                              => '',
-      '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_YES'   => '',
-      '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO'    => '',
-      '10A_WAS_HEARING_REQUESTED_YES'                                     => self.hearing_requested?,
-      '10A_WAS_HEARING_REQUESTED_NO'                                      => !self.hearing_requested?,
-      '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED'                          => self.bfdsoc_date,
-      '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED'     => self.ssoc_required?,
-      '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED'               => !self.ssoc_required?,
-      '15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE'                         => self.regional_office_full,
-      '16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL'                      => self.bfregoff
-    }
-
-    fields['5A_SERVICE_CONNECTION_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'service connection' }.map { |i| i['full_desc'] }.join(':')
-    fields['6A_INCREASED_RATING_FOR'] = issue_breakdown.select {|i| i['field_type'] == 'increased rating' }.map { |i| i['iss_desc'] }.join(':')
-    fields['7A_OTHER'] = issue_breakdown.select {|i| i['field_type'] == 'other' }.map { |i| i['iss_desc'] }.join(':')
-
-    if fields['5A_SERVICE_CONNECTION_FOR'].present?
-      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19_date
-    end
-    if fields['6A_INCREASED_RATING_FOR'].present?
-      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19_date
-    end
-    if fields['7A_OTHER'].present?
-      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19_date
-    end
-
-    @initial_fields = fields
+    @initial_fields = Caseflow.initial_fields_for_case(self)
   end
 
   def hearing_requested?
