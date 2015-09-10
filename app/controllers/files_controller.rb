@@ -1,5 +1,5 @@
 module Caseflow
-  def seld.is_child_path?(directory, path)
+  def self.is_child_path?(directory, path)
     path.cleanpath.to_s.start_with?(directory.cleanpath.to_s + '/')
   end
 end
