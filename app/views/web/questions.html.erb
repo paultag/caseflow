@@ -140,10 +140,40 @@
           </div>
         </div>
 
+
       </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <strong>14</strong>
+          REMARKS
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-6">
+          <textarea name="14_REMARKS_INITIAL" rows="3" class="form-control"></textarea>
+        </div>
+      </div>
+      <hr/>
+
+      <%= render partial: 'form8_text', locals: {
+                         question: 'NAME OF CERTIFYING OFFICIAL',
+                         question_num: '17A. REQUIRED.',
+                         input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
+                         max_length: 40,
+                         required: true
+                                      } %>
+
+      <%= render partial: 'form8_text', locals: {
+                                              question: 'TITLE OF CERTIFYING OFFICIAL',
+                                              question_num: '17B. REQUIRED.',
+                                              input_name: '17B_TITLE',
+                                              required: true
+                                      } %>
+
+      <input type="submit" value="Continue" class="btn btn-primary"/>
+
     </div>
   </div>
-
 </div>
 
 <script type="text/javascript">
