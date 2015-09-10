@@ -6,7 +6,7 @@ class WebController < ApplicationController
   end
 
   def start
-    kase = Case.find(params[:id])
+    kase = get_case(params[:id])
 
     if kase.ready_to_certify?
       return redirect_to action: :questions, params: params
@@ -16,7 +16,7 @@ class WebController < ApplicationController
   end
 
   def questions
-    kase = Case.find(params[:id])
+    kase = get_case(params[:id])
     render_case('questions', kase)
   end
 
