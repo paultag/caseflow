@@ -7,21 +7,26 @@
     - input_name: The input text field's name attribute
 
     Optional arguments include:
+    - div_id: The ID attribute of the containing div
+    - div_class: The class attribute of the containing div
     - max_length: The number of characters a response can maximally include. 45 is default.
-    %>
 
-<div class="form8-text-input" id="<%= div_id if defined?(div_id) %>">
+%>
+
+<div class="form8-text-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
   <div class="row">
     <div class="col col-md-12">
       <label for="<%= input_name %>">
-          <strong><%= question_num %></strong>
-          <%= question %>
+        <strong><%= question_num %></strong>
+        <%= question %>
       </label>
     </div>
   </div>
   <div class="row">
     <div class="col col-md-6">
-        <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control"></input>
+      <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control"></input>
     </div>
   </div>
+
+  <hr/>
 </div>
