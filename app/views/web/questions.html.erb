@@ -1,1 +1,105 @@
-<p>Questions</p>
+<div id="certification-questions">
+  <div class="row">
+    <div class="col col-md-12">
+      <p>Please answer the following questions to finish the certification and dispatch process for this appeal.</p>
+      <hr/>
+    </div>
+
+    <div class="col col-md-12">
+      <% if kase.required_fields[:show_8b] %>
+          <%= render partial: 'form8_two_radio', locals: {
+                                                       question: 'VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS',
+                                                       question_num: '8B',
+                                                       input_name: '8B_POWER_OF_ATTORNEY',
+                                                       option1_label: 'Located in the veteran\'s appeal file',
+                                                       option1_value: '8B_POWER_OF_ATTORNEY',
+                                                       option2_label: 'Located in another VA file',
+                                                       option2_value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
+                                                       input_onselect: 'javascript:display_8b_explanation();'
+                                               } %>
+
+          <%= render partial: 'form8_text', locals: {
+                                                  div_id: '8b-explanation',
+                                                  div_class: 'hidden',
+                                                  question: 'PLEASE SPECIFY LOCATION OF THE VETERAN\'S POWER OF ATTORNEY',
+                                                  question_num: '8B EXPLANATION',
+                                                  input_name: '8B_REMARKS'
+                                          } %>
+      <% end %>
+
+      <% if kase.required_fields[:show_8c] %>
+          <%= render partial: 'form8_yes_no_radio', locals: {
+                                                          question: 'THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST',
+                                                          question_num: '8C',
+                                                          input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST'
+                                                  } %>
+      <% end %>
+
+      <% if kase.required_fields[:show_9a] %>
+          <%= render partial: 'form8_yes_no_radio', locals: {
+                                                          question: 'REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD',
+                                                          question_num: '9A',
+                                                          input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
+                                                          input_onselect: 'javascript:display_9b();'
+                                                  } %>
+          <%= render partial: 'form8_text', locals: {
+                                                  div_id: '9b',
+                                                  div_class: 'hidden',
+                                                  question: 'IF VA FORM 646 IS NOT OF RECORD, EXPLAIN',
+                                                  question_num: '9B',
+                                                  input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN'
+                                          } %>
+      <% end %>
+
+      <% if kase.required_fields[:show_10b] %>
+          <%= render partial: 'form8_yes_no_radio', locals: {
+                                                          question: 'A HEARING WAS REQUESTED, IF HELD, IS TRANSCRIPT ON FILE',
+                                                          question_num: '10B',
+                                                          input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
+                                                          input_onselect: 'javascript: display_10c();'
+                                                  } %>
+
+          <% if kase.required_fields[:show_10c] %>
+              <%= render partial: 'form8_text', locals: {
+                                                      div_id: '10c',
+                                                      div_class: 'hidden',
+                                                      question: 'IF NOT HELD, EXPLAIN',
+                                                      question_num: '10C',
+                                                      input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN'
+                                              } %>
+          <% end %>
+      <% end %>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+    function display_field(inputName, divId, showValue) {
+        var selectedOption = $("input[name='" + inputName + "']:checked")[0];
+        var div = $('#' + divId);
+
+        if (selectedOption && selectedOption.value === showValue) {
+            div.removeClass("hidden");
+        }
+        else {
+            div.addClass("hidden");
+        }
+    }
+
+    function display_8b_explanation() {
+        display_field("8B_POWER_OF_ATTORNEY", "8b-explanation", "8B_POWER_OF_ATTORNEY");
+    }
+
+    function display_9b() {
+        display_field("9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646", "9b", "yes");
+    }
+    function display_10c() {
+        display_field("10B_IF_HELD_IS_TRANSCRIPT_IN_FILE", "10c", "no");
+    }
+
+
+</script>
