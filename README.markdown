@@ -117,9 +117,4 @@ To enable this, add this environment variable:
 CASEFLOW_TEST=true
 ```
 
-From there, you can configure data in several test classes:
-
-- `app/models/mock_case.rb`: Basic case information, including document dates
-- `app/models/mock_correspondent.rb`: Information about the appellant
-- `app/models/mock_folder.rb`: Information about the appellant's EFolder (ex: such as whether it is paper or VBMS based)
-- `app/models/e_folder/mock_efolder_case.rb` Change whether the EFolder upload of the Form 8 is successful or failed
+You can add new fake data in `app/models/fakes/case.rb`.
