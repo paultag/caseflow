@@ -64,6 +64,10 @@ module Caseflow
         false
       end
 
+      def bfso
+        nil
+      end
+
       def initial_fields
         # TODO: needed to trigger autoload of case.rb
         ::Case

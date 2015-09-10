@@ -41,7 +41,7 @@ module Caseflow
     if ['T', 'U', 'W'].include?(kase.bfso)
       fields[:show_8b] = true
       fields[:show_8c] = true
-    elsif self.bfso != 'L'
+    elsif kase.bfso != 'L'
       fields[:show_8b] = true
     end
 
