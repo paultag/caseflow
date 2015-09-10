@@ -111,7 +111,7 @@ class Case < ActiveRecord::Base
   end
 
   def required_fields
-    return Caseflow.required_fields_for_case(self)
+    Caseflow.required_fields_for_case(self)
   end
 
   def appeal_type
