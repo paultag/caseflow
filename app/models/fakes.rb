@@ -7,7 +7,11 @@ module Caseflow
       attr_accessor :bf41stat
 
       def self.find(bfkey)
-        return Caseflow::Fakes::DATA[bfkey]
+        kase = Caseflow::Fakes::DATA[bfkey]
+        if kase.nil?
+          raise ActiveRecord::RecordNotFound
+        end
+        kase
       end
 
       # TODO: when we have Ruby 2.1, use required keyword arguments.
