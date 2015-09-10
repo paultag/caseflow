@@ -68,8 +68,22 @@
                                                       input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN'
                                               } %>
           <% end %>
+
       <% end %>
 
+      <%= render partial: 'form8_yes_no_radio', locals: {
+                                                      question: 'ARE CONTESTED CLAIMS PROCEDURES APPLICABLE IN THIS CASE',
+                                                      question_num: '11A',
+                                                      input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
+                                                      input_onselect: 'javascript: display_11b();'
+                                              } %>
+      <%= render partial: 'form8_yes_no_radio', locals: {
+                                                      question: 'HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS',
+                                                      question_num: '11B',
+                                                      input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES',
+                                                      div_id: '11b',
+                                                      div_class: 'hidden'
+                                              } %>
 
 
     </div>
@@ -99,6 +113,9 @@
     }
     function display_10c() {
         display_field("10B_IF_HELD_IS_TRANSCRIPT_IN_FILE", "10c", "no");
+    }
+    function display_11b() {
+        display_field("11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE", "11b", "yes");
     }
 
 
