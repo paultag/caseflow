@@ -208,10 +208,6 @@ class Case < ActiveRecord::Base
       '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_NO'    => '',
       '10A_WAS_HEARING_REQUESTED_YES'                                     => self.hearing_requested?,
       '10A_WAS_HEARING_REQUESTED_NO'                                      => !self.hearing_requested?,
-      # '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_YES'                             => self.hearing_transcripts_present?,
-      # '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE_NO'                              => !self.hearing_transcripts_present?,
-      # '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_YES'   => self.contested_claims?,
-      # '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_NO'    => !self.contested_claims?,
       '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED'                          => self.bfdsoc_date,
       '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED'     => self.ssoc_required?,
       '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED'               => !self.ssoc_required?,
@@ -224,13 +220,13 @@ class Case < ActiveRecord::Base
     fields['7A_OTHER'] = issue_breakdown.select {|i| i['field_type'] == 'other' }.map { |i| i['iss_desc'] }.join(':')
 
     if fields['5A_SERVICE_CONNECTION_FOR'].present?
-      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19.to_s(:va_date)
+      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19_date
     end
     if fields['6A_INCREASED_RATING_FOR'].present?
-      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19.to_s(:va_date)
+      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19_date
     end
     if fields['7A_OTHER'].present?
-      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19.to_s(:va_date)
+      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = self.bfd19_date
     end
 
     @initial_fields = fields
