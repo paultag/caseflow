@@ -10,7 +10,7 @@
     - div_id: The ID attribute of the containing div
     - div_class: The class attribute of the containing div
     - max_length: The number of characters a response can maximally include. 45 is default.
-
+    - closing_hr: true/false, show a horizontal rules at the end (default: true)
 %>
 
 <div class="form8-text-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
@@ -27,6 +27,7 @@
       <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control"></input>
     </div>
   </div>
-
-  <hr/>
+  <% if !defined?(closing_hr) || closing_hr %>
+      <hr/>
+  <% end %>
 </div>

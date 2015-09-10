@@ -85,7 +85,62 @@
                                                       div_class: 'hidden'
                                               } %>
 
+      <div class="row">
+        <div class="col col-md-12">
+          <strong>13</strong>
+          RECORDS TO BE FORWARDED TO BOARD OF VETERANS' APPEALS
+        </div>
 
+
+        <%= render partial: 'form8_checkbox_column', locals: {
+                                                           label1_text: 'CF OR XCF',
+                                                           input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
+                                                           label2_text: 'INACTIVE CF',
+                                                           input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INACTIVE_CF',
+                                                           label3_text: 'OTHER',
+                                                           input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
+                                                           input3_onchange: 'javascript: display_13_other();'
+                                                   } %>
+        <%= render partial: 'form8_checkbox_column', locals: {
+                                                           label1_text: 'R&E F',
+                                                           input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF',
+                                                           label2_text: 'TRAINING SUB-F',
+                                                           input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TRAINING_SUBF',
+                                                           label3_text: 'LOAN GUAR. F',
+                                                           input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_LOAD_GUAR',
+                                                   } %>
+        <%= render partial: 'form8_checkbox_column', locals: {
+                                                           label1_text: 'OUTPATIENT F',
+                                                           input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OUTPATIENT_F',
+                                                           label2_text: 'HOSPITAL COR.',
+                                                           input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_HOSPITAL_COR',
+                                                           label3_text: 'CLINICAL REC.',
+                                                           input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CLINICAL_REC',
+                                                   } %>
+
+        <%= render partial: 'form8_checkbox_column', locals: {
+                                                           label1_text: 'X-RAYS',
+                                                           input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
+                                                           label2_text: 'SLIDES',
+                                                           input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES',
+                                                           label3_text: 'TISSUE BLOCKS',
+                                                           input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS',
+                                                   } %>
+        <%= render partial: 'form8_text', locals: {
+                                                question: 'Specify Other',
+                                                question_num: '',
+                                                input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
+                                                div_id: '13',
+                                                div_class: 'hidden',
+                                                closing_hr: false
+                                        } %>
+        <div class="row">
+          <div class="col col-md-12">
+            <hr/> <%# Current styles wrap this into prior line w/o divs %>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -116,6 +171,17 @@
     }
     function display_11b() {
         display_field("11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE", "11b", "yes");
+    }
+
+    function display_13_other() {
+        var isChecked = $("input[name='13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']")[0].checked;
+        var div = $('#13');
+        if (isChecked) {
+            div.removeClass("hidden");
+        }
+        else {
+            div.addClass("hidden");
+        }
     }
 
 
