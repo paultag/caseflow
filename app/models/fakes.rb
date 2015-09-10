@@ -1,7 +1,9 @@
 module Caseflow
   module Fakes
     class Case
-      attr_reader :bfkey, :bfcorlid, :bfac, :bfmpro, :efolder_appellant_id, :appeal_type, :folder
+      attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
+        :efolder_appellant_id, :appeal_type, :vso_full, :regional_office_full,
+        :folder, :correspondent)
 
       def self.find(bfkey)
         return Caseflow::Fakes::DATA[bfkey]
@@ -9,13 +11,16 @@ module Caseflow
 
       # TODO: when we have Ruby 2.1, use required keyword arguments.
       def initialize(bfkey: nil, bfcorlid: nil, bfac: nil, bfmpro: nil,
-                     bfdnod: nil, bfd19: nil, bfdsoc: nil, efolder_nod: nil,
-                     efolder_form9: nil, efolder_soc: nil,
-                     efolder_appellant_id: nil, appeal_type: nil, folder: nil)
+                     bfpdnum: nil, bfregoff: nil, bfdnod: nil, bfd19: nil,
+                     bfdsoc: nil, efolder_nod: nil, efolder_form9: nil,
+                     efolder_soc: nil, efolder_appellant_id: nil,
+                     appeal_type: nil, vso_full: nil, regional_office_full: nil,
+                     folder: nil, correspondent: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
         @bfmpro = bfmpro
+        @bfpdnum = bfpdnum
 
         @bfdnod = bfdnod
         @bfd19 = bfd19
@@ -27,8 +32,10 @@ module Caseflow
 
         @efolder_appellant_id = efolder_appellant_id
         @appeal_type = appeal_type
+        @vso_full = vso_full
 
         @folder = folder
+        @correspondent = correspondent
       end
 
       _DATE_FIELDS = [
@@ -44,9 +51,23 @@ module Caseflow
         end
       end
 
+      # TODO: allow customizing these fields
+      def issue_breakdown
+        []
+      end
+
+      def hearing_requested?
+        true
+      end
+
+      def ssoc_required?
+        false
+      end
+
       def initial_fields
-        # TODO: factor logic out of case.rb
-        {}
+        # TODO: needed to trigger autoload of case.rb
+        ::Case
+        Caseflow.initial_fields_for_case(self)
       end
 
       def required_fields
@@ -63,12 +84,24 @@ module Caseflow
       end
     end
 
+    class Correspondent
+      attr_reader :appellant_name, :appellant_relationship, :full_name
+
+      def initialize(appellant_name, appellant_relationship, full_name)
+        @appellant_name = appellant_name
+        @appellant_relationship = appellant_relationship
+        @full_name = full_name
+      end
+    end
+
     DATA = {
       "joe-snuffy" => Case.new(
         bfkey: "abc",
         bfcorlid: "22222222C",
         bfac: "3",
         bfmpro: "ADV",
+        bfpdnum: "123ABC",
+        bfregoff: "RO10",
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
@@ -77,7 +110,12 @@ module Caseflow
         efolder_soc: Date.parse('2015-09-01'),
         efolder_appellant_id: "22222222",
         appeal_type: "Post Remand",
+        vso_full: "Disabled American Veterans",
+        regional_office_full: "Philadelphia, PA",
         folder: Folder.new("VBMS"),
+        correspondent: Correspondent.new(
+          "Joe Snuffy", "Self", "Joe Snuffy",
+        ),
       )
     }
   end

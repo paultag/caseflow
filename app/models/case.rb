@@ -1,5 +1,5 @@
 module Caseflow
-  def initial_fields_for_case(kase)
+  def self.initial_fields_for_case(kase)
     fields = {
       '1A_NAME_OF_APPELLANT' => kase.correspondent.appellant_name,
       '1B_RELATIONSHIP_TO_VETERAN' => kase.correspondent.appellant_relationship,
