@@ -5,10 +5,9 @@ class ApplicationController < ActionController::Base
 
   def get_case(bfkey)
     if ENV['CASEFLOW_TEST']
-      return Caseflow::Fakes::Case.find(bfkey)
+      Caseflow::Fakes::Case.find(bfkey)
     else
       Case.find(bfkey)
     end
   end
-
 end
