@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
     get '/certifications/:id/start', to: 'web#start'
     get '/certifications/:id/questions', to: 'web#questions'
+    post '/certifications/:id/questions', to: 'web#questions_submit'
   end
 end
