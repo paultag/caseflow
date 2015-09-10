@@ -4,6 +4,7 @@ module Caseflow
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :efolder_appellant_id, :appeal_type, :vso_full, :regional_office_full,
         :folder, :correspondent)
+      attr_accessor :bf41stat
 
       def self.find(bfkey)
         return Caseflow::Fakes::DATA[bfkey]
@@ -51,6 +52,13 @@ module Caseflow
         end
       end
 
+      def efolder_case
+        Caseflow::Fakes::EFolderCase.new
+      end
+
+      def bfdcertool=(value)
+      end
+
       # TODO: allow customizing these fields
       def issue_breakdown
         []
@@ -90,18 +98,28 @@ module Caseflow
     end
 
     class Correspondent
-      attr_reader :appellant_name, :appellant_relationship, :full_name
+      attr_reader(:appellant_name, :appellant_relationship, :full_name, :snamef,
+        :snamemi, :snamel)
 
-      def initialize(appellant_name, appellant_relationship, full_name)
+      def initialize(appellant_name, appellant_relationship, full_name, snamef, snamemi, snamel)
         @appellant_name = appellant_name
         @appellant_relationship = appellant_relationship
         @full_name = full_name
+
+        @snamef = snamef
+        @snamemi = snamemi
+        @snamel = snamel
+      end
+    end
+
+    class EFolderCase
+      def upload_form8(first_name, middle_initial, last_name, file_name)
       end
     end
 
     DATA = {
       "joe-snuffy" => Case.new(
-        bfkey: "abc",
+        bfkey: "joe-snuffy",
         bfcorlid: "22222222C",
         bfac: "3",
         bfmpro: "ADV",
@@ -119,7 +137,7 @@ module Caseflow
         regional_office_full: "Philadelphia, PA",
         folder: Folder.new("VBMS"),
         correspondent: Correspondent.new(
-          "Joe Snuffy", "Self", "Joe Snuffy",
+          "Joe Snuffy", "Self", "Joe Snuffy", "Joe", "", "Snuffy",
         ),
       )
     }
