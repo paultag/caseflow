@@ -63,11 +63,6 @@
             :vacols_field => "bfd19", |
             :vbms_field => "efolder_form9"
 
-  %hr
-
-  .input-group.pull-right(ng-show="certifications.data.info.datesMatch")
-    %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" data-iconpos="right" ng-href="#/certifications/{{certifications.data.info.bfkey}}/questions")
-
   .instructions(ng-show="certifications.data.info.showInstructions")
     .row
       .col-sm-6.col-sm-offset-3
@@ -103,3 +98,8 @@
         %p
           If you can't find the missing file in VBMS
           %a(href="#") click here to report this case as un-certifiable.
+
+  %hr
+
+  .input-group.pull-right(ng-show="certifications.data.info.datesMatch")
+    %a.my-form-button(data-label="Continue" data-icon="chevron-right" data-color="primary" data-iconpos="right" ng-href="#/certifications/{{certifications.data.info.bfkey}}/questions")
