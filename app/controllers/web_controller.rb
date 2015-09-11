@@ -40,7 +40,7 @@ class WebController < ApplicationController
     form_8 = FormVa8.new(fields)
     form_8.process!
 
-    redirect_to action: :generate, params: {id: params[:id], file_name: form_8.file_name, certication_date: certification_date}
+    redirect_to action: :generate, params: {id: params[:id], file_name: form_8.file_name, certification_date: certification_date}
   end
 
   def generate
@@ -54,15 +54,13 @@ class WebController < ApplicationController
     @kase = get_case(params[:id])
     corr = @kase.correspondent
 
-    # TODO transaction is currently failing (Case object is nil)
-    # Case.transaction do
-    #   kase.bfdcertool = Time.now
-    #   kase.bf41stat = Date.strptime(params[:certification_date], Date::DATE_FORMATS[:va_date])
-    #   # TODO: get save permissions and add save method to fakes (latter, do in a separate branch)
-    #   # kase.save
-    #
-    #   kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:file_name])
-    # end
+    Case.transaction do
+      @kase.bfdcertool = Time.now
+      @kase.bf41stat = Date.strptime(params[:certification_date], Date::DATE_FORMATS[:va_date])
+      @kase.save
+
+      @kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:file_name])
+    end
 
     render 'certify'
   end
