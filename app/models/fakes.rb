@@ -3,7 +3,7 @@ module Caseflow
     class Case
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :efolder_appellant_id, :appeal_type, :vso_full, :regional_office_full,
-        :folder, :correspondent)
+        :folder, :correspondent, :save_successful)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
@@ -20,7 +20,7 @@ module Caseflow
                      bfdsoc: nil, efolder_nod: nil, efolder_form9: nil,
                      efolder_soc: nil, efolder_appellant_id: nil,
                      appeal_type: nil, vso_full: nil, regional_office_full: nil,
-                     folder: nil, correspondent: nil)
+                     folder: nil, correspondent: nil, save_successful: true)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -41,6 +41,7 @@ module Caseflow
 
         @folder = folder
         @correspondent = correspondent
+        @save_successful = save_successful
       end
 
       _DATE_FIELDS = [
@@ -78,6 +79,10 @@ module Caseflow
 
       def bfso
         nil
+      end
+
+      def save
+        @save_successful
       end
 
       def initial_fields
