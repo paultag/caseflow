@@ -18,6 +18,7 @@
   <div class="input-group">
     <%= form_tag(action: :certify, method: :post) do %>
         <input type="hidden" value="<%= @file_name %>"/>
+        <input type="hidden" value="<%= @certification_date %>"/>
         <input type="submit" value="Certify" class="btn btn-primary"/>
     <% end %>
   </div>
