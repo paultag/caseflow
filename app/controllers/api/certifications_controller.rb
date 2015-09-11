@@ -59,8 +59,7 @@ module Api
       Case.transaction do
         kase.bfdcertool = Time.now
         kase.bf41stat   = Date.strptime(params[:cert][:certification_date], Date::DATE_FORMATS[:va_date])
-        # TODO: get save permissions
-        # kase.save
+        kase.save
 
         kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:cert][:file_name])
       end
