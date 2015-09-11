@@ -51,7 +51,19 @@ class WebController < ApplicationController
   end
 
   def certify
-    puts 'certify_stub'
-    render nothing: true
+    @kase = get_case(params[:id])
+    corr = @kase.correspondent
+
+    # TODO transaction is currently failing (Case object is nil)
+    # Case.transaction do
+    #   kase.bfdcertool = Time.now
+    #   kase.bf41stat = Date.strptime(params[:certification_date], Date::DATE_FORMATS[:va_date])
+    #   # TODO: get save permissions and add save method to fakes (latter, do in a separate branch)
+    #   # kase.save
+    #
+    #   kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:file_name])
+    # end
+
+    render 'certify'
   end
 end
