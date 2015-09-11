@@ -19,7 +19,9 @@ class WebController < ApplicationController
   def questions
     @kase = get_case(params[:id])
 
-    # TODO Return the user to `start` if kase is not ready for certifcation
+    if !@kase.ready_to_certify?
+      return redirect_to action: :start, params: params
+    end
 
     render 'questions'
   end
@@ -27,7 +29,7 @@ class WebController < ApplicationController
   def questions_submit
     kase = get_case(params[:id])
 
-    # TODO Add a check for the two required params, sending the user back to `questions` with an error message if not there (maybe do this in a separate branch, since this wasn't there before)
+    # TODO Add a check for the two required params, sending the user back to `questions` with an error message if not there (maybe do this in a separate branch, since this wasn't there before and needs some design)
 
     fields = kase.initial_fields
     fields.merge!(params)
