@@ -181,17 +181,6 @@ class Case < ActiveRecord::Base
     vso.join(' - ')
   end
 
-  def ready_to_certify?
-    bfdnod_date == efolder_nod_date &&
-        bfdsoc_date == efolder_soc_date &&
-        bfssoc1_date == efolder_ssoc1_date &&
-        bfssoc2_date == efolder_ssoc2_date &&
-        bfssoc3_date == efolder_ssoc3_date &&
-        bfssoc4_date == efolder_ssoc4_date &&
-        bfssoc5_date == efolder_ssoc5_date &&
-        bfd19_date == efolder_form9_date
-  end
-
   def regional_office
     hash = {
         'RO17' => ['St. Petersburg', 'FL'],
