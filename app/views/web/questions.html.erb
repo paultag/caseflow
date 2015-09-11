@@ -7,7 +7,7 @@
       </div>
 
       <div class="col col-md-12">
-        <% if kase.required_fields[:show_8b] %>
+        <% if @kase.required_fields[:show_8b] %>
             <%= render partial: 'form8_two_radio', locals: {
                                                          question: 'VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS',
                                                          question_num: '8B',
@@ -28,7 +28,7 @@
                                             } %>
         <% end %>
 
-        <% if kase.required_fields[:show_8c] %>
+        <% if @kase.required_fields[:show_8c] %>
             <%= render partial: 'form8_yes_no_radio', locals: {
                                                             question: 'THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST',
                                                             question_num: '8C',
@@ -36,7 +36,7 @@
                                                     } %>
         <% end %>
 
-        <% if kase.required_fields[:show_9a] %>
+        <% if @kase.required_fields[:show_9a] %>
             <%= render partial: 'form8_yes_no_radio', locals: {
                                                             question: 'REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD',
                                                             question_num: '9A',
@@ -52,7 +52,7 @@
                                             } %>
         <% end %>
 
-        <% if kase.required_fields[:show_10b] %>
+        <% if @kase.required_fields[:show_10b] %>
             <%= render partial: 'form8_yes_no_radio', locals: {
                                                             question: 'A HEARING WAS REQUESTED, IF HELD, IS TRANSCRIPT ON FILE',
                                                             question_num: '10B',
@@ -60,7 +60,7 @@
                                                             input_onselect: 'javascript: display_10c();'
                                                     } %>
 
-            <% if kase.required_fields[:show_10c] %>
+            <% if @kase.required_fields[:show_10c] %>
                 <%= render partial: 'form8_text', locals: {
                                                         div_id: '10c',
                                                         div_class: 'hidden',

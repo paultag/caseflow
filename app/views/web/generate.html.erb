@@ -1,0 +1,25 @@
+<div id="certifications-generate">
+  <div class="row">
+    <div class="col col-md-12">
+      <p>
+        Download the VA Form 8 and <strong>verify</strong> all the fields are <strong>accurate</strong>.
+        If the form looks correct, click the <strong>Finish Certification</strong> button to certify and
+        send appeal to the Board of Appeals. If anything looks wrong, use the back button to return to
+        the questions.
+      </p>
+      <hr/>
+    </div>
+  </div>
+
+  <a href="/caseflow/files/forms/<%= @file_name %>">Download Complete Form 8</a>
+
+  <hr/>
+
+  <div class="input-group">
+    <%= form_tag(action: :certify, method: :post) do %>
+        <input type="hidden" value="<%= @file_name %>"/>
+        <input type="submit" value="Certify" class="btn btn-primary"/>
+    <% end %>
+  </div>
+
+</div>

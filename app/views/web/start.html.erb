@@ -1,6 +1,6 @@
 <%#
     Page requires the following local variables to be defined:
-    - kase: A Case object
+    - @kase: A Case object
 %>
 
 <div id="certifications-start">
@@ -22,14 +22,14 @@
           <th>VACOLS</th>
           <th>VBMS</th>
         </tr>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Notice of Disagreement', field_name: 'NOD', vacols_field: kase.bfdnod_date, vbms_field: kase.efolder_nod_date} %>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Statement of Case', field_name: 'SOC', vacols_field: kase.bfdsoc_date, vbms_field: kase.efolder_soc_date} %>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 1', field_name: 'SSOC 1', vacols_field: kase.bfssoc1_date, vbms_field: kase.efolder_ssoc1_date} %>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 2', field_name: 'SSOC 2', vacols_field: kase.bfssoc1_date, vbms_field: kase.efolder_ssoc2_date} %>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 3', field_name: 'SSOC 3', vacols_field: kase.bfssoc1_date, vbms_field: kase.efolder_ssoc3_date} %>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 4', field_name: 'SSOC 4', vacols_field: kase.bfssoc1_date, vbms_field: kase.efolder_ssoc4_date} %>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 5', field_name: 'SSOC 5', vacols_field: kase.bfssoc1_date, vbms_field: kase.efolder_ssoc5_date} %>
-        <%= render partial: 'table_row', locals: {full_field_name: 'Form 9', field_name: 'Form 9', vacols_field: kase.bfd19_date, vbms_field: kase.efolder_form9_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Notice of Disagreement', field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Statement of Case', field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 1', field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 2', field_name: 'SSOC 2', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc2_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 3', field_name: 'SSOC 3', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc3_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 4', field_name: 'SSOC 4', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc4_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 5', field_name: 'SSOC 5', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc5_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Form 9', field_name: 'Form 9', vacols_field: @kase.bfd19_date, vbms_field: @kase.efolder_form9_date} %>
       </table>
     </div>
   </div>
@@ -49,7 +49,7 @@
             <li><a href="https://www.vbms.vba.va.gov/vbmsp2/">Open and sign into VBMS.</a></li>
             <li>
               Search for this eFolder using the following ID:
-              <code><%= kase.efolder_appellant_id %></code>
+              <code><%= @kase.efolder_appellant_id %></code>
             </li>
             <li>Looking for the missing file</li>
           </ol>
