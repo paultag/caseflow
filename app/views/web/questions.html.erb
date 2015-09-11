@@ -8,83 +8,83 @@
 
       <div class="col col-md-12">
         <% if @kase.required_fields[:show_8b] %>
-            <%= render partial: 'form8_two_radio', locals: {
-                                                         question: 'VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS',
-                                                         question_num: '8B',
-                                                         input_name: '8B_POWER_OF_ATTORNEY',
-                                                         option1_label: 'Located in the veteran\'s appeal file',
-                                                         option1_value: '8B_POWER_OF_ATTORNEY',
-                                                         option2_label: 'Located in another VA file',
-                                                         option2_value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
-                                                         input_onchange: 'javascript:display_8b_explanation();'
-                                                 } %>
+          <%= render partial: 'form8_two_radio', locals: {
+                  question: 'VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS',
+                  question_num: '8B',
+                  input_name: '8B_POWER_OF_ATTORNEY',
+                  option1_label: 'Located in the veteran\'s appeal file',
+                  option1_value: '8B_POWER_OF_ATTORNEY',
+                  option2_label: 'Located in another VA file',
+                  option2_value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
+                  input_onchange: 'javascript:display_8b_explanation();'
+              } %>
 
-            <%= render partial: 'form8_text', locals: {
-                                                    div_id: '8b-explanation',
-                                                    div_class: 'hidden',
-                                                    question: 'PLEASE SPECIFY LOCATION OF THE VETERAN\'S POWER OF ATTORNEY',
-                                                    question_num: '8B EXPLANATION',
-                                                    input_name: '8B_REMARKS'
-                                            } %>
+          <%= render partial: 'form8_text', locals: {
+                  div_id: '8b-explanation',
+                  div_class: 'hidden',
+                  question: 'PLEASE SPECIFY LOCATION OF THE VETERAN\'S POWER OF ATTORNEY',
+                  question_num: '8B EXPLANATION',
+                  input_name: '8B_REMARKS'
+              } %>
         <% end %>
 
         <% if @kase.required_fields[:show_8c] %>
-            <%= render partial: 'form8_yes_no_radio', locals: {
-                                                            question: 'THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST',
-                                                            question_num: '8C',
-                                                            input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST'
-                                                    } %>
+          <%= render partial: 'form8_yes_no_radio', locals: {
+                  question: 'THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST',
+                  question_num: '8C',
+                  input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST'
+              } %>
         <% end %>
 
         <% if @kase.required_fields[:show_9a] %>
-            <%= render partial: 'form8_yes_no_radio', locals: {
-                                                            question: 'REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD',
-                                                            question_num: '9A',
-                                                            input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
-                                                            input_onchange: 'javascript:display_9b();'
-                                                    } %>
-            <%= render partial: 'form8_text', locals: {
-                                                    div_id: '9b',
-                                                    div_class: 'hidden',
-                                                    question: 'IF VA FORM 646 IS NOT OF RECORD, EXPLAIN',
-                                                    question_num: '9B',
-                                                    input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN'
-                                            } %>
+          <%= render partial: 'form8_yes_no_radio', locals: {
+                  question: 'REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD',
+                  question_num: '9A',
+                  input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
+                  input_onchange: 'javascript:display_9b();'
+              } %>
+          <%= render partial: 'form8_text', locals: {
+                  div_id: '9b',
+                  div_class: 'hidden',
+                  question: 'IF VA FORM 646 IS NOT OF RECORD, EXPLAIN',
+                  question_num: '9B',
+                  input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN'
+              } %>
         <% end %>
 
         <% if @kase.required_fields[:show_10b] %>
-            <%= render partial: 'form8_yes_no_radio', locals: {
-                                                            question: 'A HEARING WAS REQUESTED, IF HELD, IS TRANSCRIPT ON FILE',
-                                                            question_num: '10B',
-                                                            input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
-                                                            input_onchange: 'javascript: display_10c();'
-                                                    } %>
+          <%= render partial: 'form8_yes_no_radio', locals: {
+                  question: 'A HEARING WAS REQUESTED, IF HELD, IS TRANSCRIPT ON FILE',
+                  question_num: '10B',
+                  input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
+                  input_onchange: 'javascript: display_10c();'
+              } %>
 
-            <% if @kase.required_fields[:show_10c] %>
-                <%= render partial: 'form8_text', locals: {
-                                                        div_id: '10c',
-                                                        div_class: 'hidden',
-                                                        question: 'IF NOT HELD, EXPLAIN',
-                                                        question_num: '10C',
-                                                        input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN'
-                                                } %>
-            <% end %>
+          <% if @kase.required_fields[:show_10c] %>
+            <%= render partial: 'form8_text', locals: {
+                    div_id: '10c',
+                    div_class: 'hidden',
+                    question: 'IF NOT HELD, EXPLAIN',
+                    question_num: '10C',
+                    input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN'
+                } %>
+          <% end %>
 
         <% end %>
 
         <%= render partial: 'form8_yes_no_radio', locals: {
-                                                        question: 'ARE CONTESTED CLAIMS PROCEDURES APPLICABLE IN THIS CASE',
-                                                        question_num: '11A',
-                                                        input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
-                                                        input_onchange: 'javascript: display_11b();'
-                                                } %>
+                question: 'ARE CONTESTED CLAIMS PROCEDURES APPLICABLE IN THIS CASE',
+                question_num: '11A',
+                input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
+                input_onchange: 'javascript: display_11b();'
+            } %>
         <%= render partial: 'form8_yes_no_radio', locals: {
-                                                        question: 'HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS',
-                                                        question_num: '11B',
-                                                        input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES',
-                                                        div_id: '11b',
-                                                        div_class: 'hidden'
-                                                } %>
+                question: 'HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS',
+                question_num: '11B',
+                input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES',
+                div_id: '11b',
+                div_class: 'hidden'
+            } %>
 
         <div class="row">
           <div class="col col-md-12">
@@ -94,47 +94,47 @@
 
 
           <%= render partial: 'form8_checkbox_column', locals: {
-                                                             label1_text: 'CF OR XCF',
-                                                             input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
-                                                             label2_text: 'INACTIVE CF',
-                                                             input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INACTIVE_CF',
-                                                             label3_text: 'OTHER',
-                                                             input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
-                                                             input3_onchange: 'javascript: display_13_other();'
-                                                     } %>
+                  label1_text: 'CF OR XCF',
+                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
+                  label2_text: 'INACTIVE CF',
+                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INACTIVE_CF',
+                  label3_text: 'OTHER',
+                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
+                  input3_onchange: 'javascript: display_13_other();'
+              } %>
           <%= render partial: 'form8_checkbox_column', locals: {
-                                                             label1_text: 'R&E F',
-                                                             input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF',
-                                                             label2_text: 'TRAINING SUB-F',
-                                                             input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TRAINING_SUBF',
-                                                             label3_text: 'LOAN GUAR. F',
-                                                             input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_LOAD_GUAR',
-                                                     } %>
+                  label1_text: 'R&E F',
+                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF',
+                  label2_text: 'TRAINING SUB-F',
+                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TRAINING_SUBF',
+                  label3_text: 'LOAN GUAR. F',
+                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_LOAD_GUAR',
+              } %>
           <%= render partial: 'form8_checkbox_column', locals: {
-                                                             label1_text: 'OUTPATIENT F',
-                                                             input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OUTPATIENT_F',
-                                                             label2_text: 'HOSPITAL COR.',
-                                                             input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_HOSPITAL_COR',
-                                                             label3_text: 'CLINICAL REC.',
-                                                             input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CLINICAL_REC',
-                                                     } %>
+                  label1_text: 'OUTPATIENT F',
+                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OUTPATIENT_F',
+                  label2_text: 'HOSPITAL COR.',
+                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_HOSPITAL_COR',
+                  label3_text: 'CLINICAL REC.',
+                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CLINICAL_REC',
+              } %>
 
           <%= render partial: 'form8_checkbox_column', locals: {
-                                                             label1_text: 'X-RAYS',
-                                                             input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
-                                                             label2_text: 'SLIDES',
-                                                             input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES',
-                                                             label3_text: 'TISSUE BLOCKS',
-                                                             input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS',
-                                                     } %>
+                  label1_text: 'X-RAYS',
+                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
+                  label2_text: 'SLIDES',
+                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES',
+                  label3_text: 'TISSUE BLOCKS',
+                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS',
+              } %>
           <%= render partial: 'form8_text', locals: {
-                                                  question: 'Specify Other',
-                                                  question_num: '',
-                                                  input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
-                                                  div_id: '13',
-                                                  div_class: 'hidden',
-                                                  closing_hr: false
-                                          } %>
+                  question: 'Specify Other',
+                  question_num: '',
+                  input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
+                  div_id: '13',
+                  div_class: 'hidden',
+                  closing_hr: false
+              } %>
           <div class="row">
             <div class="col col-md-12">
               <hr/> <%# Current styles wrap this into prior line w/o divs %>
@@ -157,19 +157,19 @@
         <hr/>
 
         <%= render partial: 'form8_text', locals: {
-                                                question: 'NAME OF CERTIFYING OFFICIAL',
-                                                question_num: '17A. REQUIRED.',
-                                                input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
-                                                max_length: 40,
-                                                required: true
-                                        } %>
+                question: 'NAME OF CERTIFYING OFFICIAL',
+                question_num: '17A. REQUIRED.',
+                input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
+                max_length: 40,
+                required: true
+            } %>
 
         <%= render partial: 'form8_text', locals: {
-                                                question: 'TITLE OF CERTIFYING OFFICIAL',
-                                                question_num: '17B. REQUIRED.',
-                                                input_name: '17B_TITLE',
-                                                required: true
-                                        } %>
+                question: 'TITLE OF CERTIFYING OFFICIAL',
+                question_num: '17B. REQUIRED.',
+                input_name: '17B_TITLE',
+                required: true
+            } %>
 
         <input type="submit" value="Continue" class="btn btn-primary"/>
 
