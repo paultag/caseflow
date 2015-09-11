@@ -16,7 +16,7 @@
                                                          option1_value: '8B_POWER_OF_ATTORNEY',
                                                          option2_label: 'Located in another VA file',
                                                          option2_value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
-                                                         input_onselect: 'javascript:display_8b_explanation();'
+                                                         input_onchange: 'javascript:display_8b_explanation();'
                                                  } %>
 
             <%= render partial: 'form8_text', locals: {
@@ -41,7 +41,7 @@
                                                             question: 'REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD',
                                                             question_num: '9A',
                                                             input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
-                                                            input_onselect: 'javascript:display_9b();'
+                                                            input_onchange: 'javascript:display_9b();'
                                                     } %>
             <%= render partial: 'form8_text', locals: {
                                                     div_id: '9b',
@@ -57,7 +57,7 @@
                                                             question: 'A HEARING WAS REQUESTED, IF HELD, IS TRANSCRIPT ON FILE',
                                                             question_num: '10B',
                                                             input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
-                                                            input_onselect: 'javascript: display_10c();'
+                                                            input_onchange: 'javascript: display_10c();'
                                                     } %>
 
             <% if @kase.required_fields[:show_10c] %>
@@ -76,7 +76,7 @@
                                                         question: 'ARE CONTESTED CLAIMS PROCEDURES APPLICABLE IN THIS CASE',
                                                         question_num: '11A',
                                                         input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
-                                                        input_onselect: 'javascript: display_11b();'
+                                                        input_onchange: 'javascript: display_11b();'
                                                 } %>
         <%= render partial: 'form8_yes_no_radio', locals: {
                                                         question: 'HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS',
