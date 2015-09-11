@@ -1,29 +1,29 @@
 <%#
-    Prompts the user with a binary question (yes/no, option1/option2, etc)
+ Prompts the user with a binary question (yes/no, option1/option2, etc)
 
-    Partial requires the following arguments:
-    - question: Text of the question being asked
-    - question_num: The Form 8 question number
-    - input_name: Name for the radio input fields
+ Partial requires the following arguments:
+ - question: Text of the question being asked
+ - question_num: The Form 8 question number
+ - input_name: Name for the radio input fields
 
-    The following are optional arguments:
-    - div_id: The ID attribute of the containing div
-    - div_class: The class attribute of the containing div
-    - input_onchange: Javascript action triggered when selection changes (onchange handler)
+ The following are optional arguments:
+ - div_id: The ID attribute of the containing div
+ - div_class: The class attribute of the containing div
+ - input_onchange: Javascript action triggered when selection changes (onchange handler)
 %>
 
 <% yes_no_locals = {
-        # Same for all things using this partial
-        option1_label: 'Yes',
-        option1_value: 'yes',
-        option2_label: 'No',
-        option2_value: 'no',
+  # Same for all things using this partial
+  option1_label: 'Yes',
+  option1_value: 'yes',
+  option2_label: 'No',
+  option2_value: 'no',
 
-        # Fill in local varialbes passed to this partial
-        question: question,
-        question_num: question_num,
-        input_name: input_name,
-}
+  # Fill in local varialbes passed to this partial
+  question: question,
+  question_num: question_num,
+  input_name: input_name, }
+
    # Optional arguments
    if defined?(input_onchange)
      yes_no_locals[:input_onchange] = input_onchange
