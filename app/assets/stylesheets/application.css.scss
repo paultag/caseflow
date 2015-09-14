@@ -1,6 +1,5 @@
 //= require bootstrap
 //= require bootstrap-sprockets
-//= require loading-bar
 
 //= require font-awesome
 
@@ -63,6 +62,9 @@ body {
   opacity:1;
 }
 
+.hidden {
+  display: none;
+}
 
 #loading-bar-spinner {
   display: block;
@@ -79,4 +81,8 @@ body {
 
 .error {
   color: #c1272d;
+}
+
+label {
+  font-weight: normal !important;
 }

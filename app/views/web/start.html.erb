@@ -1,0 +1,87 @@
+<%#
+    Page requires the following local variables to be defined:
+    - @kase: A Case object
+%>
+
+<div id="certifications-start">
+  <div class="row">
+    <div class="col col-md-12">
+      <p>Verify that the dates in VACOLS and VBMS are the same for this appeal, and that it is ready for <em>Certification</em> and <em>Dispatch</em> to the Board of Appeals.</p>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row section">
+    <div class="col-sm-2 col-sm-offset-1 table-label">Check Documents:</div>
+    <div class="col-sm-6">
+      <table class="table table-hover">
+        <tr>
+          <th></th>
+          <th>Document</th>
+          <th>VACOLS</th>
+          <th>VBMS</th>
+        </tr>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Notice of Disagreement', field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Statement of Case', field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 1', field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 2', field_name: 'SSOC 2', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc2_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 3', field_name: 'SSOC 3', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc3_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 4', field_name: 'SSOC 4', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc4_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 5', field_name: 'SSOC 5', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc5_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Form 9', field_name: 'Form 9', vacols_field: @kase.bfd19_date, vbms_field: @kase.efolder_form9_date} %>
+      </table>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="instructions">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="alert alert-danger">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" role="alert"></span>
+          Some of the files listed in VACOLS could not be found in VBMS.
+        </div>
+        <p>
+          <strong>Check to see if the missing file is in the appellant's eFolder:</strong>
+          <ol>
+            <li><a href="https://www.vbms.vba.va.gov/vbmsp2/">Open and sign into VBMS.</a></li>
+            <li>
+              Search for this eFolder using the following ID:
+              <code><%= @kase.efolder_appellant_id %></code>
+            </li>
+            <li>Looking for the missing file</li>
+          </ol>
+        </p>
+        <p>
+          <strong>If you find the missing file:</strong>
+          <ol>
+            <li>
+              Open the file in VBMS.
+              <a role="button" tabindex="0" type="button" class="btn btn-link btn-xs" data-container="body" data-toggle="popover" data-placement="bottom" data-content=text>
+                <span class="glyphicon glyphicon-question-sign"></span>
+              </a>
+            </li>
+            <li>
+              Open the document properties
+              <%= render partial: 'help_text', locals: {text: 'Text'} %>
+            </li>
+            <li>
+              Change the file's receipt date to match the one listed in the VACOLS column above.
+              <%= render partial: 'help_text', locals: {text: 'Text'} %>
+            </li>
+            <li>
+              After you've changed the receipt date
+              <a href="#" onclick="location.reload()">refresh</a> this page.
+            </li>
+          </ol>
+        </p>
+        <p>
+          <strong>If you can't find the missing file in VBMS</strong>
+          <a href="#">click here to report this case as un-certifiable</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
