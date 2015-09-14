@@ -1,7 +1,7 @@
 class WebController < ApplicationController
   protect_from_forgery with: :exception
   layout 'application'
-  before_action 'login', except: %w/login login_submit/
+  before_action 'login_check', except: %w/login login_submit logout/
 
   def index
     raise ActionController::RoutingError.new('Not Found')
@@ -67,11 +67,9 @@ class WebController < ApplicationController
   end
 
   def login
-    unless session[:username]
-      reset_session
-      @error_message = params[:error_message]
-      render 'login', layout: 'basic'
-    end
+    reset_session
+    @error_message = params[:error_message]
+    render 'login', layout: 'basic'
   end
 
   def login_submit
@@ -86,6 +84,13 @@ class WebController < ApplicationController
   def logout
     reset_session
     redirect_to action: 'login'
+  end
+
+  # -- Action filter --
+  def login_check
+    unless session[:username]
+      redirect_to action: 'login'
+    end
   end
 
 end
