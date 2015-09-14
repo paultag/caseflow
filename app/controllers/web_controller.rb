@@ -73,10 +73,10 @@ class WebController < ApplicationController
   end
 
   def login
-    @no_header = true
-
     if(session[:logged_in] != true)
       reset_session
+
+      @no_header = true
       render 'login'
     end
   end
