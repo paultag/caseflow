@@ -67,7 +67,6 @@ class WebController < ApplicationController
   end
 
   def login
-    reset_session
     @error_message = params[:error_message]
     render 'login', layout: 'basic'
   end
@@ -75,7 +74,7 @@ class WebController < ApplicationController
   def login_submit
     if is_valid_user?(params[:username], params[:password])
       session[:username] = params[:username]
-      redirect_to action: 'start'
+      redirect_to action: 'start', id: session.delete(:case_id) # remove the case id now that login is done
     else
       redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
     end
@@ -89,6 +88,7 @@ class WebController < ApplicationController
   # -- Action filter --
   def login_check
     unless session[:username]
+      session[:case_id] = params[:id] # temporary store for login
       redirect_to action: 'login'
     end
   end
