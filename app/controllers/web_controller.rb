@@ -1,6 +1,7 @@
 class WebController < ApplicationController
   protect_from_forgery with: :exception
   layout 'application'
+  before_action 'login', except: %w/login login_submit/
 
   def index
     raise ActionController::RoutingError.new('Not Found')
@@ -63,5 +64,19 @@ class WebController < ApplicationController
     end
 
     render 'certify'
+  end
+
+
+  def login_submit
+    session[:logged_in] = true
+    redirect_to action: 'start'
+  end
+
+  def login
+    @no_header = true
+
+    if(session[:logged_in] != true)
+      render 'login'
+    end
   end
 end

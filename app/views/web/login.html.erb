@@ -1,0 +1,41 @@
+<%= form_tag(action: 'login_submit', method: 'post') do %>
+
+  <h1>Please login with your VACOLS username and password.</h1>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col col-md-12">
+      <label for="username">Username</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <input name="username" type="text"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-12">
+      <label for="password">Password</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <input name="password" type="password"/>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div class="input-group">
+        <input type="submit" value="Login" class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+
+<% end %>

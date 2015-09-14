@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope '/caseflow' do
-    root to: 'web#index'
+    root to: 'web#login'
 
     namespace :files do
       get '/:type/:id', to: :show, as: :show, constraints: {type: /forms/}
@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     post '/certifications/:id/questions', to: 'web#questions_submit'
     get '/certifications/:id/generate', to: 'web#generate'
     post '/certifications/:id/certify', to: 'web#certify'
+    get '/certificaitons/:id/login', to: 'web#login'
+    post '/certifications/:id/login', to: 'web#login_submit'
   end
 end
