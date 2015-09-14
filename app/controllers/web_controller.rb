@@ -69,9 +69,8 @@ class WebController < ApplicationController
   def login
     unless session[:logged_in]
       reset_session
-      @no_header = true
       @error_message = params[:error_message]
-      render 'login'
+      render 'login', layout: 'basic'
     end
   end
 
