@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     post '/certifications/:id/certify', to: 'web#certify'
     get '/certificaitons/:id/login', to: 'web#login'
     post '/certifications/:id/login', to: 'web#login_submit'
+    get '/certifications/:id/logout', to: 'web#logout'
   end
 end

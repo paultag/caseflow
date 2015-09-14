@@ -66,18 +66,27 @@ class WebController < ApplicationController
     render 'certify'
   end
 
-
-  def login_submit
-    session[:logged_in] = true
-    redirect_to action: 'start'
-  end
-
   def login
-    if(session[:logged_in] != true)
+    unless session[:logged_in]
       reset_session
-
       @no_header = true
+      @error_message = params[:error_message]
       render 'login'
     end
   end
+
+  def login_submit
+    if is_valid_user?(params[:username], params[:password])
+      session[:logged_in] = true
+      redirect_to action: 'start'
+    else
+      redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
+    end
+  end
+
+  def logout
+    reset_session
+    redirect_to action: 'login'
+  end
+
 end

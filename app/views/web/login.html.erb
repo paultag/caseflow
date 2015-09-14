@@ -4,6 +4,17 @@
 
   <hr/>
 
+  <% if @error_message %>
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="alert alert-danger">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" role="alert"></span>
+          <%= @error_message %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <div class="row">
     <div class="col col-md-12">
       <label for="username">Username</label>
