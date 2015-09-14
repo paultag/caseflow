@@ -67,10 +67,12 @@ var display_13_other = function () {
 
 // -- Add listeners --
 
-$("input[name='8B_POWER_OF_ATTORNEY']").change(display_8b_explanation);
-$("input[name='9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646']").change(display_9b);
-$("input[name='10B_IF_HELD_IS_TRANSCRIPT_IN_FILE']").change(display_10c);
-$("input[name='11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE']").change(display_11b);
-$("input[name='13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']").change(display_13_other);
+$(function () {
+    $("input[name='8B_POWER_OF_ATTORNEY']").change(display_8b_explanation);
+    $("input[name='9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646']").change(display_9b);
+    $("input[name='10B_IF_HELD_IS_TRANSCRIPT_IN_FILE']").change(display_10c);
+    $("input[name='11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE']").change(display_11b);
+    $("input[name='13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']").change(display_13_other);
+});
 
 // --- END: JS for questions.html.erb ---
