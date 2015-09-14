@@ -67,7 +67,7 @@ class WebController < ApplicationController
   end
 
   def login
-    unless session[:logged_in]
+    unless session[:username]
       reset_session
       @error_message = params[:error_message]
       render 'login', layout: 'basic'
@@ -76,7 +76,6 @@ class WebController < ApplicationController
 
   def login_submit
     if is_valid_user?(params[:username], params[:password])
-      session[:logged_in] = true
       session[:username] = params[:username]
       redirect_to action: 'start'
     else
