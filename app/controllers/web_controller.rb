@@ -76,6 +76,7 @@ class WebController < ApplicationController
     @no_header = true
 
     if(session[:logged_in] != true)
+      reset_session
       render 'login'
     end
   end
