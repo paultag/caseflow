@@ -9,7 +9,6 @@
  The following are optional arguments:
  - div_id: The ID attribute of the containing div
  - div_class: The class attribute of the containing div
- - input_onchange: Javascript action triggered when selection changes (onchange handler)
 %>
 
 <% yes_no_locals = {
@@ -25,9 +24,6 @@
   input_name: input_name, }
 
    # Optional arguments
-   if defined?(input_onchange)
-     yes_no_locals[:input_onchange] = input_onchange
-   end
    if defined?(div_id)
      yes_no_locals[:div_id] = div_id
    end

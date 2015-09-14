@@ -9,29 +9,25 @@
     - label3_text: Label for the third checkbox
     - input3_name: Name attribute for the third checkbox
 
-    Optional arguments include:
-    - input1_onchange: Onchange attribute for the first checkbox's input element
-    - input2_onchange: Onchange attribute for the second checkbox's input element
-    - input3_onchange: Onchange attribute for the third checkbox's input element
 %>
 
 <div class="col col-md-2">
   <div class="input-group">
     <div class="checkbox">
       <label>
-        <input type="checkbox" name="<%= input1_name %>" onchange="<%= input1_onchange if defined?(input1_onchange) %>"></input>
+        <input type="checkbox" name="<%= input1_name %>"></input>
         <%= label1_text %>
       </label>
     </div>
     <div class="checkbox">
       <label>
-        <input type="checkbox" name="<%= input2_name %>" onchange="<%= input2_onchange if defined?(input2_onchange) %>"></input>
+        <input type="checkbox" name="<%= input2_name %>"></input>
         <%= label2_text %>
       </label>
     </div>
     <div class="checkbox">
       <label>
-        <input type="checkbox" name="<%= input3_name %>" onchange="<%= input3_onchange if defined?(input3_onchange) %>"></input>
+        <input type="checkbox" name="<%= input3_name %>"></input>
         <%= label3_text %>
       </label>
     </div>
