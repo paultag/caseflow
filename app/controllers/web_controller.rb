@@ -77,6 +77,7 @@ class WebController < ApplicationController
   def login_submit
     if is_valid_user?(params[:username], params[:password])
       session[:logged_in] = true
+      session[:username] = params[:username]
       redirect_to action: 'start'
     else
       redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
