@@ -153,6 +153,28 @@ module Caseflow
         correspondent: Correspondent.new(
           "Joe Snuffy", "Self", "Joe Snuffy", "Joe", "", "Snuffy",
         ),
+      ),
+      "janice-snuffy" => Case.new(
+        bfkey: "janice-snuffy",
+        bfcorlid: "444444444C",
+        bfac: "3",
+        bfmpro: "ADV",
+        bfpdnum: "123ABC",
+        bfregoff: "RO10",
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-02'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-03'),
+        efolder_appellant_id: "444444444",
+        appeal_type: "Post Remand",
+        vso_full: "Jewish American Veterans",
+        regional_office_full: "Philadelphia, PA",
+        folder: Folder.new("VBMS"),
+        correspondent: Correspondent.new(
+          "Janice Snuffy", "Self", "Janice Snuffy", "Janice", "", "Snuffy",
+        ),
       )
     }
   end
