@@ -3,17 +3,7 @@
     - @kase: A Case object
 %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title>CaseFlow</title>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-</head>
-
-<body>
-<div class="container">
+<% content_for :content do %>
   <div id="certifications-header" class="row">
     <div class="col col-md-3">
       <h2><%= @kase.correspondent.full_name %></h2>
@@ -36,12 +26,6 @@
     </div>
   </div>
   <hr/>
-  <div>
-    <%= yield %>
-  </div>
-</div>
-</body>
+<% end %>
 
-<%= javascript_include_tag 'application' %>
-
-</html>
+<%= render template: 'layouts/basic' %>

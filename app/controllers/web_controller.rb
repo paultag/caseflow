@@ -1,6 +1,7 @@
 class WebController < ApplicationController
   protect_from_forgery with: :exception
   layout 'application'
+  before_action 'login_check', except: %w/login login_submit logout/
 
   def index
     raise ActionController::RoutingError.new('Not Found')
@@ -64,4 +65,32 @@ class WebController < ApplicationController
 
     render 'certify'
   end
+
+  def login
+    @error_message = params[:error_message]
+    render 'login', layout: 'basic'
+  end
+
+  def login_submit
+    if is_valid_user?(params[:username], params[:password])
+      session[:username] = params[:username]
+      redirect_to action: 'start', id: session.delete(:case_id) # remove the case id now that login is done
+    else
+      redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
+    end
+  end
+
+  def logout
+    reset_session
+    redirect_to action: 'login'
+  end
+
+  # -- Action filter --
+  def login_check
+    unless session[:username]
+      session[:case_id] = params[:id] # temporary store for login
+      redirect_to action: 'login'
+    end
+  end
+
 end
