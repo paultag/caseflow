@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post '/certifications/:id/questions', to: 'web#questions_submit'
     get '/certifications/:id/generate', to: 'web#generate'
     post '/certifications/:id/certify', to: 'web#certify'
+    post '/certifications/:id/error', to: 'web#error'
     get '/login', to: 'web#login'
     post '/login', to: 'web#login_submit'
     get '/logout', to: 'web#logout'

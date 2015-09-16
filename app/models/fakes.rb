@@ -64,6 +64,12 @@ module Caseflow
       def bfdcertool=(value)
       end
 
+      def bfdmcon=(value)
+      end
+
+      def bfms=(value)
+      end
+
       # TODO: allow customizing these fields
       def issue_breakdown
         []
