@@ -66,6 +66,16 @@ class WebController < ApplicationController
     render 'certify'
   end
 
+  def error
+    @kase = get_case(params[:id])
+    @kase.bf41stat = nil
+    @kase.bfdmcon = nil
+    @kase.bfms = nil
+    @kase.save
+
+    render 'error'
+  end
+
   def login
     @error_message = params[:error_message]
     render 'login', layout: 'basic'
