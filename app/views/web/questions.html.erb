@@ -138,15 +138,19 @@
 
 
         </div>
+
+        <% textarea_name = '14_REMARKS_INITIAL' %>
+        <% textarea_id = "#{textarea_name}_input_id" %>
         <div class="row">
           <div class="col col-md-12">
-            <strong>14</strong>
-            REMARKS
+            <label for="<%= textarea_id %>">
+              <strong>14</strong> REMARKS
+            </label>
           </div>
         </div>
         <div class="row">
           <div class="col col-md-6">
-            <textarea name="14_REMARKS_INITIAL" rows="3" class="form-control"></textarea>
+            <textarea name="<%= textarea_name %>" rows="3" class="form-control" id="<%= textarea_id %>"></textarea>
           </div>
         </div>
         <hr/>

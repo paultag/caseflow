@@ -14,10 +14,12 @@
     - required: true/false, if a field is required (default: false)
 %>
 
+<% input_id = "#{input_name}_input_id" %>
+
 <div class="form8-text-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
   <div class="row">
     <div class="col col-md-12">
-      <label for="<%= input_name %>">
+      <label for="<%= input_id %>">
         <strong><%= question_num %></strong>
         <%= question %>
       </label>
@@ -25,7 +27,7 @@
   </div>
   <div class="row">
     <div class="col col-md-6">
-      <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control" <%= 'required' if defined?(required) && required %>></input>
+      <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control" <%= 'required' if defined?(required) && required %> id="<%= input_id %>"></input>
     </div>
   </div>
   <% if !defined?(closing_hr) || closing_hr %>

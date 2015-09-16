@@ -16,6 +16,7 @@
   <div class="document-table row section">
     <div class="col-sm-6 col-sm-offset-3">
       <table class="table table-hover">
+        <caption class="hidden">This table compares received dates for forms stored in VACOLS and VBMS.</caption>
         <tr>
           <th></th>
           <th>Document</th>
@@ -30,6 +31,7 @@
         <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 4', field_name: 'SSOC 4', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc4_date} %>
         <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 5', field_name: 'SSOC 5', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc5_date} %>
         <%= render partial: 'table_row', locals: {full_field_name: 'Form 9', field_name: 'Form 9', vacols_field: @kase.bfd19_date, vbms_field: @kase.efolder_form9_date} %>
+
       </table>
     </div>
   </div>
@@ -53,9 +55,7 @@
           <ol>
             <li>
               Open the file in VBMS.
-              <a role="button" tabindex="0" type="button" class="btn btn-link btn-xs" data-container="body" data-toggle="popover" data-placement="bottom" data-content=text>
-                <span class="glyphicon glyphicon-question-sign"></span>
-              </a>
+              <%= render partial: 'help_text', locals: {text: 'Text'} %>
             </li>
             <li>
               Open the document properties
@@ -75,7 +75,7 @@
           <strong>If you can't find the missing file in VBMS</strong> click the button below to report this as un-certifiable.
 
           <%= form_tag(action: 'error', method: 'post') do %>
-            <input type="submit" value="This case cannot be certified" class="btn btn-danger"/>
+            <input type="submit" value="This case cannot be certified" class="btn btn-primary"/>
           <% end %>
         </p>
       </div>
