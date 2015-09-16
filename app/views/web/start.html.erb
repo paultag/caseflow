@@ -53,9 +53,7 @@
           <ol>
             <li>
               Open the file in VBMS.
-              <a role="button" tabindex="0" type="button" class="btn btn-link btn-xs" data-container="body" data-toggle="popover" data-placement="bottom" data-content=text>
-                <span class="glyphicon glyphicon-question-sign"></span>
-              </a>
+              <%= render partial: 'help_text', locals: {text: 'Text'} %>
             </li>
             <li>
               Open the document properties
