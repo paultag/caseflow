@@ -1,7 +1,3 @@
-//= require moment.min
-//= require lodash.min
-
-
 //= require_self
 
 (function () {
