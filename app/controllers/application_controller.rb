@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def get_case(bfkey)
-    if ENV['CASEFLOW_TEST']
+    if !ENV['CASEFLOW_TEST'].empty?
       Caseflow::Fakes::Case.find(bfkey)
     else
       Case.find(bfkey)
