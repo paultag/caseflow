@@ -11,8 +11,6 @@ gem 'puma'
 gem 'activerecord-jdbc-adapter'
 gem 'composite_primary_keys'
 gem 'squeel'
-
-gem 'haml'
 gem 'sass-rails', '~> 4.0.3'
 gem 'jbuilder', '~> 2.0'
 gem 'pdf-forms', '0.6.0'
