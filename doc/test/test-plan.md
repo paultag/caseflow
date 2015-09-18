@@ -2,227 +2,58 @@
 
 This document contains user tests that can be used to verify that Caseflow is working correctly. Each test is broken into a section with a summary of what it tests and a series of steps to perform.
 
-#### View a case with an incorrect BFKEY
+## Getting to the Application
 
-1. Open Caseflow at the base URL.
-1. Enter an invalid BFKEY.
-1. Error pops, describing that no record was found.
+For each of these tests, Caseflow requires the user to go to a URL with a BFKEY (a case ID from VACOLS). An example is:
 
-#### View a complete case without any SSOCs
+```
+https://vhacdwdwhcto6.vha.med.va.gov/caseflow/certifications/2741506/start
+```
 
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. Form 9 shows correct date.
-1. As all correct dates match the, "Continue" button is enabled. When clicked, user is directed to the Questions page.
-1. When user enters answers for the required questions, "Continue" button is enabled.  When clicked, user is directed to Form 8 page.
-1. When Form 8 is generated, user can download the Form 8 by clicking the "Download Complete Form 8" link.  User can click "Finish Certification" button and be directed to Confirmation page.
-1. When Confirmation page loads, case will be certified in VACOLS, and have the Form 8 automatically uploaded into the VBMS eFolder.  User can then close browser.
+where `2741506` is the BFKEY. We'll call this the base URL throughout the tests.
 
+## Functional Tests
 
-#### View a complete case with 2 SSOCs
+- When a non-existed case ID (BFKEY) is used with base URL, the user gets an error
+- When a case is not certifiable, the user gets an error
+- When attempting to view a paper case (no eFolder), the user gets an error
+- Start page
+  - Missing VBMS dates (NOD, SOC, Form 9), 'Not Found' is shown
+  - Missing VBMS dates (SSOC 1 - 5), 'Not Found' is shown
+  - Correct VACOLS fields appear when document is present (NOD, SOC, Form 9, SSOC 1 - 5)
+  - Correct VBMS fields appear when document is present (NOD, SOC, Form 9, SSOC 1 - 5)
+  - When VBMS document is not found, correct error message is shown
+  - When all documents are present, correct error message is shown when dates don't match (NOD, SOC, Form 9, SSOC 1-5)
+  - When all documents match, user is sent to form 8 (NOD+SOC+Form9, NOD+SOC+Form9+SSOC 1-5)
+  - When a BFKEY that isn't eligible for certification is used, user gets error page
+  - When a user marks a case as uncertifiable, all certification fields in VACOLS are reset
+  - When a user marks a case as uncertifiable, a message is displayed telling the user the case has been reset in VACOLS
+- Questions page: 
+  - All fields from VACOLS that do not have a question in Caseflow, are populated correctly
+  - When 8B is answered with 'Located in another VA file',  8B Explanation is Displayed
+  - When 9A is answered with 'No', 9B is displayed
+  - When 10B is answered with 'No', 10C is displayed
+  - When 11A is answered with 'Yes', 11B is displayed
+  - When 13 is answered with 'Other', Specify Other question is displayed
+  - 17A is a required field
+  - 17B is a required field
+- Certification page
+  - All non-visible (not on Questions page) VACOLS fields make it onto Form 8
+  - All fields from Questions page make it onto Form 8
+  - Form 8 PDF is downloadable from page
+  - Clicking Certify certifies the case in VACOLS
+  - Clicking Certify certifies the case sends the user to a confirmation page
 
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-1. As all correct dates match the, "Continue" button is enabled. When clicked, user is directed to the Questions page.
-1. When user enters answers for the required questions, "Continue" button is enabled.  When clicked, user is directed to Form 8 page.
-1. When Form 8 is generated, user can download the Form 8 by clicking the "Download Complete Form 8" link.  User can click "Finish Certification" button and be directed to Confirmation page.
-1. When Confirmation page loads, case will be certified in VACOLS, and have the Form 8 automatically uploaded into the VBMS eFolder.  User can then close browser.
+### View a case with an non-existent BFKEY
 
+#### Requires
 
-#### View a paper case (no eFolder)
+- A non-existent BFKEY
 
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side is disabled, as no eFolder exists
-1. "Continue" button is automatically enabled. When clicked, user is directed to the Questions page.
-1. When user enters answers for the required questions, "Continue" button is enabled.  When clicked, user is directed to Form 8 page.
-1. When Form 8 is generated, user can download the Form 8 by clicking the "Download Complete Form 8" link.  The Form 8 can then be printed and added to the paper file.
+#### Steps
 
+1. Go to Caseflow with the base URL.
 
-#### View an incomplete case (Missing Notice of Disagreement)
+#### Expected Outcome:
 
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows no data.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-1. As all dates do not match, "Continue" button is disabled.
-
-
-#### View an incomplete case (Missing Statement of the Case)
-
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows correct data.
-    1. SOC shows no data.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-1. As all dates do not match, "Continue" button is disabled.
-
-
-#### View an incomplete case (Missing VA Form 9)
-
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows correct data
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows no data.
-1. As all dates do not match, "Continue" button is disabled.
-
-
-#### View an incomplete case (Missing Notice of Disagreement and Statement of the Case)
-
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows no data.
-    1. SOC shows no data.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-1. As all dates do not match, "Continue" button is disabled.
-
-
-
-#### View an incomplete case (Missing Notice of Disagreement and VA Form 9)
-
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows no data.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows no data.
-1. As all dates do not match, "Continue" button is disabled.
-
-
-#### View an incomplete case (Statement of the Case and VA Form 9)
-
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows correct date.
-    1. SOC shows no data.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows no data.
-1. As all dates do not match, "Continue" button is disabled.
-
-
-#### View an incomplete case (Notice of Disagreement, Statement of the Case and VA Form 9)
-
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows no data.
-    1. SOC shows no data.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows no data.
-1. As all dates do not match, "Continue" button is disabled.
-
-
-#### View an incomplete case (Missing Everything)
-
-1. Open Caseflow at the base URL.
-1. Enter a valid BFKEY.
-1. Reconciliation page appears.
-  1. VACOLS Side.
-    1. NOD shows correct date.
-    1. SOC shows correct date.
-    1. SSOC1 shows correct date.
-    1. SSOC2 shows correct date.
-    1. Form 9 shows correct date.
-  1. VBMS Side.
-    1. NOD shows no data.
-    1. SOC shows no data.
-    1. SSOC1 shows no data.
-    1. SSOC2 shows no data.
-    1. Form 9 shows no data.
-1. As all dates do not match, "Continue" button is disabled.
+HTTP 404 status will be returned (not found)
