@@ -43,6 +43,8 @@ where `2741506` is the BFKEY. We'll call this the base URL throughout the tests.
   - Form 8 PDF is downloadable from page
   - Clicking Certify certifies the case in VACOLS
   - Clicking Certify certifies the case sends the user to a confirmation page
+  - Clicking Certify uploads the Form 8 to VBMS
+  - If uploading the Form 8 to VBMS fails, the user gets an error page and the case is marked as uncertifiable
 
 ### View a case with an non-existent BFKEY
 
