@@ -17,6 +17,7 @@ where `2741506` is the BFKEY. We'll call this the base URL throughout the tests.
 - When a non-existent case ID (BFKEY) is used with base URL, the user gets an error
 - When a case is not certifiable, the user gets an error
 - When attempting to view a paper case (no eFolder), the user gets an error
+- When a user is attempting to access a case that is not within their RO's jurisdiction, an error page is displayed
 - Login
   - When going to any URL, the user is presented with a login screen if they have not logged in
   - A user is able to login with a VACOLS username and password
