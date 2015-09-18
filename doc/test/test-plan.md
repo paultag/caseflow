@@ -45,6 +45,12 @@ where `2741506` is the BFKEY. We'll call this the base URL throughout the tests.
   - Clicking Certify certifies the case sends the user to a confirmation page
   - Clicking Certify uploads the Form 8 to VBMS
   - If uploading the Form 8 to VBMS fails, the user gets an error page and the case is marked as uncertifiable
+- Login
+  - When going to any URL, the user is presented with a login screen if they have not logged in
+  - A user is able to login with a VACOLS username and password
+  - When a username is invalid, the user cannot login and gets an error message
+  - When a password is invalid (with the corresponding username), the user cannot login and gets an error message
+  - After a user logs in, they will not have to login again unless cookies are cleared in their browser
 
 ### View a case with an non-existent BFKEY
 
