@@ -14,9 +14,15 @@ where `2741506` is the BFKEY. We'll call this the base URL throughout the tests.
 
 ## Functional Tests
 
-- When a non-existed case ID (BFKEY) is used with base URL, the user gets an error
+- When a non-existent case ID (BFKEY) is used with base URL, the user gets an error
 - When a case is not certifiable, the user gets an error
 - When attempting to view a paper case (no eFolder), the user gets an error
+- Login
+  - When going to any URL, the user is presented with a login screen if they have not logged in
+  - A user is able to login with a VACOLS username and password
+  - When a username is invalid, the user cannot login and gets an error message
+  - When a password is invalid (with the corresponding username), the user cannot login and gets an error message
+  - After a user logs in, they will not have to login again unless cookies are cleared in their browser
 - Start page
   - Missing VBMS dates (NOD, SOC, Form 9), 'Not Found' is shown
   - Missing VBMS dates (SSOC 1 - 5), 'Not Found' is shown
@@ -45,23 +51,3 @@ where `2741506` is the BFKEY. We'll call this the base URL throughout the tests.
   - Clicking Certify certifies the case sends the user to a confirmation page
   - Clicking Certify uploads the Form 8 to VBMS
   - If uploading the Form 8 to VBMS fails, the user gets an error page and the case is marked as uncertifiable
-- Login
-  - When going to any URL, the user is presented with a login screen if they have not logged in
-  - A user is able to login with a VACOLS username and password
-  - When a username is invalid, the user cannot login and gets an error message
-  - When a password is invalid (with the corresponding username), the user cannot login and gets an error message
-  - After a user logs in, they will not have to login again unless cookies are cleared in their browser
-
-### View a case with an non-existent BFKEY
-
-#### Requires
-
-- A non-existent BFKEY
-
-#### Steps
-
-1. Go to Caseflow with the base URL.
-
-#### Expected Outcome:
-
-HTTP 404 status will be returned (not found)
