@@ -11,7 +11,7 @@ class WebController < ApplicationController
     @kase = get_case(params[:id])
 
     if @kase.ready_to_certify?
-      return redirect_to action: :questions, params: params
+      return redirect_to action: :questions, id: params[:id]
     end
 
     render 'start'
@@ -21,7 +21,7 @@ class WebController < ApplicationController
     @kase = get_case(params[:id])
 
     if !@kase.ready_to_certify?
-      return redirect_to action: :start, params: params
+      return redirect_to action: :start, id: params[:id]
     end
 
     render 'questions'
