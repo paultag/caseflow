@@ -184,7 +184,7 @@ module Caseflow
         ),
       ),
       'not-authorized' => Case.new(
-        bfkey: 'ro-not-authorized',
+        bfkey: 'not-authorized',
         bfcorlid: '44444445C',
         bfac: '3',
         bfmpro: 'ADV',
