@@ -210,7 +210,7 @@ module Caseflow
         bfac: '3',
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
-        bfregoff: 'RO10',
+        bfregoff: 'DSUSER',
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
