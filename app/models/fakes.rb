@@ -20,7 +20,8 @@ module Caseflow
                      bfdsoc: nil, efolder_nod: nil, efolder_form9: nil,
                      efolder_soc: nil, efolder_appellant_id: nil,
                      appeal_type: nil, vso_full: nil, regional_office_full: nil,
-                     folder: nil, correspondent: nil, save_successful: true)
+                     folder: nil, correspondent: nil, save_successful: true,
+                     issue_breakdown: [])
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -42,6 +43,7 @@ module Caseflow
         @folder = folder
         @correspondent = correspondent
         @save_successful = save_successful
+        @issue_breakdown = issue_breakdown
       end
 
       _DATE_FIELDS = [
@@ -70,13 +72,12 @@ module Caseflow
       def bfms=(value)
       end
 
-      # TODO: allow customizing these fields
-      def issue_breakdown
-        []
-      end
-
       def hearing_requested?
         true
+      end
+
+      def issue_breakdown
+        @issue_breakdown
       end
 
       def ssoc_required?
@@ -181,6 +182,38 @@ module Caseflow
         correspondent: Correspondent.new(
           "Janice Snuffy", "Self", "Janice Snuffy", "Janice", "", "Snuffy",
         ),
+      ),
+      'full-form8' => Case.new(
+        bfkey: 'full-form8',
+        bfcorlid: '444444446C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'RO10',
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-01'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-01'),
+        efolder_appellant_id: '444444444',
+        appeal_type: 'Post Remand',
+        vso_full: 'Thorough American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
+        correspondent: Correspondent.new(
+          'Full Form8', 'Self', 'Full Form8', 'Full', 'Numberinmylastname', 'Form8',
+        ),
+        issue_breakdown: [
+          { 'field_type' => 'service connection', 'full_desc' => 'broken ankle'},
+          { 'field_type' => 'service connection', 'full_desc' => 'broken toe'},
+          { 'field_type' => 'service connection', 'full_desc' => 'broken toe nail'},
+          { 'field_type' => 'increased rating', 'iss_desc' => 'popped ankle'},
+          { 'field_type' => 'increased rating', 'iss_desc' => 'twisted toe'},
+          { 'field_type' => 'increased rating', 'iss_desc' => 'blackened toe nail'},
+          { 'field_type' => 'other', 'iss_desc' => 'enlarged ankle'},
+          { 'field_type' => 'other', 'iss_desc' => 'gross toe nail'}
+        ]
       )
     }
   end
