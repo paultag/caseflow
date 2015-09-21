@@ -41,9 +41,13 @@ class WebController < ApplicationController
 
     if fields['8B_POWER_OF_ATTORNEY'] == '8B_POWER_OF_ATTORNEY'
       fields['8B_POWER_OF_ATTORNEY'] = true
-      fields['8B_REMARKS'] = nil
+      fields.delete('8B_REMARKS')
     elsif fields['8B_POWER_OF_ATTORNEY'] == '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'
       fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'] = true
+    end
+
+    if fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646'] == 'yes'
+      fields.delete('9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN')
     end
 
     # Generate Form 8 PDF
