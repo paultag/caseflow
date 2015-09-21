@@ -31,8 +31,7 @@ class ApplicationController < ActionController::Base
     true
   end
 
-  def is_authorized?(kase_id, username)
-    kase = get_case(params[:id])
+  def is_authorized?(kase, username)
     ro = kase.bfregoff.try('upcase')
     return ro != username
   end

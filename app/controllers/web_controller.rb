@@ -4,6 +4,9 @@ class WebController < ApplicationController
 
   sessionless_actions = %w/login login_submit logout/
 
+  # Retrieve the Case object
+  before_action 'get_kase', except: sessionless_actions
+
   # Check authentication
   before_action 'login_check', except: sessionless_actions
 
@@ -15,8 +18,6 @@ class WebController < ApplicationController
   end
 
   def start
-    @kase = get_case(params[:id])
-
     if @kase.ready_to_certify?
       return redirect_to action: :questions, id: params[:id]
     end
@@ -25,8 +26,6 @@ class WebController < ApplicationController
   end
 
   def questions
-    @kase = get_case(params[:id])
-
     if !@kase.ready_to_certify?
       return redirect_to action: :start, id: params[:id]
     end
@@ -35,11 +34,10 @@ class WebController < ApplicationController
   end
 
   def questions_submit
-    kase = get_case(params[:id])
 
     # TODO Add a check for the two required params, sending the user back to `questions` with an error message if not there (maybe do this in a separate branch, since this wasn't there before and needs some design)
 
-    fields = kase.initial_fields
+    fields = @kase.initial_fields
     fields.merge!(params)
 
     certification_date = Time.now.to_s(:va_date)
@@ -52,14 +50,12 @@ class WebController < ApplicationController
   end
 
   def generate
-    @kase = get_case(params[:id])
     @file_name = params[:file_name]
     @certification_date = params[:certification_date]
     render 'generate'
   end
 
   def certify
-    @kase = get_case(params[:id])
     corr = @kase.correspondent
 
     Case.transaction do
@@ -74,7 +70,6 @@ class WebController < ApplicationController
   end
 
   def error
-    @kase = get_case(params[:id])
     @kase.bf41stat = nil
     @kase.bfdmcon = nil
     @kase.bfms = nil
@@ -103,6 +98,12 @@ class WebController < ApplicationController
   end
 
   # -- Action filter --
+
+  # Gets the Case object once, preventing multiple queries between before_action's and normal actions
+  def get_kase
+    @kase = get_case(params[:id])
+  end
+
   def login_check
     unless session[:username]
       session[:case_id] = params[:id] # temporary store for login
@@ -111,7 +112,7 @@ class WebController < ApplicationController
   end
 
   def authorization_check
-    if is_authorized?(params[:id], session[:username])
+    if is_authorized?(@kase, session[:username])
       return render 'unauthorized', layout: 'basic', status: 401
     end
   end
