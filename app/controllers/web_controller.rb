@@ -54,6 +54,10 @@ class WebController < ApplicationController
       fields.delete('10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN')
     end
 
+    if fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE'] == 'no'
+      fields.delete('11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED')
+    end
+
     # Generate Form 8 PDF
     form_8 = FormVa8.new(fields)
     form_8.process!
