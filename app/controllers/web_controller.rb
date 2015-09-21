@@ -35,9 +35,18 @@ class WebController < ApplicationController
     fields = kase.initial_fields
     fields.merge!(params)
 
+    # Prepare fields for PDF generation
     certification_date = Time.now.to_s(:va_date)
     fields['17C_DATE'] = certification_date
 
+    if fields['8B_POWER_OF_ATTORNEY'] == '8B_POWER_OF_ATTORNEY'
+      fields['8B_POWER_OF_ATTORNEY'] = true
+      fields['8B_REMARKS'] = nil
+    elsif fields['8B_POWER_OF_ATTORNEY'] == '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'
+      fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'] = true
+    end
+
+    # Generate Form 8 PDF
     form_8 = FormVa8.new(fields)
     form_8.process!
 
