@@ -62,10 +62,10 @@ where `2741506` is the BFKEY. We'll call this the base URL throughout the tests.
 
 ## Script
 
-The Caseflow script is to be run on a command prompt that has access to the Caseflow code base. To setup any of the tests, you can either create a test veteran/case across VACOLS and VBMS or maniuplate the test data that can be used with the `CASEFLOW_TEST` environment variable (more details in the project README file).
+The Caseflow script is to be run on a command prompt that has access to the Caseflow code base. To setup any of the tests, you can either create a test veteran/case across VACOLS and VBMS or manipulate the test data that can be used with the `CASEFLOW_TEST` environment variable (more details in the project README file).
 
 ### Tests
 
-- A case ID that has matching document dates (NOD+SOC+Form9, NOD+SOC+Form9+SSOC1 to 5), is added to the "Case Ready" output file
-- A case ID that does not have matching document dates (NOD+SOC+Form9, NOD+SOC+Form9+SSOC1 to 5), is added to the "Case Not Ready" output file
+- A case ID that has matching document dates for all required files (NOD+SOC+Form9, NOD+SOC+Form9+SSOC1 to 5), is added to the "Case Ready" output file
+- A case ID that does not have matching document dates for any of the required files (NOD+SOC+Form9, NOD+SOC+Form9+SSOC1 to 5), is added to the "Case Not Ready" output file
 - When a case that does not have matching document dates is found, the "Case Not Ready" record for that has a reason (NOD, SOC, Form 9, SSOC 1-5 date mismatches)
