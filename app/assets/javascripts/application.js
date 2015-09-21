@@ -5,7 +5,8 @@
 
     $(document).popover({
         selector: "[data-toggle=popover]",
-        trigger: "focus"
+        trigger: "focus",
+        html: true
     });
 })();
 
