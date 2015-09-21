@@ -1,7 +1,14 @@
 class WebController < ApplicationController
   protect_from_forgery with: :exception
   layout 'application'
-  before_action 'login_check', except: %w/login login_submit logout/
+
+  sessionless_actions = %w/login login_submit logout/
+
+  # Check authentication
+  before_action 'login_check', except: sessionless_actions
+
+  # Check authorization
+  before_action 'authorization_check', except: sessionless_actions
 
   def index
     raise ActionController::RoutingError.new('Not Found')
@@ -83,7 +90,7 @@ class WebController < ApplicationController
 
   def login_submit
     if is_valid_user?(params[:username], params[:password])
-      session[:username] = params[:username]
+      session[:username] = params[:username].upcase
       redirect_to action: 'start', id: session.delete(:case_id) # remove the case id now that login is done
     else
       redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
@@ -100,6 +107,12 @@ class WebController < ApplicationController
     unless session[:username]
       session[:case_id] = params[:id] # temporary store for login
       redirect_to action: 'login'
+    end
+  end
+
+  def authorization_check
+    if is_authorized?(params[:id], session[:username])
+      return render 'unauthorized', layout: 'basic', status: 401
     end
   end
 
