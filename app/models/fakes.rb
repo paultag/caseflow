@@ -30,6 +30,7 @@ module Caseflow
         @bfdnod = bfdnod
         @bfd19 = bfd19
         @bfdsoc = bfdsoc
+        @bfregoff = bfregoff
 
         @efolder_nod = efolder_nod
         @efolder_form9 = efolder_form9
@@ -138,48 +139,70 @@ module Caseflow
     end
 
     DATA = {
-      "joe-snuffy" => Case.new(
-        bfkey: "joe-snuffy",
-        bfcorlid: "22222222C",
-        bfac: "3",
-        bfmpro: "ADV",
-        bfpdnum: "123ABC",
-        bfregoff: "RO10",
+      'joe-snuffy' => Case.new(
+        bfkey: 'joe-snuffy',
+        bfcorlid: '22222222C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'DSUSER',
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
         efolder_nod: Date.parse('2015-09-01'),
         efolder_form9: Date.parse('2015-09-01'),
         efolder_soc: Date.parse('2015-09-01'),
-        efolder_appellant_id: "22222222",
-        appeal_type: "Post Remand",
-        vso_full: "Disabled American Veterans",
-        regional_office_full: "Philadelphia, PA",
-        folder: Folder.new("VBMS"),
+        efolder_appellant_id: '22222222',
+        appeal_type: 'Post Remand',
+        vso_full: 'Disabled American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
         correspondent: Correspondent.new(
-          "Joe Snuffy", "Self", "Joe Snuffy", "Joe", "", "Snuffy",
+          'Joe Snuffy', 'Self', 'Joe Snuffy', 'Joe', '', 'Snuffy',
         ),
       ),
-      "janice-snuffy" => Case.new(
-        bfkey: "janice-snuffy",
-        bfcorlid: "444444444C",
-        bfac: "3",
-        bfmpro: "ADV",
-        bfpdnum: "123ABC",
-        bfregoff: "RO10",
+      'janice-snuffy' => Case.new(
+        bfkey: 'janice-snuffy',
+        bfcorlid: '444444444C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'DSUSER',
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
         efolder_nod: Date.parse('2015-09-02'),
         efolder_form9: Date.parse('2015-09-01'),
         efolder_soc: Date.parse('2015-09-03'),
-        efolder_appellant_id: "444444444",
-        appeal_type: "Post Remand",
-        vso_full: "Jewish American Veterans",
-        regional_office_full: "Philadelphia, PA",
-        folder: Folder.new("VBMS"),
+        efolder_appellant_id: '444444444',
+        appeal_type: 'Post Remand',
+        vso_full: 'Jewish American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
         correspondent: Correspondent.new(
-          "Janice Snuffy", "Self", "Janice Snuffy", "Janice", "", "Snuffy",
+          'Janice Snuffy', 'Self', 'Janice Snuffy', 'Janice', '', 'Snuffy',
+        ),
+      ),
+      'not-authorized' => Case.new(
+        bfkey: 'not-authorized',
+        bfcorlid: '44444445C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'dfakl;dfakldfaj;',
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-02'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-03'),
+        efolder_appellant_id: '444444445',
+        appeal_type: 'Post Remand',
+        vso_full: 'Unauthorized American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
+        correspondent: Correspondent.new(
+          'Not Authorized', 'Self', 'Not Authorized', 'Not', '', 'Authorized',
         ),
       )
     }
