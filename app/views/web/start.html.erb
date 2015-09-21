@@ -46,6 +46,7 @@
             <li>
               Search for this eFolder using the following ID:
               <code><%= @kase.efolder_appellant_id %></code>
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/find-case.png")} %>
             </li>
             <li>Looking for the missing file</li>
           </ol>
@@ -55,15 +56,15 @@
           <ol>
             <li>
               Open the file in VBMS.
-              <%= render partial: 'help_text', locals: {text: 'Text'} %>
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/open-file.png")} %>
             </li>
             <li>
               Open the document properties
-              <%= render partial: 'help_text', locals: {text: 'Text'} %>
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/document-properties.png")} %>
             </li>
             <li>
               Change the file's receipt date to match the one listed in the VACOLS column above.
-              <%= render partial: 'help_text', locals: {text: 'Text'} %>
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/receipt-date.png")} %>
             </li>
             <li>
               After you've changed the receipt date
