@@ -68,3 +68,4 @@ The Caseflow script is to be run on a command prompt that has access to the Case
 
 - A case ID that has matching document dates (NOD+SOC+Form9, NOD+SOC+Form9+SSOC1 to 5), is added to the "Case Ready" output file
 - A case ID that does not have matching document dates (NOD+SOC+Form9, NOD+SOC+Form9+SSOC1 to 5), is added to the "Case Not Ready" output file
+- When a case that does not have matching document dates is found, the "Case Not Ready" record for that has a reason (NOD, SOC, Form 9, SSOC 1-5 date mismatches)
