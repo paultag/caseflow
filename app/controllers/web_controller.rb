@@ -50,6 +50,10 @@ class WebController < ApplicationController
       fields.delete('9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN')
     end
 
+    if fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE'] == 'yes'
+      fields.delete('10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN')
+    end
+
     # Generate Form 8 PDF
     form_8 = FormVa8.new(fields)
     form_8.process!
