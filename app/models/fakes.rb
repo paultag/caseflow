@@ -3,7 +3,7 @@ module Caseflow
     class Case
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :efolder_appellant_id, :appeal_type, :vso_full, :regional_office_full,
-        :folder, :correspondent, :save_successful)
+        :folder, :correspondent, :save_successful, :issue_breakdown, :bfso)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
@@ -16,11 +16,12 @@ module Caseflow
 
       # TODO: when we have Ruby 2.1, use required keyword arguments.
       def initialize(bfkey: nil, bfcorlid: nil, bfac: nil, bfmpro: nil,
-                     bfpdnum: nil, bfregoff: nil, bfdnod: nil, bfd19: nil,
-                     bfdsoc: nil, efolder_nod: nil, efolder_form9: nil,
-                     efolder_soc: nil, efolder_appellant_id: nil,
-                     appeal_type: nil, vso_full: nil, regional_office_full: nil,
-                     folder: nil, correspondent: nil, save_successful: true)
+        bfpdnum: nil, bfregoff: nil, bfdnod: nil, bfd19: nil,
+        bfdsoc: nil, efolder_nod: nil, efolder_form9: nil,
+        efolder_soc: nil, efolder_appellant_id: nil,
+        appeal_type: nil, vso_full: nil, regional_office_full: nil,
+        folder: nil, correspondent: nil, save_successful: true,
+        issue_breakdown: [], bfso: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -43,6 +44,9 @@ module Caseflow
         @folder = folder
         @correspondent = correspondent
         @save_successful = save_successful
+        @issue_breakdown = issue_breakdown
+        @regional_office_full = regional_office_full
+        @bfso = bfso
       end
 
       _DATE_FIELDS = [
@@ -71,21 +75,12 @@ module Caseflow
       def bfms=(value)
       end
 
-      # TODO: allow customizing these fields
-      def issue_breakdown
-        []
-      end
-
       def hearing_requested?
         true
       end
 
       def ssoc_required?
         false
-      end
-
-      def bfso
-        nil
       end
 
       def save
@@ -204,6 +199,39 @@ module Caseflow
         correspondent: Correspondent.new(
           'Not Authorized', 'Self', 'Not Authorized', 'Not', '', 'Authorized',
         ),
+      ),
+      'full-form8' => Case.new(
+        bfkey: 'full-form8',
+        bfcorlid: '444444446C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'DSUSER',
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-01'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-01'),
+        efolder_appellant_id: '444444444',
+        appeal_type: 'Post Remand',
+        vso_full: 'Thorough American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
+        correspondent: Correspondent.new(
+          'Full Form8', 'Self', 'Full Form8', 'Full', 'Numberinmylastname', 'Form8',
+        ),
+        issue_breakdown: [
+          { 'field_type' => 'service connection', 'full_desc' => 'broken ankle'},
+          { 'field_type' => 'service connection', 'full_desc' => 'broken toe'},
+          { 'field_type' => 'service connection', 'full_desc' => 'broken toe nail'},
+          { 'field_type' => 'increased rating', 'iss_desc' => 'popped ankle'},
+          { 'field_type' => 'increased rating', 'iss_desc' => 'twisted toe'},
+          { 'field_type' => 'increased rating', 'iss_desc' => 'blackened toe nail'},
+          { 'field_type' => 'other', 'iss_desc' => 'enlarged ankle'},
+          { 'field_type' => 'other', 'iss_desc' => 'gross toe nail'}
+        ],
+        bfso: 'T'
       )
     }
   end
