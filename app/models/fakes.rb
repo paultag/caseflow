@@ -46,7 +46,6 @@ module Caseflow
         @save_successful = save_successful
         @issue_breakdown = issue_breakdown
         @regional_office_full = regional_office_full
-        @bfregoff = bfregoff
         @bfso = bfso
       end
 
