@@ -3,7 +3,7 @@ module Caseflow
     class Case
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :efolder_appellant_id, :appeal_type, :vso_full, :regional_office_full,
-        :folder, :correspondent, :save_successful, :issue_breakdown)
+        :folder, :correspondent, :save_successful, :issue_breakdown, :bfso)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
@@ -21,7 +21,7 @@ module Caseflow
                      efolder_soc: nil, efolder_appellant_id: nil,
                      appeal_type: nil, vso_full: nil, regional_office_full: nil,
                      folder: nil, correspondent: nil, save_successful: true,
-                     issue_breakdown: [])
+                     issue_breakdown: [], bfso: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -47,6 +47,7 @@ module Caseflow
         @issue_breakdown = issue_breakdown
         @regional_office_full = regional_office_full
         @bfregoff = bfregoff
+        @bfso = bfso
       end
 
       _DATE_FIELDS = [
@@ -81,10 +82,6 @@ module Caseflow
 
       def ssoc_required?
         false
-      end
-
-      def bfso
-        nil
       end
 
       def save
@@ -234,7 +231,8 @@ module Caseflow
           { 'field_type' => 'increased rating', 'iss_desc' => 'blackened toe nail'},
           { 'field_type' => 'other', 'iss_desc' => 'enlarged ankle'},
           { 'field_type' => 'other', 'iss_desc' => 'gross toe nail'}
-        ]
+        ],
+        bfso: 'T'
       )
     }
   end
