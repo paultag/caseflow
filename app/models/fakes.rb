@@ -3,7 +3,7 @@ module Caseflow
     class Case
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :efolder_appellant_id, :appeal_type, :vso_full, :regional_office_full,
-        :folder, :correspondent, :save_successful)
+        :folder, :correspondent, :save_successful, :issue_breakdown)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
@@ -44,6 +44,8 @@ module Caseflow
         @correspondent = correspondent
         @save_successful = save_successful
         @issue_breakdown = issue_breakdown
+        @regional_office_full = regional_office_full
+        @bfregoff = bfregoff
       end
 
       _DATE_FIELDS = [
@@ -74,10 +76,6 @@ module Caseflow
 
       def hearing_requested?
         true
-      end
-
-      def issue_breakdown
-        @issue_breakdown
       end
 
       def ssoc_required?
