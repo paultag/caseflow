@@ -16,22 +16,23 @@ module Caseflow
 
       # TODO: when we have Ruby 2.1, use required keyword arguments.
       def initialize(bfkey: nil, bfcorlid: nil, bfac: nil, bfmpro: nil,
-        bfpdnum: nil, bfregoff: nil, bfdnod: nil, bfd19: nil,
-        bfdsoc: nil, efolder_nod: nil, efolder_form9: nil,
-        efolder_soc: nil, efolder_appellant_id: nil,
-        appeal_type: nil, vso_full: nil, regional_office_full: nil,
-        folder: nil, correspondent: nil, save_successful: true,
-        issue_breakdown: [], bfso: nil)
+                     bfpdnum: nil, bfregoff: nil, bfdnod: nil, bfd19: nil,
+                     bfdsoc: nil, bf41stat: nil, efolder_nod: nil,
+                     efolder_form9: nil, efolder_soc: nil,
+                     efolder_appellant_id: nil, appeal_type: nil, vso_full: nil,
+                     regional_office_full: nil, folder: nil, correspondent: nil,
+                     save_successful: true, issue_breakdown: [], bfso: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
         @bfmpro = bfmpro
         @bfpdnum = bfpdnum
+        @bfregoff = bfregoff
 
         @bfdnod = bfdnod
         @bfd19 = bfd19
         @bfdsoc = bfdsoc
-        @bfregoff = bfregoff
+        @bf41stat = bf41stat
 
         @efolder_nod = efolder_nod
         @efolder_form9 = efolder_form9
@@ -249,6 +250,29 @@ module Caseflow
         correspondent: Correspondent.new(
           'Not Ready', 'Self', 'Not Ready', 'Not', '', 'Ready',
         )
+      ),
+      'already-certified' => Case.new(
+        bfkey: 'already-certified',
+        bfcorlid: '111111111C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'DSUSER',
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-01'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-01'),
+        bf41stat: Date.parse('2015-09-02'),
+        efolder_appellant_id: '22222222',
+        appeal_type: 'Post Remand',
+        vso_full: 'Disabled American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
+        correspondent: Correspondent.new(
+          'Already Certified', 'Self', 'Already Certified', 'Already', '', 'Certified',
+        ),
       )
     }
   end
