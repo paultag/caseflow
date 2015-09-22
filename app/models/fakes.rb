@@ -232,6 +232,23 @@ module Caseflow
           { 'field_type' => 'other', 'iss_desc' => 'gross toe nail'}
         ],
         bfso: 'T'
+      ),
+      'not-ready' => Case.new(
+        bfkey: 'not-ready',
+        bfcorlid: '123456789C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'DSUSER',
+        # No form dates are set
+        efolder_appellant_id: '123456789',
+        appeal_type: 'Post Remand',
+        vso_full: 'Disabled American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
+        correspondent: Correspondent.new(
+          'Not Ready', 'Self', 'Not Ready', 'Not', '', 'Ready',
+        )
       )
     }
   end
