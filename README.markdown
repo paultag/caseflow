@@ -116,3 +116,15 @@ script:
 ```
 ./bin/rails runner script/identify_cases.rb
 ```
+
+## Quick Testing
+
+Setting up data both in VACOLS and VBMS can be time consuming. There's an easy way to provide mock data so that different scenarios can be tested quickly.
+
+To enable this, add this environment variable:
+
+```
+CASEFLOW_TEST=true
+```
+
+You can add new fake data in `app/models/fakes.rb`.

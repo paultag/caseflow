@@ -1,0 +1,33 @@
+<%#
+    Partial requires two arguments:
+    - vacols_field: The date of a document as it appears in VACOLS
+    - vbms_field: The date of a document as it appears in VBMS
+%>
+<% if vacols_field || vbms_field %>
+    <tr>
+      <td>
+        <% if vbms_field == vacols_field %>
+            <i class="fa fa-check success"></i>
+        <% else %>
+            <i class="fa fa-close error"></i>
+        <% end %>
+      </td>
+      <td>
+        <abbr title="<%= full_field_name %>"><%= field_name %></abbr>
+      </td>
+      <td>
+        <% if vacols_field %>
+            <%= vacols_field %>
+        <% else %>
+            <em>Not found</em>
+        <% end %>
+      </td>
+      <td>
+        <% if vbms_field %>
+            <%= vbms_field %>
+        <% else %>
+            <em>Not found</em>
+        <% end %>
+      </td>
+    </tr>
+<% end %>

@@ -1,0 +1,35 @@
+<%#
+    A 3 row checkbox column for Form 8 fields (designed for question 13)
+
+   Partial requires the following arguments:
+    - label1_text: Label for the first checkbox
+    - input1_name: Name attribute for the first checkbox
+    - label2_text: Label for the second checkbox
+    - input2_name: Name attribute for the second checkbox
+    - label3_text: Label for the third checkbox
+    - input3_name: Name attribute for the third checkbox
+
+%>
+
+<div class="col col-md-2">
+  <div class="input-group">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="<%= input1_name %>"></input>
+        <%= label1_text %>
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="<%= input2_name %>"></input>
+        <%= label2_text %>
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="<%= input3_name %>"></input>
+        <%= label3_text %>
+      </label>
+    </div>
+  </div>
+</div>

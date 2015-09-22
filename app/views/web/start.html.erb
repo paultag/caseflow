@@ -1,0 +1,85 @@
+<%#
+    Page requires the following local variables to be defined:
+    - @kase: A Case object
+%>
+
+<div id="certifications-start">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="alert alert-danger clearfix" role="alert">
+        Some of the files listed in VACOLS could not be found in VBMS.<br />
+        Use the instructione below to correct these errors.
+      </div>
+    </div>
+  </div>
+
+  <div class="document-table row section">
+    <div class="col-sm-6 col-sm-offset-3">
+      <table class="table table-hover">
+        <caption class="hidden">This table compares received dates for forms stored in VACOLS and VBMS.</caption>
+        <tr>
+          <th></th>
+          <th>Document</th>
+          <th>VACOLS</th>
+          <th>VBMS</th>
+        </tr>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Notice of Disagreement', field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Statement of Case', field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 1', field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 2', field_name: 'SSOC 2', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc2_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 3', field_name: 'SSOC 3', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc3_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 4', field_name: 'SSOC 4', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc4_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Supplement Statement of Case 5', field_name: 'SSOC 5', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc5_date} %>
+        <%= render partial: 'table_row', locals: {full_field_name: 'Form 9', field_name: 'Form 9', vacols_field: @kase.bfd19_date, vbms_field: @kase.efolder_form9_date} %>
+
+      </table>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <p>
+          <strong>Check to see if the missing file is in the appellant's eFolder:</strong>
+          <ol>
+            <li><a href="https://www.vbms.vba.va.gov/vbmsp2/">Open and sign into VBMS.</a></li>
+            <li>
+              Search for this eFolder using the following ID:
+              <code><%= @kase.efolder_appellant_id %></code>
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/find-case.png")} %>
+            </li>
+            <li>Looking for the missing file</li>
+          </ol>
+        </p>
+        <p>
+          <strong>If you find the missing file:</strong>
+          <ol>
+            <li>
+              Open the file in VBMS.
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/open-file.png")} %>
+            </li>
+            <li>
+              Open the document properties
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/document-properties.png")} %>
+            </li>
+            <li>
+              Change the file's receipt date to match the one listed in the VACOLS column above.
+              <%= render partial: 'help_text', locals: {text: image_tag("help-text/receipt-date.png")} %>
+            </li>
+            <li>
+              After you've changed the receipt date
+              <a href="#" onclick="location.reload()">refresh</a> this page.
+            </li>
+          </ol>
+        </p>
+        <p>
+          <strong>If you can't find the missing file in VBMS</strong> click the button below to report this as un-certifiable.
+
+          <%= form_tag(action: 'error', method: 'post') do %>
+            <input type="submit" value="This case cannot be certified" class="btn btn-primary"/>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

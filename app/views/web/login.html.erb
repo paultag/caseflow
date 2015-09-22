@@ -1,0 +1,54 @@
+<%= form_tag(action: 'login_submit', method: 'post') do %>
+
+  <h1>Please login with your VACOLS username and password.</h1>
+
+  <hr/>
+
+  <% if @error_message %>
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="alert alert-danger">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" role="alert"></span>
+          <%= @error_message %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% username_input_id = 'username_input_id' %>
+  <div class="row">
+    <div class="col col-md-12">
+      <label for="<%= username_input_id %>">Username</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <input name="username" type="text" id="<%= username_input_id %>"/>
+    </div>
+  </div>
+
+  <% password_input_id = 'password_input_id' %>
+  <div class="row">
+    <div class="col col-md-12">
+      <label for="<%= password_input_id %>">Password</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <input name="password" type="password" id="<%= password_input_id %>"/>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div class="input-group">
+        <input type="submit" value="Login" class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+
+<% end %>
