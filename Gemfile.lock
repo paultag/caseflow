@@ -109,7 +109,7 @@ GEM
     slop (3.6.0)
     spoon (0.0.4)
       ffi
-    spreadsheet (1.0.4)
+    spreadsheet (1.0.6)
       ruby-ole (>= 1.0)
     sprockets (2.12.4)
       hike (~> 1.2)
