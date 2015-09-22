@@ -13,6 +13,9 @@ class WebController < ApplicationController
   # Check authorization
   before_action 'authorization_check', except: sessionless_actions
 
+  # Check that the case is ready for certification.
+  before_action 'case_ready_check', except: sessionless_actions
+
   def index
     raise ActionController::RoutingError.new('Not Found')
   end
@@ -148,4 +151,9 @@ class WebController < ApplicationController
     end
   end
 
+  def case_ready_check
+    if !@kase.bfdnod || !@kase.bfd19 || !@kase.bfdsoc || @kase.bf41stat
+      return render 'not_ready', layout: 'basic', status: 403
+    end
+  end
 end

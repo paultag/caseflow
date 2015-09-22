@@ -2,8 +2,9 @@ module Caseflow
   module Fakes
     class Case
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
-        :efolder_appellant_id, :appeal_type, :vso_full, :regional_office_full,
-        :folder, :correspondent, :save_successful, :issue_breakdown, :bfso)
+        :bfdnod, :bfd19, :bfdsoc, :efolder_appellant_id, :appeal_type,
+        :vso_full, :regional_office_full, :folder, :correspondent,
+        :save_successful, :issue_breakdown, :bfso)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
