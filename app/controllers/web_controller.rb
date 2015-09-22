@@ -40,9 +40,40 @@ class WebController < ApplicationController
     fields = @kase.initial_fields
     fields.merge!(params)
 
+    # Prepare fields for PDF generation
     certification_date = Time.now.to_s(:va_date)
     fields['17C_DATE'] = certification_date
 
+    if fields['8B_POWER_OF_ATTORNEY'] == '8B_POWER_OF_ATTORNEY'
+      fields['8B_POWER_OF_ATTORNEY'] = true
+      fields.delete('8B_REMARKS')
+    elsif fields['8B_POWER_OF_ATTORNEY'] == '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'
+      fields['8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE'] = true
+    end
+
+    if fields['9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646'] == 'yes'
+      fields.delete('9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN')
+    end
+
+    if fields['10B_IF_HELD_IS_TRANSCRIPT_IN_FILE'] == 'yes'
+      fields.delete('10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN')
+    end
+
+    if fields['11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE'] == 'no'
+      fields.delete('11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED')
+    end
+
+    fields.each do |key, val|
+      if key =~ /^13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_/ && val == 'on'
+        fields[key] = true
+      end
+    end
+
+    if fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER'] != 'on'
+      fields.delete('13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS')
+    end
+
+    # Generate Form 8 PDF
     form_8 = FormVa8.new(fields)
     form_8.process!
 

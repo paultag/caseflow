@@ -77,7 +77,7 @@
         <%= render partial: 'form8_yes_no_radio', locals: {
                 question: 'HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS',
                 question_num: '11B',
-                input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_YES',
+                input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
                 div_id: '11b',
                 div_class: 'hidden'
             } %>
@@ -122,6 +122,16 @@
                   label3_text: 'TISSUE BLOCKS',
                   input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS',
               } %>
+
+          <%= render partial: 'form8_checkbox_column', locals: {
+                  label1_text: 'DEP. ED. F (Ch. 35)',
+                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DEP_ED_F',
+                  label2_text: 'INSURANCE F',
+                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INSURANCE_F',
+                  label3_text: 'DENTAL F',
+                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DENTAL_F',
+              } %>
+
           <%= render partial: 'form8_text', locals: {
                   question: 'Specify Other',
                   question_num: '',
