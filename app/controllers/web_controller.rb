@@ -69,6 +69,10 @@ class WebController < ApplicationController
       end
     end
 
+    if fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER'] != 'on'
+      fields.delete('13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS')
+    end
+
     # Generate Form 8 PDF
     form_8 = FormVa8.new(fields)
     form_8.process!
