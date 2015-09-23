@@ -239,7 +239,8 @@ class Case < ActiveRecord::Base
         'RO73' => ['Manchester', 'NH'],
         'RO37' => ['Fargo', 'ND'],
         'RO05' => ['White River Junction', 'VT'],
-        'RO42' => ['Cheyenne', 'WY']
+        'RO42' => ['Cheyenne', 'WY'],
+        'DSUSER' => ['Digital Service']
     }
     hash[bfregoff]
   end
