@@ -274,7 +274,29 @@ module Caseflow
         correspondent: Correspondent.new(
           'Already Certified', 'Self', 'Already Certified', 'Already', '', 'Certified',
         ),
-      )
+      ),
+      'paper' => Case.new(
+        bfkey: 'paper',
+        bfcorlid: '333333333C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'DSUSER',
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-01'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-01'),
+        efolder_appellant_id: '333333333',
+        appeal_type: 'Post Remand',
+        vso_full: 'Disabled American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('Paper'),
+        correspondent: Correspondent.new(
+          'Paper', 'Self', 'Paper', 'Paper', '', 'Paper',
+        ),
+      ),
     }
   end
 end
