@@ -25,7 +25,6 @@ gem 'uglifier', '>= 1.3.0'
 # for the idenitfy_cases script
 gem 'spreadsheet', '~> 1.0'
 gem 'parallel', '~> 1.6.1'
-gem 'httpclient', '~> 2.6.0.1'
 
 # for vbms_connect
 gem 'httpi'

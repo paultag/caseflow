@@ -3,14 +3,11 @@
 require 'csv'
 require 'json'
 
-require 'httpclient'
-
 require 'parallel'
 
 require 'spreadsheet'
 
 
-HOST = "***REMOVED***"
 RELEVANT_FIELDS = [
   ["bfdnod", "efolder_nod", "NOD"],
   ["bfd19", "efolder_form9", "Form 9"],
@@ -39,9 +36,8 @@ def main(argv)
 
   case_ids = extract_case_ids(input_file)
   puts "Extracted #{case_ids.length} records from the input file."
-  h = HTTPClient.new()
   Parallel.each(case_ids, :in_threads => 8) do |case_id|
-    status = check_case_status(h, case_id)
+    status = check_case_status(case_id)
     if status.nil?
       good << case_id
     else
@@ -91,14 +87,9 @@ def check_case_status(h, case_id)
   if c.nil?
     raise "No cases found where(bfroflid: #{veteran_id}, bfd19: #{form_9_date})"
   end
-  response = h.get("#{HOST}caseflow/api/certifications/start/#{c.bfkey}")
-  if response.code != 200
-    raise "HTTP Error: #{response.code}"
-  end
-  data = JSON.parse(response.body)["info"]
 
   bad_fields = RELEVANT_FIELDS.select do |vacols_field, vbms_field|
-    data[vacols_field] != data[vbms_field]
+    c.send(vacols_field) != c.send(vbms_field)
   end
 
   if bad_fields.empty?
