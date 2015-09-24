@@ -1,12 +1,15 @@
 <div id="certifications-error">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <% if @kase.bf41stat %>
+      <% if @reason == :already_certified %>
         <h1>Already certified!</h1>
         <p>This case has already been certified!</p>
-      <% else %>
+      <% elsif @reason == :not_ready %>
         <h1>Not ready!</h1>
         <p>This case is not ready ready for certification!</p>
+      <% elsif @reason == :paper %>
+        <h1>Paper cases unsupported!</h1>
+        <p>Caseflow cannot be used for Paper or Virtual VA cases</p>
       <% end %>
     </div>
   </div>
