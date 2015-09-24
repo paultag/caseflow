@@ -158,7 +158,7 @@ class WebController < ApplicationController
     elsif @kase.bf41stat
       @reason = :already_certified
       return render 'not_ready', layout: 'basic', status: 403
-    elsif @kase.folder.file_type == 'Paper' || @kase.folder_type == 'VVA'
+    elsif @kase.folder.file_type == 'Paper' || @kase.folder.file_type == 'VVA'
       @reason = :paper
       return render 'not_ready', layout: 'basic', status: 403
     end
