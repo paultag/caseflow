@@ -5,18 +5,16 @@ require 'json'
 
 require 'parallel'
 
-require 'spreadsheet'
-
 
 RELEVANT_FIELDS = [
-  ["bfdnod", "efolder_nod", "NOD"],
-  ["bfd19", "efolder_form9", "Form 9"],
-  ["bfdsoc", "efolder_soc", "SOC"],
-  ["bfssoc1", "efolder_ssoc1", "SSOC1"],
-  ["bfssoc2", "efolder_ssoc2", "SSOC2"],
-  ["bfssoc3", "efolder_ssoc3", "SSOC3"],
-  ["bfssoc4", "efolder_ssoc4", "SSOC4"],
-  ["bfssoc5", "efolder_ssoc5", "SSOC5"],
+  ["bfdnod_date", "efolder_nod_date", "NOD"],
+  ["bfd19_date", "efolder_form9_date", "Form 9"],
+  ["bfdsoc_date", "efolder_soc_date", "SOC"],
+  ["bfssoc1_date", "efolder_ssoc1_date", "SSOC1"],
+  ["bfssoc2_date", "efolder_ssoc2_date", "SSOC2"],
+  ["bfssoc3_date", "efolder_ssoc3_date", "SSOC3"],
+  ["bfssoc4_date", "efolder_ssoc4_date", "SSOC4"],
+  ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
 ]
 
 def main(argv)
@@ -47,14 +45,14 @@ def main(argv)
   puts "There were #{good.length} good records and #{bad.length} bad records."
 
   good_sheet = create_spreadsheet(good) do |case_id|
-    [case_id]
+    [case_id[0]]
   end
   bad_sheet = create_spreadsheet(bad) do |case_id, fields|
-    [case_id, "Unmatched fields: #{fields.join(', ')}"]
+    [case_id[0], "Unmatched fields: #{fields.join(', ')}"]
   end
 
-  good_sheet.write(good_output_file)
-  bad_sheet.write(bad_output_file)
+  File.write(good_output_file, good_sheet)
+  File.write(bad_output_file, bad_sheet)
 end
 
 def extract_case_ids(input_file_name)
@@ -75,17 +73,17 @@ def extract_case_ids(input_file_name)
   case_ids = []
   CSV.open(input_file_name) do |csv|
     csv.drop(1).each do |row|
-      case_ids << [row[0], Date.strptime(row[6], '%m/%d/%y')]
+      case_ids << [row[0], Date.strptime(row[6], '%m/%d/%Y')]
     end
   end
   return case_ids
 end
 
-def check_case_status(h, case_id)
+def check_case_status(case_id)
   veteran_id, form_9_date = case_id
   c = Case.where(bfcorlid: veteran_id, bfd19: form_9_date).first
   if c.nil?
-    raise "No cases found where(bfroflid: #{veteran_id}, bfd19: #{form_9_date})"
+    raise "No cases found where(bfcorlid: #{veteran_id}, bfd19: #{form_9_date})"
   end
 
   bad_fields = RELEVANT_FIELDS.select do |vacols_field, vbms_field|
@@ -100,15 +98,11 @@ def check_case_status(h, case_id)
 end
 
 def create_spreadsheet(rows)
-  workbook = Spreadsheet::Workbook.new()
-  sheet = workbook.create_worksheet()
-  rows.each_with_index do |row, idx|
-    columns = yield row
-    columns.each_with_index do |col, col_num|
-      sheet[idx, col_num] = col
+  CSV.generate do |csv|
+    rows.each do |row|
+      csv << (yield row)
     end
   end
-  return workbook
 end
 
 if __FILE__ == File.expand_path($0)
