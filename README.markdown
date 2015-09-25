@@ -107,6 +107,16 @@ Then to launch the application, run:
 > rails s
 ```
 
+## Running the case identification script
+
+In addition to the web interface, Caseflow has a script for running batch checks
+of cases to see if they have matching dates in VACOLS and VBMS. To run this
+script:
+
+```
+./bin/rails runner script/identify_cases.rb
+```
+
 ## Quick Testing
 
 Setting up data both in VACOLS and VBMS can be time consuming. There's an easy way to provide mock data so that different scenarios can be tested quickly.
