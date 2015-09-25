@@ -115,8 +115,8 @@ class Case < ActiveRecord::Base
 
   (1..5).each do |i|
     define_method("efolder_ssoc#{i}_date") do
-      if value = self.send("bfssoc#{i}")
-        self.efolder_case.send(:get_ssoc, self.bfdsoc).try(:received_at).try(:to_s, :va_date)
+      if vacols_value = self.send("bfssoc#{i}")
+        self.efolder_case.send(:get_ssoc, vacols_value).try(:received_at).try(:to_s, :va_date)
       end
     end
   end
@@ -124,7 +124,7 @@ class Case < ActiveRecord::Base
   def required_fields
     Caseflow.required_fields_for_case(self)
   end
-  
+
   def ready_to_certify?
     Caseflow.ready_to_certify?(self)
   end
