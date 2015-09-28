@@ -76,13 +76,11 @@ class WebController < ApplicationController
       fields.delete('13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS')
     end
 
-    # Send an error if required fields aren't received
-    # TODO Use this in the future ... going with something quicker given the temporary nature of the application (problem is fields don't repopulate)
-    #      Going with the bad practice of relying on the front-end only for this validation (But again, temporary application)
-    # if fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL'].empty? || fields['17B_TITLE'].empty?
-    #   @error_message = 'Please provide an answer questions for 17A and 17B'
-    #   return redirect_to action: :questions, params: fields
-    # end
+    # This check will never be reached if front-end validation works (not ideal, because it loses all the values in the form)
+    if fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL'].empty? || fields['17B_TITLE'].empty?
+      # @error_message = 'Please provide an answer questions for 17A and 17B'
+      return redirect_to action: :questions, params: fields
+    end
 
     # Generate Form 8 PDF
     form_8 = FormVa8.new(fields)
