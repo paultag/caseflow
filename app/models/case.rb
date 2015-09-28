@@ -303,7 +303,7 @@ class Case < ActiveRecord::Base
           ( ISSLEV1 = LEV1_CODE OR LEV1_CODE = '##' OR LEV1_CODE IS NULL ) AND
           ( ISSLEV2 = LEV2_CODE OR LEV2_CODE = '##' OR LEV2_CODE IS NULL ) AND
           ( ISSLEV3 = LEV3_CODE OR LEV3_CODE = '##' OR LEV3_CODE IS NULL ) AND
-          ( ISSUES.ISSKEY = #{self.bfkey} AND ISSUES.ISSDC IS NULL )
+          ( ISSUES.ISSKEY = '#{self.bfkey}' AND ISSUES.ISSDC IS NULL )
     SQL
 
     issues.each do |issue|
