@@ -18,6 +18,8 @@ gem 'kramdown'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Needed for asset compilation
+gem 'therubyrhino'
 gem 'uglifier', '>= 1.3.0'
 
 # for the idenitfy_cases script
