@@ -321,6 +321,9 @@ class Case < ActiveRecord::Base
       if issue['isslev3'] && issue['isslev3'].length == 4
         issues[idx]['full_desc'] = diagnostic_lookup(issue['isslev3'])
       end
+      if !issue['full_desc'] && issue['isslev1']
+        issue['full_desc'] = diagnostic_lookup(issue['isslev1'])
+      end
     end
 
     @issue_breakdown = issues
