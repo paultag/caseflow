@@ -10,6 +10,10 @@
     });
 })();
 
+String.prototype.isEmpty = function() {
+    return (this.length === 0 || !this.trim());
+};
+
 // --- START: JS for questions.html.erb ---
 
 /**
@@ -59,6 +63,24 @@ var display_13_other = function () {
     }
 }
 
+function requiredFieldsComplete() {
+    var a17Val = $('#17A_SIGNATURE_OF_CERTIFYING_OFFICIAL_input_id').val();
+    var b17Val = $('#17B_TITLE_input_id').val();
+
+    if(a17Val.isEmpty() || b17Val.isEmpty() ) {
+        return false;
+    }
+
+    return true;
+}
+
+var questionsSubmit = function(event) {
+    if(!requiredFieldsComplete()) {
+        alert("Please fill in 17A and 17B");
+        return event.preventDefault();
+    }
+}
+
 // -- Add listeners --
 
 $(function () {
@@ -67,6 +89,7 @@ $(function () {
     $("input[name='10B_IF_HELD_IS_TRANSCRIPT_IN_FILE']").change(display_10c);
     $("input[name='11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE']").change(display_11b);
     $("input[name='13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']").change(display_13_other);
+    $("#question-form").submit(questionsSubmit);
 });
 
 // --- END: JS for questions.html.erb ---
