@@ -173,7 +173,7 @@ class Case < ActiveRecord::Base
         'Z' => ['National Veterans Legal Services Program', 'NVLSP'],
         '1' => ['National Veterans Organization of America', 'NVOA']
     }
-    hash.default(hash['O'])
+    hash.default = hash['O']
     hash[bfso]
   end
 
