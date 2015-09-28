@@ -1,4 +1,12 @@
 module Caseflow
+  def self.format_issues(kase, issue_type)
+    issues = kase.issue_breakdown.select { |i| i['field_type'] == issue_type }
+    formatted_issues = issues.map do |i|
+      [i['iss_desc'], i['full_desc']].reject(&:nil?).reject(&:empty?).join(" - ")
+    end
+    formatted_issues.join('; ')
+  end
+
   def self.initial_fields_for_case(kase)
     fields = {
       '1A_NAME_OF_APPELLANT' => kase.correspondent.appellant_name,
@@ -6,9 +14,9 @@ module Caseflow
       '2_FILE_NO' => kase.bfcorlid,
       '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN' => kase.correspondent.full_name,
       '4_INSURANCE_FILE_NO_OR_LOAN_NO' => kase.bfpdnum,
-      '5A_SERVICE_CONNECTION_FOR' => kase.issue_breakdown.select {|i| i['field_type'] == 'service connection' }.map { |i| i['full_desc'] }.join(':'),
-      '6A_INCREASED_RATING_FOR' => kase.issue_breakdown.select {|i| i['field_type'] == 'increased rating' }.map { |i| i['iss_desc'] }.join(':'),
-      '7A_OTHER' => kase.issue_breakdown.select {|i| i['field_type'] == 'other' }.map { |i| i['iss_desc'] }.join(':'),
+      '5A_SERVICE_CONNECTION_FOR' => Caseflow.format_issues(kase, 'service connection'),
+      '6A_INCREASED_RATING_FOR' => Caseflow.format_issues(kase, 'increased rating'),
+      '7A_OTHER' => Caseflow.format_issues(kase, 'other'),
       '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY' => kase.vso_full,
       '8B_POWER_OF_ATTORNEY' => '',
       '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646_YES' => '',
@@ -115,8 +123,8 @@ class Case < ActiveRecord::Base
 
   (1..5).each do |i|
     define_method("efolder_ssoc#{i}_date") do
-      if value = self.send("bfssoc#{i}")
-        self.efolder_case.send(:get_ssoc, self.bfdsoc).try(:received_at).try(:to_s, :va_date)
+      if vacols_value = self.send("bfssoc#{i}")
+        self.efolder_case.send(:get_ssoc, vacols_value).try(:received_at).try(:to_s, :va_date)
       end
     end
   end
@@ -124,7 +132,7 @@ class Case < ActiveRecord::Base
   def required_fields
     Caseflow.required_fields_for_case(self)
   end
-  
+
   def ready_to_certify?
     Caseflow.ready_to_certify?(self)
   end
@@ -173,7 +181,7 @@ class Case < ActiveRecord::Base
         'Z' => ['National Veterans Legal Services Program', 'NVLSP'],
         '1' => ['National Veterans Organization of America', 'NVOA']
     }
-    hash.default(hash['O'])
+    hash.default = hash['O']
     hash[bfso]
   end
 
@@ -298,20 +306,20 @@ class Case < ActiveRecord::Base
           ( ISSUES.ISSKEY = '#{self.bfkey}' AND ISSUES.ISSDC IS NULL )
     SQL
 
-    issues.each.with_index do |issue, idx|
+    issues.each do |issue|
       if issue['issprog'] == '02' && issue['isscode'] == '15'
-        issues[idx]['field_type'] = 'service connection'
+        issue['field_type'] = 'service connection'
       elsif issue['issprog'] == '02' && issue['isscode'] == '12'
-        issues[idx]['field_type'] = 'increased rating'
+        issue['field_type'] = 'increased rating'
       else
-        issues[idx]['field_type'] = 'other'
+        issue['field_type'] = 'other'
       end
 
       if issue['isslev2'] && issue['isslev2'].length == 4
-        issues[idx]['full_desc'] = diagnostic_lookup(issue['isslev2'])
+        issue['full_desc'] = diagnostic_lookup(issue['isslev2'])
       end
       if issue['isslev3'] && issue['isslev3'].length == 4
-        issues[idx]['full_desc'] = diagnostic_lookup(issue['isslev3'])
+        issue['full_desc'] = diagnostic_lookup(issue['isslev3'])
       end
     end
 

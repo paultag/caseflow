@@ -155,9 +155,6 @@ class WebController < ApplicationController
     if !@kase.bfdnod || !@kase.bfd19 || !@kase.bfdsoc
       @reason = :not_ready
       return render 'not_ready', layout: 'basic', status: 403
-    elsif @kase.bf41stat
-      @reason = :already_certified
-      return render 'not_ready', layout: 'basic', status: 403
     elsif @kase.folder.file_type == 'Paper' || @kase.folder.file_type == 'VVA'
       @reason = :paper
       return render 'not_ready', layout: 'basic', status: 403

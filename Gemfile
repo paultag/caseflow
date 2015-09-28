@@ -16,11 +16,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'pdf-forms', '0.6.0'
 gem 'kramdown'
 
-gem 'bcrypt', '~> 3.1.7'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Needed for asset compilation
 gem 'therubyrhino'
 gem 'uglifier', '>= 1.3.0'
+
+# for the idenitfy_cases script
+gem 'parallel', '~> 1.6.1'
 
 # for vbms_connect
 gem 'httpi'
