@@ -277,7 +277,7 @@ class Case < ActiveRecord::Base
   def issue_breakdown
     return @issue_breakdown if @issue_breakdown
 
-    issues = self.class.connection.select_all(<<-SQL).to_hash
+    issues = self.class.connection.select_all(<<-SQL, nil, [self.bfkey]).to_hash
     SELECT ISSUES.ISSSEQ,
       ISSUES.ISSPROG,
       ISSUES.ISSCODE,
@@ -295,23 +295,23 @@ class Case < ActiveRecord::Base
           ( ISSLEV1 = LEV1_CODE OR LEV1_CODE = '##' OR LEV1_CODE IS NULL ) AND
           ( ISSLEV2 = LEV2_CODE OR LEV2_CODE = '##' OR LEV2_CODE IS NULL ) AND
           ( ISSLEV3 = LEV3_CODE OR LEV3_CODE = '##' OR LEV3_CODE IS NULL ) AND
-          ( ISSUES.ISSKEY = '#{self.bfkey}' AND ISSUES.ISSDC IS NULL )
+          ( ISSUES.ISSKEY = ? AND ISSUES.ISSDC IS NULL )
     SQL
 
-    issues.each.with_index do |issue, idx|
+    issues.each do |issue|
       if issue['issprog'] == '02' && issue['isscode'] == '15'
-        issues[idx]['field_type'] = 'service connection'
+        issue['field_type'] = 'service connection'
       elsif issue['issprog'] == '02' && issue['isscode'] == '12'
-        issues[idx]['field_type'] = 'increased rating'
+        issue['field_type'] = 'increased rating'
       else
-        issues[idx]['field_type'] = 'other'
+        issue['field_type'] = 'other'
       end
 
       if issue['isslev2'] && issue['isslev2'].length == 4
-        issues[idx]['full_desc'] = diagnostic_lookup(issue['isslev2'])
+        issue['full_desc'] = diagnostic_lookup(issue['isslev2'])
       end
       if issue['isslev3'] && issue['isslev3'].length == 4
-        issues[idx]['full_desc'] = diagnostic_lookup(issue['isslev3'])
+        issue['full_desc'] = diagnostic_lookup(issue['isslev3'])
       end
     end
 
