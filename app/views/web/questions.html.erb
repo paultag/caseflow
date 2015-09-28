@@ -132,14 +132,16 @@
                   input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DENTAL_F',
               } %>
 
-          <%= render partial: 'form8_text', locals: {
-                  question: 'Specify Other',
-                  question_num: '',
-                  input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
-                  div_id: '13',
-                  div_class: 'hidden',
-                  closing_hr: false
-              } %>
+          <div class="col col-md-12">
+            <%= render partial: 'form8_text', locals: {
+                    question: 'Specify Other',
+                    question_num: '',
+                    input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
+                    div_id: '13',
+                    div_class: 'hidden',
+                    closing_hr: false
+                } %>
+          </div>
           <div class="row">
             <div class="col col-md-12">
               <hr/> <%# Current styles wrap this into prior line w/o divs %>
