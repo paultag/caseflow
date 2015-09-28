@@ -224,14 +224,14 @@ module Caseflow
           'Full Form8', 'Self', 'Full Form8', 'Full', 'Numberinmylastname', 'Form8',
         ),
         issue_breakdown: [
-          { 'field_type' => 'service connection', 'full_desc' => 'broken ankle'},
-          { 'field_type' => 'service connection', 'full_desc' => 'broken toe'},
-          { 'field_type' => 'service connection', 'full_desc' => 'broken toe nail'},
-          { 'field_type' => 'increased rating', 'iss_desc' => 'popped ankle'},
-          { 'field_type' => 'increased rating', 'iss_desc' => 'twisted toe'},
-          { 'field_type' => 'increased rating', 'iss_desc' => 'blackened toe nail'},
-          { 'field_type' => 'other', 'iss_desc' => 'enlarged ankle'},
-          { 'field_type' => 'other', 'iss_desc' => 'gross toe nail'}
+          {'field_type' => 'service connection', 'full_desc' => 'broken ankle'},
+          {'field_type' => 'service connection', 'full_desc' => 'broken toe'},
+          {'field_type' => 'service connection', 'full_desc' => 'broken toe nail'},
+          {'field_type' => 'increased rating', 'full_desc' => 'popped ankle'},
+          {'field_type' => 'increased rating', 'full_desc' => 'twisted toe'},
+          {'field_type' => 'increased rating', 'full_desc' => 'blackened toe nail'},
+          {'field_type' => 'other', 'full_desc' => 'enlarged ankle'},
+          {'field_type' => 'other', 'full_desc' => 'gross toe nail'}
         ],
         bfso: 'T'
       ),
