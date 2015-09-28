@@ -12,11 +12,7 @@ module EFolder
       @id = id
     end
 
-    def documents(force = false)
-      if force
-        @documents = nil
-      end
-
+    def documents
       @documents ||= $vbms.send(VBMS::Requests::ListDocuments.new(self.id))
     end
 
@@ -48,7 +44,10 @@ module EFolder
     private
 
     def get_document(doc_type, timestamp)
-      documents.detect{ |document| document.doc_type == doc_type && document.received_at == timestamp.to_date }
+      documents.detect do |document|
+         document.doc_type == doc_type &&
+           document.received_at.try(:beginning_of_day) == timestamp.beginning_of_day
+      end
     end
   end
 end
