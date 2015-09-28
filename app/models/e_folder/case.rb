@@ -2,21 +2,17 @@ module EFolder
   class Case
     attr_reader :id
 
-    SOC_DOC_TYPE_ID = '95'
-    NOD_DOC_TYPE_ID = '73'
-    SSOC_DOC_TYPE_ID = '97'
-    FORM_9_DOC_TYPE_ID = '179'
-    FORM_8_DOC_TYPE_ID = '178'
+    SOC_DOC_TYPE_ID = 95
+    NOD_DOC_TYPE_ID = 73
+    SSOC_DOC_TYPE_ID = 97
+    FORM_9_DOC_TYPE_ID = 179
+    FORM_8_DOC_TYPE_ID = 178
 
     def initialize(id)
       @id = id
     end
 
-    def documents(force = false)
-      if force
-        @documents = nil
-      end
-
+    def documents
       @documents ||= $vbms.send(VBMS::Requests::ListDocuments.new(self.id))
     end
 
@@ -48,7 +44,10 @@ module EFolder
     private
 
     def get_document(doc_type, timestamp)
-      documents.detect{ |document| document.doc_type == doc_type && document.received_at == timestamp.to_date }
+      documents.detect do |document|
+         document.doc_type.try(:to_i) == doc_type &&
+           document.received_at.try(:beginning_of_day) == timestamp.beginning_of_day
+      end
     end
   end
 end
