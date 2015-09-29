@@ -66,7 +66,7 @@ class WebController < ApplicationController
       fields.delete('11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED')
     end
 
-    # Switch all question 13 checkboxes to true/false (but don't accidentally get the Other text input box)
+    # Switch all question 13 checkboxes to true if checked from 'on' value (but don't accidentally get the Other text input box)
     fields.each do |key, val|
       if key =~ /^13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_/ && key !~ /OTHER_REMARKS$/ && val
         fields[key] = true
