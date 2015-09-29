@@ -1,5 +1,5 @@
 <div id="certification-questions">
-  <%= form_tag(action: 'questions_submit', method: 'post') do %>
+  <%= form_tag({action: 'questions_submit', method: 'post'}, {id: 'question-form'}) do %>
     <div class="row">
       <div class="col col-md-12">
         <p>Please answer the following questions to finish the certification and dispatch process for this appeal.</p>
