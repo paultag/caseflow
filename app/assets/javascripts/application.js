@@ -78,7 +78,7 @@ function requiredFieldsComplete() {
 }
 
 var questionsSubmit = function(event) {
-    if(!requiredFieldsComplete()) {
+    if (!requiredFieldsComplete()) {
         alert("Please fill in 17A and 17B");
         return event.preventDefault();
     }
