@@ -1,8 +1,18 @@
 module Caseflow
+  def self.format_issue_description(desc)
+    desc.reject(&:nil?).reject(&:empty?).join(" - ")
+  end
+
   def self.format_issues(kase, issue_type)
     issues = kase.issue_breakdown.select { |i| i['field_type'] == issue_type }
     formatted_issues = issues.map do |i|
-      [i['iss_desc'], i['full_desc']].reject(&:nil?).reject(&:empty?).join(" - ")
+      if issue_type == 'other'
+        Caseflow.format_issue_description(
+          [i['iss_desc'], i['lev1_desc'], i['lev2_desc'], i['lev3_desc']]
+        )
+      else
+        Caseflow.format_issue_description([i['iss_desc'], i['full_desc']])
+      end
     end
     formatted_issues.join('; ')
   end
