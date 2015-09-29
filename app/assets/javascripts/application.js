@@ -12,7 +12,7 @@
 
 // For IE9
 if (typeof String.prototype.trim !== 'function') {
-    String.prototype.trim = function() {
+    String.prototype.trim = function () {
         return this.replace(/^\s+|\s+$/g, '');
     }
 }
@@ -70,14 +70,14 @@ function requiredFieldsComplete() {
     var a17Val = $('#17A_SIGNATURE_OF_CERTIFYING_OFFICIAL_input_id').val();
     var b17Val = $('#17B_TITLE_input_id').val();
 
-    if (!a17Val.trim() || !b17Val.trim() ) {
+    if (!a17Val.trim() || !b17Val.trim()) {
         return false;
     }
 
     return true;
 }
 
-var questionsSubmit = function(event) {
+var questionsSubmit = function (event) {
     if (!requiredFieldsComplete()) {
         alert("Please fill in 17A and 17B");
         return event.preventDefault();
