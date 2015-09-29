@@ -230,8 +230,8 @@ module Caseflow
           {'field_type' => 'increased rating', 'full_desc' => 'popped ankle'},
           {'field_type' => 'increased rating', 'full_desc' => 'twisted toe'},
           {'field_type' => 'increased rating', 'full_desc' => 'blackened toe nail'},
-          {'field_type' => 'other', 'full_desc' => 'enlarged ankle'},
-          {'field_type' => 'other', 'full_desc' => 'gross toe nail'}
+          {'field_type' => 'other', 'iss_desc' => 'enlarged ankle'},
+          {'field_type' => 'other', 'iss_desc' => 'gross toe nail'}
         ],
         bfso: 'T'
       ),
