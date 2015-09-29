@@ -77,7 +77,7 @@ class WebController < ApplicationController
     end
 
     # This check will never be reached if front-end validation works (not ideal, because it loses all the values in the form)
-    if fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL'].empty? || fields['17B_TITLE'].empty?
+    if blank?(fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL']) || blank?(fields['17B_TITLE'])
       # @error_message = 'Please provide an answer questions for 17A and 17B'
       return redirect_to action: :questions, params: fields
     end
@@ -166,4 +166,11 @@ class WebController < ApplicationController
       return render 'not_ready', layout: 'basic', status: 403
     end
   end
+
+  # -- Helper Method --
+  def blank?(str)
+    # There is a blank? method in ActiveSupport, but avoiding since it'll do more things than just add this to String
+    str =~ /^\s*$/
+  end
+
 end
