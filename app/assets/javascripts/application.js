@@ -10,9 +10,12 @@
     });
 })();
 
-String.prototype.isEmpty = function() {
-    return (this.length === 0 || !this.trim());
-};
+// For IE9
+if(typeof String.prototype.trim !== 'function') {
+    String.prototype.trim = function() {
+        return this.replace(/^\s+|\s+$/g, '');
+    }
+}
 
 // --- START: JS for questions.html.erb ---
 
@@ -67,7 +70,7 @@ function requiredFieldsComplete() {
     var a17Val = $('#17A_SIGNATURE_OF_CERTIFYING_OFFICIAL_input_id').val();
     var b17Val = $('#17B_TITLE_input_id').val();
 
-    if(a17Val.isEmpty() || b17Val.isEmpty() ) {
+    if (!a17Val.trim() || !b17Val.trim() ) {
         return false;
     }
 
