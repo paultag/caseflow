@@ -1,20 +1,26 @@
+module Caseflow
+  def self.is_child_path?(directory, path)
+    path.cleanpath.to_s.start_with?(directory.cleanpath.to_s + '/')
+  end
+end
+
+
 class WebController < ApplicationController
   protect_from_forgery with: :exception
   layout 'application'
 
   sessionless_actions = %w/login login_submit logout/
-
-  # Retrieve the Case object
-  before_action 'get_kase', except: sessionless_actions
+  non_case_actions = sessionless_actions + %w/show_form/
 
   # Check authentication
   before_action 'login_check', except: sessionless_actions
 
+  # Retrieve the Case object
+  before_action 'get_kase', except: non_case_actions
   # Check authorization
-  before_action 'authorization_check', except: sessionless_actions
-
+  before_action 'authorization_check', except: non_case_actions
   # Check that the case is ready for certification.
-  before_action 'case_ready_check', except: sessionless_actions
+  before_action 'case_ready_check', except: non_case_actions
 
   def index
     raise ActionController::RoutingError.new('Not Found')
@@ -110,6 +116,18 @@ class WebController < ApplicationController
     @kase.save
 
     render 'error'
+  end
+
+  def show_form
+    @filepath = Rails.root + 'tmp' + 'forms' + [params[:id], params[:format]].join('.')
+    if !Caseflow.is_child_path?(Rails.root + 'tmp', @filepath)
+      head :not_found
+    else
+      send_file(@filepath, filename: [params[:id], 'pdf'].join('.'), type: 'application/pdf')
+    end
+
+  rescue
+    head :not_found
   end
 
   def login
