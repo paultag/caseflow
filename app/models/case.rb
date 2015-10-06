@@ -268,8 +268,7 @@ class Case < ActiveRecord::Base
   end
 
   def initial_fields
-    return @initial_fields if @initial_fields
-    @initial_fields = Caseflow.initial_fields_for_case(self)
+    @initial_fields ||= Caseflow.initial_fields_for_case(self)
   end
 
   def hearing_requested?
