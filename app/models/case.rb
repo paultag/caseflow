@@ -56,13 +56,16 @@ module Caseflow
   def self.required_fields_for_case(kase)
     fields = {}
 
+    # Show if representative is attorney (T), agent (U), or one-time representative (W)
     if ['T', 'U', 'W'].include?(kase.bfso)
       fields[:show_8b] = true
       fields[:show_8c] = true
+    # Show if there is no representative (L)
     elsif kase.bfso != 'L'
       fields[:show_8b] = true
     end
 
+    # Show if no representative (L), attorney (T), agent (U), or one-time representative (W)
     if !['L', 'T', 'U', 'W'].include?(kase.bfso)
       fields[:show_9a] = true
     end
