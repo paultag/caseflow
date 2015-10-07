@@ -27,12 +27,12 @@ Install RVM, which is a tool that helps install/manage versions of Ruby:
 
 Using RVM install JRuby:
 
-`> rvm install jruby-1.7.20`
+`> rvm install jruby-1.7.22`
 
 Now, make JRuby the Ruby being used in your current terminal. Run the following commands
 
 ```
-> rvm use jruby-1.7.20
+> rvm use jruby-1.7.22
 > export JRUBY_OPTS=--2.0
 ```
 
@@ -97,7 +97,7 @@ For *production* (you may need to uncomment them):
 Make sure you're using the correct JRuby and environment variables.
 
 ```
-> rvm use jruby-1.7.20
+> rvm use jruby-1.7.22
 > source env.sh
 ```
 
