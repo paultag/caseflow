@@ -13,8 +13,11 @@
 </head>
 
 <body>
-
 <div class="container">
+  <div class="alert alert-info" role="alert">
+    <strong>Caseflow is a pilot stage project</strong>
+  </div>
+
   <%= yield(:content) if content_for?(:content) %>
   <%= yield %>
   <hr />
