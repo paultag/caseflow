@@ -126,11 +126,11 @@ class WebController < ApplicationController
   end
 
   def show_form
-    @filepath = Rails.root + 'tmp' + 'forms' + [params[:id], params[:format]].join('.')
+    @filepath = Rails.root + 'tmp' + 'forms' + "#{params[:id]}.pdf"
     if !Caseflow.is_child_path?(Rails.root + 'tmp', @filepath)
       head :not_found
     else
-      send_file(@filepath, filename: [params[:id], 'pdf'].join('.'), type: 'application/pdf')
+      send_file(@filepath, type: 'application/pdf')
     end
 
   rescue
