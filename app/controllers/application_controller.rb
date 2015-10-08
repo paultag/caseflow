@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     true
   end
 
-  def is_authorized?(kase, username)
+  def is_unauthorized?(kase, username)
     ro = kase.bfregoff.try('upcase')
     return ro != username
   end
