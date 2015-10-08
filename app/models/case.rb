@@ -297,6 +297,9 @@ class Case < ActiveRecord::Base
   def issue_breakdown
     return @issue_breakdown if @issue_breakdown
 
+    # TODO: Use a parameterized query here. This isn't actually exploitable
+    # because `self.bfkey` is always an integer from VACOLS, but parameterized
+    # query is good hygiene.
     issues = self.class.connection.select_all(<<-SQL).to_hash
     SELECT ISSUES.ISSSEQ,
       ISSUES.ISSPROG,
