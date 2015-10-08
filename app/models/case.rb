@@ -297,10 +297,7 @@ class Case < ActiveRecord::Base
   def issue_breakdown
     return @issue_breakdown if @issue_breakdown
 
-    # TODO: Use a parameterized query here. This isn't actually exploitable
-    # because `self.bfkey` is always an integer from VACOLS, but parameterized
-    # query is good hygiene.
-    issues = self.class.connection.select_all(<<-SQL).to_hash
+    issues = self.class.connection.select_all(ActiveRecord::Base.send(:sanitize_sql, [<<-SQL, self.bfkey]).to_hash
     SELECT ISSUES.ISSSEQ,
       ISSUES.ISSPROG,
       ISSUES.ISSCODE,
@@ -318,7 +315,7 @@ class Case < ActiveRecord::Base
           ( ISSLEV1 = LEV1_CODE OR LEV1_CODE = '##' OR LEV1_CODE IS NULL ) AND
           ( ISSLEV2 = LEV2_CODE OR LEV2_CODE = '##' OR LEV2_CODE IS NULL ) AND
           ( ISSLEV3 = LEV3_CODE OR LEV3_CODE = '##' OR LEV3_CODE IS NULL ) AND
-          ( ISSUES.ISSKEY = '#{self.bfkey}' AND ISSUES.ISSDC IS NULL )
+          ( ISSUES.ISSKEY = ? AND ISSUES.ISSDC IS NULL )
     SQL
 
     issues.each do |issue|
