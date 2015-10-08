@@ -171,7 +171,7 @@ class WebController < ApplicationController
   end
 
   def authorization_check
-    if is_authorized?(@kase, session[:username])
+    if is_unauthorized?(@kase, session[:username])
       return render 'unauthorized', layout: 'basic', status: 401
     end
   end
