@@ -1,4 +1,13 @@
 module Caseflow
+  def self.safe_join(directory, path)
+    child = directory + path
+    if Caseflow.is_child_path?(directory, child)
+      return child
+    else
+      return nil
+    end
+  end
+
   def self.is_child_path?(directory, path)
     path.cleanpath.to_s.start_with?(directory.cleanpath.to_s + '/')
   end
@@ -126,8 +135,8 @@ class WebController < ApplicationController
   end
 
   def show_form
-    @filepath = Rails.root + 'tmp' + 'forms' + "#{params[:id]}.pdf"
-    if !Caseflow.is_child_path?(Rails.root + 'tmp', @filepath)
+    @filepath = Caseflow.safe_join(Rails.root + 'tmp' + 'forms', "#{params[:id]}.pdf")
+    if @filepath.nil?
       head :not_found
     else
       send_file(@filepath, type: 'application/pdf')
