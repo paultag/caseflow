@@ -30,7 +30,6 @@ module Caseflow
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.paths['config/routes.rb'] << 'config/routes/api.rb'
     config.paths['config/routes.rb'] << 'config/routes/web.rb'
 
     config.assets.prefix = "/caseflow/assets"
