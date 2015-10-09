@@ -297,7 +297,7 @@ class Case < ActiveRecord::Base
   def issue_breakdown
     return @issue_breakdown if @issue_breakdown
 
-    issues = self.class.connection.select_all(ActiveRecord::Base.send(:sanitize_sql, [<<-SQL, self.bfkey]).to_hash
+    issues = self.class.connection.select_all(ActiveRecord::Base.send(:sanitize_sql, [<<-SQL, self.bfkey])).to_hash
     SELECT ISSUES.ISSSEQ,
       ISSUES.ISSPROG,
       ISSUES.ISSCODE,
