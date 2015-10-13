@@ -75,7 +75,7 @@
         <p>
           <strong>If you can't find the missing file in VBMS</strong> click the button below to report this as un-certifiable.
 
-          <%= form_tag(action: 'error', method: 'post') do %>
+          <%= form_tag(action: :error) do %>
             <input type="submit" value="This case cannot be certified" class="btn btn-primary"/>
           <% end %>
         </p>
