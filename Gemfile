@@ -38,4 +38,6 @@ gem 'connect_vbms', path: './vendor/gems/connect_vbms'
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'
+
+  gem 'brakeman'
 end
