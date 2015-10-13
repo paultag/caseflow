@@ -1,6 +1,7 @@
 require 'java'
+
 java_import java.sql.DriverManager
-java_import java.sql.SQLException
+
 
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
