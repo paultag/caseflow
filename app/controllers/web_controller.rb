@@ -25,7 +25,7 @@ class WebController < ApplicationController
   before_action 'login_check', except: sessionless_actions
 
   # Retrieve the Case object
-  before_action 'get_kase', except: non_case_actions
+  before_action 'load_case', except: non_case_actions
   # Check authorization
   before_action 'authorization_check', except: non_case_actions
   # Check that the case is ready for certification.
@@ -167,9 +167,14 @@ class WebController < ApplicationController
 
   # -- Action filter --
 
-  # Gets the Case object once, preventing multiple queries between before_action's and normal actions
-  def get_kase
-    @kase = get_case(params[:id])
+  # Gets the Case object once, preventing multiple queries between
+  # before_action's and normal actions
+  def load_case
+    begin
+      @kase = get_case(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      return render 'not_found', layout: 'basic', status: 404
+    end
   end
 
   def login_check
