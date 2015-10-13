@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+    - jruby-1.7.22
+
+cache: bundler
+
+env:
+    - JRUBY_OPTS="--2.0"
+
+script:
+    - bundle exec brakeman --exit-on-warn --run-all-checks --confidence-level=2
+
+notifications:
+    email: false
