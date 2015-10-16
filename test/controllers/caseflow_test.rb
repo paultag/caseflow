@@ -1,5 +1,8 @@
 require "test_helper"
 
+require "app/controllers/web_controller"
+
+
 class CaseflowTest < ActiveSupport::TestCase
   test "is_child_path?" do
     base = Pathname.new("/a/b/c")
