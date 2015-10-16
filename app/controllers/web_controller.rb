@@ -35,17 +35,29 @@ class WebController < ApplicationController
     raise ActionController::RoutingError.new('Not Found')
   end
 
-  def start
-    if @kase.ready_to_certify?
-      return redirect_to action: :questions, id: params[:id]
+  def handle_vbms_errors(&block)
+    begin
+      return block.call
+    rescue VBMS::ClientError => e
+      Rails.logger.info e
+      return render 'vbms_failure', layout: 'basic', status: 502
     end
+  end
 
-    render 'start'
+  def start
+    handle_vbms_errors do
+      if @kase.ready_to_certify?
+        return redirect_to action: :questions, id: params[:id]
+      end
+      render 'start'
+    end
   end
 
   def questions
-    if !@kase.ready_to_certify?
-      return redirect_to action: :start, id: params[:id]
+    handle_vbms_errors do
+      if !@kase.ready_to_certify?
+        return redirect_to action: :start, id: params[:id]
+      end
     end
 
     render 'questions'
@@ -114,12 +126,14 @@ class WebController < ApplicationController
   def certify
     corr = @kase.correspondent
 
-    Case.transaction do
-      @kase.bfdcertool = Time.now
-      @kase.bf41stat = Date.strptime(params[:certification_date], Date::DATE_FORMATS[:va_date])
-      @kase.save
+    handle_vbms_errors do
+      Case.transaction do
+        @kase.bfdcertool = Time.now
+        @kase.bf41stat = Date.strptime(params[:certification_date], Date::DATE_FORMATS[:va_date])
+        @kase.save
 
-      @kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:file_name])
+        @kase.efolder_case.upload_form8(corr.snamef, corr.snamemi, corr.snamel, params[:file_name])
+      end
     end
 
     render 'certify'

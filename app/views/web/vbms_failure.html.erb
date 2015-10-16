@@ -1,0 +1,19 @@
+<%#
+    VBMS sometimes fails to reply to us. So, we'll go ahead and tell the
+    user we can't do anything on their behalf.
+
+    Also, a link to refresh the page.
+%>
+
+<div id="certifications-error">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <h1>VBMS Failure</h1>
+      <p>The VBMS system is not replying to requests, and we're unable to
+          check on the status of the files for this case in VBMS. Please
+          give VBMS a few moments to come back online, and
+          <a href="<%= url_for :controller => 'web', :action => 'start' %>">Restart the certification process</a>.
+      </p>
+    </div>
+  </div>
+</div>
