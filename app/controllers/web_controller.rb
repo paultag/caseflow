@@ -15,10 +15,10 @@ end
 
 
 class WebController < ApplicationController
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, except: %w/ssoi_saml_callback/
   layout 'application'
 
-  sessionless_actions = %w/login login_submit logout/
+  sessionless_actions = %w/login ssoi_saml_callback logout/
   non_case_actions = sessionless_actions + %w/show_form/
 
   # Check authentication
@@ -147,17 +147,23 @@ class WebController < ApplicationController
   end
 
   def login
-    @error_message = params[:error_message]
-    render 'login', layout: 'basic'
+    redirect_to Rails.application.config.login_url
   end
 
-  def login_submit
-    if is_valid_user?(params[:username], params[:password])
-      session[:username] = params[:username].upcase
-      redirect_to action: 'start', id: session.delete(:case_id) # remove the case id now that login is done
-    else
-      redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
-    end
+  def ssoi_saml_callback
+    # https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
+    #  (for more information on data that's commonly set on OmniHash plugins;
+    #   we should look for any SAML-local data we want to squirl away in the
+    #   session for this)
+    auth = request.env["omniauth.auth"]
+
+    session[:username] = auth['uid']
+    session[:full_auth_data] = auth
+
+    # XXX: In the case of falure, OmniAuth seems to redirect to a /failure/
+    #      endpoint. Let's validate that assumption and ensure we don't need
+    #      a second codepath to deal with failed logins here.
+    redirect_to action: 'start', id: session.delete(:case_id)
   end
 
   def logout

@@ -1,3 +1,29 @@
+GIT
+  remote: https://github.com/Vodeclic/omniauth-saml
+  revision: 62c8e1cc5a9db7af62218aaaefa527e3d9058331
+  ref: 62c8e1cc5a9db7af62218aaaefa527e3d9058331
+  specs:
+    omniauth-saml (1.4.1)
+      omniauth (~> 1.1)
+      ruby-saml (~> 1.0.0)
+
+GIT
+  remote: https://github.com/alex/ruby-saml
+  revision: d08193c36b4186278f3d1ef0d18c435dd0180c44
+  branch: patch-1
+  specs:
+    ruby-saml (1.0.1)
+      jruby-openssl (>= 0.9.8)
+      nokogiri (>= 1.6.0)
+      uuid (~> 2.3)
+
+GIT
+  remote: https://github.com/department-of-veterans-affairs/omniauth-saml-va
+  revision: 0118479e466d2c67540e36e53812f79cd21c0d29
+  specs:
+    omniauth-saml-va (0.1)
+      omniauth-saml (~> 1.4.0)
+
 PATH
   remote: ./vendor/gems/connect_vbms
   specs:
@@ -59,6 +85,7 @@ GEM
     ffi (1.9.10-java)
     haml (4.0.7)
       tilt
+    hashie (3.4.2)
     highline (1.7.8)
     hike (1.2.3)
     httpi (2.4.1)
@@ -67,8 +94,11 @@ GEM
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jruby-openssl (0.9.12-java)
     json (1.8.3-java)
     kramdown (1.8.0)
+    macaddr (1.7.1)
+      systemu (~> 2.6.2)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -76,6 +106,9 @@ GEM
     minitest (5.8.1)
     multi_json (1.11.2)
     nokogiri (1.6.6.2-java)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
     parallel (1.6.1)
     pdf-forms (0.6.0)
     polyamorous (1.1.0)
@@ -143,6 +176,7 @@ GEM
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       polyamorous (~> 1.1.0)
+    systemu (2.6.5)
     temple (0.7.6)
     terminal-table (1.5.2)
     therubyrhino (2.0.4)
@@ -156,6 +190,8 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uuid (2.3.8)
+      macaddr (~> 1.0)
     xmlenc (0.2.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -173,12 +209,15 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   kramdown
   nokogiri (~> 1.6.6.2)
+  omniauth-saml!
+  omniauth-saml-va!
   parallel (~> 1.6.1)
   pdf-forms (= 0.6.0)
   pry
   pry-rails
   puma
   rails (~> 4.1.8)
+  ruby-saml!
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   squeel

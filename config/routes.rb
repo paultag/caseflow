@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     get '/login', to: 'web#login'
     post '/login', to: 'web#login_submit'
     get '/logout', to: 'web#logout'
+
+    post '/users/auth/saml/callback', to: 'web#ssoi_saml_callback'
   end
 end

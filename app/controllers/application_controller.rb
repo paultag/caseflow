@@ -16,22 +16,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_valid_user?(username, password)
-    db_url = Rails.application.config.database_configuration[Rails.env]['url']
-
-    # Attempt to login to the database
-    connection = nil
-    begin
-      connection = DriverManager.getConnection(db_url, username, password) # throws exception if login fails
-    rescue
-      return false
-    ensure
-      connection.close unless connection.nil?
-    end
-
-    true
-  end
-
   def is_unauthorized?(kase, username)
     ro = kase.bfregoff.try('upcase')
     return ro != username

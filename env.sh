@@ -10,3 +10,7 @@ export CONNECT_VBMS_KEYPASS="importkey"
 export CONNECT_VBMS_KEY="caseflow_uat_keyfile"
 export CONNECT_VBMS_CACERT="caseflow_uat_ca_cert"
 export CONNECT_VBMS_CERT="caseflow_uat_client_cert"
+
+# SAML information
+export SSOI_SAML_XML_LOCATION="${HOME}/Downloads/CASEFLOWmetadata-DEV_signed.xml"
+export SSOI_SAML_PRIVATE_KEY_LOCATION="${HOME}/Downloads/key.pem"
