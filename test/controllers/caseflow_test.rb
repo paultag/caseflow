@@ -18,7 +18,7 @@ class CaseflowTest < ActiveSupport::TestCase
     base = Pathname.new("/a/b/c")
 
     assert_equal Caseflow.safe_join(base, "abc.txt"), Pathname.new("/a/b/c/abc.txt")
-    assert Caseflow.safe_join(base, "..").nil?
-    assert Caseflow.safe_join(base, "../cd").nil?
+    assert_nil Caseflow.safe_join(base, "..")
+    assert_nil Caseflow.safe_join(base, "../cd")
   end
 end
