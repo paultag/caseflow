@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get '/files/forms/:id', to: 'web#show_form'
 
     get '/login', to: 'web#login'
-    post '/login', to: 'web#login_submit'
+    post '/login', to: 'web#login_ro_submit'
     get '/logout', to: 'web#logout'
 
     post '/users/auth/saml/callback', to: 'web#ssoi_saml_callback'
