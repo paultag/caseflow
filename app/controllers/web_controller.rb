@@ -246,7 +246,6 @@ class WebController < ApplicationController
     # 695 and not 713, allows for ' (continued)' to be appended for multiple lines ... no, the math doesn't make sense, but avoids word wrap algorithm in the PDF generator
 
     remarks_lines = remarks_full.try('split', "\n")
-    remarks_continued = false # flag for adding "(continued)" (page 1) and "Remarks Continued:" (page 2)
 
     if remarks_lines.length >= 1
       remarks_lines.each{|line| line.strip!}
@@ -254,14 +253,13 @@ class WebController < ApplicationController
       if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
         remarks_page_1 = first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + ' (continued)'
         remarks_page_2 << "\nRemarks Continued:\n" + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
-        remarks_continued = true
       else
         remarks_page_1 = first_line
       end
     end
 
     if remarks_lines.length > 1
-      unless remarks_continued
+      unless remarks_page_2.empty?
         remarks_page_1 << ' (continued)'
         remarks_page_2 << "\nRemarks Continued:\n" + remarks_lines[1]
       end
