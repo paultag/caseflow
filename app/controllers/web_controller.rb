@@ -263,7 +263,7 @@ class WebController < ApplicationController
         remarks_page_1 << ' (continued)'
         remarks_page_2 << "\nRemarks Continued:\n" + remarks_lines[1]
       end
-      remarks_lines[2,remarks_lines.length].each{|line| remarks_page_2 += "\n#{line}"} if remarks_lines.length >= 2
+      remarks_lines[2,remarks_lines.length].each{|line| remarks_page_2 << "\n#{line}"} if remarks_lines.length >= 2
     end
 
     fields['14_REMARKS_INITIAL'] = remarks_page_1
