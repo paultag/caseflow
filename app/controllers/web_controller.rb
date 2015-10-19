@@ -247,18 +247,16 @@ class WebController < ApplicationController
 
     remarks_lines = remarks_full.split("\n")
 
-    if remarks_lines.length >= 1
-      remarks_lines.each{|line| line.strip!}
-      first_line = remarks_lines[0]
-      if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
-        remarks_page_1 = first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + ' (continued)'
-        remarks_page_2 << "\nRemarks Continued:\n" + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
-      else
-        remarks_page_1 = first_line
-      end
+    remarks_lines.each{|line| line.strip!}
+    first_line = remarks_lines[0] || '' # by having the OR, allows this to not be wrapped with `if remarks_lines.length >= 1`
+    if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
+      remarks_page_1 << first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + ' (continued)'
+      remarks_page_2 << "\nRemarks Continued:\n" + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
+    else
+      remarks_page_1 << first_line
     end
 
-    if remarks_page_2.empty?
+    if remarks_page_2.empty? && remarks_lines.length > 1
       remarks_page_1 << ' (continued)'
       remarks_page_2 << "\nRemarks Continued:"
     end
