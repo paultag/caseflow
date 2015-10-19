@@ -245,7 +245,7 @@ class WebController < ApplicationController
     # To simplify, will rollover to page 2 after first newline and any characters past 695 characters before the first newline
     # 695 and not 713, allows for ' (continued)' to be appended for multiple lines ... no, the math doesn't make sense, but avoids word wrap algorithm in the PDF generator
 
-    remarks_lines = remarks_full.try('split', "\n")
+    remarks_lines = remarks_full.split("\n")
 
     if remarks_lines.length >= 1
       remarks_lines.each{|line| line.strip!}
