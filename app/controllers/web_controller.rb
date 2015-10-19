@@ -258,13 +258,12 @@ class WebController < ApplicationController
       end
     end
 
-    if remarks_lines.length > 1
-      unless remarks_page_2.empty?
-        remarks_page_1 << ' (continued)'
-        remarks_page_2 << "\nRemarks Continued:\n" + remarks_lines[1]
-      end
-      remarks_lines[2,remarks_lines.length].each{|line| remarks_page_2 << "\n#{line}"} if remarks_lines.length >= 2
+    if remarks_page_2.empty?
+      remarks_page_1 << ' (continued)'
+      remarks_page_2 << "\nRemarks Continued:"
     end
+    remarks_lines[1,remarks_lines.length].each{|line| remarks_page_2 << "\n#{line}"} if remarks_lines.length >= 2
+
 
     fields['14_REMARKS_INITIAL'] = remarks_page_1
     fields['14_REMARKS_CONTINUED'] = remarks_page_2
