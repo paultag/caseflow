@@ -48,7 +48,7 @@ Then use it to install dependencies:
 
 You'll need Oracle Database drivers so that you can connect to the VACOLS database. [Get these from Oracle](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html), by downloading ojdbc6.jar.
 
-From here you'll need to find your JRuby installation (`which jruby` helps or going to `~/.rvm/rubies/jruby-1.7.20` if you used RVM). Place ojdbc6.jar into the `lib` directory.
+From here you'll need to find your JRuby installation (`which jruby` helps or going to `~/.rvm/rubies/jruby-1.7.22` if you used RVM). Place ojdbc6.jar into the `lib` directory.
 
 ### PDFTK
 

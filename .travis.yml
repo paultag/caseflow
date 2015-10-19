@@ -2,12 +2,22 @@ language: ruby
 rvm:
     - jruby-1.7.22
 
+addons:
+    apt:
+        packages:
+            - pdftk
+
+
 cache: bundler
 
 env:
-    - JRUBY_OPTS="--2.0"
+    - JRUBY_OPTS="--2.0" CONNECT_VBMS_ENV_DIR="/" CONNECT_VBMS_ENV="test" CONNECT_VBMS_URL="https://" CONNECT_VBMS_KEYFILE="keystore.jks" CONNECT_VBMS_KEYPASS="nopass" CONNECT_VBMS_SAML="samltoken.xml"
+
+before_script:
+    - cp config/database.yml.test config/database.yml
 
 script:
+    - bundle exec rake
     - bundle exec brakeman --exit-on-warn --run-all-checks --confidence-level=2
 
 notifications:
