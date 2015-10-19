@@ -214,7 +214,7 @@ class WebController < ApplicationController
     end
   end
 
-  # -- Helper Method --
+  # -- Helper Methods --
   def blank?(str)
     # There is a blank? method in ActiveSupport, but avoiding since it'll do more things than just add this to String
     str =~ /^\s*$/
