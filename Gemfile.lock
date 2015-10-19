@@ -97,6 +97,7 @@ GEM
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jdbc-sqlite3 (3.8.10.1)
     jruby-openssl (0.9.12-java)
     json (1.8.3-java)
     kramdown (1.8.0)
