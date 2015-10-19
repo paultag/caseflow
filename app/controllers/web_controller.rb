@@ -241,30 +241,29 @@ class WebController < ApplicationController
     # Newlines and the associated spacing make it hard to do figure out the amount of space remaining without much complexity.
     # To simplify, will rollover to page 2 after first newline and any characters past 695 characters before the first newline
     # 695 and not 713, allows for ' (continued)' to be appended for multiple lines ... no, the math doesn't make sense, but avoids word wrap algorithm in the PDF generator
-    unless blank?(remarks_full)
-      remarks_lines = remarks_full.try('split', "\n")
-      remarks_continued = false # flag for adding "(continued)" (page 1) and "Remarks Continued:" (page 2)
 
-      if remarks_lines.length >= 1
-        remarks_lines.each{|line| line.strip!}
-        first_line = remarks_lines[0]
-        max_length = 695
-        if first_line.length > max_length
-          remarks_page_1 = first_line[0..(max_length-1)] + ' (continued)'
-          remarks_page_2 = remarks_page_2 + "\nRemarks Continued:\n" + first_line[(max_length)..(first_line.length)]
-          remarks_continued = true
-        else
-          remarks_page_1 = first_line
-        end
-      end
+    remarks_lines = remarks_full.try('split', "\n")
+    remarks_continued = false # flag for adding "(continued)" (page 1) and "Remarks Continued:" (page 2)
 
-      if remarks_lines.length > 1
-        unless remarks_continued
-          remarks_page_1 += ' (continued)'
-          remarks_page_2 += remarks_page_2 + "\nRemarks Continued:\n" + remarks_lines[1]
-        end
-        remarks_lines[2,remarks_lines.length].each{|line| remarks_page_2 += "\n#{line}"} if remarks_lines.length >= 2
+    if remarks_lines.length >= 1
+      remarks_lines.each{|line| line.strip!}
+      first_line = remarks_lines[0]
+      max_length = 695
+      if first_line.length > max_length
+        remarks_page_1 = first_line[0..(max_length-1)] + ' (continued)'
+        remarks_page_2 = remarks_page_2 + "\nRemarks Continued:\n" + first_line[(max_length)..(first_line.length)]
+        remarks_continued = true
+      else
+        remarks_page_1 = first_line
       end
+    end
+
+    if remarks_lines.length > 1
+      unless remarks_continued
+        remarks_page_1 += ' (continued)'
+        remarks_page_2 += remarks_page_2 + "\nRemarks Continued:\n" + remarks_lines[1]
+      end
+      remarks_lines[2,remarks_lines.length].each{|line| remarks_page_2 += "\n#{line}"} if remarks_lines.length >= 2
     end
 
     fields['14_REMARKS_INITIAL'] = remarks_page_1
