@@ -246,7 +246,7 @@ class WebController < ApplicationController
       remarks_continued = false # flag for adding "(continued)" (page 1) and "Remarks Continued:" (page 2)
 
       if remarks_lines.length >= 1
-        remarks_lines.map{|line| line.strip!}
+        remarks_lines.each{|line| line.strip!}
         first_line = remarks_lines[0]
         max_length = 695
         if first_line.length > max_length
