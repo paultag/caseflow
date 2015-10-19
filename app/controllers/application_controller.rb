@@ -1,6 +1,7 @@
 require 'java'
 
 java_import java.sql.DriverManager
+java_import java.sql.SQLException
 
 
 class ApplicationController < ActionController::Base
@@ -16,20 +17,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_valid_user?(username, password)
+  def is_ro_credentials_valid?(username, password)
     db_url = Rails.application.config.database_configuration[Rails.env]['url']
 
-    # Attempt to login to the database
-    connection = nil
     begin
-      connection = DriverManager.getConnection(db_url, username, password) # throws exception if login fails
-    rescue
+      # throws exception if login fails
+      connection = DriverManager.getConnection(db_url, username, password)
+    rescue SQLException
       return false
-    ensure
-      connection.close unless connection.nil?
     end
-
-    true
+    connection.close
+    return true
   end
 
   def is_unauthorized?(kase, username)

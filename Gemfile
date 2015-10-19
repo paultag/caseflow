@@ -30,6 +30,15 @@ gem 'httpi'
 # gem 'libxml-jruby'
 gem 'nokogiri', '~> 1.6.6.2'
 
+# For SAML SSO
+
+# TODO: Waiting on PR https://github.com/onelogin/ruby-saml/pull/271
+gem 'ruby-saml', git: 'https://github.com/alex/ruby-saml', :branch => 'patch-1'
+# TODO: Waiting on PR https://github.com/PracticallyGreen/omniauth-saml/pull/50
+gem 'omniauth-saml', git: 'https://github.com/Vodeclic/omniauth-saml', :ref => '62c8e1cc5a9db7af62218aaaefa527e3d9058331'
+
+gem 'omniauth-saml-va', git: 'https://github.com/department-of-veterans-affairs/omniauth-saml-va'
+
 gem 'connect_vbms', path: './vendor/gems/connect_vbms'
 
 # Use Capistrano for deployment

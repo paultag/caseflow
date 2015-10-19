@@ -15,10 +15,10 @@ end
 
 
 class WebController < ApplicationController
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, except: %w/ssoi_saml_callback/
   layout 'application'
 
-  sessionless_actions = %w/login login_submit logout/
+  sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
   non_case_actions = sessionless_actions + %w/show_form/
 
   # Check authentication
@@ -161,17 +161,38 @@ class WebController < ApplicationController
   end
 
   def login
-    @error_message = params[:error_message]
-    render 'login', layout: 'basic'
+    if !session[:username] && ssoi_configured
+      redirect_to Rails.application.config.login_url
+    else
+      @error_message = params[:error_message]
+      render 'login', layout: 'basic'
+    end
   end
 
-  def login_submit
-    if is_valid_user?(params[:username], params[:password])
-      session[:username] = params[:username].upcase
-      redirect_to action: 'start', id: session.delete(:case_id) # remove the case id now that login is done
+  def login_ro_submit
+    if is_ro_credentials_valid?(params[:username], params[:password])
+      session[:ro] = params[:username].upcase
+      # remove the case id now that login is done
+      redirect_to action: 'start', id: session.delete(:case_id)
     else
       redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
     end
+  end
+
+  def ssoi_saml_callback
+    # https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
+    #  (for more information on data that's commonly set on OmniHash plugins;
+    #   we should look for any SAML-local data we want to squirl away in the
+    #   session for this)
+    auth = request.env["omniauth.auth"]
+
+    session[:username] = auth['uid']
+    session[:full_auth_data] = auth
+
+    # XXX: In the case of falure, OmniAuth seems to redirect to a /failure/
+    #      endpoint. Let's validate that assumption and ensure we don't need
+    #      a second codepath to deal with failed logins here.
+    redirect_to action: 'start', id: session.delete(:case_id)
   end
 
   def logout
@@ -192,14 +213,22 @@ class WebController < ApplicationController
   end
 
   def login_check
-    unless session[:username]
-      session[:case_id] = params[:id] # temporary store for login
+    if !session[:username] && ssoi_configured
+      # temporary store for login
+      session[:case_id] = params[:id]
+      redirect_to action: 'login'
+    elsif !session[:ro]
+      session[:case_id] = params[:id]
       redirect_to action: 'login'
     end
   end
 
+  def ssoi_configured
+    ENV.has_key?('SSOI_SAML_XML_LOCATION') && ENV.has_key?('SSOI_SAML_PRIVATE_KEY_LOCATION')
+  end
+
   def authorization_check
-    if is_unauthorized?(@kase, session[:username])
+    if is_unauthorized?(@kase, session[:ro])
       return render 'unauthorized', layout: 'basic', status: 401
     end
   end
