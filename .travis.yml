@@ -19,7 +19,7 @@ before_script:
 script:
     - bundle exec rake
     - bundle exec brakeman --exit-on-warn --run-all-checks --confidence-level=2
-    - RAILS_ENV=production ./bin/rake assets:precompile
+    - ./bin/rake assets:precompile
 
 notifications:
     email: false
