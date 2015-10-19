@@ -251,7 +251,7 @@ class WebController < ApplicationController
       max_length = 695
       if first_line.length > max_length
         remarks_page_1 = first_line[0..(max_length-1)] + ' (continued)'
-        remarks_page_2 = remarks_page_2 + "\nRemarks Continued:\n" + first_line[(max_length)..(first_line.length)]
+        remarks_page_2 << "\nRemarks Continued:\n" + first_line[(max_length)..(first_line.length)]
         remarks_continued = true
       else
         remarks_page_1 = first_line
@@ -260,8 +260,8 @@ class WebController < ApplicationController
 
     if remarks_lines.length > 1
       unless remarks_continued
-        remarks_page_1 += ' (continued)'
-        remarks_page_2 += remarks_page_2 + "\nRemarks Continued:\n" + remarks_lines[1]
+        remarks_page_1 << ' (continued)'
+        remarks_page_2 << "\nRemarks Continued:\n" + remarks_lines[1]
       end
       remarks_lines[2,remarks_lines.length].each{|line| remarks_page_2 += "\n#{line}"} if remarks_lines.length >= 2
     end
