@@ -18,6 +18,9 @@ class WebController < ApplicationController
   protect_from_forgery with: :exception
   layout 'application'
 
+  # Constants
+  REMARKS_PAGE_1_MAX_LENGTH = 695
+
   sessionless_actions = %w/login login_submit logout/
   non_case_actions = sessionless_actions + %w/show_form/
 
@@ -248,10 +251,9 @@ class WebController < ApplicationController
     if remarks_lines.length >= 1
       remarks_lines.each{|line| line.strip!}
       first_line = remarks_lines[0]
-      max_length = 695
-      if first_line.length > max_length
-        remarks_page_1 = first_line[0..(max_length-1)] + ' (continued)'
-        remarks_page_2 << "\nRemarks Continued:\n" + first_line[(max_length)..(first_line.length)]
+      if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
+        remarks_page_1 = first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + ' (continued)'
+        remarks_page_2 << "\nRemarks Continued:\n" + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
         remarks_continued = true
       else
         remarks_page_1 = first_line
