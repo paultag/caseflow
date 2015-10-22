@@ -4,8 +4,7 @@ ruby '2.0.0', engine: 'jruby', engine_version: '1.7.22'
 # This next line tricks RVM (as seen on our servers) into doing the right thing.
 #ruby=jruby-1.7.22
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.8'
+gem 'rails', '~> 4.2.0'
 gem 'puma'
 
 gem 'activerecord-jdbc-adapter'
