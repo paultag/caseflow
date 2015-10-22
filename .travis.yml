@@ -1,7 +1,7 @@
 language: ruby
 rvm:
     - jruby-1.7.22
-    - jruby-9.0.0.0
+    - jruby-9.0.1.0
 
 addons:
     apt:
