@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: https://github.com/department-of-veterans-affairs/omniauth-saml-va
-  revision: 0118479e466d2c67540e36e53812f79cd21c0d29
+  revision: 006b8aecb516efd5fc63edbf77b70833457b8f42
   specs:
     omniauth-saml-va (0.1)
       omniauth-saml (~> 1.4.0)
@@ -196,7 +196,7 @@ GEM
       json (>= 1.8.0)
     uuid (2.3.8)
       macaddr (~> 1.0)
-    xmlenc (0.3.0)
+    xmlenc (0.4.0)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       nokogiri (~> 1.6.0)
