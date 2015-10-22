@@ -8,7 +8,7 @@ require 'rails/all'
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
-require 'app/models/fakes'
+require './app/models/fakes'
 
 require './lib/sources/caseflow'
 
