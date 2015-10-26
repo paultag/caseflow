@@ -32,7 +32,7 @@
               <% if session[:username] %>
                 <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
               <% else %>
-                <% session[:ro] %>
+                <%= session[:ro] %>
               <% end %>
               <span class="caret"></span>
             </a>
