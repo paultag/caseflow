@@ -13,19 +13,48 @@
 </head>
 
 <body>
-<div class="container">
-  <div class="alert alert-info" role="alert">
-    Caseflow is a pilot stage project
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand">Caseflow</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <% if session[:ro] || session[:username] %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              Signed in as
+              <% if session[:username] %>
+                <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
+              <% else %>
+                <%= session[:ro] %>
+              <% end %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/caseflow/logout">Sign out</a></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="alert alert-info" role="alert">
+      Caseflow is a pilot stage project
+    </div>
+    <%= yield(:content) if content_for?(:content) %>
+    <%= yield %>
+    <hr />
+    <footer class="text-center">
+      Built with love by the Digital Service at the <abbr title="Department of Veterans Affairs">VA</abbr>.
+    </div>
   </div>
-
-  <%= yield(:content) if content_for?(:content) %>
-  <%= yield %>
-  <hr />
-  <footer class="text-center">
-    Built with love by the Digital Service at the <abbr title="Department of Veterans Affairs">VA</abbr>.
-  </div>
-</div>
-
 </body>
 
 <%= javascript_include_tag 'application' %>
