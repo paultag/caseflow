@@ -30,7 +30,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               Signed in as
               <% if session[:username] %>
-                <%= session[:username] %><% if session[:ro] %>(<%= session[:ro] %>)<% end %>
+                <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
               <% else %>
                 <% session[:ro] %>
               <% end %>
