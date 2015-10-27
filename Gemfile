@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.0'
 gem 'puma'
 
@@ -32,13 +31,9 @@ gem 'nokogiri', '~> 1.6.6.2'
 gem 'ruby-saml', git: 'https://github.com/onelogin/ruby-saml', tag: 'v1.1.0'
 # TODO: Waiting on PR https://github.com/PracticallyGreen/omniauth-saml/pull/50
 gem 'omniauth-saml', git: 'https://github.com/alex/omniauth-saml', branch: 'patch-1'
-
 gem 'omniauth-saml-va', git: 'https://github.com/department-of-veterans-affairs/omniauth-saml-va'
 
 gem 'connect_vbms', path: './vendor/gems/connect_vbms'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 group :development, :test do
   gem 'pry'

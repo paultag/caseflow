@@ -17,6 +17,11 @@ RELEVANT_FIELDS = [
   ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
 ]
 
+# Copied from conrrunt-ruby's 1.0 pre-release
+class ConcurrentArray < ::Array
+  include JRuby::Synchronized
+end
+
 def main(argv)
   if argv.length != 3
     $stderr.puts "identify_cases.rb <input-file> <good-output-file> <bad-output-file>"
@@ -29,8 +34,8 @@ def main(argv)
     exit(1)
   end
 
-  good = []
-  bad = []
+  good = ConcurrentArray.new
+  bad = ConcurrentArray.new
 
   case_ids = extract_case_ids(input_file)
   puts "Extracted #{case_ids.length} records from the input file."
