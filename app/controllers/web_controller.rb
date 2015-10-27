@@ -277,6 +277,18 @@ class WebController < ApplicationController
     fields
   end
 
+  def self.field_xa_rollover(value, field_label)
+    if value.length > 200
+      field = "#{value[0..158]} (see continued remarks page 2)"
+      rollover = "\n#{field_label} Continued:\n#{value[159..(value.length)]}"
+    else
+      field = value
+      rollover = ''
+    end
+
+    [field, rollover]
+  end
+
   def self.remarks_field_rollover(remarks)
     remarks_1 = ''
     remarks_2 = ''
