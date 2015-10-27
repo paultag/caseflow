@@ -39,3 +39,11 @@ label {
     max-width: 1000px;
     max-height: 1000px;
 }
+
+.navbar-default {
+  background-color: #ffffff;
+
+  .navbar-brand, .navbar-brand:hover {
+    color: #000000;
+  }
+}
