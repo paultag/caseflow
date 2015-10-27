@@ -29,7 +29,8 @@ gem 'nokogiri', '~> 1.6.6.2'
 
 # TODO: waiting on 1.1.0 to be uploaded to rubygems
 gem 'ruby-saml', git: 'https://github.com/onelogin/ruby-saml', tag: 'v1.1.0'
-# TODO: Waiting on PR https://github.com/PracticallyGreen/omniauth-saml/pull/50
+# TODO: Waiting on https://github.com/PracticallyGreen/omniauth-saml/pull/50 and
+#                  https://github.com/PracticallyGreen/omniauth-saml/pull/62
 gem 'omniauth-saml', git: 'https://github.com/alex/omniauth-saml', branch: 'patch-1'
 gem 'omniauth-saml-va', git: 'https://github.com/department-of-veterans-affairs/omniauth-saml-va'
 
