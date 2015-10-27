@@ -23,6 +23,10 @@ class WebController < ApplicationController
 
   # Constants
   REMARKS_PAGE_1_MAX_LENGTH = 695
+  CONTINUED = ' (continued)'
+  REMARKS_CONTINUED = "\n\nRemarks Continued:\n"
+  SEE_PAGE_2 = ' (see continued remarks page 2)'
+  XA_ROLLOVER_CAP = 159
 
   sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
   non_case_actions = sessionless_actions + %w/show_form/
@@ -282,8 +286,8 @@ class WebController < ApplicationController
 
   def self.field_xa_rollover(value, field_label)
     if value.length > 200
-      field = "#{value[0..158]} (see continued remarks page 2)"
-      rollover = "\n#{field_label} Continued:\n#{value[159..(value.length)]}"
+      field = "#{value[0..(XA_ROLLOVER_CAP-1)]}#{SEE_PAGE_2}"
+      rollover = "\n\n#{field_label} Continued:\n#{value[XA_ROLLOVER_CAP..(value.length)]}"
     else
       field = value
       rollover = ''
@@ -306,15 +310,15 @@ class WebController < ApplicationController
     remarks_lines.each { |line| line.strip! }
     first_line = remarks_lines[0] || '' # by having the OR, allows this to not be wrapped with `if remarks_lines.length >= 1`
     if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
-      remarks_1 << first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + ' (continued)'
-      remarks_2 << "\nRemarks Continued:\n" + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
+      remarks_1 << first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + CONTINUED
+      remarks_2 << REMARKS_CONTINUED + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
     else
       remarks_1 << first_line
     end
 
     if remarks_2.empty? && remarks_lines.length > 1
-      remarks_1 << ' (continued)'
-      remarks_2 << "\nRemarks Continued:"
+      remarks_1 << CONTINUED
+      remarks_2 << "\n\nRemarks Continued:"
     end
     remarks_lines[1, remarks_lines.length].each { |line| remarks_2 << "\n#{line}" } if remarks_lines.length >= 2
 
