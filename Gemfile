@@ -1,11 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0', engine: 'jruby', engine_version: '1.7.22'
-# This next line tricks RVM (as seen on our servers) into doing the right thing.
-#ruby=jruby-1.7.22
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.8'
+gem 'rails', '~> 4.2.0'
 gem 'puma'
 
 gem 'activerecord-jdbc-adapter'
@@ -32,10 +28,10 @@ gem 'nokogiri', '~> 1.6.6.2'
 
 # For SAML SSO
 
-# TODO: Waiting on PR https://github.com/onelogin/ruby-saml/pull/271
-gem 'ruby-saml', git: 'https://github.com/alex/ruby-saml', :branch => 'patch-1'
+# TODO: waiting on 1.1.0 to be uploaded to rubygems
+gem 'ruby-saml', git: 'https://github.com/onelogin/ruby-saml', tag: 'v1.1.0'
 # TODO: Waiting on PR https://github.com/PracticallyGreen/omniauth-saml/pull/50
-gem 'omniauth-saml', git: 'https://github.com/Vodeclic/omniauth-saml', :ref => '62c8e1cc5a9db7af62218aaaefa527e3d9058331'
+gem 'omniauth-saml', git: 'https://github.com/alex/omniauth-saml', branch: 'patch-1'
 
 gem 'omniauth-saml-va', git: 'https://github.com/department-of-veterans-affairs/omniauth-saml-va'
 

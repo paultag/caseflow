@@ -1,5 +1,8 @@
 module Caseflow
   def self.safe_join(directory, path)
+    if /\x00/ =~ path
+      return nil
+    end
     child = directory + path
     if Caseflow.is_child_path?(directory, child)
       return child

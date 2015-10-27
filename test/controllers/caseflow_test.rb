@@ -1,6 +1,6 @@
 require "test_helper"
 
-require "app/controllers/web_controller"
+require "./app/controllers/web_controller"
 
 
 class CaseflowTest < ActiveSupport::TestCase
@@ -20,6 +20,7 @@ class CaseflowTest < ActiveSupport::TestCase
     assert_equal Caseflow.safe_join(base, "abc.txt"), Pathname.new("/a/b/c/abc.txt")
     assert_nil Caseflow.safe_join(base, "..")
     assert_nil Caseflow.safe_join(base, "../cd")
+    assert_nil Caseflow.safe_join(base, "\x00")
   end
 
   test 'no remarks stays as no remarks' do
