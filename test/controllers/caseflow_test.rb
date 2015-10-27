@@ -1,6 +1,6 @@
 require "test_helper"
 
-require "app/controllers/web_controller"
+require "./app/controllers/web_controller"
 
 
 class CaseflowTest < ActiveSupport::TestCase
