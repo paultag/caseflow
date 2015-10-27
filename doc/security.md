@@ -6,7 +6,7 @@ Caseflow is a web based tool intended for use by Veterans Service Representative
 
 ## Environment
 
-Caseflow is hosted on four servers located in the Austin Information Technology Center (AITC) in the CDW cluster. Caseflow runs on Linux systems running CentOS (at the time of writing).
+Caseflow is hosted on four servers located in the Austin Information Technology Center (AITC) in the VINCIC cluster. Caseflow runs on Linux systems running Red Hat Enterprise Linux.
 
 ## Communications
 
@@ -19,7 +19,6 @@ Caseflow communicates with two systems:
 
 VACOLS is the software system which supports the appeals process at the Board of Veterans Appeals. Caseflow communicates directly with VACOLS's Oracle database.
 
-<!--- TLS? -->
 Connections to the Oracle database from Caseflow are secured using password authentication for the database.
 
 Caseflow and the VACOLS Oracle database exchange the following information:
