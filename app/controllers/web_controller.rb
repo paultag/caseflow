@@ -254,20 +254,23 @@ class WebController < ApplicationController
   def self.field_rollover(field_hash)
 
     fields = field_hash.dup
-    remarks_full = fields['14_REMARKS_INITIAL']
     remarks_page_1 = ''
     remarks_page_2 = ''
 
     # Box 5A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
-    # TODO: For future PR, add to remarks_page_2
+    fields['5A_SERVICE_CONNECTION_FOR'], field_5a_rollover = WebController.field_xa_rollover(fields['5A_SERVICE_CONNECTION_FOR'], '5A')
+    remarks_page_2 << field_5a_rollover
 
     # Box 6A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
-    # TODO: For future PR, add to remarks_page_2
+    fields['6A_INCREASED_RATING_FOR'], field_6a_rollover = WebController.field_xa_rollover(fields['6A_INCREASED_RATING_FOR'], '6A')
+    remarks_page_2 << field_6a_rollover
 
     # Box 7A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
-    # TODO: For future PR, add to remarks_page_2
+    fields['7A_OTHER'], field_7a_rollover = WebController.field_xa_rollover(fields['7A_OTHER'], '7A')
+    remarks_page_2 << field_7a_rollover
 
     # Remarks field, itself
+    remarks_full = fields['14_REMARKS_INITIAL']
     remarks = WebController.remarks_field_rollover(remarks_full)
     remarks_page_1 << remarks[0]
     remarks_page_2 << remarks[1]
