@@ -22,25 +22,4 @@ class CaseflowTest < ActiveSupport::TestCase
     assert_nil Caseflow.safe_join(base, "../cd")
     assert_nil Caseflow.safe_join(base, "\x00")
   end
-
-  test 'no remarks stays as no remarks' do
-
-  end
-
-  test 'short one line remark does not get split' do
-
-  end
-
-  test 'more than one line remark gets split' do
-
-  end
-
-  test 'long one line remark gets split' do
-
-  end
-
-  test 'remark with long first line gets split correctly' do
-
-  end
-
 end
