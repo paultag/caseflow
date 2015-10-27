@@ -1,9 +1,13 @@
 require 'test_helper'
-require '../../app/controllers/web_controller'
+require './app/controllers/web_controller'
 
 class WebControllerTest < ActiveSupport::TestCase
   test 'no remarks stays as no remarks' do
+    remarks_full = ''
+    expected_remarks = ['', '']
 
+    remarks = WebController.remarks_field_rollover(remarks_full)
+    assert_equal(expected_remarks, remarks, 'Empty remarks should not have produced any remarks during rollover')
   end
 
   test 'short one line remark does not get split' do
