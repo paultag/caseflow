@@ -1,21 +1,11 @@
 GIT
-  remote: https://github.com/Vodeclic/omniauth-saml
-  revision: 62c8e1cc5a9db7af62218aaaefa527e3d9058331
-  ref: 62c8e1cc5a9db7af62218aaaefa527e3d9058331
+  remote: https://github.com/alex/omniauth-saml
+  revision: 77b16df0600037fa34cff6d548117e50a59de4c6
+  branch: patch-1
   specs:
     omniauth-saml (1.4.1)
       omniauth (~> 1.1)
-      ruby-saml (~> 1.0.0)
-
-GIT
-  remote: https://github.com/alex/ruby-saml
-  revision: d08193c36b4186278f3d1ef0d18c435dd0180c44
-  branch: patch-1
-  specs:
-    ruby-saml (1.0.1)
-      jruby-openssl (>= 0.9.8)
-      nokogiri (>= 1.6.0)
-      uuid (~> 2.3)
+      ruby-saml (~> 1.0)
 
 GIT
   remote: https://github.com/department-of-veterans-affairs/omniauth-saml-va
@@ -23,6 +13,16 @@ GIT
   specs:
     omniauth-saml-va (0.1)
       omniauth-saml (~> 1.4.0)
+
+GIT
+  remote: https://github.com/onelogin/ruby-saml
+  revision: 12c9f9caf2578060f6d97d10ec76cbe718d16ec0
+  tag: v1.1.0
+  specs:
+    ruby-saml (1.1.0)
+      jruby-openssl (>= 0.9.8)
+      nokogiri (>= 1.6.0)
+      uuid (~> 2.3)
 
 PATH
   remote: ./vendor/gems/connect_vbms
@@ -99,7 +99,7 @@ GEM
       activesupport (>= 4.1.0)
     haml (4.0.7)
       tilt
-    hashie (3.4.2)
+    hashie (3.4.3)
     highline (1.7.8)
     hike (1.2.3)
     httpi (2.4.1)
