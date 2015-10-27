@@ -6,7 +6,7 @@ Caseflow is a web based tool intended for use by Veterans Service Representative
 
 ## Environment
 
-Caseflow is hosted on four servers located in the Austin Information Technology Center (AITC) in the VINCIC cluster. Caseflow runs on Linux systems running Red Hat Enterprise Linux.
+Caseflow is hosted on four servers located in the Austin Information Technology Center (AITC) in the VINCI cluster. Caseflow runs on Linux systems running Red Hat Enterprise Linux.
 
 ## Communications
 
