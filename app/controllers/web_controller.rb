@@ -45,7 +45,6 @@ class WebController < ApplicationController
     begin
       return block.call
     rescue VBMS::ClientError => e
-      Rails.logger.info e
       return render 'vbms_failure', layout: 'basic', status: 502
     end
   end
