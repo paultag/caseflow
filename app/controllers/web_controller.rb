@@ -289,21 +289,22 @@ class WebController < ApplicationController
     remarks_lines.each { |line| line.strip! }
     first_line = remarks_lines[0] || ''
     if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
-      remarks_1 = first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + ' (continued)'
-      remarks_2 = "\nRemarks Continued:\n" + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
+      remarks_1 = first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)]
+      remarks_2 = first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
     else
       remarks_1 = first_line
       remarks_2 = ''
     end
 
     if remarks_lines.length > 1
-      if remarks_2.empty?
-        remarks_1 << ' (continued)'
-        remarks_2 << "\nRemarks Continued:"
-      end
       remarks_lines[1, remarks_lines.length].each do |line|
         remarks_2 << "\n#{line}"
       end
+    end
+
+    if !remarks_2.empty?
+      remarks_1 << ' (continued)'
+      remarks_2 = "\nRemarks Continued: #{remarks_2}"
     end
 
     [remarks_1, remarks_2]
