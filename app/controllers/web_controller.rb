@@ -290,7 +290,7 @@ class WebController < ApplicationController
     first_line = remarks_lines[0] || ''
     if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
       remarks_1 = first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)]
-      remarks_2 = first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
+      remarks_2 = "\n#{first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]}"
     else
       remarks_1 = first_line
       remarks_2 = ''
@@ -304,7 +304,7 @@ class WebController < ApplicationController
 
     if !remarks_2.empty?
       remarks_1 << ' (continued)'
-      remarks_2 = "\nRemarks Continued:\n#{remarks_2}"
+      remarks_2 = "\nRemarks Continued:#{remarks_2}"
     end
 
     [remarks_1, remarks_2]
