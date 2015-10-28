@@ -14,16 +14,6 @@ GIT
     omniauth-saml-va (0.1)
       omniauth-saml (~> 1.4.0)
 
-GIT
-  remote: https://github.com/onelogin/ruby-saml
-  revision: 12c9f9caf2578060f6d97d10ec76cbe718d16ec0
-  tag: v1.1.0
-  specs:
-    ruby-saml (1.1.0)
-      jruby-openssl (>= 0.9.8)
-      nokogiri (>= 1.6.0)
-      uuid (~> 2.3)
-
 PATH
   remote: ./vendor/gems/connect_vbms
   specs:
@@ -109,7 +99,6 @@ GEM
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jdbc-sqlite3 (3.8.10.1)
-    jruby-openssl (0.9.12-java)
     json (1.8.3-java)
     kramdown (1.9.0)
     loofah (2.0.3)
@@ -168,6 +157,9 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    ruby-saml (1.1.0)
+      nokogiri (>= 1.5.10)
+      uuid (~> 2.3)
     ruby2ruby (2.2.0)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
@@ -244,7 +236,7 @@ DEPENDENCIES
   pry-rails
   puma
   rails (~> 4.2.0)
-  ruby-saml!
+  ruby-saml (~> 1.1.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   squeel
