@@ -21,6 +21,9 @@ class WebController < ApplicationController
   protect_from_forgery with: :exception, except: %w/ssoi_saml_callback/
   layout 'application'
 
+  # Constants
+  REMARKS_PAGE_1_MAX_LENGTH = 695
+
   sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
   non_case_actions = sessionless_actions + %w/show_form/
 
@@ -108,12 +111,13 @@ class WebController < ApplicationController
     end
 
     # This check will never be reached if front-end validation works (not ideal, because it loses all the values in the form)
-    if blank?(fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL']) || blank?(fields['17B_TITLE'])
+    if WebController.blank?(fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL']) || WebController.blank?(fields['17B_TITLE'])
       # @error_message = 'Please provide an answer questions for 17A and 17B'
       return redirect_to action: :questions, params: fields
     end
 
     # Generate Form 8 PDF
+    fields = WebController.field_rollover(fields)
     form_8 = FormVa8.new(fields)
     form_8.process!
 
@@ -246,10 +250,64 @@ class WebController < ApplicationController
     end
   end
 
-  # -- Helper Method --
-  def blank?(str)
+  # --- Helper Methods ---
+  def self.field_rollover(field_hash)
+
+    fields = field_hash.dup
+    remarks_full = fields['14_REMARKS_INITIAL']
+    remarks_page_1 = ''
+    remarks_page_2 = ''
+
+    # Box 5A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
+    # TODO: For future PR, add to remarks_page_2
+
+    # Box 6A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
+    # TODO: For future PR, add to remarks_page_2
+
+    # Box 7A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
+    # TODO: For future PR, add to remarks_page_2
+
+    # Remarks field, itself
+    remarks = WebController.remarks_field_rollover(remarks_full)
+    remarks_page_1 << remarks[0]
+    remarks_page_2 << remarks[1]
+
+    fields['14_REMARKS_INITIAL'] = remarks_page_1
+    fields['14_REMARKS_CONTINUED'] = remarks_page_2
+    fields
+  end
+
+  def self.remarks_field_rollover(remarks)
+    remarks_1 = ''
+    remarks_2 = ''
+
+    # Remarks box on page 1 can handle 713 characters straight or several newlines with 1 line sentences.
+    # Newlines and the associated spacing make it hard to do figure out the amount of space remaining without much complexity.
+    # To simplify, will rollover to page 2 after first newline and any characters past 695 characters before the first newline
+    # 695 and not 713, allows for ' (continued)' to be appended for multiple lines ... no, the math doesn't make sense, but avoids word wrap algorithm in the PDF generator
+
+    remarks_lines = remarks.split("\n")
+
+    remarks_lines.each { |line| line.strip! }
+    first_line = remarks_lines[0] || '' # by having the OR, allows this to not be wrapped with `if remarks_lines.length >= 1`
+    if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
+      remarks_1 << first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + ' (continued)'
+      remarks_2 << "\nRemarks Continued:\n" + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
+    else
+      remarks_1 << first_line
+    end
+
+    if remarks_2.empty? && remarks_lines.length > 1
+      remarks_1 << ' (continued)'
+      remarks_2 << "\nRemarks Continued:"
+    end
+    remarks_lines[1, remarks_lines.length].each { |line| remarks_2 << "\n#{line}" } if remarks_lines.length >= 2
+
+    [remarks_1, remarks_2]
+  end
+
+  def self.blank?(str)
     # There is a blank? method in ActiveSupport, but avoiding since it'll do more things than just add this to String
     str =~ /^\s*$/
   end
-
 end
