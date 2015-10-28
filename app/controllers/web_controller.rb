@@ -304,7 +304,7 @@ class WebController < ApplicationController
 
     if !remarks_2.empty?
       remarks_1 << ' (continued)'
-      remarks_2 = "\nRemarks Continued: #{remarks_2}"
+      remarks_2 = "\nRemarks Continued:#{remarks_2}"
     end
 
     [remarks_1, remarks_2]
