@@ -31,7 +31,6 @@ class WebControllerTest < ActiveSupport::TestCase
   # --- Helper Methods ---
   def remarks_test(remarks_input, expected_remarks)
     remarks = WebController.remarks_field_rollover(remarks_input)
-    assert_equal(expected_remarks[0], remarks[0], 'Remarks block #1 does not match expectations')
-    assert_equal(expected_remarks[1], remarks[1], 'Remarks block #2 does not match expectations')
+    assert_equal remarks, expected_remarks
   end
 end
