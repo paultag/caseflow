@@ -49,7 +49,6 @@ class WebController < ApplicationController
     begin
       return block.call
     rescue VBMS::ClientError => e
-      Rails.logger.info e
       return render 'vbms_failure', layout: 'basic', status: 502
     end
   end
@@ -258,6 +257,7 @@ class WebController < ApplicationController
   def self.field_rollover(field_hash)
 
     fields = field_hash.dup
+    remarks_full = fields['14_REMARKS_INITIAL']
     remarks_page_1 = ''
     remarks_page_2 = ''
 
