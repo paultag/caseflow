@@ -24,7 +24,7 @@ class WebController < ApplicationController
   # Constants
   REMARKS_PAGE_1_MAX_LENGTH = 695
   CONTINUED = ' (continued)'
-  REMARKS_CONTINUED = "\n\nRemarks Continued:\n"
+  REMARKS_CONTINUED = "\n\nRemarks Continued:"
   SEE_PAGE_2 = ' (see continued remarks page 2)'
   XA_ROLLOVER_CAP = 159
 
@@ -113,8 +113,9 @@ class WebController < ApplicationController
       fields.delete('13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS')
     end
 
-    # This check will never be reached if front-end validation works (not ideal, because it loses all the values in the form)
-    if WebController.blank?(fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL']) || WebController.blank?(fields['17B_TITLE'])
+    # This check will never be reached if front-end validation works (not ideal,
+    # because it loses all the values in the form)
+    if fields['17A_SIGNATURE_OF_CERTIFYING_OFFICIAL'].blank? || fields['17B_TITLE'].blank?
       # @error_message = 'Please provide an answer questions for 17A and 17B'
       return redirect_to action: :questions, params: fields
     end
@@ -297,36 +298,38 @@ class WebController < ApplicationController
   end
 
   def self.remarks_field_rollover(remarks)
-    remarks_1 = ''
-    remarks_2 = ''
-
-    # Remarks box on page 1 can handle 713 characters straight or several newlines with 1 line sentences.
-    # Newlines and the associated spacing make it hard to do figure out the amount of space remaining without much complexity.
-    # To simplify, will rollover to page 2 after first newline and any characters past 695 characters before the first newline
-    # 695 and not 713, allows for ' (continued)' to be appended for multiple lines ... no, the math doesn't make sense, but avoids word wrap algorithm in the PDF generator
+    # Remarks box on page 1 can handle 713 characters straight or several
+    # newlines with 1 line sentences. Newlines and the associated spacing make
+    # it hard to do figure out the amount of space remaining without much
+    # complexity. To simplify, will rollover to page 2 after first newline and
+    # any characters past 695 characters before the first newline 695 and not
+    # 713, allows for ' (continued)' to be appended for multiple lines ... no,
+    # the math doesn't make sense, but avoids word wrap algorithm in the PDF
+    # generator
 
     remarks_lines = remarks.split("\n")
 
     remarks_lines.each { |line| line.strip! }
-    first_line = remarks_lines[0] || '' # by having the OR, allows this to not be wrapped with `if remarks_lines.length >= 1`
+    first_line = remarks_lines[0] || ''
     if first_line.length > REMARKS_PAGE_1_MAX_LENGTH
-      remarks_1 << first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)] + CONTINUED
-      remarks_2 << REMARKS_CONTINUED + first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]
+      remarks_1 = first_line[0..(REMARKS_PAGE_1_MAX_LENGTH-1)]
+      remarks_2 = "\n#{first_line[(REMARKS_PAGE_1_MAX_LENGTH)..(first_line.length)]}"
     else
-      remarks_1 << first_line
+      remarks_1 = first_line
+      remarks_2 = ''
     end
 
-    if remarks_2.empty? && remarks_lines.length > 1
-      remarks_1 << CONTINUED
-      remarks_2 << "\n\nRemarks Continued:"
+    if remarks_lines.length > 1
+      remarks_lines[1, remarks_lines.length].each do |line|
+        remarks_2 << "\n#{line}"
+      end
     end
-    remarks_lines[1, remarks_lines.length].each { |line| remarks_2 << "\n#{line}" } if remarks_lines.length >= 2
+
+    if !remarks_2.empty?
+      remarks_1 << CONTINUED
+      remarks_2 = "#{REMARKS_CONTINUED}#{remarks_2}"
+    end
 
     [remarks_1, remarks_2]
-  end
-
-  def self.blank?(str)
-    # There is a blank? method in ActiveSupport, but avoiding since it'll do more things than just add this to String
-    str =~ /^\s*$/
   end
 end
