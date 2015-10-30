@@ -1,25 +1,24 @@
 <div id="certifications-generate">
   <div class="row">
-    <div class="col col-md-12">
+    <div class="col col-md-10 col-md-offset-1">
       <p>
         Review the completed Form 8 below and verify all fields are accurate.
         If the form looks correct, click the <strong>Upload and Certify</strong>
         button and the Form 8 will automatically be uploaded to VBMS.
       </p>
       <hr/>
+
+      <embed class="embedded-document" src="/caseflow/files/forms/<%= @file_name %>"></embed>
+
+      <hr/>
+
+      <div class="input-group">
+        <%= form_tag(action: :certify) do %>
+          <input type="hidden" value="<%= @file_name %>" name="file_name"/>
+          <input type="hidden" value="<%= @certification_date %>" name="certification_date"/>
+          <input type="submit" value="Certify" class="btn btn-primary"/>
+        <% end %>
+      </div>
     </div>
   </div>
-
-  <embed class="embedded-document" src="/caseflow/files/forms/<%= @file_name %>"></embed>
-
-  <hr/>
-
-  <div class="input-group">
-    <%= form_tag(action: :certify) do %>
-        <input type="hidden" value="<%= @file_name %>" name="file_name"/>
-        <input type="hidden" value="<%= @certification_date %>" name="certification_date"/>
-        <input type="submit" value="Certify" class="btn btn-primary"/>
-    <% end %>
-  </div>
-
 </div>
