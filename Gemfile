@@ -8,7 +8,7 @@ gem 'composite_primary_keys'
 gem 'squeel'
 gem 'sass-rails', '~> 4.0.3'
 gem 'jbuilder', '~> 2.0'
-gem 'pdf-forms', '~> 0.6.0'
+gem 'pdf-forms', '~> 1.0.0'
 gem 'kramdown'
 
 gem 'sdoc', '~> 0.4.0', group: :doc

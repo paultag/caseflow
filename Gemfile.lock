@@ -117,9 +117,9 @@ GEM
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
     parallel (1.6.1)
-    pdf-forms (0.6.1)
+    pdf-forms (1.0.0)
       cliver (~> 0.3.2)
-      safe_shell (~> 1.0)
+      safe_shell (>= 1.0.3, < 2.0)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
     pry (0.10.3-java)
@@ -235,7 +235,7 @@ DEPENDENCIES
   omniauth-saml!
   omniauth-saml-va!
   parallel (~> 1.6.1)
-  pdf-forms (~> 0.6.0)
+  pdf-forms (~> 1.0.0)
   pry
   pry-rails
   puma
