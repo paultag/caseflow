@@ -72,21 +72,20 @@ class Caseflow::FormBuilder
   end
 
   def tmp_location
-    @tmp_location ||= Rails.root + 'tmp' + 'forms' + file_name
+    Rails.root + 'tmp' + 'forms' + "#{file_name}.tmp"
+  end
+
+  def final_location
+    Rails.root + 'tmp' + 'forms' + file_name
   end
 
   def process!
     self.engine.fill_form((Rails.root + 'forms' + "#{self.class.form_name}.pdf"), self.tmp_location, self.values, flatten: true)
-    self.tmp_location
-  end
-
-  def destroy!
-    File.delete(self.tmp_location)
-  rescue
-    nil
-  end
-
-  def processed?
-    File.exist?(self.tmp_location)
+    # Run it through `pdftk cat`. The reason for this is that editable PDFs have
+    # an RSA signature on them which proves they are genuine. pdftk tries to
+    # maintain the editability of a PDF after processing it, but then the
+    # signature doesn't match. The result is that (without `pdftk cat`) Acrobat
+    # shows a warning (other PDF viewers don't care).
+    self.engine.call_pdftk(self.tmp_location, "cat", "output", self.final_location)
   end
 end
