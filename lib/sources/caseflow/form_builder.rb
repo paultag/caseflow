@@ -87,5 +87,7 @@ class Caseflow::FormBuilder
     # signature doesn't match. The result is that (without `pdftk cat`) Acrobat
     # shows a warning (other PDF viewers don't care).
     self.engine.call_pdftk(self.tmp_location, "cat", "output", self.final_location)
+    # Remove it from the tmp_location, leaving it only in final_location
+    File.delete(self.tmp_location)
   end
 end
