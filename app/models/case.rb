@@ -106,6 +106,38 @@ class Case < ActiveRecord::Base
 
   has_many :correspondences, foreign_key: :mlfolder
 
+  FULL_VSO_NAMES = {
+    'A' => ['The American Legion', 'American Legion'],
+    'B' => ['AMVETS', 'AmVets'],
+    'C' => ['American Red Cross', 'ARC'],
+    'D' => ['Disabled American Veterans', 'DAV'],
+    'E' => ['Jewish War Veterans', 'JWV'],
+    'F' => ['Military Order of the Purple Heart', 'MOPH'],
+    'G' => ['Paralyzed Veterans of America', 'PVA'],
+    'H' => ['Veterans of Foreign Wars', 'VFW'],
+    'I' => ['State Service Organization(s)', 'State Svc Org'],
+    'J' => ['Maryland Veterans Commission', 'Md Veterans Comm'],
+    'K' => ['Virginia Department of Veterans Affairs', 'Virginia Dept of Veteran'],
+    'L' => ['No Representative', 'None'],
+    'M' => ['Navy Mutual Aid Association', 'Navy Mut Aid'],
+    'N' => ['Non-Commissioned Officers Association', 'NCOA'],
+    'O' => ['Other Service Organization', 'Other'],
+    'P' => ['Army & Air Force Mutual Aid Assn.', 'Army Mut Aid'],
+    'Q' => ['Catholic War Veterans', 'Catholic War Vets'],
+    'R' => ['Fleet Reserve Association', 'Fleet Reserve'],
+    'S' => ['Marine Corp League', 'Marine Corps League'],
+    'T' => ['Attorney', 'Attorney'],
+    'U' => ['Agent', 'Agent'],
+    'V' => ['Vietnam Veterans of America', 'VVA'],
+    'W' => ['One Time Representative', 'One Time Rep'],
+    'X' => ['American Ex-Prisoners of War', 'EXPOW'],
+    'Y' => ['Blinded Veterans Association', 'Blinded Vet Assoc'],
+    'Z' => ['National Veterans Legal Services Program', 'NVLSP'],
+    '1' => ['National Veterans Organization of America', 'NVOA'],
+    nil => nil,
+  }
+  FULL_VSO_NAMES.default = FULL_VSO_NAMES['O']
+
   [:bfdnod, :bfd19, :bfdsoc, :bfssoc1, :bfssoc2, :bfssoc3, :bfssoc4, :bfssoc5].each do |name|
     define_method("#{name}_date") do
       if value = self.send(name)
@@ -165,41 +197,16 @@ class Case < ActiveRecord::Base
   end
 
   def vso
-    hash = {
-        'A' => ['The American Legion', 'American Legion'],
-        'B' => ['AMVETS', 'AmVets'],
-        'C' => ['American Red Cross', 'ARC'],
-        'D' => ['Disabled American Veterans', 'DAV'],
-        'E' => ['Jewish War Veterans', 'JWV'],
-        'F' => ['Military Order of the Purple Heart', 'MOPH'],
-        'G' => ['Paralyzed Veterans of America', 'PVA'],
-        'H' => ['Veterans of Foreign Wars', 'VFW'],
-        'I' => ['State Service Organization(s)', 'State Svc Org'],
-        'J' => ['Maryland Veterans Commission', 'Md Veterans Comm'],
-        'K' => ['Virginia Department of Veterans Affairs', 'Virginia Dept of Veteran'],
-        'L' => ['No Representative', 'None'],
-        'M' => ['Navy Mutual Aid Association', 'Navy Mut Aid'],
-        'N' => ['Non-Commissioned Officers Association', 'NCOA'],
-        'O' => ['Other Service Organization', 'Other'],
-        'P' => ['Army & Air Force Mutual Aid Assn.', 'Army Mut Aid'],
-        'Q' => ['Catholic War Veterans', 'Catholic War Vets'],
-        'R' => ['Fleet Reserve Association', 'Fleet Reserve'],
-        'S' => ['Marine Corp League', 'Marine Corps League'],
-        'T' => ['Attorney', 'Attorney'],
-        'U' => ['Agent', 'Agent'],
-        'V' => ['Vietnam Veterans of America', 'VVA'],
-        'W' => ['One Time Representative', 'One Time Rep'],
-        'X' => ['American Ex-Prisoners of War', 'EXPOW'],
-        'Y' => ['Blinded Veterans Association', 'Blinded Vet Assoc'],
-        'Z' => ['National Veterans Legal Services Program', 'NVLSP'],
-        '1' => ['National Veterans Organization of America', 'NVOA']
-    }
-    hash.default = hash['O']
+    FULL_VSO_NAMES[bfso]
     hash[bfso]
   end
 
   def vso_full
-    vso.join(' - ')
+    if vso.nil?
+      "No PoA"
+    else
+      vso.join(' - ')
+    end
   end
 
   def regional_office
