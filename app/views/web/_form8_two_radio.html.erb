@@ -18,14 +18,14 @@
 %>
 
 <div class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
-  <div class="row">
-    <div class="col col-md-12">
+  <div>
+    <div>
       <strong><%= question_num %></strong>
       <%= question %>
     </div>
   </div>
-  <div class="row">
-    <div class="col col-md-6">
+  <div>
+    <div>
       <div class="input-group">
         <label class="radio-inline">
           <input type="radio" name="<%= input_name %>" value="<%= option1_value %>">
@@ -38,6 +38,5 @@
       </div>
     </div>
   </div>
-
   <hr/>
 </div>
