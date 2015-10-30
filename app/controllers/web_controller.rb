@@ -160,7 +160,7 @@ class WebController < ApplicationController
     if @filepath.nil?
       head :not_found
     else
-      send_file(@filepath, type: 'application/pdf')
+      send_file(@filepath, type: 'application/pdf', disposition: 'inline')
     end
 
   rescue
