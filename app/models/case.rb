@@ -202,7 +202,7 @@ class Case < ActiveRecord::Base
 
   def vso_full
     if vso.nil?
-      "No PoA"
+      "None"
     else
       vso.join(' - ')
     end
