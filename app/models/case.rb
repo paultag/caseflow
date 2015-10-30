@@ -198,7 +198,6 @@ class Case < ActiveRecord::Base
 
   def vso
     FULL_VSO_NAMES[bfso]
-    hash[bfso]
   end
 
   def vso_full
