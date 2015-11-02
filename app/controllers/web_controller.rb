@@ -25,7 +25,7 @@ class WebController < ApplicationController
   REMARKS_PAGE_1_MAX_LENGTH = 695
 
   sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
-  non_case_actions = sessionless_actions + %w/show_form/
+  non_case_actions = sessionless_actions + %w/show_form http_404_not_found/
 
   # Check authentication
   before_action 'login_check', except: sessionless_actions
@@ -47,6 +47,10 @@ class WebController < ApplicationController
     rescue VBMS::ClientError => e
       return render 'vbms_failure', layout: 'basic', status: 502
     end
+  end
+
+  def http_404_not_found
+    render '404', layout: 'basic', status: 404
   end
 
   def start
@@ -176,11 +180,20 @@ class WebController < ApplicationController
     end
   end
 
+  def redirect_to_case
+    case_id = session.delete(:case_id)
+    if case_id.nil?
+      # Send them to a generic 404 page if they didn't get here via VACOLS
+      redirect_to '/caseflow/'
+    else
+      redirect_to action: 'start', id: case_id
+    end
+  end
+
   def login_ro_submit
     if is_ro_credentials_valid?(params[:username], params[:password])
       session[:ro] = params[:username].upcase
-      # remove the case id now that login is done
-      redirect_to action: 'start', id: session.delete(:case_id)
+      redirect_to_case
     else
       redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
     end
@@ -199,7 +212,7 @@ class WebController < ApplicationController
     # XXX: In the case of falure, OmniAuth seems to redirect to a /failure/
     #      endpoint. Let's validate that assumption and ensure we don't need
     #      a second codepath to deal with failed logins here.
-    redirect_to action: 'start', id: session.delete(:case_id)
+    redirect_to_case
   end
 
   def logout
