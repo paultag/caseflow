@@ -1,3 +1,5 @@
+require 'uri'
+
 module Caseflow
   def self.safe_join(directory, path)
     if /\x00/ =~ path
@@ -221,7 +223,20 @@ class WebController < ApplicationController
 
   def logout
     reset_session
-    redirect_to action: 'login'
+    # If SSOi is enabled, redirect to their non-SAML logout page. Otherwise just
+    # go to the login page.
+    if ssoi_configured
+      # TODO: Don't reparse this on every single logout attempt.
+      doc = Nokogiri.XML(File.open(ENV['SSOI_SAML_XML_LOCATION'], 'rb'))
+      # Get the URI that is the SAML endpoint
+      location = URI(
+        doc.xpath("//*[local-name()='SingleSignOnService']/@Location")[0].text
+      )
+      # And use the host from there, with a different path.
+      redirect_to "#{location.schema}://#{location.host}/centerallogin/loggedout.aspx"
+    elsif
+      redirect_to action: 'login'
+    end
   end
 
   # -- Action filter --
