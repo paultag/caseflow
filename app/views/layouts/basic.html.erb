@@ -13,6 +13,9 @@
 </head>
 
 <body>
+  <div class="pilot-warning">
+    Caseflow is a pilot stage project
+  </div>
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -45,9 +48,6 @@
     </div>
   </nav>
   <div class="container">
-    <div class="alert alert-info" role="alert">
-      Caseflow is a pilot stage project
-    </div>
     <%= yield(:content) if content_for?(:content) %>
     <%= yield %>
     <hr />
