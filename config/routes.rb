@@ -15,4 +15,6 @@ Rails.application.routes.draw do
 
     post '/users/auth/saml/callback', to: 'web#ssoi_saml_callback'
   end
+
+  get '/404', to: 'web#http_404_not_found', code: 404
 end
