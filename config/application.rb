@@ -34,6 +34,8 @@ module Caseflow
 
     # Do not modify query parameters when empty arrays are passed
     config.action_dispatch.perform_deep_munge = false
+
+    config.exceptions_app = self.routes
   end
 end
 
