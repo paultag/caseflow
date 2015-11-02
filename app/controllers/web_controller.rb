@@ -229,7 +229,7 @@ class WebController < ApplicationController
         doc.xpath("//*[local-name()='SingleSignOnService']/@Location")[0].text
       )
       # And use the host from there, with a different path.
-      redirect_to "#{location.scheme}://#{location.host}/centrallogin/loggedout.aspx"
+      redirect_to "#{location.scheme}://#{location.host}/centrallogin/centrallanding.aspx"
     elsif
       redirect_to action: 'login'
     end
