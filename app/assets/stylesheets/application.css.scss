@@ -65,3 +65,19 @@ label {
   background-color: #4d92df;
   color: #ffffff;
 }
+
+/* Login view */
+#login-login-button {
+  padding-top: 1em;
+}
+
+/* Grid sizes can be found on http://getbootstrap.com/css/ */
+@media (min-width: 970px) {
+
+  /* When we're medium and large, lets set a border on the left side
+   * of the login form column and pad it out to give it a bit of room. */
+  #login-login-form {
+    border-left: 1px solid #DCDCDC;
+    padding-left: 3em;
+  }
+}
