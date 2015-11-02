@@ -1,9 +1,4 @@
 <%= form_tag(action: :login_ro_submit) do %>
-
-  <h1>Please login with your VACOLS username and password.</h1>
-
-  <hr/>
-
   <% if @error_message %>
     <div class="row">
       <div class="col col-md-6">
@@ -15,40 +10,51 @@
     </div>
   <% end %>
 
-  <% username_input_id = 'username_input_id' %>
   <div class="row">
-    <div class="col col-md-12">
-      <label for="<%= username_input_id %>">Username</label>
+    <div class="col col-md-2">
     </div>
-  </div>
-
-  <div class="row">
     <div class="col col-md-6">
-      <input name="username" type="text" id="<%= username_input_id %>" autofocus="autofocus" />
+      <h1>Welcome to Caseflow!</h1>
+      <p>Caseflow helps certify an appeal by verifying documents
+      in the eFolder and helping you fill out an electronic Form 8.
+      Please log in using your VACOLS credentals.</p>
     </div>
-  </div>
+    <div id="login-login-form" class="col col-md-3">
+      <% username_input_id = 'username_input_id' %>
+      <div class="row">
+        <div class="col col-md-3">
+          <label for="<%= username_input_id %>">Username</label>
+        </div>
+      </div>
 
-  <% password_input_id = 'password_input_id' %>
-  <div class="row">
-    <div class="col col-md-12">
-      <label for="<%= password_input_id %>">Password</label>
-    </div>
-  </div>
+      <div class="row">
+        <div class="col col-md-3">
+          <input name="username" type="text" id="<%= username_input_id %>" autofocus="autofocus" />
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col col-md-6">
-      <input name="password" type="password" id="<%= password_input_id %>"/>
-    </div>
-  </div>
+      <% password_input_id = 'password_input_id' %>
+      <div class="row">
+        <div class="col col-md-3">
+          <label for="<%= password_input_id %>">Password</label>
+        </div>
+      </div>
 
-  <hr/>
+      <div class="row">
+        <div class="col col-md-3">
+          <input name="password" type="password" id="<%= password_input_id %>"/>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col col-md-6">
-      <div class="input-group">
-        <input type="submit" value="Login" class="btn btn-primary"/>
+      <div id="login-login-button" class="row">
+        <div class="col col-md-3">
+          <div class="input-group">
+            <input type="submit" value="Login" class="btn btn-primary"/>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="col col-md-1">
+    </div>
   </div>
-
 <% end %>
