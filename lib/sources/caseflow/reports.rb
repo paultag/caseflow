@@ -138,7 +138,7 @@ def main(argv)
   vacols_cases = report.find_vacols_cases().to_a
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
   report_cases = Caseflow::ConcurrentArray.new
-  Parallel.each(vacols_cases, in_threads: 8) do |vacols_case|
+  Parallel.each(vacols_cases, in_threads: 8, progress: "Checking VBMS") do |vacols_case|
     if report.should_include(vacols_case)
       report_cases << vacols_case
     end
