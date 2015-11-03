@@ -28,13 +28,36 @@ module Caseflow
     end
 
     def spreadsheet_cells(vacols_case)
-      # TODO: add data on mismatched cases between VACOLS and VBMS
+      # TODO: add data on mismatched dates between VACOLS and VBMS
       [vacols_case.bfkey, vacols_case.bfac, vacols_case.folder.tivbms, vacols_case.regional_office_full]
     end
   end
 
+  class MismatchedDocumentsReport
+    def find_vacols_cases
+      return Case.joins(:folder).where(
+        "bf41stat IS NOT NULL and bfmpro = ? AND folder.tivbms IN (?)",
+        "ADV", ["Y", "1", "0"]
+      )
+    end
+
+    def should_include(vacols_case)
+      !vacols_case.ready_to_certify?
+    end
+
+    def spreadsheet_columns
+      ["BFKEY", "TYPE", "AOJ"]
+    end
+
+    def spreadsheet_cells(vacols_case)
+      # TODO: add data on mismatched dates between VACOLS and VBMS
+      [vacols_case.bfkey, vacols_case.bfac, vacols_case.regional_office_full]
+    end
+  end
+
   REPORTS = {
-    "seam" => SeamReport
+    "seam" => SeamReport,
+    "mismatched" => MismatchedDocumentsReport,
   }
 end
 

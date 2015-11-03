@@ -114,7 +114,7 @@ of cases to see if they have matching dates in VACOLS and VBMS. To run this
 script:
 
 ```
-./bin/rails runner script/identify_cases.rb
+./bin/rails runner lib/sources/caseflow/reports.rb
 ```
 
 ## Quick Testing
