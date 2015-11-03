@@ -69,7 +69,6 @@ module Caseflow
     end
 
     def spreadsheet_cells(vacols_case)
-      # TODO: convert bfac to something readable
       [
         vacols_case.bfkey,
         TYPE_ACTION[vacols_case.bfac],
