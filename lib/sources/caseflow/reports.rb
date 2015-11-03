@@ -24,12 +24,18 @@ module Caseflow
     end
 
     def spreadsheet_columns
-      ["BFKEY", "TYPE", "TIVBMS", "AOJ"]
+      ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES"]
     end
 
     def spreadsheet_cells(vacols_case)
-      # TODO: add data on mismatched dates between VACOLS and VBMS
-      [vacols_case.bfkey, vacols_case.bfac, vacols_case.folder.tivbms, vacols_case.regional_office_full]
+      # TODO: convert bfac to something readable
+      [
+        vacols_case.bfkey,
+        vacols_case.bfac,
+        vacols_case.folder.file_type,
+        vacols_case.regional_office_full,
+        mismatched_dates(vacols_case),
+      ]
     end
   end
 
@@ -46,12 +52,17 @@ module Caseflow
     end
 
     def spreadsheet_columns
-      ["BFKEY", "TYPE", "AOJ"]
+      ["BFKEY", "TYPE", "AOJ", "MISMATHCED DATES"]
     end
 
     def spreadsheet_cells(vacols_case)
-      # TODO: add data on mismatched dates between VACOLS and VBMS
-      [vacols_case.bfkey, vacols_case.bfac, vacols_case.regional_office_full]
+      # TODO: convert bfac to something readable
+      [
+        vacols_case.bfkey,
+        vacols_case.bfac,
+        vacols_case.regional_office_full,
+        mismatched_dates(vacols_case),
+      ]
     end
   end
 
@@ -60,6 +71,25 @@ module Caseflow
     "mismatched" => MismatchedDocumentsReport,
   }
 end
+
+RELEVANT_FIELDS = [
+  ["bfdnod_date", "efolder_nod_date", "NOD"],
+  ["bfd19_date", "efolder_form9_date", "Form 9"],
+  ["bfdsoc_date", "efolder_soc_date", "SOC"],
+  ["bfssoc1_date", "efolder_ssoc1_date", "SSOC1"],
+  ["bfssoc2_date", "efolder_ssoc2_date", "SSOC2"],
+  ["bfssoc3_date", "efolder_ssoc3_date", "SSOC3"],
+  ["bfssoc4_date", "efolder_ssoc4_date", "SSOC4"],
+  ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
+]
+
+def mismatched_dates(c)
+  mismatched_fields = RELEVANT_FIELDS.select do |vacols_field, vbms_field|
+    c.send(vacols_field) != c.send(vbms_field)
+  end
+  mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
+end
+
 
 def create_spreadsheet(report, items)
   CSV.generate do |csv|
