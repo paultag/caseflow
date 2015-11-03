@@ -11,6 +11,19 @@ module Caseflow
     include JRuby::Synchronized
   end
 
+  TYPE_ACTION = {
+    "1" => "1-Original",
+    "2" => "2-Supplemental",
+    "3" => "3-Post-remand",
+    "4" => "4-Reconsideration",
+    "5" => "5-Vacate",
+    "6" => "6-De novo",
+    "7" => "7-Court remand",
+    "8" => "8-DOR",
+    "9" => "9-CUE",
+    "P" => "P-Post decision development",
+  }
+
   class SeamReport
     def find_vacols_cases
       return Case.joins(:folder).where(
@@ -24,14 +37,14 @@ module Caseflow
     end
 
     def spreadsheet_columns
+      # TODO: include cert date
       ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES"]
     end
 
     def spreadsheet_cells(vacols_case)
-      # TODO: convert bfac to something readable
       [
         vacols_case.bfkey,
-        vacols_case.bfac,
+        TYPE_ACTION[vacols_case.bfac],
         vacols_case.folder.file_type,
         vacols_case.regional_office_full,
         mismatched_dates(vacols_case),
@@ -59,7 +72,7 @@ module Caseflow
       # TODO: convert bfac to something readable
       [
         vacols_case.bfkey,
-        vacols_case.bfac,
+        TYPE_ACTION[vacols_case.bfac],
         vacols_case.regional_office_full,
         mismatched_dates(vacols_case),
       ]
