@@ -37,8 +37,7 @@ module Caseflow
     end
 
     def spreadsheet_columns
-      # TODO: include cert date
-      ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES"]
+      ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE"]
     end
 
     def spreadsheet_cells(vacols_case)
@@ -48,6 +47,7 @@ module Caseflow
         vacols_case.folder.file_type,
         vacols_case.regional_office_full,
         mismatched_dates(vacols_case),
+        vacols_case.bf41stat,
       ]
     end
   end
