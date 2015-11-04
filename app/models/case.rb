@@ -151,7 +151,7 @@ class Case < ActiveRecord::Base
   end
 
   def efolder_case
-    @efolder_case ||= EFolder::Case.new(self.bfcorlid.gsub(/[^0-9]/, ''))
+    @efolder_case ||= EFolder::Case.new(efolder_appellant_id)
   end
 
   def efolder_nod_date
