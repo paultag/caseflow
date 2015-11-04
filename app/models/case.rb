@@ -151,7 +151,7 @@ class Case < ActiveRecord::Base
   end
 
   def efolder_case
-    @efolder_case ||= EFolder::Case.new(self.bfcorlid.gsub(/[^0-9]/, ''))
+    @efolder_case ||= EFolder::Case.new(efolder_appellant_id)
   end
 
   def efolder_nod_date
@@ -273,7 +273,11 @@ class Case < ActiveRecord::Base
   end
 
   def regional_office_full
-    regional_office.join(', ')
+    if regional_office.nil?
+      bfregoff
+    else
+      regional_office.join(', ')
+    end
   end
 
   def initial_fields

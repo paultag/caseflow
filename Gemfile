@@ -17,8 +17,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyrhino'
 gem 'uglifier', '>= 1.3.0'
 
-# for the idenitfy_cases script
+# for reports
 gem 'parallel', '~> 1.6.1'
+gem 'ruby-progressbar', '~> 1.7.0'
 
 # for vbms_connect
 gem 'httpi'
