@@ -6,7 +6,7 @@
         Review the completed Form 8 below and verify all fields are accurate.
         If the form looks correct, click the <strong>Upload and Certify</strong>
         button and the Form 8 will automatically be uploaded to VBMS. If there
-        are any mistakes, <a onlick="window.history.back();">go back the errors</a>.
+        are any mistakes, <a onlick="window.history.back();">go back to fix any errors</a>.
       </p>
       <hr/>
 
@@ -21,7 +21,7 @@
       <%= form_tag({action: :certify}) do %>
         <input type="hidden" value="<%= @file_name %>" name="file_name"/>
         <input type="hidden" value="<%= @certification_date %>" name="certification_date"/>
-        <a href="#">Go back to fix an error</a>
+        <a href="#">Go back to fix any errors</a>
         <input type="submit" value="Upload and Certify" class="btn btn-primary pull-right"/>
       <% end %>
     </div>
