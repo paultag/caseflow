@@ -66,7 +66,7 @@ module Caseflow
           TYPE_ACTION[vacols_case.bfac],
           vacols_case.folder.file_type,
           vacols_case.regional_office_full,
-          mismatched_dates(vacols_case),
+          Caseflow::Reports.mismatched_dates(vacols_case),
           vacols_case.bf41stat,
         ]
       end
@@ -93,7 +93,7 @@ module Caseflow
           vacols_case.bfkey,
           TYPE_ACTION[vacols_case.bfac],
           vacols_case.regional_office_full,
-          mismatched_dates(vacols_case),
+          Caseflow::Reports.mismatched_dates(vacols_case),
         ]
       end
     end
@@ -140,7 +140,7 @@ def main(argv)
 
   vacols_cases = report.find_vacols_cases().to_a
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
-  report_cases = Caseflow::ConcurrentArray.new
+  report_cases = Caseflow::Reports::ConcurrentArray.new
   Parallel.each(vacols_cases, in_threads: 8, progress: "Checking VBMS") do |vacols_case|
     if report.should_include(vacols_case)
       report_cases << vacols_case
