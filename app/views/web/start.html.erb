@@ -5,7 +5,7 @@
 
 <div id="certifications-start">
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col col-md-10 col-md-offset-1">
       <div class="alert alert-danger clearfix" role="alert">
         <strong>Cannot find documents in VBMS</strong><br/>
         Some of the files listed in VACOLS could not be found in VBMS.
@@ -15,8 +15,8 @@
 
   <div class="instructions">
     <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
-        <h3>Find missing documents</h3>
+      <div class="col col-md-10 col-md-offset-1">
+        <h2>Find missing documents</h2>
 
         <p>
           Caseflow could not find the documents with an <strong>X</strong> below, in the
@@ -62,15 +62,13 @@
 
   <div class="instructions">
     <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
-        <p>
-          <%= form_tag({action: :error}, {class: "pull-right"}) do %>
-            <input type="submit" value="This case cannot be certified" class="btn btn-link"/>
-          <% end %>
-          <button class="btn btn-primary" onclick="location.reload()">
+      <div class="col col-md-10 col-md-offset-1">
+        <%= form_tag({action: :certify}) do %>
+          <input type="submit" value="This case cannot be certified" class="btn btn-link"/>
+          <button class="btn btn-primary pull-right" onclick="location.reload()">
             Refresh Page
           </button>
-        </p>
+        <% end %>
       </div>
     </div>
   </div>
