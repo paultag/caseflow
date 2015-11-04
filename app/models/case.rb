@@ -273,7 +273,11 @@ class Case < ActiveRecord::Base
   end
 
   def regional_office_full
-    regional_office.join(', ')
+    if regional_office.nil?
+      bfregoff
+    else
+      regional_office.join(', ')
+    end
   end
 
   def initial_fields
