@@ -114,8 +114,10 @@ of cases to see if they have matching dates in VACOLS and VBMS. To run this
 script:
 
 ```
-./bin/rails runner lib/sources/caseflow/reports.rb
+./bin/rails runner lib/sources/caseflow/reports.rb <report-name> <output.csv>
 ```
+
+Valid report names are `seam` and `mismatched`.
 
 ## Quick Testing
 
