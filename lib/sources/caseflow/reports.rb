@@ -140,6 +140,10 @@ def main(argv)
 
   vacols_cases = report.find_vacols_cases().to_a
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
+
+  # For now only process cases whose bfcorlid is an SSN
+  vacols_cases = vacols_cases.reject { |c| c.bfcorlid.ends_with?("C") }
+
   report_cases = Caseflow::Reports::ConcurrentArray.new
   Parallel.each(vacols_cases, in_threads: 8, progress: "Checking VBMS") do |vacols_case|
     if report.should_include(vacols_case)
