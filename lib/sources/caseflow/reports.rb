@@ -30,6 +30,15 @@ module Caseflow
       mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
     end
 
+    def self.hearing_pending(c)
+      # bfhr: Hearing requested ("1" -> Central Office, "2" -> Travel Board)
+      # bfha: Hearing action (NULL -> No hearing happened)
+      if (c.bfhr == "1" || c.bfhr == "2") && c.bfha.nil?
+        "Y"
+      else
+        "N"
+      end
+    end
 
     TYPE_ACTION = {
       "1" => "1-Original",
@@ -57,7 +66,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE"]
+        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE", "HAS HEARING PENDING"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -68,6 +77,7 @@ module Caseflow
           vacols_case.regional_office_full,
           Caseflow::Reports.mismatched_dates(vacols_case),
           vacols_case.bf41stat,
+          Caseflow::Reports.hearing_pending(vacols_case)
         ]
       end
     end
