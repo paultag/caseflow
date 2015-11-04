@@ -7,99 +7,102 @@ require 'parallel'
 
 module Caseflow
   # Copied from conrrunt-ruby's 1.0 pre-release
-  class ConcurrentArray < ::Array
-    include JRuby::Synchronized
-  end
+  module Reports
+    RELEVANT_FIELDS = [
+      ["bfdnod_date", "efolder_nod_date", "NOD"],
+      ["bfd19_date", "efolder_form9_date", "Form 9"],
+      ["bfdsoc_date", "efolder_soc_date", "SOC"],
+      ["bfssoc1_date", "efolder_ssoc1_date", "SSOC1"],
+      ["bfssoc2_date", "efolder_ssoc2_date", "SSOC2"],
+      ["bfssoc3_date", "efolder_ssoc3_date", "SSOC3"],
+      ["bfssoc4_date", "efolder_ssoc4_date", "SSOC4"],
+      ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
+    ]
 
-  TYPE_ACTION = {
-    "1" => "1-Original",
-    "2" => "2-Supplemental",
-    "3" => "3-Post-remand",
-    "4" => "4-Reconsideration",
-    "5" => "5-Vacate",
-    "6" => "6-De novo",
-    "7" => "7-Court remand",
-    "8" => "8-DOR",
-    "9" => "9-CUE",
-    "P" => "P-Post decision development",
-  }
-
-  class SeamReport
-    def find_vacols_cases
-      return Case.joins(:folder).where(
-        "bf41stat IS NOT NULL and bfmpro = ? AND folder.tivbms NOT IN (?)",
-        "ADV", ["Y", "1", "0"]
-      )
+    class ConcurrentArray < ::Array
+      include JRuby::Synchronized
     end
 
-    def should_include(vacols_case)
-      vacols_case.efolder_case.documents.length >= 1
+    def self.mismatched_dates(c)
+      mismatched_fields = RELEVANT_FIELDS.select do |vacols_field, vbms_field|
+        c.send(vacols_field) != c.send(vbms_field)
+      end
+      mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
     end
 
-    def spreadsheet_columns
-      ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE"]
+
+    TYPE_ACTION = {
+      "1" => "1-Original",
+      "2" => "2-Supplemental",
+      "3" => "3-Post-remand",
+      "4" => "4-Reconsideration",
+      "5" => "5-Vacate",
+      "6" => "6-De novo",
+      "7" => "7-Court remand",
+      "8" => "8-DOR",
+      "9" => "9-CUE",
+      "P" => "P-Post decision development",
+    }
+
+    class SeamReport
+      def find_vacols_cases
+        return Case.joins(:folder).where(
+          "bf41stat IS NOT NULL and bfmpro = ? AND folder.tivbms NOT IN (?)",
+          "ADV", ["Y", "1", "0"]
+        )
+      end
+
+      def should_include(vacols_case)
+        vacols_case.efolder_case.documents.length >= 1
+      end
+
+      def spreadsheet_columns
+        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE"]
+      end
+
+      def spreadsheet_cells(vacols_case)
+        [
+          vacols_case.bfkey,
+          TYPE_ACTION[vacols_case.bfac],
+          vacols_case.folder.file_type,
+          vacols_case.regional_office_full,
+          mismatched_dates(vacols_case),
+          vacols_case.bf41stat,
+        ]
+      end
     end
 
-    def spreadsheet_cells(vacols_case)
-      [
-        vacols_case.bfkey,
-        TYPE_ACTION[vacols_case.bfac],
-        vacols_case.folder.file_type,
-        vacols_case.regional_office_full,
-        mismatched_dates(vacols_case),
-        vacols_case.bf41stat,
-      ]
-    end
-  end
+    class MismatchedDocumentsReport
+      def find_vacols_cases
+        return Case.joins(:folder).where(
+          "bf41stat IS NOT NULL and bfmpro = ? AND folder.tivbms IN (?)",
+          "ADV", ["Y", "1", "0"]
+        )
+      end
 
-  class MismatchedDocumentsReport
-    def find_vacols_cases
-      return Case.joins(:folder).where(
-        "bf41stat IS NOT NULL and bfmpro = ? AND folder.tivbms IN (?)",
-        "ADV", ["Y", "1", "0"]
-      )
-    end
+      def should_include(vacols_case)
+        !vacols_case.ready_to_certify?
+      end
 
-    def should_include(vacols_case)
-      !vacols_case.ready_to_certify?
-    end
+      def spreadsheet_columns
+        ["BFKEY", "TYPE", "AOJ", "MISMATHCED DATES"]
+      end
 
-    def spreadsheet_columns
-      ["BFKEY", "TYPE", "AOJ", "MISMATHCED DATES"]
-    end
-
-    def spreadsheet_cells(vacols_case)
-      [
-        vacols_case.bfkey,
-        TYPE_ACTION[vacols_case.bfac],
-        vacols_case.regional_office_full,
-        mismatched_dates(vacols_case),
-      ]
+      def spreadsheet_cells(vacols_case)
+        [
+          vacols_case.bfkey,
+          TYPE_ACTION[vacols_case.bfac],
+          vacols_case.regional_office_full,
+          mismatched_dates(vacols_case),
+        ]
+      end
     end
   end
 
   REPORTS = {
-    "seam" => SeamReport,
-    "mismatched" => MismatchedDocumentsReport,
+    "seam" => Reports::SeamReport,
+    "mismatched" => Reports::MismatchedDocumentsReport,
   }
-end
-
-RELEVANT_FIELDS = [
-  ["bfdnod_date", "efolder_nod_date", "NOD"],
-  ["bfd19_date", "efolder_form9_date", "Form 9"],
-  ["bfdsoc_date", "efolder_soc_date", "SOC"],
-  ["bfssoc1_date", "efolder_ssoc1_date", "SSOC1"],
-  ["bfssoc2_date", "efolder_ssoc2_date", "SSOC2"],
-  ["bfssoc3_date", "efolder_ssoc3_date", "SSOC3"],
-  ["bfssoc4_date", "efolder_ssoc4_date", "SSOC4"],
-  ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
-]
-
-def mismatched_dates(c)
-  mismatched_fields = RELEVANT_FIELDS.select do |vacols_field, vbms_field|
-    c.send(vacols_field) != c.send(vbms_field)
-  end
-  mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
 end
 
 
