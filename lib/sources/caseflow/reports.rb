@@ -156,7 +156,7 @@ def main(argv)
   puts "#{vacols_cases.length} cases with potential eFolder IDs"
 
   report_cases = Caseflow::Reports::ConcurrentArray.new
-  Parallel.each(vacols_cases, in_threads: 8, progress: "Checking VBMS") do |vacols_case|
+  Parallel.each(vacols_cases, in_threads: 4, progress: "Checking VBMS") do |vacols_case|
     if report.should_include(vacols_case)
       report_cases << vacols_case
     end
