@@ -116,8 +116,8 @@ module Caseflow
 end
 
 
-def create_spreadsheet(report, items)
-  CSV.generate do |csv|
+def create_spreadsheet(output_path, report, items)
+  CSV.open(output_path, "wb") do |csv|
     csv << report.spreadsheet_columns
     items.each do |item|
       csv << report.spreadsheet_cells(item)
@@ -164,8 +164,7 @@ def main(argv)
 
   puts "Found #{report_cases.length} cases that met the report conditions"
 
-  sheet = create_spreadsheet(report, report_cases)
-  File.write(output_path, sheet)
+  create_spreadsheet(output_path, report, report_cases)
 end
 
 if __FILE__ == $0
