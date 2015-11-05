@@ -151,8 +151,8 @@ def main(argv)
   vacols_cases = report.find_vacols_cases().to_a
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
 
-  # For now only process cases whose bfcorlid is an SSN
-  vacols_cases = vacols_cases.reject { |c| !c.bfcorlid.ends_with?("S") || c.efolder_appellant_id.length != 9 }
+  # For now only process cases whose efolder_appellant_id's length is >= 8
+  vacols_cases = vacols_cases.reject { |c| c.efolder_appellant_id.length < 8 }
   puts "#{vacols_cases.length} cases with potential eFolder IDs"
 
   report_cases = Caseflow::Reports::ConcurrentArray.new
