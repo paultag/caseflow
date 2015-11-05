@@ -148,7 +148,7 @@ class Case < ActiveRecord::Base
 
   def efolder_appellant_id
     id = self.bfcorlid.gsub(/[^0-9]/, '')
-    if self.bfcorlid.starts_with?("C") && id.length == 7
+    if self.bfcorlid.ends_with?("C") && id.length == 7
       id = "0#{id}"
     end
     id
