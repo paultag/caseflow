@@ -152,7 +152,8 @@ def main(argv)
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
 
   # For now only process cases whose bfcorlid is an SSN
-  vacols_cases = vacols_cases.reject { |c| c.bfcorlid.ends_with?("C") }
+  vacols_cases = vacols_cases.reject { |c| !c.bfcorlid.ends_with?("S") || c.efolder_appellant_id.length != 9 }
+  puts "#{vacols_cases.length} cases with potential eFolder IDs"
 
   report_cases = Caseflow::Reports::ConcurrentArray.new
   Parallel.each(vacols_cases, in_threads: 8, progress: "Checking VBMS") do |vacols_case|
