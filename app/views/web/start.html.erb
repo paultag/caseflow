@@ -60,16 +60,14 @@
 
   <hr/>
 
-  <div class="instructions">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
-        <%= form_tag(action: :error) do %>
-          <input type="submit" value="This case cannot be certified" class="btn btn-link"/>
-          <button class="btn btn-primary pull-right" onclick="location.reload(); return false;">
-            Refresh Page
-          </button>
-        <% end %>
-      </div>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= form_tag(action: :error) do %>
+        <input type="submit" value="This case cannot be certified" class="btn btn-link"/>
+        <button class="btn btn-primary pull-right" onclick="location.reload(); return false;">
+          Refresh Page
+        </button>
+      <% end %>
     </div>
   </div>
 </div>
