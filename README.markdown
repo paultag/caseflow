@@ -31,9 +31,7 @@ Using `rbenv` install JRuby:
 
 Now, make JRuby the Ruby being used in your current terminal. Run the following commands
 
-```
 `$ rbenv local jruby-9.0.3.0`
-```
 
 Install bundle, which will help download/manage Ruby dependencies:
 
