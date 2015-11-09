@@ -159,8 +159,15 @@ def main(argv)
 
   report_cases = Caseflow::Reports::ConcurrentArray.new
   Parallel.each(vacols_cases, in_threads: 4, progress: "Checking VBMS") do |vacols_case|
-    if report.should_include(vacols_case)
-      report_cases << vacols_case
+    begin
+      if report.should_include(vacols_case)
+        Rails.logger.info "event=report.case.found bfkey=#{vacols_case.bfkey}"
+        report_cases << vacols_case
+      else
+        Rails.logger.info "event=report.case.condition_not_met bfkey=#{vacols_case.bfkey}"
+      end
+    rescue => e
+      Rails.logger.error "event=report.case.exception bfkey=#{vacols_case.bfkey} traceback=#{e.backtrace}"
     end
   end
 
