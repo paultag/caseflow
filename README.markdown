@@ -91,10 +91,9 @@ For *production* (you may need to uncomment them):
 
 ## Everytime Setup
 
-Make sure you're using the correct JRuby and environment variables.
+Make sure you're using the correct environment variables. 
 
 ```
-> rvm use jruby-1.7.22
 > source env.sh
 ```
 
