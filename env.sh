@@ -1,4 +1,3 @@
-export JRUBY_OPTS="--2.0"
 export CONNECT_VBMS_ENV_DIR="/Users/vacomaherj/GitHub/deployment/decrypted_creds"
 export CONNECT_VBMS_ENV="uat_creds"
 export CONNECT_VBMS_URL="***REMOVED***"
