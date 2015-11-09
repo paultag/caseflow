@@ -167,7 +167,7 @@ def main(argv)
         Rails.logger.info "event=report.case.condition_not_met bfkey=#{vacols_case.bfkey}"
       end
     rescue => e
-      Rails.logger.error "event=report.case.exception bfkey=#{vacols_case.bfkey} traceback=#{e.backtrace}"
+      Rails.logger.error "event=report.case.exception bfkey=#{vacols_case.bfkey} message=#{e.message} traceback=#{e.backtrace}"
     end
   end
 
