@@ -21,19 +21,18 @@ Next, you'll need the Java Cryptography Extension (JCE) that is required by JRub
 
 ### JRuby Setup
 
-Install RVM, which is a tool that helps install/manage versions of Ruby:
+Install `rbenv`, which is a tool that helps install/manage versions of Ruby:
 
- `> \curl -sSL https://get.rvm.io | bash -s stable`
+`$ brew install rbenv`
 
-Using RVM install JRuby:
+Using `rbenv` install JRuby:
 
-`> rvm install jruby-1.7.22`
+`$ rbenv install jruby-9.0.3.0`
 
 Now, make JRuby the Ruby being used in your current terminal. Run the following commands
 
 ```
-> rvm use jruby-1.7.22
-> export JRUBY_OPTS=--2.0
+`$ rbenv local jruby-9.0.3.0`
 ```
 
 Install bundle, which will help download/manage Ruby dependencies:
