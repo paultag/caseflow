@@ -95,7 +95,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATHCED DATES"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE", "HAS HEARING PENDING"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -104,6 +104,8 @@ module Caseflow
           TYPE_ACTION[vacols_case.bfac],
           vacols_case.regional_office_full,
           Caseflow::Reports.mismatched_dates(vacols_case),
+          vacols_case.bf41stat,
+          Caseflow::Reports.hearing_pending(vacols_case)
         ]
       end
     end
@@ -116,8 +118,8 @@ module Caseflow
 end
 
 
-def create_spreadsheet(report, items)
-  CSV.generate do |csv|
+def create_spreadsheet(output_path, report, items)
+  CSV.open(output_path, "wb") do |csv|
     csv << report.spreadsheet_columns
     items.each do |item|
       csv << report.spreadsheet_cells(item)
@@ -151,20 +153,27 @@ def main(argv)
   vacols_cases = report.find_vacols_cases().to_a
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
 
-  # For now only process cases whose bfcorlid is an SSN
-  vacols_cases = vacols_cases.reject { |c| c.bfcorlid.ends_with?("C") }
+  # For now only process cases whose efolder_appellant_id's length is >= 8
+  vacols_cases = vacols_cases.reject { |c| c.efolder_appellant_id.length < 8 }
+  puts "#{vacols_cases.length} cases with potential eFolder IDs"
 
   report_cases = Caseflow::Reports::ConcurrentArray.new
-  Parallel.each(vacols_cases, in_threads: 8, progress: "Checking VBMS") do |vacols_case|
-    if report.should_include(vacols_case)
-      report_cases << vacols_case
+  Parallel.each(vacols_cases, in_threads: 4, progress: "Checking VBMS") do |vacols_case|
+    begin
+      if report.should_include(vacols_case)
+        Rails.logger.info "event=report.case.found bfkey=#{vacols_case.bfkey}"
+        report_cases << vacols_case
+      else
+        Rails.logger.info "event=report.case.condition_not_met bfkey=#{vacols_case.bfkey}"
+      end
+    rescue => e
+      Rails.logger.error "event=report.case.exception bfkey=#{vacols_case.bfkey} message=#{e.message} traceback=#{e.backtrace}"
     end
   end
 
   puts "Found #{report_cases.length} cases that met the report conditions"
 
-  sheet = create_spreadsheet(report, report_cases)
-  File.write(output_path, sheet)
+  create_spreadsheet(output_path, report, report_cases)
 end
 
 if __FILE__ == $0
