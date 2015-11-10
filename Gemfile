@@ -21,10 +21,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'parallel', '~> 1.6.1'
 gem 'ruby-progressbar', '~> 1.7.0'
 
-# for vbms_connect
-gem 'httpi'
-# gem 'libxml-jruby'
 gem 'nokogiri', '~> 1.6.6.2'
+gem 'httpclient', '~> 2.6.0'
 
 # For SAML SSO
 
