@@ -13,7 +13,7 @@ module EFolder
     end
 
     def documents
-      @documents ||= $vbms.send(VBMS::Requests::ListDocuments.new(self.id))
+      @documents ||= $vbms.send_request(VBMS::Requests::ListDocuments.new(self.id))
     end
 
     def get_nod(timestamp)
