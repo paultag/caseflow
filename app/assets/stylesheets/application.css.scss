@@ -1,47 +1,42 @@
-/*
- * = require us_web_design_standards
- * = require us_web_design_standards_fonts
- */
-
 // Vendor -------------- //
 
-//@import '_scss/lib/bourbon/bourbon';
-//@import '_scss/lib/neat/neat';
-//@import '_scss/lib/normalize';
+@import '_scss/lib/bourbon/bourbon';
+@import '_scss/lib/neat/neat';
+@import '_scss/lib/normalize';
 
 
 // Core -------------- //
 
-//@import '_scss/core/grid-settings';
-//@import '_scss/core/defaults';
-//@import '_scss/core/variables';
-//@import '_scss/core/base';
-//@import '_scss/core/grid';
-// @import '_scss/core/utilities';
+@import '_scss/core/grid-settings';
+@import '_scss/core/defaults';
+@import '_scss/core/variables';
+@import '_scss/core/base';
+@import '_scss/core/grid';
+@import '_scss/core/utilities';
 
 
 // Elements -------------- //
 // Styles basic html elements
 
-//@import '_scss/elements/typography';
-//@import '_scss/elements/list';
-//@import '_scss/elements/inputs';
-//@import '_scss/elements/buttons';
-//@import '_scss/elements/table';
-//@import '_scss/elements/figure';
-//@import '_scss/elements/labels';
+@import '_scss/elements/typography';
+@import '_scss/elements/list';
+@import '_scss/elements/inputs';
+@import '_scss/elements/buttons';
+@import '_scss/elements/table';
+@import '_scss/elements/figure';
+@import '_scss/elements/labels';
 
 
 // Components -------------- //
 
-//@import '_scss/components/skipnav';
-//@import '_scss/components/disclaimer';
-//@import '_scss/components/sidenav';
-//@import '_scss/components/footer';
-//@import '_scss/components/forms';
-//@import '_scss/components/search';
-//@import '_scss/components/alerts';
-//@import '_scss/components/accordions';
+@import '_scss/components/skipnav';
+@import '_scss/components/disclaimer';
+@import '_scss/components/sidenav';
+@import '_scss/components/footer';
+@import '_scss/components/forms';
+@import '_scss/components/search';
+@import '_scss/components/alerts';
+@import '_scss/components/accordions';
 
 
 body {
@@ -167,6 +162,20 @@ body {
 
   &-trigger {
     cursor: pointer;
+
+    &::after {
+        background: url(asset-path('icons/arrow-down.svg')) 50% 100% no-repeat;
+        background-size: 100% 100%;
+        content: ' ';
+        display: inline-block;
+        height: 1rem;
+        margin-left: 1rem;
+        width: 1rem;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
   }
 
   &-button:after {
