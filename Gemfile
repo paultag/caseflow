@@ -36,6 +36,8 @@ gem 'omniauth-saml-va', git: 'https://github.com/department-of-veterans-affairs/
 
 gem 'connect_vbms', path: './vendor/gems/connect_vbms'
 
+gem 'us_web_design_standards'
+
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'

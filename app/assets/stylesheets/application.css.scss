@@ -1,30 +1,35 @@
+/*
+ * = require us_web_design_standards
+ * = require us_web_design_standards_fonts
+ */
+
 // Vendor -------------- //
 
-@import '_scss/lib/bourbon/bourbon';
-@import '_scss/lib/neat/neat';
-@import '_scss/lib/normalize';
+//@import '_scss/lib/bourbon/bourbon';
+//@import '_scss/lib/neat/neat';
+//@import '_scss/lib/normalize';
 
 
 // Core -------------- //
 
-@import '_scss/core/grid-settings';
-@import '_scss/core/defaults';
-@import '_scss/core/variables';
-@import '_scss/core/base';
-@import '_scss/core/grid';
-@import '_scss/core/utilities';
+//@import '_scss/core/grid-settings';
+//@import '_scss/core/defaults';
+//@import '_scss/core/variables';
+//@import '_scss/core/base';
+//@import '_scss/core/grid';
+// @import '_scss/core/utilities';
 
 
 // Elements -------------- //
 // Styles basic html elements
 
-@import '_scss/elements/typography';
-@import '_scss/elements/list';
-@import '_scss/elements/inputs';
-@import '_scss/elements/buttons';
-@import '_scss/elements/table';
-@import '_scss/elements/figure';
-@import '_scss/elements/labels';
+//@import '_scss/elements/typography';
+//@import '_scss/elements/list';
+//@import '_scss/elements/inputs';
+//@import '_scss/elements/buttons';
+//@import '_scss/elements/table';
+//@import '_scss/elements/figure';
+//@import '_scss/elements/labels';
 
 
 // Components -------------- //

@@ -1,4 +1,10 @@
-//= require_self
+/*
+ * = require vendor/jquery-1.11.3.min.js
+ * = require components.js
+ */
+ //= require_self
+
+
 
 (function () {
     "use strict";
