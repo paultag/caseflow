@@ -103,3 +103,18 @@ $(function () {
 });
 
 // --- END: JS for questions.html.erb ---
+
+/*------------------------------------
+* Patterns based on Refills.bourbon.io
+*------------------------------------*/
+
+$(document).ready(function(){
+  $(".dropdown-trigger").click(function(e) {
+    e.preventDefault(); // Prevent page jump
+    var dropdownMenu = $(this).attr('href');
+    $(dropdownMenu).toggleClass("dropdown-show");
+    $(".dropdown-menu > li").click(function(){
+      $(".dropdown-menu").removeClass("dropdown-show");
+    });
+  });
+});
