@@ -25,6 +25,10 @@ class WebController < ApplicationController
 
   # Constants
   REMARKS_PAGE_1_MAX_LENGTH = 695
+  CONTINUED = ' (continued)'
+  REMARKS_CONTINUED = "\n\nRemarks Continued:"
+  SEE_PAGE_2 = ' (see continued remarks page 2)'
+  XA_ROLLOVER_CAP = 159
 
   sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
   non_case_actions = sessionless_actions + %w/show_form http_404_not_found/
@@ -280,25 +284,45 @@ class WebController < ApplicationController
 
   # --- Helper Methods ---
   def self.field_rollover(field_hash)
+
     fields = field_hash.dup
+    remarks_full = fields['14_REMARKS_INITIAL']
+    remarks_page_1 = ''
+    remarks_page_2 = ''
 
     # Box 5A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
-    # TODO: For future PR, add to remarks_page_2
+    fields['5A_SERVICE_CONNECTION_FOR'], field_5a_rollover = WebController.field_xa_rollover(fields['5A_SERVICE_CONNECTION_FOR'], '5A')
+    remarks_page_2 << field_5a_rollover
 
     # Box 6A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
-    # TODO: For future PR, add to remarks_page_2
+    fields['6A_INCREASED_RATING_FOR'], field_6a_rollover = WebController.field_xa_rollover(fields['6A_INCREASED_RATING_FOR'], '6A')
+    remarks_page_2 << field_6a_rollover
 
     # Box 7A is capped at 200 characters (arbitrary choice), rollover to page 2 if over cap
-    # TODO: For future PR, add to remarks_page_2
+    fields['7A_OTHER'], field_7a_rollover = WebController.field_xa_rollover(fields['7A_OTHER'], '7A')
+    remarks_page_2 << field_7a_rollover
 
     # Remarks field, itself
-    remarks_page_1, remarks_page_2 = WebController.remarks_field_rollover(
-      fields['14_REMARKS_INITIAL']
-    )
+    remarks_full = fields['14_REMARKS_INITIAL']
+    remarks = WebController.remarks_field_rollover(remarks_full)
+    remarks_page_1 << remarks[0]
+    remarks_page_2 << remarks[1]
 
     fields['14_REMARKS_INITIAL'] = remarks_page_1
     fields['14_REMARKS_CONTINUED'] = remarks_page_2
     fields
+  end
+
+  def self.field_xa_rollover(value, field_label)
+    if value.length > 200
+      field = "#{value[0..(XA_ROLLOVER_CAP-1)]}#{SEE_PAGE_2}"
+      rollover = "\n\n#{field_label} Continued:\n#{value[XA_ROLLOVER_CAP..(value.length)]}"
+    else
+      field = value
+      rollover = ''
+    end
+
+    [field, rollover]
   end
 
   def self.remarks_field_rollover(remarks)
@@ -330,8 +354,8 @@ class WebController < ApplicationController
     end
 
     if !remarks_2.empty?
-      remarks_1 << ' (continued)'
-      remarks_2 = "\nRemarks Continued:#{remarks_2}"
+      remarks_1 << CONTINUED
+      remarks_2 = "#{REMARKS_CONTINUED}#{remarks_2}"
     end
 
     [remarks_1, remarks_2]

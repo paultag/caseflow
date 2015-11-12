@@ -56,8 +56,8 @@ module Caseflow
     class SeamReport
       def find_vacols_cases
         return Case.joins(:folder).where(
-          "bf41stat IS NOT NULL and bfmpro = ? AND (folder.tivbms IS NULL OR folder.tivbms NOT IN (?))",
-          "ADV", ["Y", "1", "0"]
+          "bf41stat < ? AND bfmpro = ? AND (folder.tivbms IS NULL OR folder.tivbms NOT IN (?))",
+          2.weeks.ago, "ADV", ["Y", "1", "0"]
         )
       end
 
@@ -85,8 +85,8 @@ module Caseflow
     class MismatchedDocumentsReport
       def find_vacols_cases
         return Case.joins(:folder).where(
-          "bf41stat IS NOT NULL and bfmpro = ? AND folder.tivbms IN (?)",
-          "ADV", ["Y", "1", "0"]
+          "bf41stat < ? AND bfmpro = ? AND folder.tivbms IN (?)",
+          2.weeks.ago, "ADV", ["Y", "1", "0"]
         )
       end
 
