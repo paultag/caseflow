@@ -44,11 +44,12 @@
       </header>
 
 
-  <main class="usa-grid container usa-cf_app-main">
+  <main class="usa-grid">
+    <div class="usa-cf_app-main">
     <%= yield(:content) if content_for?(:content) %>
     <%= yield %>
 
-
+    </div>
   </main>
 
     <footer class="text-center usa-grid">

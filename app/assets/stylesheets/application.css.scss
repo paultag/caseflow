@@ -113,12 +113,14 @@ label {
 }
 
 /*----------------------------------*
-* Resets
+* Globals, Resets, and overrides
 *-----------------------------------*/
 .text-center {
     text-align: center;
 }
-
+abbr[title] {
+    border: 0;
+}
 
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
@@ -152,7 +154,14 @@ body {
     margin-right: rem(20px);
 }
 
-
+/*
+Should only use with a <main> element
+Or with the primary element of the page.
+*/
+.usa-cf_app-main {
+    @include span-columns(10);
+    @include shift(1);
+}
 
 
 .dropdown {

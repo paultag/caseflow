@@ -1,4 +1,5 @@
-$usa-form-width: 32rem;
+// $usa-form-width: 32rem;
+$usa-form-width: 100%;
 
 form {
   @include media($medium-screen) {

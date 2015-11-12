@@ -1,11 +1,10 @@
-<div id="certification-questions">
+<section id="certification-questions">
   <%= form_tag({action: :questions_submit}, {id: 'question-form'}) do %>
-    <div class="row">
-      <div class="col col-md-10 col-md-offset-1">
+    <div>
+      <div>
         <h2>Complete Electronic Form 8</h2>
         <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
-        <hr/>
-
+        
         <% if @kase.required_fields[:show_8b] %>
           <%= render partial: 'form8_two_radio', locals: {
                   question: 'VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS',
@@ -145,7 +144,7 @@
           </div>
           <div class="row">
             <div class="col col-md-12">
-              <hr/> <%# Current styles wrap this into prior line w/o divs %>
+               <%# Current styles wrap this into prior line w/o divs %>
             </div>
           </div>
         </div>
@@ -164,7 +163,7 @@
             <textarea name="<%= textarea_name %>" rows="3" class="form-control" id="<%= textarea_id %>"></textarea>
           </div>
         </div>
-        <hr/>
+
 
         <%= render partial: 'form8_text', locals: {
                 question: 'NAME OF CERTIFYING OFFICIAL',
@@ -185,4 +184,4 @@
       </div>
     </div>
   <% end %>
-</div>
+</section>
