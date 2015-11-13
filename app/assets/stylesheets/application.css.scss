@@ -205,12 +205,25 @@ body {
     > * {
         display: table-cell;
         width: 33%;
+        padding: rem(30px);
+    }
+
+    &--bordered {
+        border: 1px solid $color-gray-lighter;
+
+        > *:nth-child(even) {
+            border-left: 1px solid $color-gray-lighter;
+            border-right: 1px solid $color-gray-lighter;
+        }
+    }
+    &-title {
+        color: $color-gray;
+        font-weight: inherit;
     }
 }
 
-.usa-cf_app-3-up--centered {
-    
-}
+
+
 
 
 /*------ Dropdowns --------*/
