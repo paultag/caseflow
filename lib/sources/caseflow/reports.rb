@@ -149,7 +149,7 @@ def main(argv)
 
   Caseflow::Reports::ConcurrentCSV.open(output_path, "wb") do |csv|
     csv << report.spreadsheet_columns
-    Parallel.each(vacols_cases, in_threads: 6, progress: "Checking VBMS") do |vacols_case|
+    Parallel.each(vacols_cases, in_threads: 8, progress: "Checking VBMS") do |vacols_case|
       begin
         if report.should_include(vacols_case)
           Rails.logger.info "event=report.case.found bfkey=#{vacols_case.bfkey}"
