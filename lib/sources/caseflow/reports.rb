@@ -6,7 +6,6 @@ require 'parallel'
 
 
 module Caseflow
-  # Copied from conrrunt-ruby's 1.0 pre-release
   module Reports
     RELEVANT_FIELDS = [
       ["bfdnod_date", "efolder_nod_date", "NOD"],
@@ -19,7 +18,7 @@ module Caseflow
       ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
     ]
 
-    class ConcurrentArray < ::Array
+    class ConcurrentCSV < ::CSV
       include JRuby::Synchronized
     end
 
@@ -118,15 +117,6 @@ module Caseflow
 end
 
 
-def create_spreadsheet(output_path, report, items)
-  CSV.open(output_path, "wb") do |csv|
-    csv << report.spreadsheet_columns
-    items.each do |item|
-      csv << report.spreadsheet_cells(item)
-    end
-  end
-end
-
 def main(argv)
   # Trigger autoloading of this case because reasons. I don't even sometimes.
   EFolder::Case
@@ -157,23 +147,21 @@ def main(argv)
   vacols_cases = vacols_cases.reject { |c| c.efolder_appellant_id.length < 8 }
   puts "#{vacols_cases.length} cases with potential eFolder IDs"
 
-  report_cases = Caseflow::Reports::ConcurrentArray.new
-  Parallel.each(vacols_cases, in_threads: 4, progress: "Checking VBMS") do |vacols_case|
-    begin
-      if report.should_include(vacols_case)
-        Rails.logger.info "event=report.case.found bfkey=#{vacols_case.bfkey}"
-        report_cases << vacols_case
-      else
-        Rails.logger.info "event=report.case.condition_not_met bfkey=#{vacols_case.bfkey}"
+  Caseflow::Report::ConcurrentCSV.open(output_path, "wb") do |csv|
+    csv << report.spreadsheet_columns
+    Parallel.each(vacols_cases, in_threads: 4, progress: "Checking VBMS") do |vacols_case|
+      begin
+        if report.should_include(vacols_case)
+          Rails.logger.info "event=report.case.found bfkey=#{vacols_case.bfkey}"
+          csv << report.spreadsheet_cells(vacols_case)
+        else
+          Rails.logger.info "event=report.case.condition_not_met bfkey=#{vacols_case.bfkey}"
+        end
+      rescue => e
+        Rails.logger.error "event=report.case.exception bfkey=#{vacols_case.bfkey} message=#{e.message} traceback=#{e.backtrace}"
       end
-    rescue => e
-      Rails.logger.error "event=report.case.exception bfkey=#{vacols_case.bfkey} message=#{e.message} traceback=#{e.backtrace}"
     end
   end
-
-  puts "Found #{report_cases.length} cases that met the report conditions"
-
-  create_spreadsheet(output_path, report, report_cases)
 end
 
 if __FILE__ == $0
