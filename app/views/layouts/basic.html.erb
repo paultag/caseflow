@@ -19,7 +19,7 @@
           </div>
 
           <nav class="usa-cf_app-nav">
-              <div class="usa-grid">
+              <div class="usa-grid-full">
                   <b class="usa-cf_app-logo">Caseflow</b>
                   <span class="cf-application-title">Title Placeholder</span>
 
@@ -45,11 +45,10 @@
 
 
   <main class="usa-grid">
-    <div class="usa-cf_app-main">
-    <%= yield(:content) if content_for?(:content) %>
-    <%= yield %>
-
-    </div>
+      <div class="usa-cf_app">
+          <%= yield(:content) if content_for?(:content) %>
+          <%= yield %>
+      </div>
   </main>
 
     <footer class="text-center usa-grid">

@@ -5,25 +5,27 @@
 
 <% content_for :content do %>
 
-<div id="certifications-header">
-    <h2><%= @kase.correspondent.full_name %></h2>
-    <div class="text-uc">
-      Appeal ID <button type="submit" title="Copy to clipboard" class="usa-cf--apppeal-id" data-clipboard-text="<%= @kase.bfcorlid %>"><%= @kase.bfcorlid %></button>
+<div id="certifications-header" class="usa-cf_app-segment usa-cf_app-segment--v-pad">
+    <h2 class="push-left"><%= @kase.correspondent.full_name %></h2>
+    <div class="text-uc usa-cf--apppeal-id-control push-right">
+      Appeal ID &nbsp; <button type="submit" title="Copy to clipboard" class="usa-cf--apppeal-id" data-clipboard-text="<%= @kase.bfcorlid %>"><%= @kase.bfcorlid %></button>
     </div>
 </div>
 
-  <div>
-    <div class="col col-md-2">
-      <h4>Appeal Type</h4>
-      <span><%= @kase.appeal_type %></span>
-    </div>
-    <div class="col col-md-2">
-      <h4>File Type:</h4>
-      <span><%= @kase.folder.file_type %></span>
-    </div>
-    <div class="col col-md-3">
-      <h4>Representative:</h4>
-      <span><%= @kase.initial_fields['8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY'] %></span>
+  <div class="usa-cf_app-segment">
+    <div class="usa-cf_app-3-up usa-cf_app-3-up--centered">
+        <section>
+          <h4>Appeal Type</h4>
+          <span><%= @kase.appeal_type %></span>
+        </section>
+        <section>
+          <h4>File Type:</h4>
+          <span><%= @kase.folder.file_type %></span>
+        </section>
+        <section>
+          <h4>Representative:</h4>
+          <span><%= @kase.initial_fields['8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY'] %></span>
+        </section>
     </div>
   </div>
 

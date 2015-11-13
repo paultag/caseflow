@@ -118,12 +118,25 @@ label {
 .text-center {
     text-align: center;
 }
+.text-right {
+    text-align: right;
+}
+.text-uc {
+    text-transform: uppercase;
+}
+.push-left {
+    float: left;
+}
+.push-right {
+    float: right;
+}
 abbr[title] {
     border: 0;
 }
 
 h1,h2,h3,h4,h5,h6 {
     font-family: inherit;
+    margin: 0;
 }
 
 /*-----------------------------------*
@@ -136,6 +149,9 @@ body {
     background: $color-gray-lightest;
 }
 
+/* ===========================*
+* Application navigation bar  *
+* ============================*/
 .usa-cf_app-nav {
     background: $color-white;
     color: $color-gray;
@@ -149,7 +165,7 @@ body {
 
     .dropdown {
         position: absolute;
-        right: 3rem;
+        right: rem(112px);
     }
 }
 
@@ -158,16 +174,46 @@ body {
     margin-right: rem(20px);
 }
 
-/*
-Should only use with a <main> element
-Or with the primary element of the page.
-*/
-.usa-cf_app-main {
-    @include span-columns(10);
-    @include shift(1);
+.usa-cf_app {
+    margin: auto;
+    width: 90%;
+}
+
+.usa-cf_app-segment {
+    @include clearfix();
+
+    & + .usa-cf_app-segment {
+        margin-top: rem(30px);
+    }
+
+    &--v-pad {
+        padding-top: rem(30px);
+        padding-bottom: rem(30px);
+    }
+    &--h-pad {
+        padding-left: rem(30px);
+        padding-right: rem(30px);
+    }
 }
 
 
+.usa-cf_app-3-up {
+    // background: orange;
+    display: table;
+    width: 100%;
+
+    > * {
+        display: table-cell;
+        width: 33%;
+    }
+}
+
+.usa-cf_app-3-up--centered {
+    
+}
+
+
+/*------ Dropdowns --------*/
 .dropdown {
   $large-screen: em(640) !default;
   display: inline-block;
@@ -216,4 +262,19 @@ Or with the primary element of the page.
   a {
      color: inherit;
   }
+}
+
+/*------ Appeal button --------*/
+
+.usa-cf--apppeal-id {
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid $color-gray;
+    color: $color-gray;
+
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        border-bottom: 2px solid $color-gray;
+    }
 }
