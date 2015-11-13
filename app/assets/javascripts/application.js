@@ -9,11 +9,20 @@
 (function () {
     "use strict";
 
-    $(document).popover({
+    /* $(document).popover({
         selector: "[data-toggle=popover]",
         trigger: "focus",
         html: true
-    });
+    }); */
+
+
+    /*------------------------------------
+    * Clipboard
+    *------------------------------------*/
+    var btn = new Clipboard('.usa-cf--apppeal-id');
+    console.log(btn)
+
+
 })();
 
 // For IE9
