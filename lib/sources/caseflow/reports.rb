@@ -147,7 +147,7 @@ def main(argv)
   vacols_cases = vacols_cases.reject { |c| c.efolder_appellant_id.length < 8 }
   puts "#{vacols_cases.length} cases with potential eFolder IDs"
 
-  Caseflow::Report::ConcurrentCSV.open(output_path, "wb") do |csv|
+  Caseflow::Reports::ConcurrentCSV.open(output_path, "wb") do |csv|
     csv << report.spreadsheet_columns
     Parallel.each(vacols_cases, in_threads: 4, progress: "Checking VBMS") do |vacols_case|
       begin
