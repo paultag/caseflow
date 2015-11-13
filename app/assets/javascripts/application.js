@@ -9,19 +9,8 @@
 (function () {
     "use strict";
 
-    /* $(document).popover({
-        selector: "[data-toggle=popover]",
-        trigger: "focus",
-        html: true
-    }); */
-
-
-    /*------------------------------------
-    * Clipboard
-    *------------------------------------*/
-    var btn = new Clipboard('.usa-cf--apppeal-id');
-    console.log(btn)
-
+    /* Copies appeals ID to clipboard */
+    new Clipboard('[data-clipboard-text]');
 
 })();
 

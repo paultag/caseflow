@@ -194,8 +194,14 @@ body {
         padding-left: rem(30px);
         padding-right: rem(30px);
     }
+    &--alt {
+        background: $color-white;
+    }
 }
 
+[id=certifications-header] {
+    margin-top: rem(40px);
+}
 
 .usa-cf_app-3-up {
     // background: orange;
@@ -219,6 +225,10 @@ body {
     &-title {
         color: $color-gray;
         font-weight: inherit;
+    }
+    &-text {
+        font-weight: 600;
+        margin-bottom: 0;
     }
 }
 
