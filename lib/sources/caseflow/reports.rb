@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'csv'
+require 'optparse'
 
 require 'parallel'
 
@@ -121,22 +122,29 @@ def main(argv)
   # Trigger autoloading of this case because reasons. I don't even sometimes.
   EFolder::Case
 
-  if argv.length != 2
-    $stderr.puts "reports.rb <report-name> <output.csv>"
-    exit(1)
-  end
+  concurrency = 1
+  report_name = nil
+  output_path = nil
 
-  report_name, output_path, = argv
+  OptionParser.new do |opts|
+    opts.banner = "Usage: reports.rb [--concurrency=n] --report-name=<report-name> --output=<output.csv>"
 
-  if !Caseflow::REPORTS.has_key?(report_name)
-    $stderr.puts "Unknown report"
-    exit(1)
-  end
+    opts.on("--concurrency=[n]") do |c|
+      concurrency = c.to_i
+    end
 
-  if !output_path.ends_with?(".csv")
-    $stderr.puts "output file must end in .csv"
-    exit(1)
-  end
+    opts.on("--report-name=", Caseflow::REPORTS.keys) do |r|
+      report_name = r
+    end
+
+    opts.on("--output=") do |o|
+      if !o.ends_with?(".csv")
+        $stderr.puts "output file must end in .csv"
+        exit(1)
+      end
+      output_path = o
+    end
+  end.parse!
 
   report = Caseflow::REPORTS[report_name].new
 
@@ -149,7 +157,7 @@ def main(argv)
 
   Caseflow::Reports::ConcurrentCSV.open(output_path, "wb") do |csv|
     csv << report.spreadsheet_columns
-    Parallel.each(vacols_cases, in_threads: 16, progress: "Checking VBMS") do |vacols_case|
+    Parallel.each(vacols_cases, in_threads: concurrency, progress: "Checking VBMS") do |vacols_case|
       begin
         if report.should_include(vacols_case)
           Rails.logger.info "event=report.case.found bfkey=#{vacols_case.bfkey}"
