@@ -1,17 +1,14 @@
-/*
- * = require vendor/jquery-1.11.3.min.js
- * = require components.js
- */
- //= require_self
-
-
+//= require_self
+//=require clipboard
 
 (function () {
     "use strict";
 
-    /* Copies appeals ID to clipboard */
-    new Clipboard('[data-clipboard-text]');
-
+    $(document).popover({
+        selector: "[data-toggle=popover]",
+        trigger: "focus",
+        html: true
+    });
 })();
 
 // For IE9
@@ -107,18 +104,3 @@ $(function () {
 });
 
 // --- END: JS for questions.html.erb ---
-
-/*------------------------------------
-* Patterns based on Refills.bourbon.io
-*------------------------------------*/
-
-$(document).ready(function(){
-  $(".dropdown-trigger").click(function(e) {
-    e.preventDefault(); // Prevent page jump
-    var dropdownMenu = $(this).attr('href');
-    $(dropdownMenu).toggleClass("dropdown-show");
-    $(".dropdown-menu > li").click(function(){
-      $(".dropdown-menu").removeClass("dropdown-show");
-    });
-  });
-});

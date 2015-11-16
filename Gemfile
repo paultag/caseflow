@@ -42,3 +42,6 @@ group :development, :test do
 
   gem 'activerecord-jdbcsqlite3-adapter'
 end
+
+# Libraries and dependencies for front end
+gem 'clipboard-rails'
