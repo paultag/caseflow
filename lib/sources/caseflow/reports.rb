@@ -53,10 +53,23 @@ module Caseflow
     }
 
     class SeamReport
+      # Appeals from these sources are _always_ paper, even if the appelant has
+      # an eFolder
+      PAPER_ONLY_OFFICES = [
+        # General Counsel
+        "RO89",
+        # Education Centers
+        "RO91", "RO92", "RO93", "RO94",
+        # Pension
+        "RO80", "RO81", "RO82", "RO83",
+        # VHA CO
+        "RO99",
+      ]
+
       def find_vacols_cases
         return Case.joins(:folder).where(
-          "bf41stat < ? AND bfmpro = ? AND (folder.tivbms IS NULL OR folder.tivbms NOT IN (?))",
-          2.weeks.ago, "ADV", ["Y", "1", "0"]
+          "bf41stat < ? AND bfmpro = ? AND (folder.tivbms IS NULL OR folder.tivbms NOT IN (?)) AND bfregoff NOT IN (?)",
+          2.weeks.ago, "ADV", ["Y", "1", "0"], PAPER_ONLY_OFFICES
         )
       end
 
