@@ -160,6 +160,9 @@ def main(argv)
       rescue => e
         Rails.logger.error "event=report.case.exception bfkey=#{vacols_case.bfkey} message=#{e.message} traceback=#{e.backtrace}"
       end
+      # Clear the list of eFolder documents on the case, otherwise the memory of
+      # this script grows over time.
+      vacols_case.clear_efolder_cache!
     end
   end
 end

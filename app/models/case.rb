@@ -158,6 +158,10 @@ class Case < ActiveRecord::Base
     @efolder_case ||= EFolder::Case.new(efolder_appellant_id)
   end
 
+  def clear_efolder_cache!
+    @efolder_case = nil
+  end
+
   def efolder_nod_date
     self.efolder_case.get_nod(self.bfdnod).try(:received_at).try(:to_s, :va_date) if self.bfdnod
   end
