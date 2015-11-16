@@ -1,18 +1,13 @@
 /*
- * = require vendor/jquery-1.11.3.min.js
+ * = require jquery
  * = require clipboard
- * = require components.js
  */
  //= require_self
 
 (function () {
     "use strict";
 
-    $(document).popover({
-        selector: "[data-toggle=popover]",
-        trigger: "focus",
-        html: true
-    });
+    
 })();
 
 // For IE9

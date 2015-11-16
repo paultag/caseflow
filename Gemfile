@@ -44,4 +44,5 @@ group :development, :test do
 end
 
 # Libraries and dependencies for front end
+gem 'jquery-rails', '~> 4.0', '>= 4.0.5'
 gem 'clipboard-rails'
