@@ -1,5 +1,6 @@
 /*
  * = require vendor/jquery-1.11.3.min.js
+ * = require clipboard
  * = require components.js
  */
  //= require_self
