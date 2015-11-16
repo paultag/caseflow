@@ -146,6 +146,11 @@ def main(argv)
     end
   end.parse!
 
+  if report_name.nil? || output_path.nil?
+    $stderr.puts "Missing --report-name or --output"
+    exit(1)
+  end
+
   report = Caseflow::REPORTS[report_name].new
 
   vacols_cases = report.find_vacols_cases().to_a
