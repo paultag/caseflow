@@ -204,7 +204,6 @@ body {
 }
 
 .usa-cf_app-3-up {
-    // background: orange;
     display: table;
     width: 100%;
 
@@ -232,9 +231,11 @@ body {
     }
 }
 
-
-
-
+.usa-cf_app-footer {
+    border-top: 1px solid $color-gray-lighter;
+    padding-top: rem(55px);
+    margin-top: rem(55px);
+}
 
 /*------ Dropdowns --------*/
 .dropdown {

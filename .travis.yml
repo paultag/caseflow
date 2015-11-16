@@ -2,6 +2,7 @@ language: ruby
 
 rvm:
     - jruby-9.0.3.0
+jdk: oraclejdk8
 env:
     - CONNECT_VBMS_ENV_DIR="/" CONNECT_VBMS_ENV="test" CONNECT_VBMS_URL="https://" CONNECT_VBMS_KEYFILE="keystore.jks" CONNECT_VBMS_KEYPASS="nopass" CONNECT_VBMS_SAML="samltoken.xml"
 
