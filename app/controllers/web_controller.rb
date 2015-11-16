@@ -226,14 +226,9 @@ class WebController < ApplicationController
     # If SSOi is enabled, redirect to their non-SAML logout page. Otherwise just
     # go to the login page.
     if ssoi_configured
-      # TODO: Don't reparse this on every single logout attempt.
-      doc = Nokogiri.XML(File.open(ENV['SSOI_SAML_XML_LOCATION'], 'rb'))
       # Get the URI that is the SAML endpoint
-      location = URI(
-        doc.xpath("//*[local-name()='SingleSignOnService']/@Location")[0].text
-      )
-      # And use the host from there, with a different path.
-      redirect_to "#{location.scheme}://#{location.host}/centrallogin/centrallanding.aspx"
+      host = ENV['SSOI_SAML_LOGOUT_HOST']
+      redirect_to "https://#{host}/centrallogin/centrallanding.aspx"
     elsif
       redirect_to action: 'login'
     end
