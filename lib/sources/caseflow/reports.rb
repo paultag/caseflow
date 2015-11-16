@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'csv'
+require 'optparse'
 
 require 'parallel'
 
@@ -53,10 +54,23 @@ module Caseflow
     }
 
     class SeamReport
+      # Appeals from these sources are _always_ paper, even if the appelant has
+      # an eFolder
+      PAPER_ONLY_OFFICES = [
+        # General Counsel
+        "RO89",
+        # Education Centers
+        "RO91", "RO92", "RO93", "RO94",
+        # Pension
+        "RO80", "RO81", "RO82", "RO83",
+        # VHA CO
+        "RO99",
+      ]
+
       def find_vacols_cases
         return Case.joins(:folder).where(
-          "bf41stat < ? AND bfmpro = ? AND (folder.tivbms IS NULL OR folder.tivbms NOT IN (?))",
-          2.weeks.ago, "ADV", ["Y", "1", "0"]
+          "bf41stat < ? AND bfmpro = ? AND (folder.tivbms IS NULL OR folder.tivbms NOT IN (?)) AND bfregoff NOT IN (?)",
+          2.weeks.ago, "ADV", ["Y", "1", "0"], PAPER_ONLY_OFFICES
         )
       end
 
@@ -121,20 +135,32 @@ def main(argv)
   # Trigger autoloading of this case because reasons. I don't even sometimes.
   EFolder::Case
 
-  if argv.length != 2
-    $stderr.puts "reports.rb <report-name> <output.csv>"
-    exit(1)
-  end
+  concurrency = 1
+  report_name = nil
+  output_path = nil
 
-  report_name, output_path, = argv
+  OptionParser.new do |opts|
+    opts.banner = "Usage: reports.rb [--concurrency=n] --report-name=<report-name> --output=<output.csv>"
 
-  if !Caseflow::REPORTS.has_key?(report_name)
-    $stderr.puts "Unknown report"
-    exit(1)
-  end
+    opts.on("--concurrency=[n]") do |c|
+      concurrency = c.to_i
+    end
 
-  if !output_path.ends_with?(".csv")
-    $stderr.puts "output file must end in .csv"
+    opts.on("--report-name=", Caseflow::REPORTS.keys) do |r|
+      report_name = r
+    end
+
+    opts.on("--output=") do |o|
+      if !o.ends_with?(".csv")
+        $stderr.puts "output file must end in .csv"
+        exit(1)
+      end
+      output_path = o
+    end
+  end.parse!
+
+  if report_name.nil? || output_path.nil?
+    $stderr.puts "Missing --report-name or --output"
     exit(1)
   end
 
@@ -149,7 +175,7 @@ def main(argv)
 
   Caseflow::Reports::ConcurrentCSV.open(output_path, "wb") do |csv|
     csv << report.spreadsheet_columns
-    Parallel.each(vacols_cases, in_threads: 16, progress: "Checking VBMS") do |vacols_case|
+    Parallel.each(vacols_cases, in_threads: concurrency, progress: "Checking VBMS") do |vacols_case|
       begin
         if report.should_include(vacols_case)
           Rails.logger.info "event=report.case.found bfkey=#{vacols_case.bfkey}"
