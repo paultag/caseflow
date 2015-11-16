@@ -1,5 +1,9 @@
-//= require_self
-//=require clipboard
+/*
+ * = require vendor/jquery-1.11.3.min.js
+ * = require clipboard
+ * = require components.js
+ */
+ //= require_self
 
 (function () {
     "use strict";

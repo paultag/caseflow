@@ -1,8 +1,8 @@
 # $LOAD_PATH << Rails.root + '../' + 'connect_vbms' + 'src' + 'src'
 
-#require 'vbms'
+require 'vbms'
 
-'''class CaseflowLogger
+class CaseflowLogger
   def log(event, data)
     case event
     when :request
@@ -14,4 +14,4 @@
 end
 
 $vbms = VBMS::Client.from_env_vars(logger: CaseflowLogger.new, env_name: ENV["CONNECT_VBMS_ENV"])
-'''
+
