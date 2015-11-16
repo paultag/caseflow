@@ -4,12 +4,6 @@
  */
  //= require_self
 
-(function () {
-    "use strict";
-
-    
-})();
-
 // For IE9
 if (typeof String.prototype.trim !== 'function') {
     String.prototype.trim = function () {
