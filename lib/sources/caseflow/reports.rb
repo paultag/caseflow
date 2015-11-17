@@ -67,14 +67,16 @@ module Caseflow
         "RO99",
       ]
 
-      # VBMS document types which are appeals related documents
-      APPEALS_DOCUMENT_TYPES = [
-        EFolder::Case::SOC_DOC_TYPE_ID,
-        EFolder::Case::NOD_DOC_TYPE_ID,
-        EFolder::Case::SSOC_DOC_TYPE_ID,
-        EFolder::Case::FORM_9_DOC_TYPE_ID,
-        EFolder::Case::FORM_8_DOC_TYPE_ID,
-      ]
+      def initialize
+        # VBMS document types which are appeals related documents
+        @appeals_document_types = [
+          EFolder::Case::SOC_DOC_TYPE_ID,
+          EFolder::Case::NOD_DOC_TYPE_ID,
+          EFolder::Case::SSOC_DOC_TYPE_ID,
+          EFolder::Case::FORM_9_DOC_TYPE_ID,
+          EFolder::Case::FORM_8_DOC_TYPE_ID,
+        ]
+      end
 
       def find_vacols_cases
         return Case.joins(:folder).where(
@@ -87,7 +89,7 @@ module Caseflow
         # Include cases in the report which have an appeals related document in
         # their eFolder
         vacols_case.efolder_case.documents.any? do |doc|
-          APPEALS_DOCUMENT_TYPES.include?(doc.doc_type.try(:to_i))
+          @appeals_document_types.include?(doc.doc_type.try(:to_i))
         end
       end
 
