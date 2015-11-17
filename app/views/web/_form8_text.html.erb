@@ -30,7 +30,5 @@
       <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control" <%= 'required' if defined?(required) && required %> id="<%= input_id %>"></input>
     </div>
   </div>
-  <% if !defined?(closing_hr) || closing_hr %>
-      <hr/>
-  <% end %>
+ 
 </div>

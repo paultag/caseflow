@@ -9,3 +9,4 @@ export CONNECT_VBMS_KEYPASS="importkey"
 export CONNECT_VBMS_KEY="caseflow_uat_keyfile"
 export CONNECT_VBMS_CACERT="caseflow_uat_ca_cert"
 export CONNECT_VBMS_CERT="caseflow_uat_client_cert"
+

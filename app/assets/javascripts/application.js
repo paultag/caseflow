@@ -1,14 +1,8 @@
-//= require_self
-
-(function () {
-    "use strict";
-
-    $(document).popover({
-        selector: "[data-toggle=popover]",
-        trigger: "focus",
-        html: true
-    });
-})();
+/*
+ * = require jquery
+ * = require clipboard
+ */
+ //= require_self
 
 // For IE9
 if (typeof String.prototype.trim !== 'function') {

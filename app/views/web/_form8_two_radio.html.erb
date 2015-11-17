@@ -21,14 +21,15 @@
   <strong><%= question_num %></strong>
   <%= question %>
   <div class="input-group">
-    <label class="radio-inline">
-      <input type="radio" name="<%= input_name %>" value="<%= option1_value %>">
+    <input type="radio" name="<%= input_name %>" value="<%= option1_value %>" id="<%= input_name %>__<%= option1_value %>">
+    <label class="radio-inline" for="<%= input_name %>__<%= option1_value %>">
       <%= option1_label %>
     </label>
-    <label class="radio-inline">
-      <input type="radio" name="<%= input_name %>" value="<%= option2_value %>">
+
+    <input type="radio" name="<%= input_name %>" value="<%= option2_value %>" id="<%= input_name %>__<%= option2_value %>">
+
+    <label class="radio-inline" for="<%= input_name %>__<%= option2_value %>">
       <%= option2_label %>
     </label>
   </div>
-  <hr/>
 </div>
