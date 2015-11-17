@@ -295,10 +295,21 @@ body {
     background: transparent;
     border: 2px solid $color-gray;
     color: $color-gray;
+    padding: 1rem;
 
     &:hover {
         color: $color-white;
         background: $color-gray;
         border-bottom: 2px solid $color-gray;
     }
+}
+
+.usa-cf--apppeal-id-icon {
+    display: inline-block;
+    margin-left: .5rem;
+    vertical-align: middle;
+}
+
+.usa-cf--apppeal-id:hover path {
+    fill: $color-white;
 }
