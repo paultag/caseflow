@@ -1,92 +1,107 @@
-<section id="certification-questions">
-  <%= form_tag({action: :questions_submit}, {id: 'question-form'}) do %>
-    <div>
-      <div>
-        <h2>Complete Electronic Form 8</h2>
-        <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
-        
+  <%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
+
+    <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
+        <header>
+            <h2>Complete Electronic Form 8</h2>
+            <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
+            <p class="required-msg usa-input-error-message">Required</p>
+        </header>
+
         <% if @kase.required_fields[:show_8b] %>
           <%= render partial: 'form8_two_radio', locals: {
-                  question: 'VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS',
+                  question: 'Veteran has chose a power of attorney, the authority recognizing such is',
                   question_num: '8B',
                   input_name: '8B_POWER_OF_ATTORNEY',
                   option1_label: 'Located in the veteran\'s appeal file',
                   option1_value: '8B_POWER_OF_ATTORNEY',
                   option2_label: 'Located in another VA file',
                   option2_value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
+                  required: true,
               } %>
 
           <%= render partial: 'form8_text', locals: {
                   div_id: '8b-explanation',
                   div_class: 'hidden',
-                  question: 'PLEASE SPECIFY LOCATION OF THE VETERAN\'S POWER OF ATTORNEY',
+                  question: 'Please specify location of the veteran\'s power of attorney',
                   question_num: '8B EXPLANATION',
-                  input_name: '8B_REMARKS'
+                  input_name: '8B_REMARKS',
+                  is_linked: true,
               } %>
         <% end %>
 
         <% if @kase.required_fields[:show_8c] %>
           <%= render partial: 'form8_yes_no_radio', locals: {
-                  question: 'THE AGENT DESIGNATED, IS HE/SHE ON ACCREDITED LIST',
+                  question: 'The agent designated, is he/she on accredited list',
                   question_num: '8C',
-                  input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST'
+                  input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST',
               } %>
         <% end %>
 
         <% if @kase.required_fields[:show_9a] %>
           <%= render partial: 'form8_yes_no_radio', locals: {
-                  question: 'REPRESENTATIVE IS SERVICE ORGANIZATION, IS VA FORM 646, OR EQUIVALENT, OF RECORD',
+                  question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
                   question_num: '9A',
                   input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
+                  required: true,
               } %>
           <%= render partial: 'form8_text', locals: {
                   div_id: '9b',
                   div_class: 'hidden',
-                  question: 'IF VA FORM 646 IS NOT OF RECORD, EXPLAIN',
+                  question: 'If VA form 646 is not of record, explain',
                   question_num: '9B',
-                  input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN'
+                  input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN',
+                  is_linked: true,
               } %>
         <% end %>
 
         <% if @kase.required_fields[:show_10b] %>
           <%= render partial: 'form8_yes_no_radio', locals: {
-                  question: 'A HEARING WAS REQUESTED, IF HELD, IS TRANSCRIPT ON FILE',
+                  question: 'A hearing was requested, if held, is transcript on file?',
                   question_num: '10B',
                   input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
+                  required: true,
               } %>
 
           <% if @kase.required_fields[:show_10c] %>
             <%= render partial: 'form8_text', locals: {
                     div_id: '10c',
                     div_class: 'hidden',
-                    question: 'IF NOT HELD, EXPLAIN',
+                    question: 'If not held, explain',
                     question_num: '10C',
-                    input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN'
+                    input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
+                    is_linked: true,
                 } %>
           <% end %>
 
         <% end %>
 
         <%= render partial: 'form8_yes_no_radio', locals: {
-                question: 'ARE CONTESTED CLAIMS PROCEDURES APPLICABLE IN THIS CASE',
+                question: 'Are contested claims procedures applicable in this case?',
                 question_num: '11A',
                 input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
             } %>
+
+
+
         <%= render partial: 'form8_yes_no_radio', locals: {
-                question: 'HAVE THE REQUIREMENTS OF 38 U.S.C. 7105A BEEN FOLLOWED FOR ALL CONTESTED CLAIMS',
+                question: 'Have the requirements of 38 U.S.C. 7105A been followed for all contested claims?',
                 question_num: '11B',
                 input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
                 div_id: '11b',
-                div_class: 'hidden'
+                div_class: 'hidden',
+                is_linked: true
             } %>
 
-        <div>
-          <div>
-            <strong>13</strong>
-            RECORDS TO BE FORWARDED TO BOARD OF VETERANS' APPEALS
-          </div>
+        </fieldset><%# Closes nested fieldset for question 11b %>
+    </fieldset><%# Closes nested fieldset parent (Question 11a) %>
 
-          <div class="row col-no-right-pad">
+        <fieldset>
+          <legend>
+            <strong>13</strong>
+            Records to be forwarded to Board of Veterans' Appeals
+          </legend>
+
+          <div class="usa-cf_app-multi-col-3">
             <%= render partial: 'form8_checkbox_column', locals: {
                     label1_text: 'CF OR XCF',
                     input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
@@ -130,9 +145,8 @@
                     input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
 
                 } %>
-          </div>
 
-          <div>
+
             <%= render partial: 'form8_text', locals: {
                     question: 'Specify Other',
                     question_num: '',
@@ -141,47 +155,39 @@
                     div_class: 'hidden',
                     closing_hr: false
                 } %>
-          </div>
-          <div class="row">
-            <div class="col col-md-12">
-               <%# Current styles wrap this into prior line w/o divs %>
             </div>
-          </div>
-        </div>
+      </fieldset>
+
+
 
         <% textarea_name = '14_REMARKS_INITIAL' %>
         <% textarea_id = "#{textarea_name}_input_id" %>
-        <div class="row">
-          <div class="col col-md-12">
+
+
+        <p class="row">
             <label for="<%= textarea_id %>">
               <strong>14</strong> REMARKS
             </label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-md-6">
             <textarea name="<%= textarea_name %>" rows="3" class="form-control" id="<%= textarea_id %>"></textarea>
-          </div>
-        </div>
-
+        </p>
 
         <%= render partial: 'form8_text', locals: {
-                question: 'NAME OF CERTIFYING OFFICIAL',
-                question_num: '17A. REQUIRED.',
+                question: 'Name of Certifying Official',
+                question_num: '17A.',
                 input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
                 max_length: 40,
                 required: true
             } %>
 
         <%= render partial: 'form8_text', locals: {
-                question: 'TITLE OF CERTIFYING OFFICIAL',
-                question_num: '17B. REQUIRED.',
+                question: 'Title of Certifying Official',
+                question_num: '17B.',
                 input_name: '17B_TITLE',
                 required: true
             } %>
-
-        <input type="submit" value="Continue" class="btn btn-primary"/>
-      </div>
     </div>
+
+    <p class="text-right">
+        <button type="submit" class="btn btn-primary usa-cf_app-btn-forward">Preview Completed Form 8</button>
+    </p>
   <% end %>
-</section>
