@@ -51,7 +51,9 @@ def main(argv)
     by_field = group_by_csv_field(path, field)
   end
 
-  header = "#{path} grouped by #{field}"
+  total = by_field.reduce(0) { |sum, c| sum += c[1] }
+
+  header = "#{path} grouped by #{field} (#{total} total)"
   puts header
   puts "=" * header.length
   puts
