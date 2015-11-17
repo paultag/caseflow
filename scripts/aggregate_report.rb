@@ -31,7 +31,7 @@ def group_by_vacols_date(path, field)
     when "form9"
       col = c.bfd19
     end
-    by_field[col.strftime("%Y-%m")] += 1
+    by_field[col.strftime("%Y")] += 1
   end
   by_field.to_a.sort_by{|c| c[0]}
 end
