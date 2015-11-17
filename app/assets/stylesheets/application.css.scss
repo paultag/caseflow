@@ -1,5 +1,43 @@
-//= require_tree .
-//= require_self
+// Vendor -------------- //
+
+@import '_scss/lib/bourbon/bourbon';
+@import '_scss/lib/neat/neat';
+@import '_scss/lib/normalize';
+
+
+// Core -------------- //
+
+@import '_scss/core/grid-settings';
+@import '_scss/core/defaults';
+@import '_scss/core/variables';
+@import '_scss/core/base';
+@import '_scss/core/grid';
+@import '_scss/core/utilities';
+
+
+// Elements -------------- //
+// Styles basic html elements
+
+@import '_scss/elements/typography';
+@import '_scss/elements/list';
+@import '_scss/elements/inputs';
+@import '_scss/elements/buttons';
+@import '_scss/elements/table';
+@import '_scss/elements/figure';
+@import '_scss/elements/labels';
+
+
+// Components -------------- //
+
+@import '_scss/components/skipnav';
+@import '_scss/components/disclaimer';
+@import '_scss/components/sidenav';
+@import '_scss/components/footer';
+@import '_scss/components/forms';
+@import '_scss/components/search';
+@import '_scss/components/alerts';
+@import '_scss/components/accordions';
+
 
 body {
   padding-bottom: 70px;
@@ -38,10 +76,6 @@ label {
 
 .navbar-default {
   background-color: #ffffff;
-
-  .navbar-brand, .navbar-brand:hover, .navbar-nav>li>a, {
-    color: #000000;
-  }
 }
 
 .embedded-document {
@@ -53,13 +87,13 @@ label {
   padding-right: 0px;
 }
 
+
 .pilot-warning {
   width: 100%;
   padding: 8px 20px 8px;
-  box-sizing: border-box;
   text-align: center;
-  background-color: #4d92df;
-  color: #ffffff;
+  background-color: $color-primary-darker;
+  color: $color-white;
 }
 
 /* Login view */
@@ -76,4 +110,195 @@ label {
     border-left: 1px solid #DCDCDC;
     padding-left: 3em;
   }
+}
+
+/*----------------------------------*
+* Globals, Resets, and overrides
+*-----------------------------------*/
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.text-uc {
+    text-transform: uppercase;
+}
+.push-left {
+    float: left;
+}
+.push-right {
+    float: right;
+}
+abbr[title] {
+    border: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: inherit;
+    margin: 0;
+}
+
+/*-----------------------------------*
+* CSS based on Web Design Guidelines.
+* - Uses Neat.bourbon.io as a grid
+* - Uses patterns and components
+*   from refills.bourbon.io/unstyled/
+*-----------------------------------*/
+body {
+    background: $color-gray-lightest;
+}
+
+/* ===========================*
+* Application navigation bar  *
+* ============================*/
+.usa-cf_app-nav {
+    background: $color-white;
+    color: $color-gray;
+    padding: rem(30px) 0;
+    position: relative;
+    border-bottom: 1px solid $color-gray-lighter;
+
+    .usa-grid {
+        position: relative;
+    }
+
+    .dropdown {
+        position: absolute;
+        right: rem(112px);
+    }
+}
+
+.usa-cf_app-logo {
+    color: $color-gray-dark;
+    margin-right: rem(20px);
+}
+
+.usa-cf_app {
+    margin: auto;
+    width: 90%;
+}
+
+.usa-cf_app-segment {
+    @include clearfix();
+
+    & + .usa-cf_app-segment {
+        margin-top: rem(30px);
+    }
+
+    &--v-pad {
+        padding-top: rem(30px);
+        padding-bottom: rem(30px);
+    }
+    &--h-pad {
+        padding-left: rem(30px);
+        padding-right: rem(30px);
+    }
+    &--alt {
+        background: $color-white;
+    }
+}
+
+[id=certifications-header] {
+    margin-top: rem(40px);
+}
+
+.usa-cf_app-3-up {
+    display: table;
+    width: 100%;
+
+    > * {
+        display: table-cell;
+        width: 33%;
+        padding: rem(30px);
+    }
+
+    &--bordered {
+        border: 1px solid $color-gray-lighter;
+
+        > *:nth-child(even) {
+            border-left: 1px solid $color-gray-lighter;
+            border-right: 1px solid $color-gray-lighter;
+        }
+    }
+    &-title {
+        color: $color-gray;
+        font-weight: inherit;
+    }
+    &-text {
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+}
+
+.usa-cf_app-footer {
+    border-top: 1px solid $color-gray-lighter;
+    padding-top: rem(55px);
+    margin-top: rem(55px);
+}
+
+/*------ Dropdowns --------*/
+.dropdown {
+  $large-screen: em(640) !default;
+  display: inline-block;
+  position: relative;
+
+  &-trigger {
+    cursor: pointer;
+
+    &::after {
+        background: url(asset-path('icons/arrow-down.svg')) 50% 100% no-repeat;
+        background-size: 100% 100%;
+        content: ' ';
+        display: inline-block;
+        height: 1rem;
+        margin-left: 1rem;
+        width: 1rem;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+  }
+
+  &-button:after {
+    display: block;
+    position: absolute;
+  }
+  &-menu {
+    @include unstyled-list();
+    @include transition (all 0.2s ease-in-out);
+    background: $color-white;
+    border: 1px solid $color-gray-lighter;
+    cursor: pointer;
+    display: none;
+    padding: rem(10px);
+    position: absolute;
+    text-align: left;
+    top: 2em;
+    width: 18rem;
+    z-index: 1;
+  }
+  &-show {
+    display: block;
+  }
+
+  a {
+     color: inherit;
+  }
+}
+
+/*------ Appeal button --------*/
+
+.usa-cf--apppeal-id {
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid $color-gray;
+    color: $color-gray;
+
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        border-bottom: 2px solid $color-gray;
+    }
 }

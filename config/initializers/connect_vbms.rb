@@ -14,3 +14,4 @@ class CaseflowLogger
 end
 
 $vbms = VBMS::Client.from_env_vars(logger: CaseflowLogger.new, env_name: ENV["CONNECT_VBMS_ENV"])
+
