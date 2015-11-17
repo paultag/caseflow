@@ -67,6 +67,17 @@ module Caseflow
         "RO99",
       ]
 
+      def initialize
+        # VBMS document types which are appeals related documents
+        @appeals_document_types = [
+          EFolder::Case::SOC_DOC_TYPE_ID,
+          EFolder::Case::NOD_DOC_TYPE_ID,
+          EFolder::Case::SSOC_DOC_TYPE_ID,
+          EFolder::Case::FORM_9_DOC_TYPE_ID,
+          EFolder::Case::FORM_8_DOC_TYPE_ID,
+        ]
+      end
+
       def find_vacols_cases
         return Case.joins(:folder).where(
           "bf41stat < ? AND bfmpro = ? AND (folder.tivbms IS NULL OR folder.tivbms NOT IN (?)) AND bfregoff NOT IN (?)",
@@ -75,7 +86,11 @@ module Caseflow
       end
 
       def should_include(vacols_case)
-        vacols_case.efolder_case.documents.length >= 1
+        # Include cases in the report which have an appeals related document in
+        # their eFolder
+        vacols_case.efolder_case.documents.any? do |doc|
+          @appeals_document_types.include?(doc.doc_type.try(:to_i))
+        end
       end
 
       def spreadsheet_columns
