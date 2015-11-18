@@ -33,18 +33,20 @@
     </div>
   </div>
 
-  <div class="document-table row section">
-    <div class="col-sm-6 col-sm-offset-3">
-      <table class="table table-hover">
-        <caption class="hidden">
+  <div class="usa-cf_app-table-wrap">
+
+      <table class="usa-table-borderless">
+        <caption class="usa-sr-only">
           This table compares received dates for forms stored in VACOLS and VBMS.
         </caption>
-        <tr>
-          <th></th>
-          <th>Document</th>
-          <th>VACOLS</th>
-          <th>VBMS</th>
-        </tr>
+        <thead>
+            <tr>
+              <th></th>
+              <th>Document</th>
+              <th>VACOLS</th>
+              <th>VBMS</th>
+          </tr>
+        </thead>
         <%= render partial: 'table_row', locals: {field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
         <%= render partial: 'table_row', locals: {field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
         <%= render partial: 'table_row', locals: {field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
@@ -55,10 +57,8 @@
         <%= render partial: 'table_row', locals: {field_name: 'Form 9', vacols_field: @kase.bfd19_date, vbms_field: @kase.efolder_form9_date} %>
 
       </table>
-    </div>
-  </div>
 
-  <hr/>
+  </div>
 
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
