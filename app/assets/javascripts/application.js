@@ -90,7 +90,7 @@ var questionsSubmit = function (event) {
 
 $(function () {
     if(!!$("#question-form").length) {
-        $("input[name='8B_POWER_OF_ATTORNEY']").on(display_8b_explanation);
+        $("input[name='8B_POWER_OF_ATTORNEY']").change(display_8b_explanation);
         $("input[name='9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646']").change(display_9b);
         $("input[name='10B_IF_HELD_IS_TRANSCRIPT_IN_FILE']").change(display_10c);
         $("input[name='11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE']").change(display_11b);
