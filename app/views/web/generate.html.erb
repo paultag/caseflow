@@ -10,11 +10,11 @@
         button and the Form 8 will automatically be uploaded to VBMS. If there
         are any mistakes, <a onclick="javascript:history.back()">go back to fix any errors</a>.
       </p>
-      <hr/>
+      
 
       <embed class="embedded-document" src="/caseflow/files/forms/<%= @file_name %>"></embed>
 
-      <hr/>
+      
 
       <%= form_tag({action: :certify}, {class: 'usa-cf_app-form usa-cf_app-segment usa-cf_app-segment--v-pad'}) do %>
         <input type="hidden" value="<%= @file_name %>" name="file_name">
