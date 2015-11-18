@@ -1,11 +1,11 @@
-<% content_for :page_title do %>Complete Electronic Form 8<% end %>
+  <%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
 
-<section id="certification-questions">
-  <%= form_tag({action: :questions_submit}, {id: 'question-form'}) do %>
-    <div>
-      <div>
-        <h2>Complete Electronic Form 8</h2>
-        <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
+    <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
+        <header>
+            <h2>Complete Electronic Form 8</h2>
+            <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
+            <p class="required-msg usa-input-error-message">Required</p>
+        </header>
 
         <% if @kase.required_fields[:show_8b] %>
           <%= render partial: 'form8_two_radio', locals: {
@@ -187,7 +187,7 @@
             } %>
     </div>
 
-    <p class="text-right">
-        <button type="submit" class="btn btn-primary usa-cf_app-btn-forward">Continue</button>
-    </p>
+    <div class="usa-cf_app-segment">
+        <button type="submit" class="btn btn-primary push-right">Continue</button>
+    </div>
   <% end %>
