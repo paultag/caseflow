@@ -1,3 +1,5 @@
+<% content_for :page_title do %>Login<% end %>
+
 <%= form_tag(action: :login_ro_submit) do %>
 
   <% if @error_message %>
