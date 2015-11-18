@@ -297,6 +297,11 @@ body {
     }
 }
 
+/*--- Alerts ---*/
+.usa-alert-error {
+    background-image: url(asset-path('icons/error.svg'));
+}
+
 /*--- Table styles ---*/
 .usa-cf_app-table-wrap {
     width: 100%;
