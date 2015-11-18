@@ -1,10 +1,12 @@
+<% content_for :page_title do %>Complete Electronic Form 8<% end %>
+
 <section id="certification-questions">
   <%= form_tag({action: :questions_submit}, {id: 'question-form'}) do %>
     <div>
       <div>
         <h2>Complete Electronic Form 8</h2>
         <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
-        
+
         <% if @kase.required_fields[:show_8b] %>
           <%= render partial: 'form8_two_radio', locals: {
                   question: 'VETERAN HAS CHOSEN A POWER OF ATTORNEY, THE AUTHORITY RECOGNIZING SUCH IS',
