@@ -180,7 +180,11 @@ body {
 }
 
 .usa-cf_app-segment {
-    @include clearfix();
+    &::before, &::after {
+        content: ' ';
+        display: block;
+        clear:both;
+    }
 
     & + .usa-cf_app-segment {
         margin-top: rem(30px);
@@ -196,6 +200,7 @@ body {
     }
     &--alt {
         background: $color-white;
+        border: 1px solid $color-gray-lighter;
     }
 }
 
@@ -290,7 +295,7 @@ body {
 
 /*------ Appeal button --------*/
 
-.usa-cf--apppeal-id {
+.usa-cf-apppeal-id {
     box-sizing: border-box;
     background: transparent;
     border: 2px solid $color-gray;
@@ -300,5 +305,30 @@ body {
         color: $color-white;
         background: $color-gray;
         border-bottom: 2px solid $color-gray;
+    }
+}
+
+/*------ Buttons --------*/
+
+// I hate using !important, but web design standards
+// form buttons have high specificity.
+// Keep an eye on https://github.com/18F/web-design-standards/issues/891
+[type="submit"] {
+    margin: 0 !important;
+}
+
+.usa-cf-btn--link {
+    background: transparent;
+    color: $color-primary;
+    font-weight: normal;
+    line-height: 1;
+    // I hate using !important, but web design standards
+    // form buttons have high specificity.
+    // Keep an eye on https://github.com/18F/web-design-standards/issues/891
+    padding: 1rem 0 !important;
+
+    &:hover {
+        background-color: inherit;
+        color: $color-primary-darker;
     }
 }
