@@ -302,3 +302,8 @@ body {
         border-bottom: 2px solid $color-gray;
     }
 }
+
+/*--- Alerts ---*/
+.usa-alert-error {
+    background-image: url(asset-path('icons/error.svg'));
+}
