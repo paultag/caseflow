@@ -81,8 +81,13 @@ label {
 .pilot-warning {
   padding: 8px 20px 8px;
   text-align: center;
-  background-color: $color-primary-darker;
+  background-color: $color-primary;
   color: $color-white;
+
+  a {
+    color: $color-white;
+    text-decoration: underline;
+  }
 }
 
 /* Login view */
