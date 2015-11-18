@@ -12,23 +12,18 @@
     - max_length: The number of characters a response can maximally include. 45 is default.
     - closing_hr: true/false, show a horizontal rules at the end (default: true)
     - required: true/false, if a field is required (default: false)
+    - is_linked: Whether this field is linked to radio button fields
 %>
 
 <% input_id = "#{input_name}_input_id" %>
 
-<div class="form8-text-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
-  <div class="row">
-    <div class="col col-md-10">
-      <label for="<%= input_id %>">
-        <strong><%= question_num %></strong>
+<p class="form8-text-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
+    <label for="<%= input_id %>">
+        <strong <%= 'class=required' if defined?(required) && required %>><%= question_num %></strong>
         <%= question %>
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col col-md-6">
-      <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control" <%= 'required' if defined?(required) && required %> id="<%= input_id %>"></input>
-    </div>
-  </div>
- 
-</div>
+    </label>
+    <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" class="form-control" <%= 'required' if defined?(required) && required %> id="<%= input_id %>">
+</p>
+<% if defined?(is_linked) && is_linked %>
+</fieldset>
+<% end %>
