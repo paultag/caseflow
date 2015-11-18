@@ -294,6 +294,7 @@ body {
     background: transparent;
     border: 2px solid $color-gray;
     color: $color-gray;
+    padding: 1rem;
 
     &:hover {
         color: $color-white;
@@ -326,7 +327,6 @@ body {
         color: $color-primary-darker;
     }
 }
-
 
 /*--- Alerts ---*/
 .usa-alert-error {
