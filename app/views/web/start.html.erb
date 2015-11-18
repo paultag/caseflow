@@ -14,12 +14,11 @@
     </div>
 
 
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+  <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
       <h2>Find missing documents</h2>
 
       <p>
-        Caseflow could not find the documents with an <strong>X</strong> below,
+        Caseflow could not find the documents with an <strong class="error">&times;</strong> below,
         in the appellant’s eFolder. Try <strong>looking for</strong> the missing
         document in VBMS and <strong>changing its date</strong> to the date in
         the VACOLS column. After changing the date, click the
@@ -27,37 +26,35 @@
       </p>
 
       <p>
-        If you can’t find the document click the
+        If you can’t find the document, click the
         <strong>This case cannot be certified</strong> link below.
       </p>
-    </div>
-  </div>
 
-  <div class="usa-cf_app-table-wrap">
-
-      <table class="usa-table-borderless">
-        <caption class="usa-sr-only">
-          This table compares received dates for forms stored in VACOLS and VBMS.
-        </caption>
-        <thead>
-            <tr>
-              <th></th>
-              <th>Document</th>
-              <th>VACOLS</th>
-              <th>VBMS</th>
-          </tr>
-        </thead>
-        <%= render partial: 'table_row', locals: {field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
-        <%= render partial: 'table_row', locals: {field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
-        <%= render partial: 'table_row', locals: {field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
-        <%= render partial: 'table_row', locals: {field_name: 'SSOC 2', vacols_field: @kase.bfssoc2_date, vbms_field: @kase.efolder_ssoc2_date} %>
-        <%= render partial: 'table_row', locals: {field_name: 'SSOC 3', vacols_field: @kase.bfssoc3_date, vbms_field: @kase.efolder_ssoc3_date} %>
-        <%= render partial: 'table_row', locals: {field_name: 'SSOC 4', vacols_field: @kase.bfssoc4_date, vbms_field: @kase.efolder_ssoc4_date} %>
-        <%= render partial: 'table_row', locals: {field_name: 'SSOC 5', vacols_field: @kase.bfssoc5_date, vbms_field: @kase.efolder_ssoc5_date} %>
-        <%= render partial: 'table_row', locals: {field_name: 'Form 9', vacols_field: @kase.bfd19_date, vbms_field: @kase.efolder_form9_date} %>
-
-      </table>
-
+      <div class="usa-cf_app-table-wrap">
+          <table class="usa-table-borderless">
+            <caption class="usa-sr-only">
+              This table compares received dates for forms stored in VACOLS and VBMS.
+            </caption>
+            <thead>
+                <tr>
+                  <th></th>
+                  <th>Document</th>
+                  <th>VACOLS</th>
+                  <th>VBMS</th>
+              </tr>
+            </thead>
+            <tbody>
+                <%= render partial: 'table_row', locals: {field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
+                <%= render partial: 'table_row', locals: {field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
+                <%= render partial: 'table_row', locals: {field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
+                <%= render partial: 'table_row', locals: {field_name: 'SSOC 2', vacols_field: @kase.bfssoc2_date, vbms_field: @kase.efolder_ssoc2_date} %>
+                <%= render partial: 'table_row', locals: {field_name: 'SSOC 3', vacols_field: @kase.bfssoc3_date, vbms_field: @kase.efolder_ssoc3_date} %>
+                <%= render partial: 'table_row', locals: {field_name: 'SSOC 4', vacols_field: @kase.bfssoc4_date, vbms_field: @kase.efolder_ssoc4_date} %>
+                <%= render partial: 'table_row', locals: {field_name: 'SSOC 5', vacols_field: @kase.bfssoc5_date, vbms_field: @kase.efolder_ssoc5_date} %>
+                <%= render partial: 'table_row', locals: {field_name: 'Form 9', vacols_field: @kase.bfd19_date, vbms_field: @kase.efolder_form9_date} %>
+            </tbody>
+          </table>
+      </div>
   </div>
 
   <div class="row">
