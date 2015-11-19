@@ -32,7 +32,10 @@ script:
     - bundle exec brakeman --exit-on-warn --run-all-checks --confidence-level=2
     - ./bin/rake assets:precompile
     - ./bin/rails s &
-    - sleep 10
+    - |
+        while ! nc -z -w1 localhost 3000 > /dev/null; do
+            sleep 1
+        end
     - "pa11y --standard=Section508 http://localhost:3000/caseflow/login"
 
 notifications:
