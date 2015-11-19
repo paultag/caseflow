@@ -19,6 +19,18 @@ if (typeof String.prototype.trim !== 'function') {
     }
 }
 
+/*
+Extends jQuery to add a toggleAttr method
+https://gist.github.com/mathiasbynens/298591
+*/
+jQuery.fn.toggleAttr = function(attr) {
+ return this.each(function() {
+  var $this = $(this);
+  $this.attr(attr) ? $this.removeAttr(attr) : $this.attr(attr, attr);
+ });
+};
+
+
 // --- START: JS for questions.html.erb ---
 
 /**
@@ -108,17 +120,22 @@ $(function () {
 
 // --- END: JS for questions.html.erb ---
 
+/* --------------------------------
+Reusable open/close Item methods
+ -------------------------------- */
+
 $.fn.extend({
     openItem: function() {
-        $(this).toggleClass('open');
+        $(this).removeAttr('hidden');
     },
     toggleItem: function() {
-        $(this).toggleClass('open');
+        $(this).toggleAttr('hidden','hidden');
     },
     closeItem: function(){
-        $(this).removeClass('open');
+        $(this).attr('hidden', 'hidden');
     }
 })
+
 
 $(function(){
     $(".dropdown-trigger").on('click', function(e) {
@@ -129,6 +146,6 @@ $(function(){
 
     $(".dropdown-trigger").on('blur', function(){
         var dropdownMenu = $(this).attr('href');
-        $(dropdownMenu).closeItem();    
+        $(dropdownMenu).closeItem();
     });
 });
