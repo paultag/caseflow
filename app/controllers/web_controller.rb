@@ -223,15 +223,7 @@ class WebController < ApplicationController
 
   def logout
     reset_session
-    # If SSOi is enabled, redirect to their non-SAML logout page. Otherwise just
-    # go to the login page.
-    if ssoi_configured
-      # Get the URI that is the SAML endpoint
-      host = ENV['SSOI_SAML_LOGOUT_HOST']
-      redirect_to "https://#{host}/centrallogin/centrallanding.aspx"
-    elsif
-      redirect_to action: 'login'
-    end
+    redirect_to action: 'login'
   end
 
   # -- Action filter --
