@@ -58,16 +58,12 @@
 
       </table>
 
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+  <div class="usa_cf-app-segment clearfix">
       <%= form_tag(action: :error) do %>
-        <input type="submit" value="This case cannot be certified" class="btn btn-link"/>
-        <button class="btn btn-primary pull-right" onclick="location.reload(); return false;">
+        <button type="submit" class="usa-cf-btn--link push-left">This case cannot be certified</button>
+        <button class="btn btn-primary push-right" onclick="location.reload(); return false;">
           Refresh Page
         </button>
       <% end %>
-    </div>
   </div>
 </div>
