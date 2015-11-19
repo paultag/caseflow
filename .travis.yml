@@ -16,10 +16,15 @@ addons:
             - pdftk
 
 
-cache: bundler
+cache:
+    - bundler
+    directories:
+        - node_modules
+
+post_install:
+    - npm install
 
 before_script:
-    - npm install pa11y
     - cp config/database.yml.test config/database.yml
 
 script:
