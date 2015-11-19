@@ -58,7 +58,7 @@ body {
 }
 
 .error {
-  color: #c1272d;
+  color: $color-secondary-dark;
 }
 
 label {
@@ -341,5 +341,15 @@ body {
     table {
         min-width: rem(400px);
         width: 100%;
+    }
+}
+// Overrides table th, table td classes
+// from web design standards
+.usa-table-borderless {
+    th, td {
+        border-width: 0;
+    }
+    tr  {
+        border-bottom: 2px solid $color-gray-lightest;
     }
 }
