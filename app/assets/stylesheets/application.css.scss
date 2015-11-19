@@ -133,6 +133,11 @@ h1,h2,h3,h4,h5,h6 {
     margin: 0;
 }
 
+[hidden] {
+    display: none !important;
+}
+
+
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
 * - Uses Neat.bourbon.io as a grid
@@ -242,7 +247,12 @@ body {
   display: inline-block;
   position: relative;
 
-  &-trigger {
+  a {
+     color: inherit;
+  }
+}
+
+.dropdown-trigger {
     cursor: pointer;
 
     &::after {
@@ -258,34 +268,22 @@ body {
     &:hover {
         text-decoration: none;
     }
-  }
+}
 
-  &-button:after {
-    display: block;
-    position: absolute;
-  }
-  &-menu {
+.dropdown-menu {
     @include unstyled-list();
     @include transition (all 0.2s ease-in-out);
     background: $color-white;
     border: 1px solid $color-gray-lighter;
     cursor: pointer;
-    display: none;
     padding: rem(10px);
     position: absolute;
     text-align: left;
     top: 2em;
     width: 18rem;
     z-index: 1;
-  }
-  &-show {
-    display: block;
-  }
+ }
 
-  a {
-     color: inherit;
-  }
-}
 
 /*--- Appeal button ---*/
 
