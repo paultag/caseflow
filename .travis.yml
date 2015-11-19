@@ -21,7 +21,7 @@ cache:
     directories:
         - node_modules
 
-post_install:
+pre_install:
     - npm install
 
 before_script:
