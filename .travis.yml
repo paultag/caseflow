@@ -17,7 +17,7 @@ addons:
 
 
 cache:
-    - bundler
+    bundler: true
     directories:
         - node_modules
 
