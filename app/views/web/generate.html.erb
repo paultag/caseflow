@@ -16,16 +16,12 @@
 
       
 
-    </div>
-  </div>
-  <div class="row">
-    <div class="col col-md-10 col-md-offset-1">
-      <%= form_tag({action: :certify}) do %>
-        <input type="hidden" value="<%= @file_name %>" name="file_name"/>
-        <input type="hidden" value="<%= @certification_date %>" name="certification_date"/>
-        <a onclick="javascript:history.back()">Go back to fix any errors</a>
-        <input type="submit" value="Upload and Certify" class="btn btn-primary pull-right"/>
+      <%= form_tag({action: :certify}, {class: 'usa-cf_app-form usa-cf_app-segment usa-cf_app-segment--v-pad'}) do %>
+        <input type="hidden" value="<%= @file_name %>" name="file_name">
+        <input type="hidden" value="<%= @certification_date %>" name="certification_date">
+
+        <a href="<%= url_for :controller => 'web', :action => 'questions' %>" class="usa-cf-btn--link pull-left">Go back to fix any errors</a>
+        <button type="submit" class="btn btn-primary push-right">Upload and Certify</button>
       <% end %>
-    </div>
-  </div>
+
 </div>
