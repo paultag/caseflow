@@ -180,10 +180,6 @@ body {
         clear:both;
     }
 
-    & + .usa-cf_app-segment {
-        margin-top: rem(30px);
-    }
-
     &--v-pad {
         padding-top: rem(30px);
         padding-bottom: rem(30px);
@@ -196,6 +192,10 @@ body {
         background: $color-white;
         border: 1px solid $color-gray-lighter;
     }
+}
+
+* + .usa-cf_app-segment {
+    margin-top: rem(30px);
 }
 
 [id=certifications-header] {
@@ -308,7 +308,8 @@ body {
 // I hate using !important, but web design standards
 // form buttons have high specificity.
 // Keep an eye on https://github.com/18F/web-design-standards/issues/891
-[type="submit"] {
+[type="submit"],
+[type="button"] {
     margin: 0 !important;
 }
 
@@ -336,7 +337,7 @@ body {
 /*--- Table styles ---*/
 .usa-cf_app-table-wrap {
     width: 100%;
-    overflow: scroll;
+    overflow-x: scroll;
 
     table {
         min-width: rem(400px);
