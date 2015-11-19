@@ -133,6 +133,11 @@ h1,h2,h3,h4,h5,h6 {
     margin: 0;
 }
 
+.open {
+    display: block !important;
+}
+
+
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
 * - Uses Neat.bourbon.io as a grid
@@ -277,9 +282,6 @@ body {
     top: 2em;
     width: 18rem;
     z-index: 1;
-  }
-  &-show {
-    display: block;
   }
 
   a {
