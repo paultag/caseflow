@@ -27,6 +27,7 @@ script:
     - bundle exec brakeman --exit-on-warn --run-all-checks --confidence-level=2
     - ./bin/rake assets:precompile
     - nohup ./bin/rails s &
+    - sleep 10
     - "pa11y --standard=Section508 http://localhost:3000/caseflow/login"
 
 notifications:
