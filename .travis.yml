@@ -19,12 +19,15 @@ addons:
 cache: bundler
 
 before_script:
+    - npm install pa11y
     - cp config/database.yml.test config/database.yml
 
 script:
     - bundle exec rake
     - bundle exec brakeman --exit-on-warn --run-all-checks --confidence-level=2
     - ./bin/rake assets:precompile
+    - nohup ./bin/rails s &
+    - "pa11y --standard=Section508 http://localhost:3000/caseflow/login"
 
 notifications:
     email: false
