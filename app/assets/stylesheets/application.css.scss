@@ -300,7 +300,17 @@ body {
         color: $color-white;
         background: $color-gray;
         border-bottom: 2px solid $color-gray;
+
+        path {
+            fill: $color-white;
+        }
     }
+}
+
+.usa-cf-apppeal-id-icon {
+    display: inline-block;
+    margin-left: 1rem;
+    vertical-align: middle;
 }
 
 /*------ Buttons --------*/
