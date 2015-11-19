@@ -35,7 +35,7 @@ script:
     - |
         while ! nc -z -w1 localhost 3000 > /dev/null; do
             sleep 1
-        end
+        done
     - "pa11y --standard=Section508 http://localhost:3000/caseflow/login"
 
 notifications:
