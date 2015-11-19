@@ -144,7 +144,6 @@ $(function(){
          $(dropdownMenu).toggleItem();
     });
 
-
     $(":not(.dropdown)").on('click', function(e){
         if( !$(e.target).parents('.dropdown').length ) {
             $('.dropdown-menu').closeItem();
