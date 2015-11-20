@@ -6,10 +6,8 @@
 
  (function () {
      "use strict";
-
      /* Copies appeals ID to clipboard */
      new Clipboard('[data-clipboard-text]');
-
  })();
 
 // For IE9
@@ -18,6 +16,23 @@ if (typeof String.prototype.trim !== 'function') {
         return this.replace(/^\s+|\s+$/g, '');
     }
 }
+
+
+/* --------------------------------
+Reusable open/close Item methods
+ -------------------------------- */
+
+$.fn.extend({
+    openItem: function() {
+        $(this).removeAttr('hidden');
+    },
+    toggleItem: function() {
+        $(this).toggleAttr('hidden','hidden');
+    },
+    closeItem: function(){
+        $(this).attr('hidden', 'hidden');
+    }
+});
 
 /*
 Extends jQuery to add a toggleAttr method
@@ -34,108 +49,44 @@ jQuery.fn.toggleAttr = function(attr) {
 // --- START: JS for questions.html.erb ---
 
 /**
- * Shows/hides an element (with a specified ID attribute) when a checked radio
- * button (with a specific name attribute) has a particular value.
- *
- * @param inputName The radio input element to check for value
- * @param divId The ID of the element to show/hide
- * @param showValue The value of the input element needed to show the element indicated by divId
- */
-function display_field(inputName, divId, showValue) {
-    var selectedOption = $("input[name='" + inputName + "']:checked")[0];
-    var div = $('#' + divId);
+* Show a linked text field when a particular checkbox or radio input is selected
+*
+* 1. Requires inputs and related text fields to be grouped within the same fieldset.
+* 2. Requires the revealed item to have a data-showwhen attribute. The value for this
+*    attribute should match that of the item that triggers the reveal.
+*/
 
-    if (selectedOption && selectedOption.value === showValue) {
-        div.removeClass("hidden");
-    }
-    else {
-        div.addClass("hidden");
-    }
-}
+/* Change event bubbles up, so we can wait until it hits fieldset */
+$('fieldset').on('change', function(e){
+    /*
+    If this is a checkbox, toggle the visibility of
+    its sibling.
+    */
 
-// -- Functions for display specific fields --
+    // TODO: Refactor this to use openItem/closeItem/toggleItem
 
-var display_8b_explanation = function () {
-    display_field("8B_POWER_OF_ATTORNEY", "8b-explanation", "8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE");
-}
-
-var display_9b = function () {
-    display_field("9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646", "9b", "no");
-}
-var display_10c = function () {
-    display_field("10B_IF_HELD_IS_TRANSCRIPT_IN_FILE", "10c", "no");
-}
-var display_11b = function () {
-    display_field("11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE", "11b", "yes");
-}
-
-var display_13_other = function () {
-    var isChecked = $("input[name='13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']")[0].checked;
-    var div = $('#13');
-    if (isChecked) {
-        div.removeClass("hidden");
-    }
-    else {
-        div.addClass("hidden");
-    }
-}
-
-function requiredFieldsComplete() {
-    var a17Val = $('#17A_SIGNATURE_OF_CERTIFYING_OFFICIAL_input_id').val();
-    var b17Val = $('#17B_TITLE_input_id').val();
-
-    if (!a17Val.trim() || !b17Val.trim()) {
-        return false;
+    if( $(e.target).attr('type') == 'checkbox' ) {
+        $(this).find('[data-showwhen]').toggleClass('hidden');
     }
 
-    return true;
-}
+    /*
+    Otherwise, assume it's a radio button. Find the element that should be
+    triggered when that value is selected. If the value of showwhen matches
+    the value of the selected item, show that item.
+    */
 
-var questionsSubmit = function (event) {
-    if (!requiredFieldsComplete()) {
-        alert("Please fill in 17A and 17B");
-        return event.preventDefault();
+    else if(
+        $(this).find('[data-showwhen]').length &&
+        $(this).find('[data-showwhen]').data('showwhen') == $(e.target).attr('value')
+    ) {
+        $(this).find('[data-showwhen]').removeClass('hidden');
+    } else {
+        $(this).find('[data-showwhen]').addClass('hidden');
     }
-}
 
-// -- Add listeners and other on page load behavior --
-
-$(function () {
-    if(!!$("#question-form").length) {
-        $("input[name='8B_POWER_OF_ATTORNEY']").change(display_8b_explanation);
-        $("input[name='9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646']").change(display_9b);
-        $("input[name='10B_IF_HELD_IS_TRANSCRIPT_IN_FILE']").change(display_10c);
-        $("input[name='11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE']").change(display_11b);
-        $("input[name='13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']").change(display_13_other);
-        $("#question-form").submit(questionsSubmit);
-
-        // Restore the hidden fields that should be displayed, used when back button is used
-        display_8b_explanation();
-        display_9b();
-        display_10c();
-        display_11b();
-        display_13_other();
-    }
 });
 
 // --- END: JS for questions.html.erb ---
-
-/* --------------------------------
-Reusable open/close Item methods
- -------------------------------- */
-
-$.fn.extend({
-    openItem: function() {
-        $(this).removeAttr('hidden');
-    },
-    toggleItem: function() {
-        $(this).toggleAttr('hidden','hidden');
-    },
-    closeItem: function(){
-        $(this).attr('hidden', 'hidden');
-    }
-})
-
 
 $(function(){
     $(".dropdown-trigger").on('click', function(e) {
