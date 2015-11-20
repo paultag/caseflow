@@ -21,7 +21,8 @@
   # Fill in local varialbes passed to this partial
   question: question,
   question_num: question_num,
-  input_name: input_name, }
+  input_name: input_name,
+}
 
    # Optional arguments
    if defined?(div_id)
@@ -34,5 +35,11 @@
    if defined?(required)
      yes_no_locals[:required] = required
    end
+
+   if defined?(show_when)
+     yes_no_locals[:show_when] = show_when
+   end
+
+
 %>
 <%= render partial: 'form8_two_radio', locals: yes_no_locals %>

@@ -28,6 +28,7 @@
                 question_num: '8B EXPLANATION',
                 input_name: '8B_REMARKS',
                 close_fieldset: true,
+                show_when: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
             } %>
       <% end %>
 
@@ -53,6 +54,7 @@
                 question_num: '9B',
                 input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN',
                 close_fieldset: true,
+                show_when: 'no',
             } %>
       <% end %>
 
@@ -72,6 +74,7 @@
                   question_num: '10C',
                   input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
                   close_fieldset: true,
+                  show_when: 'no',
               } %>
         <% end %>
 
@@ -91,7 +94,8 @@
               input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
               div_id: '11b',
               div_class: 'hidden',
-              close_fieldset: true
+              close_fieldset: true,
+              show_when: 'yes'
           } %>
 
       </fieldset><%# Closes nested fieldset for question 11b %>
