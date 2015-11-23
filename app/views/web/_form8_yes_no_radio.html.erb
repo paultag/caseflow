@@ -40,6 +40,10 @@
      yes_no_locals[:show_when] = show_when
    end
 
+   if defined?(hidden)
+     yes_no_locals[:hidden] = hidden
+   end
+
 
 %>
 <%= render partial: 'form8_two_radio', locals: yes_no_locals %>

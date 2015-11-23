@@ -10,14 +10,6 @@
      new Clipboard('[data-clipboard-text]');
  })();
 
-// For IE9
-if (typeof String.prototype.trim !== 'function') {
-    String.prototype.trim = function () {
-        return this.replace(/^\s+|\s+$/g, '');
-    }
-}
-
-
 /* --------------------------------
 Reusable open/close Item methods
  -------------------------------- */
@@ -45,15 +37,16 @@ jQuery.fn.toggleAttr = function(attr) {
  });
 };
 
-
 // --- START: JS for questions.html.erb ---
 
 /**
 * Show a linked text field when a particular checkbox or radio input is selected
 *
-* 1. Requires inputs and related text fields to be grouped within the same fieldset.
+* 1. Requires inputs and related text fields to be grouped within the same fieldset
+     (which is the best way to mark it up anyway).
 * 2. Requires the revealed item to have a data-showwhen attribute. The value for this
-*    attribute should match that of the item that triggers the reveal.
+*    attribute should match that of the item that triggers the reveal. I.e., if the
+*    element should be triggered on when 'Yes' is selected, use data-showwhen="yes".
 */
 
 /* Change event bubbles up, so we can wait until it hits fieldset */
@@ -63,10 +56,8 @@ $('fieldset').on('change', function(e){
     its sibling.
     */
 
-    // TODO: Refactor this to use openItem/closeItem/toggleItem
-
     if( $(e.target).attr('type') == 'checkbox' ) {
-        $(this).find('[data-showwhen]').toggleClass('hidden');
+        $(this).find('[data-showwhen]').toggleItem();
     }
 
     /*
@@ -79,9 +70,9 @@ $('fieldset').on('change', function(e){
         $(this).find('[data-showwhen]').length &&
         $(this).find('[data-showwhen]').data('showwhen') == $(e.target).attr('value')
     ) {
-        $(this).find('[data-showwhen]').removeClass('hidden');
+        $(this).find('[data-showwhen]').openItem('hidden');
     } else {
-        $(this).find('[data-showwhen]').addClass('hidden');
+        $(this).find('[data-showwhen]').closeItem('hidden', 'hidden');
     }
 
 });
