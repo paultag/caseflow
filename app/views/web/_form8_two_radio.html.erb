@@ -24,9 +24,9 @@ end
 %>
 
 
-<fieldset class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= hidden if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
+<fieldset <%= ' class=required' if defined?(required) && required %> class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
   <legend>
-      <strong<%= ' class=required' if defined?(required) && required %>><%= question_num %></strong>
+      <b><%= question_num %></b>
       <%= question %>
   </legend>
   <p class="form8-two-radio-item">
