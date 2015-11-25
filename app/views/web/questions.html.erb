@@ -107,7 +107,7 @@
           Records to be forwarded to Board of Veterans' Appeals
         </legend>
 
-        <div class="usa-cf_app-multi-col-3">
+        <div class="usa-grid-full usa-cf_app-form-3-col">
           <%= render partial: 'form8_checkbox_column', locals: {
                   label1_text: 'CF OR XCF',
                   input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
@@ -119,7 +119,6 @@
                   input4_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF',
                   label5_text: 'TRAINING SUB-F',
                   input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TRAINING_SUBF',
-
               } %>
           <%= render partial: 'form8_checkbox_column', locals: {
                   label1_text: 'LOAN GUAR. F',
@@ -132,7 +131,6 @@
                   input4_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CLINICAL_REC',
                   label5_text: 'X-RAYS',
                   input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
-
               } %>
 
           <%= render partial: 'form8_checkbox_column', locals: {
@@ -146,7 +144,6 @@
                   input4_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INSURANCE_F',
                   label5_text: 'OTHER',
                   input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
-
               } %>
 
           <%= render partial: 'form8_text', locals: {
@@ -157,7 +154,7 @@
                   hidden: true,
                   show_when: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER'
               } %>
-          </div>
+
     </fieldset>
 
 
