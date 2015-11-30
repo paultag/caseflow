@@ -1,7 +1,6 @@
 GIT
-  remote: https://github.com/alex/omniauth-saml
-  revision: 77b16df0600037fa34cff6d548117e50a59de4c6
-  branch: patch-1
+  remote: https://github.com/Vodeclic/omniauth-saml
+  revision: de558c63f987efcc24dc5addfa77552086d61016
   specs:
     omniauth-saml (1.4.1)
       omniauth (~> 1.1)
