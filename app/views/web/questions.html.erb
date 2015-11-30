@@ -84,6 +84,7 @@
               question: 'Are contested claims procedures applicable in this case?',
               question_num: '11A',
               input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
+              required: true,
           } %>
 
 
@@ -95,7 +96,7 @@
               div_id: '11b',
               hidden: true,
               close_fieldset: true,
-              show_when: 'yes'
+              show_when: 'yes',
           } %>
 
       </fieldset><%# Closes nested fieldset for question 11b %>
@@ -107,7 +108,7 @@
           Records to be forwarded to Board of Veterans' Appeals
         </legend>
 
-        <div class="usa-cf_app-multi-col-3">
+        <div class="usa-grid-full usa-cf_app-form-3-col">
           <%= render partial: 'form8_checkbox_column', locals: {
                   label1_text: 'CF OR XCF',
                   input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
@@ -115,41 +116,35 @@
                   input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INACTIVE_CF',
                   label3_text: 'DENTAL F',
                   input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DENTAL_F',
+                  label4_text: 'R&E F',
+                  input4_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF',
+                  label5_text: 'TRAINING SUB-F',
+                  input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TRAINING_SUBF',
               } %>
           <%= render partial: 'form8_checkbox_column', locals: {
-                  label1_text: 'R&E F',
-                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF',
-                  label2_text: 'TRAINING SUB-F',
-                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TRAINING_SUBF',
-                  label3_text: 'LOAN GUAR. F',
-                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_LOAD_GUAR',
-              } %>
-          <%= render partial: 'form8_checkbox_column', locals: {
-                  label1_text: 'OUTPATIENT F',
-                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OUTPATIENT_F',
-                  label2_text: 'HOSPITAL COR.',
-                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_HOSPITAL_COR',
-                  label3_text: 'CLINICAL REC.',
-                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CLINICAL_REC',
-              } %>
-
-          <%= render partial: 'form8_checkbox_column', locals: {
-                  label1_text: 'X-RAYS',
-                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
-                  label2_text: 'SLIDES',
-                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES',
-                  label3_text: 'TISSUE BLOCKS',
-                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS',
+                  label1_text: 'LOAN GUAR. F',
+                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_LOAD_GUAR',
+                  label2_text: 'OUTPATIENT F',
+                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OUTPATIENT_F',
+                  label3_text: 'HOSPITAL COR.',
+                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_HOSPITAL_COR',
+                  label4_text: 'CLINICAL REC.',
+                  input4_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CLINICAL_REC',
+                  label5_text: 'X-RAYS',
+                  input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
               } %>
 
           <%= render partial: 'form8_checkbox_column', locals: {
-                  label1_text: 'DEP. ED. F (Ch. 35)',
-                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DEP_ED_F',
-                  label2_text: 'INSURANCE F',
-                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INSURANCE_F',
-                  label3_text: 'OTHER',
-                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
-
+                  label1_text: 'SLIDES',
+                  input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES',
+                  label2_text: 'TISSUE BLOCKS',
+                  input2_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_TISSUE_BLOCKS',
+                  label3_text: 'DEP. ED. F (Ch. 35)',
+                  input3_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_DEP_ED_F',
+                  label4_text: 'INSURANCE F',
+                  input4_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_INSURANCE_F',
+                  label5_text: 'OTHER',
+                  input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
               } %>
 
           <%= render partial: 'form8_text', locals: {
@@ -158,9 +153,9 @@
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
                   div_id: '13',
                   hidden: true,
-                  show_when: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER'
+                  show_when: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
               } %>
-          </div>
+
     </fieldset>
 
 
@@ -171,24 +166,24 @@
 
       <p class="row">
           <label for="<%= textarea_id %>">
-            <strong>14</strong> REMARKS
+            <strong>14</strong> Remarks
           </label>
           <textarea name="<%= textarea_name %>" rows="3" class="form-control" id="<%= textarea_id %>"></textarea>
       </p>
 
       <%= render partial: 'form8_text', locals: {
               question: 'Name of Certifying Official',
-              question_num: '17A.',
+              question_num: '17A',
               input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
               max_length: 40,
-              required: true
+              required: true,
           } %>
 
       <%= render partial: 'form8_text', locals: {
               question: 'Title of Certifying Official',
-              question_num: '17B.',
+              question_num: '17B',
               input_name: '17B_TITLE',
-              required: true
+              required: true,
           } %>
 
   </div>
