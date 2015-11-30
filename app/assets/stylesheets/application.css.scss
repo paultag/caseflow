@@ -49,10 +49,6 @@ body {
   border-bottom: 1px solid #eee;
 }
 
-.hidden {
-  display: none;
-}
-
 .success {
   color: #009245;
 }
@@ -95,16 +91,6 @@ label {
   padding-top: 1em;
 }
 
-/* Grid sizes can be found on http://getbootstrap.com/css/ */
-@media (min-width: 970px) {
-
-  /* When we're medium and large, lets set a border on the left side
-   * of the login form column and pad it out to give it a bit of room. */
-  #login-login-form {
-    border-left: 1px solid #DCDCDC;
-    padding-left: 3em;
-  }
-}
 
 /*----------------------------------*
 * Globals, Resets, and overrides
@@ -363,5 +349,75 @@ body {
     }
     tr  {
         border-bottom: 2px solid $color-gray-lightest;
+    }
+}
+
+/* ===========================*
+* Form-related states
+* ============================*/
+
+.required {
+    strong, b {
+        &::after {
+            content: '* ';
+            color: $color-secondary-dark;
+        }
+    }
+
+    &-msg {
+        &::before {
+            content: '* ';
+        }
+        @extend .usa-input-error-message;
+    }
+}
+
+.usa-cf_app-form {
+
+    header {
+        border-bottom: 1px solid $color-gray-lighter;
+        margin-bottom: rem(30px);
+    }
+
+    legend {
+        font: inherit;
+    }
+    label {
+        margin-top: inherit;
+    }
+    fieldset {
+        margin-bottom: rem(45px);
+
+        fieldset {
+            margin-bottom: 0
+        }
+    }
+
+    .usa-cf_app-btn-forward {
+        display: inline-block;
+        margin-right: 0;
+    }
+}
+
+.usa-cf_app-form-3-col {
+    @include clearfix;
+    margin-top: rem(30px);
+    margin-bottom: rem(30px);
+    padding: .25rem;
+    white-space: nowrap;
+
+    .usa-width-one-third {
+        margin-right: 0;
+    }
+}
+.form8-text-input {
+    @include clearfix;
+    clear: both;
+}
+.form8-two-radio {
+    &-item {
+        display: inline-block;
+        padding-right: 2rem;
+        margin: 1rem 0;
     }
 }

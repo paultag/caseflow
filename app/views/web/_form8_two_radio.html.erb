@@ -17,9 +17,16 @@
     - div_class: The class attribute of the containing div
 %>
 
-<fieldset class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>">
-  <legend>
-      <strong<%= ' class=required' if defined?(required) && required %>><%= question_num %></strong>
+<%
+if defined?(show_when)
+  show_when = "data-showwhen=#{show_when}"
+end
+%>
+
+
+<fieldset class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
+  <legend <%= ' class=required' if defined?(required) && required %> >
+      <strong><%= question_num %></strong>
       <%= question %>
   </legend>
   <p class="form8-two-radio-item">
