@@ -199,8 +199,9 @@ body {
 
     > * {
         display: table-cell;
+        padding: 1.5rem;
+        vertical-align: middle;
         width: 33%;
-        padding: rem(30px);
     }
 
     &--bordered {
