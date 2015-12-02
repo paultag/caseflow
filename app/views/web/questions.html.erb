@@ -23,7 +23,6 @@
 
         <%= render partial: 'form8_text', locals: {
                 div_id: '8b-explanation',
-                hidden: true,
                 question: 'Please specify location of the veteran\'s power of attorney',
                 question_num: '8B EXPLANATION',
                 input_name: '8B_REMARKS',
@@ -49,7 +48,6 @@
             } %>
         <%= render partial: 'form8_text', locals: {
                 div_id: '9b',
-                hidden: true,
                 question: 'If VA form 646 is not of record, explain',
                 question_num: '9B',
                 input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN',
@@ -69,7 +67,6 @@
         <% if @kase.required_fields[:show_10c] %>
           <%= render partial: 'form8_text', locals: {
                   div_id: '10c',
-                  hidden: true,
                   question: 'If not held, explain',
                   question_num: '10C',
                   input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
@@ -94,7 +91,6 @@
               question_num: '11B',
               input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
               div_id: '11b',
-              hidden: true,
               close_fieldset: true,
               show_when: 'yes',
           } %>
@@ -152,7 +148,6 @@
                   question_num: '',
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
                   div_id: '13',
-                  hidden: true,
                   show_when: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
               } %>
 
