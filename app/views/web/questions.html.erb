@@ -66,11 +66,12 @@
 
 
             <%= render partial: 'form8_text', locals: {
+                 div_class: 'cf-form-disabled',
                  div_id: '5b-date-notice',
                  question: "Date of notification of action appealed",
                  question_num: '5B',
                  input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-                 value: @kase.bfdrodec,
+                 value: @kase.bfd19_date,
              } %>
 
     </div>
@@ -89,7 +90,7 @@
              question: "Date of notification of action appealed",
              question_num: '6B',
              input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: @kase.bfdrodec,
+             value: @kase.bfd19_date,
          } %>
     </div>
 
@@ -107,7 +108,7 @@
              question: "Date of notification of action appealed",
              question_num: '7B',
              input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: @kase.bfdrodec,
+             value: @kase.bfd19_date,
          } %>
 
     </div>
@@ -351,10 +352,13 @@
               required: true,
           } %>
 
-          <%= render partial: 'form8_text', locals: {
+          <%= render partial: 'form8_date', locals: {
                   question: 'Date',
                   question_num: '17C',
                   input_name: '17C_DATE',
+                  required: true,
+                  value: Time.now.strftime('%Y-%m-%d'),
+                  disabled: true,
               } %>
   </div>
 

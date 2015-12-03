@@ -134,6 +134,11 @@ legend {
     white-space: normal;
 }
 
+[disabled] {
+    background: $color-gray-lightest !important;
+    opacity: .5 !important;
+}
+
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
 * - Uses Neat.bourbon.io as a grid
