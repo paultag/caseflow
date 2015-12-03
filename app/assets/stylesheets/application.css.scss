@@ -106,9 +106,12 @@ label {
 .text-uc {
     text-transform: uppercase;
 }
+
+.cf-push-left,
 .push-left {
     float: left;
 }
+.cf-push-right,
 .push-right {
     float: right;
 }
@@ -403,7 +406,7 @@ label {
         }
     }
 
-    .usa-cf_app-btn-forward {
+    .cf-btn-forward {
         display: inline-block;
         margin-right: 0;
     }
