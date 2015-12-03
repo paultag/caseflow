@@ -15,14 +15,14 @@
     $('.cf-action-back').on('click', function(evt) {
         window.history.back();
     });
- })();
+ });
 
 /* Reusable 'refresh' pattern */
 $(function() {
     $('.cf-action-refresh').on('click', function(evt) {
         location.reload(); return false;
     });
-})();
+});
 
 
 /*
