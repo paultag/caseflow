@@ -2,7 +2,7 @@ module Caseflow
   module Fakes
     class Case
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
-        :bfdnod, :bfd19, :bfdsoc, :efolder_appellant_id, :appeal_type,
+        :bfdrodec, :bfdnod, :bfd19, :bfdsoc, :efolder_appellant_id, :appeal_type,
         :vso_full, :regional_office_full, :folder, :correspondent,
         :save_successful, :issue_breakdown, :bfso)
       attr_accessor :bf41stat
@@ -17,8 +17,8 @@ module Caseflow
 
       # TODO: when we have Ruby 2.1, use required keyword arguments.
       def initialize(bfkey: nil, bfcorlid: nil, bfac: nil, bfmpro: nil,
-                     bfpdnum: nil, bfregoff: nil, bfdnod: nil, bfd19: nil,
-                     bfdsoc: nil, bf41stat: nil, efolder_nod: nil,
+                     bfpdnum: nil, bfregoff: nil, bfdrodec: nil, bfdnod: nil,
+                     bfd19: nil, bfdsoc: nil, bf41stat: nil, efolder_nod: nil,
                      efolder_form9: nil, efolder_soc: nil,
                      efolder_appellant_id: nil, appeal_type: nil, vso_full: nil,
                      regional_office_full: nil, folder: nil, correspondent: nil,
@@ -29,6 +29,7 @@ module Caseflow
         @bfmpro = bfmpro
         @bfpdnum = bfpdnum
         @bfregoff = bfregoff
+        @bfdrodec = bfdrodec
 
         @bfdnod = bfdnod
         @bfd19 = bfd19
@@ -143,6 +144,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'DSUSER',
+        bfdrodec: Date.parse('2015-09-01'),
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
@@ -165,6 +167,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'DSUSER',
+        bfdrodec: Date.parse('2015-09-01'),
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
@@ -187,6 +190,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'dfakl;dfakldfaj;',
+        bfdrodec: Date.parse('2015-09-01'),
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
@@ -209,6 +213,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'DSUSER',
+        bfdrodec: Date.parse('2015-10-01'),
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
@@ -242,6 +247,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'DSUSER',
+        bfdrodec: Date.parse('2015-09-01'),
         # No form dates are set
         efolder_appellant_id: '123456789',
         appeal_type: 'Post Remand',
@@ -259,6 +265,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'DSUSER',
+        bfdrodec: Date.parse('2015-09-01'),
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),
@@ -282,6 +289,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'DSUSER',
+        bfdrodec: Date.parse('2015-09-01'),
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),

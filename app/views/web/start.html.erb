@@ -58,14 +58,12 @@
   </div>
 
     <div class="usa-cf_app-segment">
-  <%= form_tag(action: :error) do %>
 
-            <button type="submit" class="cf-btn-link push-left">This case cannot be certified</button>
-            <button type="button" class="btn btn-primary push-right cf-action-refresh">
-                Refresh Page
-            </button>
+    <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link pull-left' %>
+    <button type="button" class="btn btn-primary push-right cf-action-refresh">
+        Refresh Page
+    </button>
 
-  <% end %>
 </div>
 
 </div>
