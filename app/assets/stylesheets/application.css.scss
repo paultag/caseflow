@@ -307,7 +307,8 @@ body {
     margin: 0 !important;
 }
 
-.usa-cf-btn--link {
+
+.cf-btn-link {
     background: transparent;
     color: $color-primary;
     font-weight: normal;
@@ -315,11 +316,18 @@ body {
     // I hate using !important, but web design standards
     // form buttons have high specificity.
     // Keep an eye on https://github.com/18F/web-design-standards/issues/891
+    -webkit-font-smoothing: inherit;
     padding: 1rem 0 !important;
+
+    // Removes padding, so that these links can be placed inline.
+    &--inline {
+        padding: 0 !important;
+    }
 
     &:hover {
         background-color: inherit;
         color: $color-primary-darker;
+        text-decoration: underline;
     }
 }
 
