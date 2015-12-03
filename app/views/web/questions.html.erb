@@ -64,15 +64,14 @@
             value: Caseflow.format_issues(@kase, 'service connection'),
         } %>
 
-
-            <%= render partial: 'form8_text', locals: {
-                 div_class: 'cf-form-disabled',
-                 div_id: '5b-date-notice',
-                 question: "Date of notification of action appealed",
-                 question_num: '5B',
-                 input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-                 value: @kase.bfdrodec,
-             } %>
+        <%= render partial: 'form8_text', locals: {
+             div_class: 'cf-form-disabled',
+             div_id: '5b-date-notice',
+             question: "Date of notification of action appealed",
+             question_num: '5B',
+             input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: @kase.bfdrodec,
+         } %>
 
     </div>
 
@@ -177,7 +176,11 @@
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Was hearing requested?',
               question_num: '10A',
-              input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
+              input_name: '10A_WAS_HEARING_REQUESTED_YES',
+              option1_label: 'Yes',
+              option1_value: 'yes',
+              option2_label: 'No',
+              option2_value: 'no',
               required: true,
           } %>
 
