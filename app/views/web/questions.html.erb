@@ -9,29 +9,25 @@
           <p class="required-msg usa-input-error-message">Required</p>
       </header>
 
-
-     <% if @kase.correspondent.appellant_name %>
-        <%= render partial: 'form8_text', locals: {
+      <%= render partial: 'form8_text', locals: {
              div_id: '1A-appellant',
              question: "Name of Appellant (If other than veteran)",
              question_num: '1A',
              input_name: '1A_NAME_OF_APPELLANT',
              value: @kase.correspondent.appellant_name,
          } %>
-   <% end %>
 
-   <% if @kase.correspondent.appellant_relationship %>
-      <%= render partial: 'form8_text', locals: {
+
+       <%= render partial: 'form8_text', locals: {
            div_id: '1A-appellant-relationship',
            question: "Relationship to Veteran",
            question_num: '1B',
            input_name: '1B_RELATIONSHIP_TO_VETERAN',
            value: @kase.correspondent.appellant_relationship,
        } %>
-  <% end %>
 
-  <% if @kase.bfcorlid %>
-     <%= render partial: 'form8_text', locals: {
+
+      <%= render partial: 'form8_text', locals: {
           div_id: '2-file-no',
           question: "File no.",
           question_num: '2',
@@ -39,9 +35,8 @@
           value: @kase.bfcorlid,
           required: true,
       } %>
-  <% end %>
 
-  <% if @kase.correspondent.full_name %>
+
        <%= render partial: 'form8_text', locals: {
             div_id: '3-vet-name',
             question: "Full Veteran Name",
@@ -50,9 +45,7 @@
             value: @kase.correspondent.full_name,
             required: true,
         } %>
-   <% end %>
 
-   <% if @kase.bfpdnum %>
       <%= render partial: 'form8_text', locals: {
            div_id: '4-insurance-loan-number',
            question: "Insurance file number or loan number (if pertinent)",
@@ -60,7 +53,7 @@
            input_name: '4_INSURANCE_FILE_NO_OR_LOAN_NO',
            value: @kase.bfpdnum,
        } %>
-  <% end %>
+
 
     <div class="cf-row">
        <%= render partial: 'form8_textarea', locals: {
@@ -71,15 +64,15 @@
             value: Caseflow.format_issues(@kase, 'service connection'),
         } %>
 
-        <% if @kase.bfd19_date %>
+
             <%= render partial: 'form8_text', locals: {
                  div_id: '5b-date-notice',
                  question: "Date of notification of action appealed",
                  question_num: '5B',
                  input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-                 value: @kase.bfd19_date,
+                 value: @kase.bfdrodec,
              } %>
-        <% end %>
+
     </div>
 
     <div class="cf-row">
@@ -91,15 +84,13 @@
             value: Caseflow.format_issues(@kase, 'increased rating'),
         } %>
 
-        <% if @kase.bfd19_date %>
-            <%= render partial: 'form8_text', locals: {
-                 div_id: '6b-date-notice',
-                 question: "Date of notification of action appealed",
-                 question_num: '6B',
-                 input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-                 value: @kase.bfd19_date,
-             } %>
-        <% end %>
+        <%= render partial: 'form8_text', locals: {
+             div_id: '6b-date-notice',
+             question: "Date of notification of action appealed",
+             question_num: '6B',
+             input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: @kase.bfdrodec,
+         } %>
     </div>
 
     <div class="cf-row">
@@ -111,27 +102,23 @@
             value: Caseflow.format_issues(@kase, 'other'),
         } %>
 
-        <% if @kase.bfd19_date %>
-            <%= render partial: 'form8_text', locals: {
-                 div_id: '7b-date-notice',
-                 question: "Date of notification of action appealed",
-                 question_num: '7B',
-                 input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-                 value: @kase.bfd19_date,
-             } %>
-        <% end %>
+        <%= render partial: 'form8_text', locals: {
+             div_id: '7b-date-notice',
+             question: "Date of notification of action appealed",
+             question_num: '7B',
+             input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: @kase.bfdrodec,
+         } %>
+
     </div>
 
-    <% if @kase.vso_full %>
-        <%= render partial: 'form8_text', locals: {
-             div_id: '8a-appellant-rep',
-             question: "Appellant represented in this appeal by (name of organization, attorney or agent)",
-             question_num: '8A',
-             input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY',
-             value: @kase.vso_full,
-         } %>
-    <% end %>
-
+    <%= render partial: 'form8_text', locals: {
+         div_id: '8a-appellant-rep',
+         question: "Appellant represented in this appeal by (name of organization, attorney or agent)",
+         question_num: '8A',
+         input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY',
+         value: @kase.vso_full,
+     } %>
 
       <% if @kase.required_fields[:show_8b] %>
         <%= render partial: 'form8_two_radio', locals: {
