@@ -1,5 +1,6 @@
-// Vendor -------------- //
+$caseflow-background: #f9f9f9;
 
+// Vendor -------------- //
 @import '_scss/lib/bourbon/bourbon';
 @import '_scss/lib/neat/neat';
 @import '_scss/lib/normalize';
@@ -49,8 +50,9 @@ body {
   border-bottom: 1px solid #eee;
 }
 
-.success {
-  color: #009245;
+.success,
+.usa-cf_app-success {
+  color: #2e8540;
 }
 
 .error {
@@ -131,7 +133,7 @@ h1,h2,h3,h4,h5,h6 {
 *   from refills.bourbon.io/unstyled/
 *-----------------------------------*/
 body {
-    background: $color-gray-lightest;
+    background: $caseflow-background;
 }
 
 /* ===========================*
@@ -171,17 +173,10 @@ body {
         clear:both;
     }
 
-    &--v-pad {
-        padding-top: rem(30px);
-        padding-bottom: rem(30px);
-    }
-    &--h-pad {
-        padding-left: rem(30px);
-        padding-right: rem(30px);
-    }
     &--alt {
         background: $color-white;
         border: 1px solid $color-gray-lighter;
+        padding: rem(30px);
     }
 }
 
@@ -375,7 +370,6 @@ body {
 }
 
 .usa-cf_app-form {
-
     header {
         border-bottom: 1px solid $color-gray-lighter;
         margin-bottom: rem(30px);
@@ -421,5 +415,34 @@ body {
         display: inline-block;
         padding-right: 2rem;
         margin: 1rem 0;
+    }
+}
+/*========================
+Certified success page
+==========================*/
+
+.usa-cf_app-success-heading {
+    text-align: center;
+    font-size: rem(52px);
+    margin-bottom: 1rem;
+}
+
+.usa-cf_app-success-deck {
+    text-align: center;
+    font-size: rem(20px);
+    font-weight: normal;
+    color: $color-gray;
+}
+
+.usa-cf_app-checklist {
+    margin: 5rem auto 6.5rem;
+    list-style-type: none;
+
+    li::before {
+        content: '';
+    }
+    .fa-check {
+        font-size: 2.5rem;
+        margin-right: 1.8rem;
     }
 }
