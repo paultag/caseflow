@@ -199,8 +199,9 @@ body {
 
     > * {
         display: table-cell;
+        padding: 1.5rem;
+        vertical-align: middle;
         width: 33%;
-        padding: rem(30px);
     }
 
     &--bordered {
@@ -218,6 +219,7 @@ body {
     &-text {
         font-weight: 600;
         margin-bottom: 0;
+        margin-top: 1rem;
     }
 }
 
@@ -296,8 +298,8 @@ body {
 
 .usa-cf-apppeal-id-icon {
     display: inline-block;
-    margin-left: 1rem;
-    vertical-align: middle;
+    margin-left: .25rem;
+    vertical-align: -3px;
 }
 
 /*------ Buttons --------*/
