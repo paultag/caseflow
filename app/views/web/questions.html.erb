@@ -65,7 +65,7 @@
     <div class="cf-row">
        <%= render partial: 'form8_textarea', locals: {
             div_id: '5a-service-connection-for',
-            question: "Service connection for",
+            question: "Service connection for:",
             question_num: '5A',
             input_name: '5A_SERVICE_CONNECTION_FOR',
             value: Caseflow.format_issues(@kase, 'service connection'),
@@ -259,9 +259,12 @@
               div_id: '12b',
               option1_label: 'Required and furnished',
               option1_value: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED',
+              option1_checked: @kase.ssoc_required?,
               option2_label: 'Not required',
               option2_value: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED',
+              option2_checked: !@kase.ssoc_required?,
               close_fieldset: true,
+              required: true,
           } %>
 
 

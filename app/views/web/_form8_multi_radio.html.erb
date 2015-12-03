@@ -32,21 +32,21 @@ end
       <%= question %>
   </legend>
   <p class="form8-two-radio-item">
-      <input<%= ' required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option1_value %>" id="<%= input_name %>__<%= option1_value %>">
+      <input<%= ' required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option1_value %>" id="<%= input_name %>__<%= option1_value %>" <%= ' checked' if defined?(option1_checked) && option1_checked %>>
       <label class="radio-inline" for="<%= input_name %>__<%= option1_value %>">
         <%= option1_label %>
       </label>
   </p>
 
   <p class="form8-two-radio-item">
-      <input <%= 'required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option2_value %>" id="<%= input_name %>__<%= option2_value %>">
+      <input <%= 'required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option2_value %>" id="<%= input_name %>__<%= option2_value %>" <%= ' checked' if defined?(option2_checked) && option2_checked %>>
       <label class="radio-inline" for="<%= input_name %>__<%= option2_value %>">
         <%= option2_label %>
       </label>
   </p>
 
   <p class="form8-two-radio-item">
-      <input <%= 'required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option3_value %>" id="<%= input_name %>__<%= option3_value %>">
+      <input <%= 'required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option3_value %>" id="<%= input_name %>__<%= option3_value %>" <%= ' checked' if defined?(option3_checked) && option3_checked %>>
       <label class="radio-inline" for="<%= input_name %>__<%= option3_value %>">
         <%=raw option3_label %>
       </label>
