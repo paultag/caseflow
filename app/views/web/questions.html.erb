@@ -158,8 +158,8 @@
             } %>
 
 
-      <% if @kase.required_fields[:show_9a] %>
-        <%= render partial: 'form8_yes_no_radio', locals: {
+      <%# if @kase.required_fields[:show_9a] %>
+        <%= render partial: 'form8_two_radio', locals: {
                 question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
                 question_num: '9A',
                 input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646'
@@ -172,7 +172,7 @@
                 close_fieldset: true,
                 show_when: 'no',
             } %>
-      <% end %>
+      <%# end %>
 
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Was hearing requested?',
