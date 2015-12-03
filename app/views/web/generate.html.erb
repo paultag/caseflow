@@ -16,7 +16,7 @@
     <input type="hidden" value="<%= @file_name %>" name="file_name">
     <input type="hidden" value="<%= @certification_date %>" name="certification_date">
 
-    <button type="button" class="usa-button-gray cf-action-back pull-left">&laquo; Go back and make edits</button>
+    <button type="button" class="usa-button-gray cf-action-back cf-push-left">&laquo; Go back and make edits</button>
     <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link space-left pull-left' %><!-- TODO: Make this more responsive friendly later -->
     <button type="submit" class="btn btn-primary push-right">Upload and Certify</button>
 

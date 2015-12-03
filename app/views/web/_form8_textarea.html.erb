@@ -1,0 +1,27 @@
+<%#
+    Used for Form 8 fields with questions that have a long text response
+
+   Partial requires the following arguments:
+    - question: Prompting question text for input
+    - question_num: Field 8 form number for the question
+    - input_name: The input text field's name attribute
+
+    Optional arguments include:
+    - div_id: The ID attribute of the containing div
+    - div_class: The class attribute of the containing div
+    - max_length: The number of characters a response can maximally include. 45 is default.
+    - required: true/false, if a field is required (default: false)
+    - close_fieldset: Whether this fieldset should be closed (default: false)
+
+%>
+
+<p class="row">
+    <label for="<%= input_name %>">
+      <strong><%= question_num %></strong> <%= question %>
+    </label>
+    <textarea name="<%= input_name %>" rows="3" class="form-control" id="<%= input_name %>" <%= 'required' if defined?(required) && required %> <%= 'rows='+rows if defined?(rows) && rows %>><% value if defined?(value) && value %></textarea>
+</p>
+
+<% if defined?(close_fieldset) && close_fieldset %>
+</fieldset>
+<% end %>
