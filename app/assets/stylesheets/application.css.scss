@@ -376,7 +376,9 @@ body {
     }
 
     legend {
+        display: table;
         font: inherit;
+        white-space: normal;
     }
     label {
         margin-top: inherit;
