@@ -11,15 +11,13 @@
         are any mistakes, <button type="button" class="cf-btn-link cf-btn-link--inline cf-action-back">go back to fix any errors</button>.
       </p>
 
+      <embed class="embedded-document usa-cf_app-segment" src="/caseflow/files/forms/<%= @file_name %>"></embed>
 
-      <embed class="embedded-document" src="/caseflow/files/forms/<%= @file_name %>"></embed>
+<%= form_tag({action: :certify}, {class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
+    <input type="hidden" value="<%= @file_name %>" name="file_name">
+    <input type="hidden" value="<%= @certification_date %>" name="certification_date">
 
-      <%= form_tag({action: :certify}, {class: 'usa-cf_app-form usa-cf_app-segment usa-cf_app-segment--v-pad'}) do %>
-        <input type="hidden" value="<%= @file_name %>" name="file_name">
-        <input type="hidden" value="<%= @certification_date %>" name="certification_date">
+    <button type="button" class="cf-btn-link cf-action-back pull-left">Go back to fix any errors</a>
+    <button type="submit" class="btn btn-primary push-right">Upload and Certify</button>
 
-        <button type="button" class="cf-btn-link cf-action-back pull-left">Go back to fix any errors</a>
-        <button type="submit" class="btn btn-primary push-right">Upload and Certify</button>
-      <% end %>
-
-</div>
+<% end %>
