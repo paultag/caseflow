@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     post '/certifications/:id/questions', to: 'web#questions_submit'
     get '/certifications/:id/generate', to: 'web#generate'
     post '/certifications/:id/certify', to: 'web#certify'
+    get '/certifications/:id/error', to: 'web#error', as: :not_certified
     post '/certifications/:id/error', to: 'web#error'
 
     get '/files/forms/:id', to: 'web#show_form'
