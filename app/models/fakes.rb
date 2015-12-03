@@ -213,7 +213,7 @@ module Caseflow
         bfmpro: 'ADV',
         bfpdnum: '123ABC',
         bfregoff: 'DSUSER',
-        bfdrodec: Date.parse('2015-09-01'),
+        bfdrodec: Date.parse('2015-10-01'),
         bfdnod: Date.parse('2015-09-01'),
         bfd19: Date.parse('2015-09-01'),
         bfdsoc: Date.parse('2015-09-01'),

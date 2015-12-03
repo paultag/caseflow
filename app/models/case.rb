@@ -41,13 +41,13 @@ module Caseflow
     }
 
     if fields['5A_SERVICE_CONNECTION_FOR'].present?
-      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec
     end
     if fields['6A_INCREASED_RATING_FOR'].present?
-      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec
     end
     if fields['7A_OTHER'].present?
-      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec
     end
 
     fields
