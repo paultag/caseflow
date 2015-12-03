@@ -18,26 +18,26 @@
       <h1>Welcome to Caseflow!</h1>
       <p>Caseflow helps certify an appeal by verifying documents
       in the eFolder and helping you fill out an electronic Form 8.
-      Please log in using your VACOLS credentals.</p>
+      Please log in using your <strong>VACOLS credentals.</p>
     </div>
     <div id="login-login-form" class="col col-md-3">
       <% username_input_id = 'username_input_id' %>
       <div class="row">
         <div class="col col-md-3">
-          <label for="<%= username_input_id %>">Username</label>
+          <label for="<%= username_input_id %>"><strong>VACOLS Login ID</strong> (example: <code>RO06</code>)</label>
         </div>
       </div>
 
       <div class="row">
         <div class="col col-md-3">
-          <input name="username" type="text" id="<%= username_input_id %>" autofocus="autofocus" />
+          <input name="username" type="text" id="<%= username_input_id %>" autofocus="autofocus" placeholder="Example: RO06"/>
         </div>
       </div>
 
       <% password_input_id = 'password_input_id' %>
       <div class="row">
         <div class="col col-md-3">
-          <label for="<%= password_input_id %>">Password</label>
+          <label for="<%= password_input_id %>"><strong>VACOLS Password</strong></label>
         </div>
       </div>
 

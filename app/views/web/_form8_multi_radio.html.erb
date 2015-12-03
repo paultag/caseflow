@@ -11,6 +11,8 @@
     - option2_label: Text for the second option
     - option2_name: Input name attribute for the second option
     - option2_value: Input value attribute for the second option
+    - option3_name: Input name attribute for the third option
+    - option3_value: Input value attribute for the third option
 
     The following are optional arguments:
     - div_id: The ID attribute of the containing div
@@ -40,6 +42,13 @@ end
       <input <%= 'required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option2_value %>" id="<%= input_name %>__<%= option2_value %>">
       <label class="radio-inline" for="<%= input_name %>__<%= option2_value %>">
         <%= option2_label %>
+      </label>
+  </p>
+
+  <p class="form8-two-radio-item">
+      <input <%= 'required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option3_value %>" id="<%= input_name %>__<%= option3_value %>">
+      <label class="radio-inline" for="<%= input_name %>__<%= option3_value %>">
+        <%=raw option3_label %>
       </label>
   </p>
 

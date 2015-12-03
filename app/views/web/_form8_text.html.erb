@@ -10,7 +10,6 @@
     - div_id: The ID attribute of the containing div
     - div_class: The class attribute of the containing div
     - max_length: The number of characters a response can maximally include. 45 is default.
-    - closing_hr: true/false, show a horizontal rules at the end (default: true)
     - required: true/false, if a field is required (default: false)
     - close_fieldset: Whether this fieldset should be closed (default: false)
 
@@ -23,7 +22,7 @@
 <p class="form8-text-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
     <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
-        <%= question %>
+        <%=raw question %>
     </label>
     <input text="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" <% if defined?(value) && value %> value="<%=value%>" <% end %> class="form-control" <%= 'required' if defined?(required) && required %> id="<%= input_id %>" >
 </p>

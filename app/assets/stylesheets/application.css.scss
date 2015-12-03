@@ -125,6 +125,11 @@ h1,h2,h3,h4,h5,h6 {
     display: none !important;
 }
 
+legend {
+    display: table; /* Causes text to wrap in IE */
+    font: inherit;
+    white-space: normal;
+}
 
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
@@ -307,7 +312,12 @@ body {
     margin: 0 !important;
 }
 
-.usa-cf-btn--link {
+// Overrides web design standards
+label {
+    max-width: 100%;
+}
+
+.cf-btn-link {
     background: transparent;
     color: $color-primary;
     font-weight: normal;
@@ -315,11 +325,18 @@ body {
     // I hate using !important, but web design standards
     // form buttons have high specificity.
     // Keep an eye on https://github.com/18F/web-design-standards/issues/891
+    -webkit-font-smoothing: inherit;
     padding: 1rem 0 !important;
+
+    // Removes padding, so that these links can be placed inline.
+    &--inline {
+        padding: 0 !important;
+    }
 
     &:hover {
         background-color: inherit;
         color: $color-primary-darker;
+        text-decoration: underline;
     }
 }
 
@@ -375,11 +392,6 @@ body {
         margin-bottom: rem(30px);
     }
 
-    legend {
-        display: table;
-        font: inherit;
-        white-space: normal;
-    }
     label {
         margin-top: inherit;
     }

@@ -1,21 +1,23 @@
 <% content_for :page_title do %>Review Completed Form 8<% end %>
 
-<div id="certifications-generate" class="usa-cf_app-segment usa-cf_app-segment--alt">
-  <h2>Review Form 8 Before Upload</h2>
-  <p>
-    Review the completed Form 8 below and verify all fields are accurate.
-    If the form looks correct, click the <strong>Upload and Certify</strong>
-    button and the Form 8 will automatically be uploaded to VBMS. If there
-    are any mistakes, <a onclick="javascript:history.back()">go back to fix any errors</a>.
-  </p>
-</div>
+<div id="certifications-generate">
+  <div class="row">
+    <div class="col col-md-10 col-md-offset-1">
+      <h2>Review Form 8 Before Upload</h2>
+      <p>
+        Review the completed Form 8 below and verify all fields are accurate.
+        If the form looks correct, click the <strong>Upload and Certify</strong>
+        button and the Form 8 will automatically be uploaded to VBMS. If there
+        are any mistakes, <button type="button" class="cf-btn-link cf-btn-link--inline cf-action-back">go back to fix any errors</button>.
+      </p>
 
-<embed class="embedded-document usa-cf_app-segment" src="/caseflow/files/forms/<%= @file_name %>"></embed>
+      <embed class="embedded-document usa-cf_app-segment" src="/caseflow/files/forms/<%= @file_name %>"></embed>
 
 <%= form_tag({action: :certify}, {class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
     <input type="hidden" value="<%= @file_name %>" name="file_name">
     <input type="hidden" value="<%= @certification_date %>" name="certification_date">
 
-    <a href="<%= url_for :controller => 'web', :action => 'questions' %>" class="usa-cf-btn--link pull-left">Go back to fix any errors</a>
+    <button type="button" class="cf-btn-link cf-action-back pull-left">Go back to fix any errors</a>
     <button type="submit" class="btn btn-primary push-right">Upload and Certify</button>
+
 <% end %>

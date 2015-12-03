@@ -4,11 +4,26 @@
  */
  //= require_self
 
- (function () {
+/* Copies appeals ID to clipboard */
+(function () {
      "use strict";
-     /* Copies appeals ID to clipboard */
      new Clipboard('[data-clipboard-text]');
  })();
+
+/* Reusable 'go back one page' pattern */
+ $(function() {
+    $('.cf-action-back').on('click', function(evt) {
+        window.history.back();
+    });
+ });
+
+/* Reusable 'refresh' pattern */
+$(function() {
+    $('.cf-action-refresh').on('click', function(evt) {
+        location.reload(); return false;
+    });
+});
+
 
 /*
 Extends jQuery to add a toggleAttr method
