@@ -24,21 +24,20 @@
                   <strong class="usa-cf_app-logo">Caseflow</strong>
                   <span class="cf-application-title"><%= yield :page_title %></span>
 
-                  <div class="dropdown">
                       <% if session[:ro] || session[:username] %>
+                       <div class="dropdown">
                           <a href="#menu" class="dropdown-trigger">
                               <% if session[:username] %>
                               <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
                               <%= session[:ro] %>
                               <% end %>
-                              <span class="caret"></span>
                           </a>
-                          <% end %>
-                        <ul id="menu" class="dropdown-menu" hidden>
-                          <li><a href="/caseflow/logout">Sign out</a></li>
-                        </ul>
-                  </div>
+                          <ul id="menu" class="dropdown-menu" hidden>
+                            <li><a href="/caseflow/logout">Sign out</a></li>
+                          </ul>
+                        </div>
+                    <% end %>
               </div>
           </nav>
 
