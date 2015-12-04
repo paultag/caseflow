@@ -106,9 +106,12 @@ label {
 .text-uc {
     text-transform: uppercase;
 }
+
+.cf-push-left,
 .push-left {
     float: left;
 }
+.cf-push-right,
 .push-right {
     float: right;
 }
@@ -125,6 +128,16 @@ h1,h2,h3,h4,h5,h6 {
     display: none !important;
 }
 
+legend {
+    display: table; /* Causes text to wrap in IE */
+    font: inherit;
+    white-space: normal;
+}
+
+[disabled] {
+    background: $color-gray-lightest !important;
+    opacity: .5 !important;
+}
 
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
@@ -307,6 +320,10 @@ body {
     margin: 0 !important;
 }
 
+// Overrides web design standards
+label {
+    max-width: 100%;
+}
 
 .cf-btn-link {
     background: transparent;
@@ -383,9 +400,6 @@ body {
         margin-bottom: rem(30px);
     }
 
-    legend {
-        font: inherit;
-    }
     label {
         margin-top: inherit;
     }
@@ -397,7 +411,7 @@ body {
         }
     }
 
-    .usa-cf_app-btn-forward {
+    .cf-btn-forward {
         display: inline-block;
         margin-right: 0;
     }

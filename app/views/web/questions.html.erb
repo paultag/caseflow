@@ -9,6 +9,118 @@
           <p class="required-msg usa-input-error-message">Required</p>
       </header>
 
+      <%= render partial: 'form8_text', locals: {
+             div_id: '1A-appellant',
+             question: "Name of Appellant (If other than veteran)",
+             question_num: '1A',
+             input_name: '1A_NAME_OF_APPELLANT',
+             value: @kase.correspondent.appellant_name,
+         } %>
+
+
+       <%= render partial: 'form8_text', locals: {
+           div_id: '1A-appellant-relationship',
+           question: "Relationship to Veteran",
+           question_num: '1B',
+           input_name: '1B_RELATIONSHIP_TO_VETERAN',
+           value: @kase.correspondent.appellant_relationship,
+       } %>
+
+
+      <%= render partial: 'form8_text', locals: {
+          div_id: '2-file-no',
+          question: "File no.",
+          question_num: '2',
+          input_name: '2_FILE_NO',
+          value: @kase.bfcorlid,
+          required: true,
+          disabled: true,
+      } %>
+
+
+       <%= render partial: 'form8_text', locals: {
+            div_id: '3-vet-name',
+            question: "Full Veteran Name",
+            question_num: '3',
+            input_name: '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN',
+            value: @kase.correspondent.full_name,
+            required: true,
+        } %>
+
+      <%= render partial: 'form8_text', locals: {
+           div_id: '4-insurance-loan-number',
+           question: "Insurance file number or loan number (if pertinent)",
+           question_num: '4',
+           input_name: '4_INSURANCE_FILE_NO_OR_LOAN_NO',
+           value: @kase.bfpdnum,
+       } %>
+
+
+    <div class="cf-row">
+       <%= render partial: 'form8_textarea', locals: {
+            div_id: '5a-service-connection-for',
+            question: "Service connection for:",
+            question_num: '5A',
+            input_name: '5A_SERVICE_CONNECTION_FOR',
+            value: Caseflow.format_issues(@kase, 'service connection'),
+        } %>
+
+        <%= render partial: 'form8_text', locals: {
+             div_class: 'cf-form-disabled',
+             div_id: '5b-date-notice',
+             question: "Date of notification of action appealed",
+             question_num: '5B',
+             input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec : '',
+         } %>
+
+    </div>
+
+    <div class="cf-row">
+       <%= render partial: 'form8_textarea', locals: {
+            div_id: '6a-increased-rating',
+            question: "Increased rating for",
+            question_num: '6A',
+            input_name: '6A_INCREASED_RATING_FOR',
+            value: Caseflow.format_issues(@kase, 'increased rating'),
+        } %>
+
+        <%= render partial: 'form8_text', locals: {
+             div_id: '6b-date-notice',
+             question: "Date of notification of action appealed",
+             question_num: '6B',
+             input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec : '',
+         } %>
+    </div>
+
+    <div class="cf-row">
+       <%= render partial: 'form8_textarea', locals: {
+            div_id: '7a-increased-rating',
+            question: "Other",
+            question_num: '7A',
+            input_name: '7A_OTHER',
+            value: Caseflow.format_issues(@kase, 'other'),
+        } %>
+
+        <%= render partial: 'form8_text', locals: {
+             div_id: '7b-date-notice',
+             question: "Date of notification of action appealed",
+             question_num: '7B',
+             input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec : '',
+         } %>
+
+    </div>
+
+    <%= render partial: 'form8_text', locals: {
+         div_id: '8a-appellant-rep',
+         question: "Appellant represented in this appeal by (name of organization, attorney or agent)",
+         question_num: '8A',
+         input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY',
+         value: @kase.vso_full,
+     } %>
+
       <% if @kase.required_fields[:show_8b] %>
         <%= render partial: 'form8_two_radio', locals: {
                 question: 'Veteran has chosen a power of attorney, the authority recognizing such is',
@@ -18,33 +130,43 @@
                 option1_value: '8B_POWER_OF_ATTORNEY',
                 option2_label: 'Located in another VA file',
                 option2_value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
-                required: true,
             } %>
 
         <%= render partial: 'form8_text', locals: {
+                div_class: 'cf-wrap-flex',
                 div_id: '8b-explanation',
-                question: 'Please specify location of the veteran\'s power of attorney',
-                question_num: '8B EXPLANATION',
+                question: '<em>Specify file if applicable</em>',
+                question_num: '',
                 input_name: '8B_REMARKS',
                 close_fieldset: true,
                 show_when: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
             } %>
       <% end %>
 
-      <% if @kase.required_fields[:show_8c] %>
-        <%= render partial: 'form8_yes_no_radio', locals: {
+
+        <%= render partial: 'form8_multi_radio', locals: {
                 question: 'The agent designated, is he/she on accredited list',
                 question_num: '8C',
                 input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST',
+                option1_label: 'Yes',
+                option1_value: 'yes',
+                option2_label: 'No',
+                option2_value: 'no',
+                option3_label: '<abbr title="not applicable">N/A</abbr>',
+                option3_value: 'NOT_APPLICABLE',
+                required: true,
             } %>
-      <% end %>
 
-      <% if @kase.required_fields[:show_9a] %>
-        <%= render partial: 'form8_yes_no_radio', locals: {
+
+      <%# if @kase.required_fields[:show_9a] %>
+        <%= render partial: 'form8_two_radio', locals: {
                 question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
                 question_num: '9A',
                 input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
-                required: true,
+                option1_label: 'Yes',
+                option1_value: 'yes',
+                option2_label: 'No',
+                option2_value: 'no',
             } %>
         <%= render partial: 'form8_text', locals: {
                 div_id: '9b',
@@ -54,24 +176,41 @@
                 close_fieldset: true,
                 show_when: 'no',
             } %>
-      <% end %>
+      <%# end %>
+
+      <%= render partial: 'form8_yes_no_radio', locals: {
+              question: 'Was hearing requested?',
+              question_num: '10A',
+              input_name: '10A_WAS_HEARING_REQUESTED_YES',
+              option1_label: 'Yes',
+              option1_value: 'yes',
+              option2_label: 'No',
+              option2_value: 'no',
+              required: true,
+          } %>
+
 
       <% if @kase.required_fields[:show_10b] %>
-        <%= render partial: 'form8_yes_no_radio', locals: {
+        <%= render partial: 'form8_multi_radio', locals: {
                 question: 'A hearing was requested, if held, is transcript on file?',
                 question_num: '10B',
                 input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
-                required: true,
+                option1_label: 'Yes',
+                option1_value: 'yes',
+                option2_label: 'No',
+                option2_value: 'no',
+                option3_label: '<abbr title="not applicable">N/A</abbr>',
+                option3_value: 'NOT_APPLICABLE',
             } %>
 
         <% if @kase.required_fields[:show_10c] %>
           <%= render partial: 'form8_text', locals: {
                   div_id: '10c',
-                  question: 'If not held, explain',
+                  question: 'If requested, but not held, explain',
                   question_num: '10C',
                   input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
                   close_fieldset: true,
-                  show_when: 'no',
+                  show_when: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE__yes',
               } %>
         <% end %>
 
@@ -92,11 +231,38 @@
               input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
               div_id: '11b',
               close_fieldset: true,
-              show_when: 'yes',
+              show_when: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_yes',
+              required: true,
           } %>
 
       </fieldset><%# Closes nested fieldset for question 11b %>
   </fieldset><%# Closes nested fieldset parent (Question 11a) %>
+
+
+   <%= render partial: 'form8_text', locals: {
+          div_id: '12A-date',
+          question: 'Date of statement of the case furnished',
+          question_num: '12A',
+          input_name: '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED',
+          required: true,
+          value: @kase.bfdsoc_date,
+      } %>
+
+      <%= render partial: 'form8_two_radio', locals: {
+              question: 'Supplemental statement of the case',
+              question_num: '12B',
+              input_name: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED',
+              div_id: '12b',
+              option1_label: 'Required and furnished',
+              option1_value: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED',
+              option1_checked: @kase.ssoc_required?,
+              option2_label: 'Not required',
+              option2_value: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED',
+              option2_checked: !@kase.ssoc_required?,
+              close_fieldset: true,
+              required: true,
+          } %>
+
 
       <fieldset>
         <legend>
@@ -154,17 +320,32 @@
     </fieldset>
 
 
+      <%= render partial: 'form8_textarea', locals: {
+              question: 'Remarks',
+              question_num: '14',
+              input_name: '14_REMARKS_INITIAL',
+              div_id: '14',
+       } %>
 
-      <% textarea_name = '14_REMARKS_INITIAL' %>
-      <% textarea_id = "#{textarea_name}_input_id" %>
+       <%= render partial: 'form8_text', locals: {
+               question: 'Name and location of certifying office',
+               question_num: '15',
+               input_name: '15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE',
+               max_length: 40,
+               required: true,
+               disabled: true,
+               value: @kase.regional_office_full,
+       } %>
 
-
-      <p class="row">
-          <label for="<%= textarea_id %>">
-            <strong>14</strong> Remarks
-          </label>
-          <textarea name="<%= textarea_name %>" rows="3" class="form-control" id="<%= textarea_id %>"></textarea>
-      </p>
+       <%= render partial: 'form8_text', locals: {
+               question: 'Organizational elements certifying appeal',
+               question_num: '16',
+               input_name: '16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL',
+               max_length: 40,
+               required: true,
+               disabled: true,
+               value: @kase.bfregoff,
+       } %>
 
       <%= render partial: 'form8_text', locals: {
               question: 'Name of Certifying Official',
@@ -172,7 +353,7 @@
               input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
               max_length: 40,
               required: true,
-          } %>
+      } %>
 
       <%= render partial: 'form8_text', locals: {
               question: 'Title of Certifying Official',
@@ -181,10 +362,20 @@
               required: true,
           } %>
 
+          <%= render partial: 'form8_date', locals: {
+                  question: 'Date',
+                  question_num: '17C',
+                  input_name: '17C_DATE',
+                  required: true,
+                  value: Time.now.strftime('%Y-%m-%d'),
+                  disabled: true,
+              } %>
   </div>
 
   <div class="usa-cf_app-segment">
-      <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link pull-left' %>
-      <button type="submit" class="btn btn-primary usa-cf_app-btn-forward push-right">Preview Completed Form 8</button>
+
+      <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link cf-push-left' %>
+      <button type="submit" class="cf-push-right">Preview Completed Form 8</button>
+
   </div>
 <% end %>

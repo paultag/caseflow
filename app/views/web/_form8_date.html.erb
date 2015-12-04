@@ -1,0 +1,14 @@
+<% input_id = "#{input_name}_input_id" %>
+<% show_when = "data-showwhen=#{show_when}" %>
+
+
+<p class="form8-date-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
+    <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
+        <strong><%= question_num %></strong>
+        <%= question %>
+    </label>
+    <input type="date" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" <% if defined?(value) && value %> value="<%=value%>" <% end %> class="form-control" <%= 'required' if defined?(required) && required %> id="<%= input_id %>" <%= 'disabled' if defined?(disabled) && disabled %>>
+</p>
+<% if defined?(close_fieldset) && close_fieldset %>
+</fieldset>
+<% end %>

@@ -44,6 +44,10 @@
      yes_no_locals[:hidden] = hidden
    end
 
+   if defined?(close_fieldset)
+     yes_no_locals[:close_fieldset] = close_fieldset
+   end
+
 
 %>
 <%= render partial: 'form8_two_radio', locals: yes_no_locals %>
