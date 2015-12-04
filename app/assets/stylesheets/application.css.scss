@@ -264,7 +264,7 @@ body {
         position: relative;
     }
 
-    .dropdown {
+    .cf-dropdown {
         position: absolute;
         right: rem(112px);
     }
@@ -357,8 +357,8 @@ making .cf-app-segment a grandchild element of .cf-app.
 }
 
 /*------ Dropdowns --------*/
-.dropdown {
-  $large-screen: em(640) !default;
+.cf-dropdown {
+  $large-screen: em(640px) !default;
   display: inline-block;
   position: relative;
 
@@ -367,7 +367,7 @@ making .cf-app-segment a grandchild element of .cf-app.
   }
 }
 
-.dropdown-trigger {
+.cf-dropdown-trigger {
     cursor: pointer;
 
     &::after {
@@ -385,7 +385,7 @@ making .cf-app-segment a grandchild element of .cf-app.
     }
 }
 
-.dropdown-menu {
+.cf-dropdown-menu {
     @include unstyled-list();
     @include transition (all 0.2s ease-in-out);
     background: $color-white;
@@ -407,6 +407,45 @@ making .cf-app-segment a grandchild element of .cf-app.
 textarea {
     max-width: 100% !important;
 }
+
+/*----------------------------------
+ * Icons
+ *--------------------------------*/
+// TODO: Convert to SVG icon
+.cf-icon-x {
+    &::before {
+        color: $color-secondary-dark;
+        content: '\00D7';
+        font-size: 130%;
+        line-height: inherit;
+        vertical-align: middle;
+    }
+}
+
+.cf-apppeal-id {
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid $color-gray;
+    color: $color-gray;
+    padding: 1rem;
+
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        border-bottom: 2px solid $color-gray;
+
+        path {
+            fill: $color-white;
+        }
+    }
+}
+
+.cf-apppeal-id-icon {
+    display: inline-block;
+    margin-left: .25rem;
+    vertical-align: -3px;
+}
+
 
 /*------ Buttons --------*/
 // I hate using !important, but web design standards

@@ -21,20 +21,21 @@
                   <strong class="cf-logo">Caseflow</strong>
                   <span class="cf-application-title"><%= yield :page_title %></span>
 
+                  <div class="cf-dropdown">
                       <% if session[:ro] || session[:username] %>
-                       <div class="dropdown">
-                          <a href="#menu" class="dropdown-trigger" title="Open menu to sign out" id="menu-trigger">
+                          <a href="#menu" class="cf-dropdown-trigger">
                               <% if session[:username] %>
                                 <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
                                 <%= session[:ro] %>
                               <% end %>
                           </a>
-                          <ul id="menu" class="dropdown-menu" hidden aria-labeledby="menu-trigger">
-                            <li><a href="/caseflow/logout">Sign out</a></li>
-                          </ul>
-                        </div>
-                    <% end %>
+                       
+                        <ul id="menu" class="cf-dropdown-menu" hidden>
+                          <li><a href="/caseflow/logout">Sign out</a></li>
+                        </ul>
+                      <% end %>
+                  </div>
               </div>
           </nav>
 
