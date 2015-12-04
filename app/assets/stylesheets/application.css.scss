@@ -139,6 +139,33 @@ legend {
     opacity: .5 !important;
 }
 
+/*------------------------------------
+ * Icons
+ *-----------------------------------*/
+
+[class|=cf-icon]{
+    display: inline-block;
+    height: .8em; // Should be an em
+}
+
+.cf-icon-missing {
+    vertical-align: -.15ex;
+    width: .8em;
+
+    path {
+        fill: $color-secondary-dark;
+    }
+}
+
+.cf-icon-found {
+    width: 1em;
+
+    path {
+        fill: $color-green;
+    }
+}
+
+
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
 * - Uses Neat.bourbon.io as a grid
@@ -356,7 +383,7 @@ label {
 /*--- Table styles ---*/
 .usa-cf_app-table-wrap {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
 
     table {
         min-width: rem(400px);
