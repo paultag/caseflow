@@ -304,11 +304,28 @@ body {
     }
 }
 
+/*----------------------------------
+ * Icons
+ *--------------------------------*/
+
+.cf-icon-x {
+    &::before {
+        color: $color-secondary-dark;
+        content: '\00D7';
+        font-size: 150%;
+        line-height: inherit;
+        vertical-align: middle;
+    }
+}
+
 .usa-cf-apppeal-id-icon {
     display: inline-block;
     margin-left: .25rem;
     vertical-align: -3px;
 }
+
+
+
 
 /*------ Buttons --------*/
 
@@ -356,7 +373,7 @@ label {
 /*--- Table styles ---*/
 .usa-cf_app-table-wrap {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
 
     table {
         min-width: rem(400px);
