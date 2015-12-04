@@ -83,10 +83,9 @@ class WebController < ApplicationController
     # TODO Add a check for the two required params, sending the user back to `questions` with an error message if not there (maybe do this in a separate branch, since this wasn't there before and needs some design)
 
     fields = @kase.initial_fields
-    #fields.merge!(params)
     params.each{|k, v| fields[k] = v }
 
-    
+
     # Prepare fields for PDF generation
     certification_date = Time.now.to_s(:va_date)
     fields['17C_DATE'] = certification_date
