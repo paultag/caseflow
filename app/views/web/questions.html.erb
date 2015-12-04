@@ -34,6 +34,7 @@
           input_name: '2_FILE_NO',
           value: @kase.bfcorlid,
           required: true,
+          disabled: true,
       } %>
 
 
@@ -64,15 +65,14 @@
             value: Caseflow.format_issues(@kase, 'service connection'),
         } %>
 
-
-            <%= render partial: 'form8_text', locals: {
-                 div_class: 'cf-form-disabled',
-                 div_id: '5b-date-notice',
-                 question: "Date of notification of action appealed",
-                 question_num: '5B',
-                 input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-                 value: @kase.bfd19_date,
-             } %>
+        <%= render partial: 'form8_text', locals: {
+             div_class: 'cf-form-disabled',
+             div_id: '5b-date-notice',
+             question: "Date of notification of action appealed",
+             question_num: '5B',
+             input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec : '',
+         } %>
 
     </div>
 
@@ -90,7 +90,7 @@
              question: "Date of notification of action appealed",
              question_num: '6B',
              input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: @kase.bfd19_date,
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec : '',
          } %>
     </div>
 
@@ -108,7 +108,7 @@
              question: "Date of notification of action appealed",
              question_num: '7B',
              input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: @kase.bfd19_date,
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec : '',
          } %>
 
     </div>
@@ -158,11 +158,15 @@
             } %>
 
 
-      <% if @kase.required_fields[:show_9a] %>
-        <%= render partial: 'form8_yes_no_radio', locals: {
+      <%# if @kase.required_fields[:show_9a] %>
+        <%= render partial: 'form8_two_radio', locals: {
                 question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
                 question_num: '9A',
-                input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646'
+                input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
+                option1_label: 'Yes',
+                option1_value: 'yes',
+                option2_label: 'No',
+                option2_value: 'no',
             } %>
         <%= render partial: 'form8_text', locals: {
                 div_id: '9b',
@@ -172,12 +176,16 @@
                 close_fieldset: true,
                 show_when: 'no',
             } %>
-      <% end %>
+      <%# end %>
 
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Was hearing requested?',
               question_num: '10A',
-              input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
+              input_name: '10A_WAS_HEARING_REQUESTED_YES',
+              option1_label: 'Yes',
+              option1_value: 'yes',
+              option2_label: 'No',
+              option2_value: 'no',
               required: true,
           } %>
 
@@ -325,6 +333,7 @@
                input_name: '15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE',
                max_length: 40,
                required: true,
+               disabled: true,
                value: @kase.regional_office_full,
        } %>
 
@@ -334,6 +343,7 @@
                input_name: '16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL',
                max_length: 40,
                required: true,
+               disabled: true,
                value: @kase.bfregoff,
        } %>
 

@@ -19,7 +19,7 @@
     <label for="<%= input_name %>">
       <strong><%= question_num %></strong> <%= question %>
     </label>
-    <textarea name="<%= input_name %>" rows="3" class="form-control" id="<%= input_name %>" <%= 'required' if defined?(required) && required %> <%= 'rows='+rows if defined?(rows) && rows %>><% value if defined?(value) && value %></textarea>
+    <textarea name="<%= input_name %>" rows="3" class="form-control" id="<%= input_name %>" <%= 'required' if defined?(required) && required %> <%= 'rows='+rows if defined?(rows) && rows %>><%=value if defined?(value) && value %></textarea>
 </p>
 
 <% if defined?(close_fieldset) && close_fieldset %>
