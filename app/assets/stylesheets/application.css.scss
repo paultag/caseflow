@@ -146,6 +146,7 @@ legend {
 [class|=cf-icon]{
     display: inline-block;
     height: .8em; // Should be an em
+    margin: 0 .1ex;
 }
 
 .cf-icon-missing {
@@ -165,6 +166,31 @@ legend {
     }
 }
 
+/*--- Appeal button ---*/
+
+.usa-cf-apppeal-id {
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid $color-gray;
+    color: $color-gray;
+    padding: 1rem;
+
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        border-bottom: 2px solid $color-gray;
+
+        path {
+            fill: $color-white;
+        }
+    }
+}
+
+.cf-icon-appeal-id {
+    display: inline-block;
+    margin-left: .25rem;
+    vertical-align: -1px;
+}
 
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
@@ -310,32 +336,6 @@ body {
     z-index: 1;
  }
 
-
-/*--- Appeal button ---*/
-
-.usa-cf-apppeal-id {
-    box-sizing: border-box;
-    background: transparent;
-    border: 2px solid $color-gray;
-    color: $color-gray;
-    padding: 1rem;
-
-    &:hover {
-        color: $color-white;
-        background: $color-gray;
-        border-bottom: 2px solid $color-gray;
-
-        path {
-            fill: $color-white;
-        }
-    }
-}
-
-.usa-cf-apppeal-id-icon {
-    display: inline-block;
-    margin-left: .25rem;
-    vertical-align: -3px;
-}
 
 /*------ Buttons --------*/
 
