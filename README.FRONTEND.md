@@ -83,21 +83,27 @@ Super obvious: create icons using graphics software such as Sketch or Illustrato
 
 After you create an SVG image, you'll need to tweak it a little bit by hand. It's plain text, so any editor will do. Make these changes.
 
-- **Add a `title` element if the icon is meant to convey information.** For example, the <svg width="55" height="55" class="cf-icon-missing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55"><title>missing</title><path d="M52.6 46.9l-6 6c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-13-13-13 13c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-6-6c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l13-13-13-13c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l6-6c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l13 13 13-13c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l6 6c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3l-13 13 13 13c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3z"/></svg> icon indicates whether or not a document is missing, and should have a `title` element. Place the title within an `svg`, or `g` parent.
+- **Add a `title` element if the icon is meant to convey information.** For example, the <svg width="10" height="10" class="cf-icon-missing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55"><title>missing</title><path fill="#c00" d="M52.6 46.9l-6 6c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-13-13-13 13c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-6-6c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l13-13-13-13c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l6-6c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l13 13 13-13c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l6 6c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3l-13 13 13 13c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3z"/></svg> icon indicates whether or not a document is missing, and should have a `title` element. Place the title within an `svg`, or `g` parent.
 
-    &lt;svg width="55" height="55" class="cf-icon-missing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55"&gt;
-        &lt;title&gt;missing&lt;/title&gt;
-        <path d="M52.6 46.9l-6 6c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-13-13-13 13c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-6-6c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l13-13-13-13c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l6-6c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l13 13 13-13c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l6 6c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3l-13 13 13 13c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3z"/&gt;
-    &lt;/svg&gt;
+    ````
+    <svg width="55" height="55" class="cf-icon-missing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55">
+        <title>missing</title>
+        <path d="M52.6 46.9l-6 6c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-13-13-13 13c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-6-6c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l13-13-13-13c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l6-6c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l13 13 13-13c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l6 6c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3l-13 13 13 13c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3z">
+    </svg>
+    ````
 
 - **Do not add a `title` element if the icon doesn't convey information**. Screen readers announce that text. Don't overwhelm the user.
 
 - **Add `height` and `width` attributes to the opening `svg` element.** Internet Explorer does funky things if you don't. Make the `width` match the third value of the `viewBox` attribute. Make the `height` match the last value.
 
-    &lt;svg width="60" height="55" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 55"&gt;
+    ```
+    <svg width="60" height="55" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 55">
+    ```
 
-- **Add a `.cf-icon-*` class name.** For example, `class="cf-icon-missing"`. Shared styles for all `.cf-icon-*` icons can be found in `application.css.scss` (look for the `[class|=cf-icon]` selector). Update the CSS accordingly, setting the `fill` and/or `stroke-color` properties. _Use color variables defined in [U.S. Web Design Standards](https://playbook.cio.gov/designstandards/visual-style/#colors)._ Also note that only [some SVG properties]( http://www.w3.org/TR/SVG/styling.html#SVGStylingProperties) can be changed with CSS.
+- **Add a `.cf-icon-*` class name.** For example, `class="cf-icon-missing"`. Shared styles for all `.cf-icon-*` icons are in `application.css.scss`, (look for the `[class|=cf-icon]` selector). Update the CSS accordingly, setting the `fill` and/or `stroke-color` properties. _Use color variables defined in [U.S. Web Design Standards](https://playbook.cio.gov/designstandards/visual-style/#colors)._ Also note that only [some SVG properties]( http://www.w3.org/TR/SVG/styling.html#SVGStylingProperties) can be changed with CSS.
 
+	```
     .cf-icon-missing {
         fill: $color-secondary-dark;
     }
+    ```
