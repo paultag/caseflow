@@ -1,0 +1,15 @@
+<% if nod && soc && ssoc1 && ssoc2 && ssoc3 && ssoc4 && ssoc5 && form9  %>
+<div class="usa-alert usa-alert-success cf-app-segment" role="alert">
+  <div class="usa-alert-body">
+    <h3 class="usa-alert-heading">All documents detected!</h3>
+    <p class="usa-alert-text">The Form 9, <abbr>NOD</abbr>, <abbr>SOC</abbr> and <abbr>SSOC</abbr>s (if applicable) were found in the eFolder.</p>
+  </div>
+</div>
+<% else %>
+<div class="usa-alert usa-alert-error cf-app-segment" role="alert">
+  <div class="usa-alert-body">
+    <h3 class="usa-alert-heading">Cannot find documents in VBMS</h3>
+    <p class="usa-alert-text">Some of the files listed in VACOLS could not be found in VBMS.</p>
+  </div>
+</div>
+<% end %>
