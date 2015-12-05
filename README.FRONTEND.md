@@ -1,16 +1,29 @@
 # Front-end development docs
 
+- [CSS Development Notes](README.FRONTEND.md#devnotes)
+    - [Dependencies / External resources](README.FRONTEND.md#css-dependencies)
+    - [Naming conventions](README.FRONTEND.md#css-naming)
+    - [Overriding Web Design Standards CSS](README.FRONTEND.md#overriding)
+- [JS](README.FRONTEND.md#js)
+    - [JS Dependencies](README.FRONTEND.md#js-depends)
+- [SVG and Icons](README.FRONTEND.md#svg)
+    - [Creating SVG icons and images](README.FRONTEND.md#svg-making)
+    - [SVG icon guidelines and tips](README.FRONTEND.md#svg-guidelines)
+
+<span id="devnotes"></span>
 ## CSS Development Notes
 
 - This project uses [SCSS](http://sass-lang.com/).
 - It also uses (or will by the time it's done) a naming system that is similar to [BEM](https://en.bem.info/method/naming-convention/)
 
+<span id="css-dependencies"></span>
 ### Dependencies / External resources
 - [U.S. Web Design Standards](https://playbook.cio.gov/designstandards/) project
 - [Bourbon.io](http://bourbon.io/) is the mixin library.
 - Some patterns are based on [Refills](http://refills.bourbon.io/)
 - [normalize.css v3.0.2](https://necolas.github.io/normalize.css/) sets a cross-browser baseline
 
+<span id="css-naming"></span>
 ### Naming conventions
 
 (Work in progress)
@@ -21,6 +34,7 @@ Prefix | Use for
 `cf-text` | Text layout or formatting-related styles
 `cf-table`| Table-related layouts
 
+<span id="overriding"></span>
 ### Overriding Web Design Standards CSS
 
 - Add an additional class name with a `cf-*` prefix, to override styles using the `usa-*` selector.
@@ -32,13 +46,16 @@ Prefix | Use for
 
 - _Only use !important to override the specificity of Web Design Standards selectors_. Otherwise, you'll just end up with a series of cascade problems and messy CSS.
 
+<span id="js"></span>
 ## JavaScript Development Notes
 Most JavaScript assets are managed using the [Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html).
 
+<span id="js-depends"></span>
 ### Current dependencies
 - jQuery v1.11.3
 - [clipboard.js](https://zenorocha.github.io/clipboard.js) v1.5.5
 
+<span id="svg"></span>
 ## Icons and SVG
 
 Use inline SVG for icons rather than an icon font. [Why?](http://blog.cloudfour.com/seriously-dont-use-icon-fonts/)
@@ -48,9 +65,10 @@ Use inline SVG for icons rather than an icon font. [Why?](http://blog.cloudfour.
 - Assistive technology tools try to read the characters
 - Inline SVG eliminates the overhead of an HTTP request and will load as long as the page does.  
 
+<span id="svg-making"></span>
 ### Creating SVG icons and images
 
-Super obvious: create icons using graphics software such as Sketch or Illustrator. Less obvious: most of **our icons use [FontAwesome](http://fontawesome.io/)**.
+Super obvious: create icons using graphics software such as Sketch or Illustrator. Less obvious: most of **our icons use [FontAwesome](http://fontawesome.io/)**, but with the text converted to a shape.
 
 - Download and install FontAwesome as a Desktop font. (Yes, you'll need administrative access in order to install the font.)
 - Copy the icon you want from the [FontAwesome cheatsheet](fontawesome.io/cheatsheet/) and paste it into the image document.
@@ -60,6 +78,7 @@ Super obvious: create icons using graphics software such as Sketch or Illustrato
 - Bonus points if you minimize it using a tool such as [SVGO](https://github.com/svg/svgo)
 - Commit the icon to the repo, so that it can be reused and repurposed.
 
+<span id="svg-guidelines"></span>
 ### SVG icon guidelines and tips
 
 After you create an SVG image, you'll need to tweak it a little bit by hand. It's plain text, so any editor will do. Make these changes.
