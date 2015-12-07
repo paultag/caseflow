@@ -81,7 +81,9 @@ module Caseflow
       end
 
       def hearing_requested?
-        bfha && ['1', '2', '6'].include?(bfha)
+        # TODO: needed to trigger autoload of case.rb
+        ::Case
+        Caseflow.hearing_requested?(self)
       end
 
       def ssoc_required?
