@@ -4,7 +4,7 @@ module Caseflow
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :bfdrodec, :bfdnod, :bfd19, :bfdsoc, :efolder_appellant_id, :appeal_type,
         :vso_full, :regional_office_full, :folder, :correspondent,
-        :save_successful, :issue_breakdown, :bfso)
+        :save_successful, :issue_breakdown, :bfso, :bfha)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
@@ -22,7 +22,7 @@ module Caseflow
                      efolder_form9: nil, efolder_soc: nil,
                      efolder_appellant_id: nil, appeal_type: nil, vso_full: nil,
                      regional_office_full: nil, folder: nil, correspondent: nil,
-                     save_successful: true, issue_breakdown: [], bfso: nil)
+                     save_successful: true, issue_breakdown: [], bfso: nil, bfha: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -50,6 +50,7 @@ module Caseflow
         @issue_breakdown = issue_breakdown
         @regional_office_full = regional_office_full
         @bfso = bfso
+        @bfha = bfha
       end
 
       _DATE_FIELDS = [
@@ -80,7 +81,11 @@ module Caseflow
       end
 
       def hearing_requested?
-        true
+        if bfha && ['1', '2', '6'].include?(bfha)
+          true
+        else
+          false
+        end
       end
 
       def ssoc_required?
@@ -305,6 +310,30 @@ module Caseflow
         correspondent: Correspondent.new(
           'Paper', 'Self', 'Paper', 'Paper', '', 'Paper',
         ),
+      ),
+      'hearing-requested' => Case.new(
+        bfkey: 'joe-snuffy',
+        bfcorlid: '22222222C',
+        bfac: '3',
+        bfmpro: 'ADV',
+        bfpdnum: '123ABC',
+        bfregoff: 'DSUSER',
+        bfdrodec: Date.parse('2015-09-01'),
+        bfdnod: Date.parse('2015-09-01'),
+        bfd19: Date.parse('2015-09-01'),
+        bfdsoc: Date.parse('2015-09-01'),
+        efolder_nod: Date.parse('2015-09-01'),
+        efolder_form9: Date.parse('2015-09-01'),
+        efolder_soc: Date.parse('2015-09-01'),
+        efolder_appellant_id: '22222222',
+        appeal_type: 'Post Remand',
+        vso_full: 'Disabled American Veterans',
+        regional_office_full: 'Philadelphia, PA',
+        folder: Folder.new('VBMS'),
+        correspondent: Correspondent.new(
+          'Joe Snuffy', 'Self', 'Joe Snuffy', 'Joe', '', 'Snuffy',
+        ),
+        bfha: '1',
       ),
     }
   end
