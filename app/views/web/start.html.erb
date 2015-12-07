@@ -4,33 +4,34 @@
 %>
 <% content_for :page_title do %>Mismatched Documents<% end %>
 
-
 <div id="certifications-start">
 
-    <div class="usa-alert usa-alert-error cf-app-segment" role="alert">
+    <div class="usa-alert usa-alert-error usa-cf_app-segment" role="alert">
       <div class="usa-alert-body">
         <h3 class="usa-alert-heading">Cannot find documents in VBMS</h3>
         <p class="usa-alert-text">Some of the files listed in VACOLS could not be found in VBMS.</p>
       </div>
     </div>
 
-  <div class="cf-app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
+
+  <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
       <h2>Find missing documents</h2>
 
       <p>
-        Caseflow could not find the documents with an <svg width="55" height="55" class="cf-icon-missing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55"><title>missing</title><path d="M52.6 46.9l-6 6c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-13-13-13 13c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-6-6c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l13-13-13-13c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l6-6c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l13 13 13-13c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l6 6c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3l-13 13 13 13c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3z"/></svg>
-        </svg> below, in the appellant’s eFolder. Try <strong>looking for</strong> the missing
+          Caseflow could not find the documents marked with an <svg width="55" height="55" class="cf-icon-missing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55"><title>missing icon</title><path d="M52.6 46.9l-6 6c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-13-13-13 13c-.8.8-1.9 1.2-3 1.2s-2.2-.4-3-1.2l-6-6c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l13-13-13-13c-.8-.8-1.2-1.9-1.2-3s.4-2.2 1.2-3l6-6c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l13 13 13-13c.8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2l6 6c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3l-13 13 13 13c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3z"/></svg>
+      </svg> in the appellant's eFolder. This usually happens when something doesn't match up. Try checking:</p>
 
-        document in VBMS and <strong>changing its date</strong> to the date in
-        the VACOLS column. After changing the date, click the
-        <strong>Refresh Page</strong> button below.
-      </p>
+          <ul>
+                <li>The <strong>document type</strong> in VBMS to make sure it's labeled correctly</li>
+                <li>The <strong>document date</strong> &#8212; the date in VBMS must match the date in VACOLS</li>
+          </ul>
 
-      <p>
+      <p>Once you've made corrections, <button type="button" class="cf-action-refresh cf-btn-link cf-btn-link--inline">refresh this page</button>.</p>
+
+       <p>
         If you can’t find the document, click the
         <strong>This case cannot be certified</strong> link below.
       </p>
-
 
       <div class="usa-cf_app-table-wrap">
           <table class="usa-table-borderless">
@@ -46,7 +47,6 @@
               </tr>
             </thead>
             <tbody>
-
                 <%= render partial: 'table_row', locals: {field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
                 <%= render partial: 'table_row', locals: {field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
                 <%= render partial: 'table_row', locals: {field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
