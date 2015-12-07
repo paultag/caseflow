@@ -4,17 +4,17 @@
 %>
 <% content_for :page_title do %>Mismatched Documents<% end %>
 
+
 <div id="certifications-start">
 
-    <div class="usa-alert usa-alert-error usa-cf_app-segment" role="alert">
+    <div class="usa-alert usa-alert-error cf-app-segment" role="alert">
       <div class="usa-alert-body">
         <h3 class="usa-alert-heading">Cannot find documents in VBMS</h3>
         <p class="usa-alert-text">Some of the files listed in VACOLS could not be found in VBMS.</p>
       </div>
     </div>
 
-
-  <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
+  <div class="cf-app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
       <h2>Find missing documents</h2>
 
       <p>
@@ -33,6 +33,7 @@
         <strong>This case cannot be certified</strong> link below.
       </p>
 
+
       <div class="usa-cf_app-table-wrap">
           <table class="usa-table-borderless">
             <caption class="usa-sr-only">
@@ -47,6 +48,7 @@
               </tr>
             </thead>
             <tbody>
+
                 <%= render partial: 'table_row', locals: {field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
                 <%= render partial: 'table_row', locals: {field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
                 <%= render partial: 'table_row', locals: {field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>

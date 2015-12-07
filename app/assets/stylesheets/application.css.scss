@@ -114,8 +114,10 @@ abbr[title] {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: inherit;
-    margin: 0;
+    &:not(.usa-alert-heading) {
+        font-family: inherit;
+        margin: 0;
+    }
 }
 
 [hidden] {
@@ -226,6 +228,7 @@ body {
     width: 90%;
 }
 
+.cf-app-segment,
 .usa-cf_app-segment {
     &::before, &::after {
         content: ' ';
@@ -240,6 +243,7 @@ body {
     }
 }
 
+* + .cf-app-segment,
 * + .usa-cf_app-segment {
     margin-top: rem(30px);
 }
@@ -371,7 +375,11 @@ label {
 
 /*--- Alerts ---*/
 .usa-alert-error {
-    background-image: url(asset-path('icons/error.svg'));
+    background-image: url(asset-path('icons/alerts/error.svg'));
+}
+
+.usa-alert-success {
+    background-image: url(asset-path('icons/alerts/success.svg'));
 }
 
 /*--- Table styles ---*/
