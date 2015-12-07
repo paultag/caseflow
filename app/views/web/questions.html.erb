@@ -2,6 +2,13 @@
 
 <%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
 
+<div class="usa-alert usa-alert-success cf-app-segment" role="alert">
+  <div class="usa-alert-body">
+    <h3 class="usa-alert-heading">All documents detected!</h3>
+    <p class="usa-alert-text">The Form 9, <abbr>NOD</abbr>, <abbr>SOC</abbr> and <abbr>SSOC</abbr>s (if applicable) were found in the eFolder.</p>
+  </div>
+</div>
+
   <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
       <header>
           <h2>Complete Electronic Form 8</h2>
