@@ -41,13 +41,13 @@ module Caseflow
     }
 
     if fields['5A_SERVICE_CONNECTION_FOR'].present?
-      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec
+      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec_date
     end
     if fields['6A_INCREASED_RATING_FOR'].present?
-      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec
+      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec_date
     end
     if fields['7A_OTHER'].present?
-      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec
+      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec_date
     end
 
     fields
@@ -138,7 +138,7 @@ class Case < ActiveRecord::Base
   }
   FULL_VSO_NAMES.default = FULL_VSO_NAMES['O']
 
-  [:bfdnod, :bfd19, :bfdsoc, :bfssoc1, :bfssoc2, :bfssoc3, :bfssoc4, :bfssoc5].each do |name|
+  [:bfdnod, :bfdrodec, :bfd19, :bfdsoc, :bfssoc1, :bfssoc2, :bfssoc3, :bfssoc4, :bfssoc5].each do |name|
     define_method("#{name}_date") do
       if value = self.send(name)
         value.to_s(:va_date)
