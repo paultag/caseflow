@@ -20,24 +20,18 @@ $caseflow-background: #f9f9f9;
 // Styles basic html elements
 
 @import '_scss/elements/typography';
-@import '_scss/elements/list';
 @import '_scss/elements/inputs';
 @import '_scss/elements/buttons';
 @import '_scss/elements/table';
-@import '_scss/elements/figure';
 @import '_scss/elements/labels';
 
 
 // Components -------------- //
 
 @import '_scss/components/skipnav';
-@import '_scss/components/disclaimer';
-@import '_scss/components/sidenav';
 @import '_scss/components/footer';
 @import '_scss/components/forms';
-@import '_scss/components/search';
 @import '_scss/components/alerts';
-@import '_scss/components/accordions';
 
 
 body {
@@ -120,10 +114,8 @@ abbr[title] {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    &:not(.usa-alert-heading) {
-        font-family: inherit;
-        margin: 0;
-    }
+    font-family: inherit;
+    margin: 0;
 }
 
 [hidden] {
@@ -234,7 +226,6 @@ body {
     width: 90%;
 }
 
-.cf-app-segment,
 .usa-cf_app-segment {
     &::before, &::after {
         content: ' ';
@@ -249,7 +240,6 @@ body {
     }
 }
 
-* + .cf-app-segment,
 * + .usa-cf_app-segment {
     margin-top: rem(30px);
 }
@@ -381,11 +371,7 @@ label {
 
 /*--- Alerts ---*/
 .usa-alert-error {
-    background-image: url(asset-path('icons/alerts/error.svg'));
-}
-
-.usa-alert-success {
-    background-image: url(asset-path('icons/alerts/success.svg'));
+    background-image: url(asset-path('icons/error.svg'));
 }
 
 /*--- Table styles ---*/
