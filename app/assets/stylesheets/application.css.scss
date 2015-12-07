@@ -139,6 +139,59 @@ legend {
     opacity: .5 !important;
 }
 
+/*------------------------------------
+ * Icons
+ *-----------------------------------*/
+
+[class|=cf-icon]{
+    display: inline-block;
+    height: .8em; // Should be an em
+    margin: 0 .1ex;
+}
+
+.cf-icon-missing {
+    vertical-align: -.15ex;
+    width: .8em;
+
+    path {
+        fill: $color-secondary-dark;
+    }
+}
+
+.cf-icon-found {
+    width: 1em;
+
+    path {
+        fill: $color-green;
+    }
+}
+
+/*--- Appeal button ---*/
+
+.usa-cf-apppeal-id {
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid $color-gray;
+    color: $color-gray;
+    padding: 1rem;
+
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        border-bottom: 2px solid $color-gray;
+
+        path {
+            fill: $color-white;
+        }
+    }
+}
+
+.cf-icon-appeal-id {
+    display: inline-block;
+    margin-left: .25rem;
+    vertical-align: -1px;
+}
+
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
 * - Uses Neat.bourbon.io as a grid
@@ -282,49 +335,6 @@ body {
     width: 18rem;
     z-index: 1;
  }
-
-
-/*--- Appeal button ---*/
-
-.usa-cf-apppeal-id {
-    box-sizing: border-box;
-    background: transparent;
-    border: 2px solid $color-gray;
-    color: $color-gray;
-    padding: 1rem;
-
-    &:hover {
-        color: $color-white;
-        background: $color-gray;
-        border-bottom: 2px solid $color-gray;
-
-        path {
-            fill: $color-white;
-        }
-    }
-}
-
-/*----------------------------------
- * Icons
- *--------------------------------*/
-
-.cf-icon-x {
-    &::before {
-        color: $color-secondary-dark;
-        content: '\00D7';
-        font-size: 150%;
-        line-height: inherit;
-        vertical-align: middle;
-    }
-}
-
-.usa-cf-apppeal-id-icon {
-    display: inline-block;
-    margin-left: .25rem;
-    vertical-align: -3px;
-}
-
-
 
 
 /*------ Buttons --------*/
