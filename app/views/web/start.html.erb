@@ -7,16 +7,12 @@
 
 <div id="certifications-start">
 
-  <%= render partial: 'documents_message', locals: { nod: (@kase.bfdnod_date == @kase.efolder_nod_date),
-      soc: (@kase.bfdsoc_date == @kase.efolder_soc_date),
-      ssoc1: (@kase.bfssoc1_date == @kase.efolder_ssoc1_date),
-      ssoc2: (@kase.bfssoc2_date == @kase.efolder_ssoc2_date),
-      ssoc3: (@kase.bfssoc3_date == @kase.efolder_ssoc3_date),
-      ssoc4: (@kase.bfssoc4_date == @kase.efolder_ssoc4_date),
-      ssoc5: (@kase.bfssoc5_date == @kase.efolder_ssoc5_date),
-      form9: (@kase.bfd19_date == @kase.efolder_form9_date)} %>
-
-
+    <div class="usa-alert usa-alert-error cf-app-segment" role="alert">
+      <div class="usa-alert-body">
+        <h3 class="usa-alert-heading">Cannot find documents in VBMS</h3>
+        <p class="usa-alert-text">Some of the files listed in VACOLS could not be found in VBMS.</p>
+      </div>
+    </div>
 
   <div class="cf-app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
       <h2>Find missing documents</h2>
