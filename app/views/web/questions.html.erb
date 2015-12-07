@@ -189,8 +189,6 @@
               required: true,
           } %>
 
-
-      <% if @kase.required_fields[:show_10b] %>
         <%= render partial: 'form8_multi_radio', locals: {
                 question: 'A hearing was requested, if held, is transcript on file?',
                 question_num: '10B',
@@ -203,7 +201,6 @@
                 option3_value: 'NOT_APPLICABLE',
             } %>
 
-        <% if @kase.required_fields[:show_10c] %>
           <%= render partial: 'form8_text', locals: {
                   div_id: '10c',
                   question: 'If requested, but not held, explain',
@@ -212,9 +209,7 @@
                   close_fieldset: true,
                   show_when: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE__yes',
               } %>
-        <% end %>
 
-      <% end %>
 
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Are contested claims procedures applicable in this case?',
