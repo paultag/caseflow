@@ -9,7 +9,7 @@
  The following are optional arguments:
  - div_id: The ID attribute of the containing div
  - div_class: The class attribute of the containing div
- - selected: 'yes' if 'Yes' should be pre-selected, 'no' if 'No' should be pre-selected
+ - selected: bool, true means 'Yes' should be pre-selected, false if 'No' should be pre-selected
 %>
 
 <% yes_no_locals = {
@@ -50,9 +50,9 @@
    end
 
    if defined?(selected)
-     if selected == 'yes'
+     if selected
        yes_no_locals[:option1_checked] = true
-     elsif selected == 'no'
+     else
        yes_no_locals[:option2_checked] = true
      end
    end

@@ -81,11 +81,7 @@ module Caseflow
       end
 
       def hearing_requested?
-        if bfha && ['1', '2', '6'].include?(bfha)
-          true
-        else
-          false
-        end
+        bfha && ['1', '2', '6'].include?(bfha)
       end
 
       def ssoc_required?
