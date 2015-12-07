@@ -25,14 +25,14 @@
 
                       <% if session[:ro] || session[:username] %>
                        <div class="dropdown">
-                          <a href="#menu" class="dropdown-trigger">
+                          <a href="#menu" class="dropdown-trigger" title="Get help or sign out" id="menu-trigger">
                               <% if session[:username] %>
                               <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
                               <%= session[:ro] %>
                               <% end %>
                           </a>
-                          <ul id="menu" class="dropdown-menu" hidden>
+                          <ul id="menu" class="dropdown-menu" hidden aria-labeledby="menu-trigger">
                             <li><a href="/caseflow/logout">Sign out</a></li>
                           </ul>
                         </div>
