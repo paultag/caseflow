@@ -53,9 +53,10 @@ module Caseflow
       end
 
       _DATE_FIELDS = [
-        :bfdnod, :bfd19, :bfdsoc, :bfssoc1, :bfssoc2, :bfssoc3, :bfssoc4,
-        :bfssoc5, :efolder_nod, :efolder_form9, :efolder_soc, :efolder_ssoc1,
-        :efolder_ssoc2, :efolder_ssoc3, :efolder_ssoc4, :efolder_ssoc5
+        :bfdrodec, :bfdnod, :bfd19, :bfdsoc, :bfssoc1, :bfssoc2, :bfssoc3,
+        :bfssoc4, :bfssoc5, :efolder_nod, :efolder_form9, :efolder_soc,
+        :efolder_ssoc1, :efolder_ssoc2, :efolder_ssoc3, :efolder_ssoc4,
+        :efolder_ssoc5
       ]
       _DATE_FIELDS.each do |field|
         define_method("#{field}_date") do
