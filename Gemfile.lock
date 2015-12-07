@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/department-of-veterans-affairs/omniauth-saml-va
-  revision: 006b8aecb516efd5fc63edbf77b70833457b8f42
+  revision: a2257cb9f75d398cc03396de8aaa1904c057f9e5
   specs:
     omniauth-saml-va (0.1)
       omniauth-saml (~> 1.4.0)
@@ -165,7 +165,7 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     ruby-progressbar (1.7.5)
-    ruby-saml (1.1.0)
+    ruby-saml (1.1.1)
       nokogiri (>= 1.5.10)
       uuid (~> 2.3)
     ruby2ruby (2.2.0)
