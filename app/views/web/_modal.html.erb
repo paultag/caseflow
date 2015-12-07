@@ -3,7 +3,8 @@
     - modal_id: A string. Used to create the ID and ARIA roles
     - modal_title: A string.
     - modal_text: A string.
-    - modal_html: Optional. An HTML string. Printed as raw HTML. Use carefully
+    - modal_html: Optional. An HTML string. Printed as raw HTML. USE CAREFULLY.
+
 %>
 
 <section class="cf-modal" id="<%= modal_id %>" role="aria-alertdialog" aria-labelledby="<%= modal_id %>-title" aria-describedby="<%= modal_id %>-desc" hidden="hidden">
@@ -14,6 +15,12 @@
 
           <h1 class="cf-modal-title" id-"<%= modal_id %>-title"><%= modal_title %></h1>
           <p class="cf-modal-text" id-"<%= modal_id %>-desc"><%= modal_text %></p>
+
+          <%#
+          DO NOT UNDER ANY CIRCUMSTANCES USE modal_html
+          TO OUTPUT DATA THAT WAS ORIGINALLY USER SUBMITTED.
+          DOING SO IS AN EXCELLENT WAY TO INTRODUCE A VULNERABILITY.
+          %>
 
           <%=raw modal_html if defined?(modal_html) && modal_html %>
 
