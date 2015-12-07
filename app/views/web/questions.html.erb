@@ -360,6 +360,7 @@
               input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
               max_length: 40,
               required: true,
+              value: session.has_key?(:full_auth_data) ? session[:full_auth_data][:name] : nil,
       } %>
 
       <%= render partial: 'form8_text', locals: {
