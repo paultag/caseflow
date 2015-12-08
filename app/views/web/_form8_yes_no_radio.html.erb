@@ -37,6 +37,10 @@
      yes_no_locals[:required] = required
    end
 
+   if defined?(linked)
+     yes_no_locals[:linked] = linked
+   end
+
    if defined?(show_when)
      yes_no_locals[:show_when] = show_when
    end
