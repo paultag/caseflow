@@ -146,7 +146,6 @@
                 question_num: '',
                 input_name: '8B_REMARKS',
                 close_fieldset: true,
-                show_when: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
             } %>
       <% end %>
 
@@ -165,8 +164,7 @@
             } %>
 
 
-      <%# if @kase.required_fields[:show_9a] %>
-        <%= render partial: 'form8_two_radio', locals: {
+         <%= render partial: 'form8_two_radio', locals: {
                 question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
                 question_num: '9A',
                 input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
@@ -181,9 +179,8 @@
                 question_num: '9B',
                 input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN',
                 close_fieldset: true,
-                show_when: 'no',
             } %>
-      <%# end %>
+
 
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Was hearing requested?',
@@ -198,7 +195,6 @@
           } %>
 
 
-      <% # if @kase.required_fields[:show_10b] %>
         <%= render partial: 'form8_multi_radio', locals: {
                 question: 'A hearing was requested, if held, is transcript on file?',
                 question_num: '10B',
@@ -211,24 +207,22 @@
                 option3_value: 'NOT_APPLICABLE',
             } %>
 
-        <% # if @kase.required_fields[:show_10c] %>
           <%= render partial: 'form8_text', locals: {
                   div_id: '10c',
                   question: 'If requested, but not held, explain',
                   question_num: '10C',
                   input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
                   close_fieldset: true,
-                  show_when: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE__yes',
               } %>
-        <% # end %>
-
-      <% # end %>
 
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Are contested claims procedures applicable in this case?',
               question_num: '11A',
               input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
               required: true,
+              toggle: true,
+              linked: '#11b',
+              show_when: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE__no'
           } %>
 
 
@@ -239,12 +233,10 @@
               input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
               div_id: '11b',
               close_fieldset: true,
-              show_when: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE_yes',
           } %>
 
       </fieldset><%# Closes nested fieldset for question 11b %>
   </fieldset><%# Closes nested fieldset parent (Question 11a) %>
-
 
    <%= render partial: 'form8_text', locals: {
           div_id: '12A-date',
@@ -321,7 +313,6 @@
                   question_num: '',
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
                   div_id: '13',
-                  show_when: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
               } %>
 
     </fieldset>
