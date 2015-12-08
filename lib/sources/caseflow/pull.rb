@@ -1,4 +1,22 @@
 #!/usr/bin/env ruby
+#
+# Usage: pull.rb output-file.json [bfcorlid...]
+#
+# Pull cases from VACOLS and put them into a JSON format that the Caseflow
+# Fakes models can import as test data.
+#
+# This is useful when you need to debug bugs caused by data in the production
+# webservice, *without* actually using the production VACOLS database. This
+# will constuct a mock object that matches (as best as they can) the state
+# of the production data.
+#
+# This script also queries the VBMS efolder to get the `nod`, `form9`, and `soc`
+# dates.
+#
+# This information is still PII, and *must* be treated with care. Never check
+# the output JSON into any VCS, and *destroy* the data as soon as it's not
+# needed anymore. Do not take this information off your secured machine, and
+# never put it into a system unapproved for PII, or a USB stick.
 
 def dateize(date)
   if not date.nil?
