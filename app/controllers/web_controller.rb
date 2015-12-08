@@ -94,6 +94,9 @@ class WebController < ApplicationController
     certification_date = Time.now.to_s(:va_date)
     fields['17C_DATE'] = certification_date
 
+    ## Clear not applicable fields
+    fields = fields.each{|key, value| fields.delete(key) if value == 'NOT_APPLICABLE' }
+
 
     ## Ensure that values are not set when a dependent question makes the answer not applicable
     if fields['8B_POWER_OF_ATTORNEY'] == '8B_POWER_OF_ATTORNEY'
