@@ -78,6 +78,7 @@ $(function(){
         if( showwhen == $(e.target).attr('id') ||
             showwhen == $(e.target).attr('name') ){
             $(whichEl).closeItem();
+            $(whichEl).find('input').prop('checked', false);
         } else {
             $(whichEl).openItem();
         }
