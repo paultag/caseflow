@@ -26,9 +26,9 @@ def main(argv)
                      bfd19: dateize(el.bfd19),
                      bfdsoc: dateize(el.bfdsoc),
                      # Fake good and valid data here
-                     efolder_nod: dateize(el.bfdnod),
-                     efolder_form9: dateize(el.bfd19),
-                     efolder_soc: dateize(el.bfdsoc),
+                     efolder_nod: el.efolder_nod_date,
+                     efolder_form9: el.efolder_form9_date,
+                     efolder_soc: el.efolder_soc_date,
                      efolder_appellant_id: el.efolder_appellant_id,
                      # Now, fill out the rest.
                      appeal_type: el.appeal_type,
