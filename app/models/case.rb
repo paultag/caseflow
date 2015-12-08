@@ -225,7 +225,7 @@ class Case < ActiveRecord::Base
     if vso.nil?
       "None"
     else
-      vso.join(' - ')
+      vso[0]
     end
   end
 

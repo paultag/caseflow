@@ -38,7 +38,6 @@ $.fn.extend({
      new Clipboard('[data-clipboard-text]');
  })();
 
-
 /* Reusable 'go back one page' pattern */
  $(function() {
     $('.cf-action-back').on('click', function(evt) {
