@@ -39,8 +39,9 @@ class FormVa8 < Caseflow::FormBuilder
     '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED_NO'                  => {id: "form1[0].#subform[0].#area[0].CheckBox23[11]", type: :check},
     '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED'                     => {type: :radio},
     '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED'                              => {id: "form1[0].#subform[0].#area[0].TextField1[15]", type: :text},
-    '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED'         => {id: "form1[0].#subform[0].#area[0].CheckBox23[12]", type: :check},
-    '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED'                   => {id: "form1[0].#subform[0].#area[0].CheckBox23[13]", type: :check},
+    '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_YES'                            => {id: "form1[0].#subform[0].#area[0].CheckBox23[12]", type: :check}, # Required and Furnished
+    '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NO'                             => {id: "form1[0].#subform[0].#area[0].CheckBox23[13]", type: :check}, # Not Required
+    '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE'                                => {type: :radio},
     '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF'     => {id: "form1[0].#subform[0].#area[0].CheckBox23[14]", type: :check},
     '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_REF'           => {id: "form1[0].#subform[0].#area[0].CheckBox23[15]", type: :check},
     '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_LOAD_GUAR'     => {id: "form1[0].#subform[0].#area[0].CheckBox23[16]", type: :check},

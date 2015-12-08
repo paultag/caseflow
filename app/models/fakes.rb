@@ -146,7 +146,7 @@ module Caseflow
       # a real Correspondent object.
       data = data.symbolize_keys
       Caseflow::Fakes::Case::DATE_FIELDS.each do |field|
-        if data.has_key?(field)
+        if data[field]
           data[field] = Date.parse(data[field])
         end
       end
