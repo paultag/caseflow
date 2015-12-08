@@ -45,11 +45,12 @@ body {
 }
 
 .success,
-.usa-cf_app-success {
+.cf-success {
   color: #2e8540;
 }
 
-.error {
+.error,
+.cf-error {
   color: $color-secondary-dark;
 }
 
@@ -91,7 +92,8 @@ label {
 /*----------------------------------*
 * Globals, Resets, and overrides
 *-----------------------------------*/
-.text-center {
+.text-center,
+.cf-text-center {
     text-align: center;
 }
 .text-right {
@@ -160,6 +162,14 @@ legend {
     path {
         fill: $color-green;
     }
+}
+
+.cf-icon-success--bg {
+    background: url(asset-path('icons/icon-check.svg')) bottom no-repeat;
+    background-size: auto 2rem;
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
 }
 
 /*--- Appeal button ---*/
@@ -472,27 +482,30 @@ label {
 Certified success page
 ==========================*/
 
-.usa-cf_app-success-heading {
+.cf-msg-screen-heading,
+.usa-cf_app-message-heading {
     text-align: center;
     font-size: rem(52px);
     margin-bottom: 1rem;
 }
 
-.usa-cf_app-success-deck {
+.cf-msg-screen-deck {
     text-align: center;
     font-size: rem(20px);
     font-weight: normal;
     color: $color-gray;
 }
 
-.usa-cf_app-checklist {
-    margin: 5rem auto 6.5rem;
+.cf-list-checklist {
     list-style-type: none;
+    margin: 5rem auto 6.5rem;
+    position: relative;
+    width: 50%;
 
     li::before {
         content: '';
     }
-    .fa-check {
+    .cf-icon-success--bg {
         font-size: 2.5rem;
         margin-right: 1.8rem;
     }
