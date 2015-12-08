@@ -81,15 +81,21 @@ class WebController < ApplicationController
   def questions_submit
 
     # TODO Add a check for the two required params, sending the user back to `questions` with an error message if not there (maybe do this in a separate branch, since this wasn't there before and needs some design)
-
-    fields = @kase.initial_fields
-    params.each{|k, v| fields[k] = v }
-
+    fields = params
 
     # Prepare fields for PDF generation
+
+    ## Override user entered fields (since they are disabled on the frontend)
+    initial_fields = @kase.initial_fields
+    fields['2_FILE_NO'] = initial_fields['2_FILE_NO']
+    fields['15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE'] = initial_fields['15_NAME_AND_LOCATION_OF_CERTIFYING_OFFICE']
+    fields['16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL'] = initial_fields['16_ORGANIZATIONAL_ELEMENT_CERTIFIYING_APPEAL']
+
     certification_date = Time.now.to_s(:va_date)
     fields['17C_DATE'] = certification_date
 
+
+    ## Ensure that values are not set when a dependent question makes the answer not applicable
     if fields['8B_POWER_OF_ATTORNEY'] == '8B_POWER_OF_ATTORNEY'
       fields['8B_POWER_OF_ATTORNEY'] = true
       fields.delete('8B_REMARKS')
@@ -109,7 +115,7 @@ class WebController < ApplicationController
       fields.delete('11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED')
     end
 
-    # Switch all question 13 checkboxes to true if checked from 'on' value (but don't accidentally get the Other text input box)
+    ## Switch all question 13 checkboxes to true if checked from 'on' value (but don't accidentally get the Other text input box)
     fields.each do |key, val|
       if key =~ /^13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_/ && key !~ /OTHER_REMARKS$/ && val
         fields[key] = true
