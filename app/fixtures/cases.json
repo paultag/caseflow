@@ -1,0 +1,193 @@
+{
+  "joe-snuffy": {
+    "bfkey": "joe-snuffy",
+    "bfcorlid": "22222222C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-09-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-01",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-01",
+    "efolder_appellant_id": "22222222",
+    "appeal_type": "Post Remand",
+    "vso_full": "Disabled American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Joe Snuffy", "Self", "Joe Snuffy", "Joe", "", "Snuffy"
+    ]
+  },
+  "janice-snuffy": {
+    "bfkey": "janice-snuffy",
+    "bfcorlid": "444444444C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-09-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-02",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-03",
+    "efolder_appellant_id": "444444444",
+    "appeal_type": "Post Remand",
+    "vso_full": "Jewish American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Janice Snuffy", "Self", "Janice Snuffy", "Janice", "", "Snuffy"
+    ]
+  },
+  "not-authorized": {
+    "bfkey": "not-authorized",
+    "bfcorlid": "44444445C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "dfakl;dfakldfaj;",
+    "bfdrodec": "2015-09-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-02",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-03",
+    "efolder_appellant_id": "444444445",
+    "appeal_type": "Post Remand",
+    "vso_full": "Unauthorized American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Not Authorized", "Self", "Not Authorized", "Not", "", "Authorized"
+    ]
+  },
+  "full-form8": {
+    "bfkey": "full-form8",
+    "bfcorlid": "444444446C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-10-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-01",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-01",
+    "efolder_appellant_id": "444444444",
+    "appeal_type": "Post Remand",
+    "vso_full": "Thorough American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Full Form8", "Self", "Full Form8", "Full", "Numberinmylastname", "Form8"
+    ],
+    "issue_breakdown": [
+      {"field_type": "service connection", "full_desc": "broken ankle"},
+      {"field_type": "service connection", "full_desc": "broken toe"},
+      {"field_type": "service connection", "full_desc": "broken toe nail"},
+      {"field_type": "increased rating", "full_desc": "popped ankle"},
+      {"field_type": "increased rating", "full_desc": "twisted toe"},
+      {"field_type": "increased rating", "full_desc": "blackened toe nail"},
+      {"field_type": "other", "iss_desc": "enlarged ankle"},
+      {"field_type": "other", "iss_desc": "gross toe nail"}
+    ],
+    "bfso": "T"
+  },
+  "not-ready": {
+    "bfkey": "not-ready",
+    "bfcorlid": "123456789C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-09-01",
+    "efolder_appellant_id": "123456789",
+    "appeal_type": "Post Remand",
+    "vso_full": "Disabled American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Not Ready", "Self", "Not Ready", "Not", "", "Ready"
+    ]
+  },
+  "already-certified": {
+    "bfkey": "already-certified",
+    "bfcorlid": "111111111C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-09-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-01",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-01",
+    "bf41stat": "2015-09-02",
+    "efolder_appellant_id": "22222222",
+    "appeal_type": "Post Remand",
+    "vso_full": "Disabled American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Already Certified", "Self", "Already Certified", "Already", "", "Certified"
+    ]
+  },
+  "paper": {
+    "bfkey": "paper",
+    "bfcorlid": "333333333C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-09-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-01",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-01",
+    "efolder_appellant_id": "333333333",
+    "appeal_type": "Post Remand",
+    "vso_full": "Disabled American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "Paper",
+    "correspondent": [
+      "Paper", "Self", "Paper", "Paper", "", "Paper"
+    ]
+  },
+  "hearing-requested": {
+    "bfkey": "joe-snuffy",
+    "bfcorlid": "22222222C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-09-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-01",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-01",
+    "efolder_appellant_id": "22222222",
+    "appeal_type": "Post Remand",
+    "vso_full": "Disabled American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Joe Snuffy", "Self", "Joe Snuffy", "Joe", "", "Snuffy"
+    ],
+    "bfha": "1"
+  }
+}

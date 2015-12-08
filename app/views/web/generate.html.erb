@@ -1,29 +1,23 @@
+<% content_for :page_title do %>Review Completed Form 8<% end %>
+
 <div id="certifications-generate">
   <div class="row">
     <div class="col col-md-10 col-md-offset-1">
       <h2>Review Form 8 Before Upload</h2>
       <p>
         Review the completed Form 8 below and verify all fields are accurate.
-        If the form looks correct, click the <strong>Upload and Certify</strong>
-        button and the Form 8 will automatically be uploaded to VBMS. If there
-        are any mistakes, <a onclick="javascript:history.back()">go back to fix any errors</a>.
+        If the form looks correct, click the Upload and Certify
+        button and the Form 8 will automatically be uploaded to VBMS.
       </p>
-      <hr/>
 
-      <embed class="embedded-document" src="/caseflow/files/forms/<%= @file_name %>"></embed>
+      <embed class="embedded-document usa-cf_app-segment" src="/caseflow/files/forms/<%= @file_name %>"></embed>
 
-      <hr/>
+<%= form_tag({action: :certify}, {class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
+    <input type="hidden" value="<%= @file_name %>" name="file_name">
+    <input type="hidden" value="<%= @certification_date %>" name="certification_date">
 
-    </div>
-  </div>
-  <div class="row">
-    <div class="col col-md-10 col-md-offset-1">
-      <%= form_tag({action: :certify}) do %>
-        <input type="hidden" value="<%= @file_name %>" name="file_name"/>
-        <input type="hidden" value="<%= @certification_date %>" name="certification_date"/>
-        <a onclick="javascript:history.back()">Go back to fix any errors</a>
-        <input type="submit" value="Upload and Certify" class="btn btn-primary pull-right"/>
-      <% end %>
-    </div>
-  </div>
-</div>
+    <button type="button" class="usa-button-gray cf-action-back cf-push-left">&laquo; Go back and make edits</button>
+    <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link space-left pull-left' %><!-- TODO: Make this more responsive friendly later -->
+    <button type="submit" class="btn btn-primary push-right">Upload and Certify</button>
+
+<% end %>

@@ -1,5 +1,6 @@
-// Vendor -------------- //
+$caseflow-background: #f9f9f9;
 
+// Vendor -------------- //
 @import '_scss/lib/bourbon/bourbon';
 @import '_scss/lib/neat/neat';
 @import '_scss/lib/normalize';
@@ -19,24 +20,18 @@
 // Styles basic html elements
 
 @import '_scss/elements/typography';
-@import '_scss/elements/list';
 @import '_scss/elements/inputs';
 @import '_scss/elements/buttons';
 @import '_scss/elements/table';
-@import '_scss/elements/figure';
 @import '_scss/elements/labels';
 
 
 // Components -------------- //
 
 @import '_scss/components/skipnav';
-@import '_scss/components/disclaimer';
-@import '_scss/components/sidenav';
 @import '_scss/components/footer';
 @import '_scss/components/forms';
-@import '_scss/components/search';
 @import '_scss/components/alerts';
-@import '_scss/components/accordions';
 
 
 body {
@@ -49,29 +44,17 @@ body {
   border-bottom: 1px solid #eee;
 }
 
-.hidden {
-  display: none;
-}
-
-.success {
-  color: #009245;
+.success,
+.usa-cf_app-success {
+  color: #2e8540;
 }
 
 .error {
-  color: #c1272d;
+  color: $color-secondary-dark;
 }
 
 label {
   font-weight: normal !important;
-}
-
-.document-table {
-  padding-top: 20px;
-}
-
-.popover {
-  max-width: 1000px;
-  max-height: 1000px;
 }
 
 .navbar-default {
@@ -87,13 +70,16 @@ label {
   padding-right: 0px;
 }
 
-
 .pilot-warning {
-  width: 100%;
   padding: 8px 20px 8px;
   text-align: center;
-  background-color: $color-primary-darker;
+  background-color: $color-primary;
   color: $color-white;
+
+  a {
+    color: $color-white;
+    text-decoration: underline;
+  }
 }
 
 /* Login view */
@@ -101,16 +87,6 @@ label {
   padding-top: 1em;
 }
 
-/* Grid sizes can be found on http://getbootstrap.com/css/ */
-@media (min-width: 970px) {
-
-  /* When we're medium and large, lets set a border on the left side
-   * of the login form column and pad it out to give it a bit of room. */
-  #login-login-form {
-    border-left: 1px solid #DCDCDC;
-    padding-left: 3em;
-  }
-}
 
 /*----------------------------------*
 * Globals, Resets, and overrides
@@ -124,9 +100,12 @@ label {
 .text-uc {
     text-transform: uppercase;
 }
+
+.cf-push-left,
 .push-left {
     float: left;
 }
+.cf-push-right,
 .push-right {
     float: right;
 }
@@ -135,8 +114,78 @@ abbr[title] {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: inherit;
-    margin: 0;
+    &:not(.usa-alert-heading) {
+        font-family: inherit;
+        margin: 0;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+legend {
+    display: table; /* Causes text to wrap in IE */
+    font: inherit;
+    white-space: normal;
+}
+
+[disabled] {
+    background: $color-gray-lightest !important;
+    opacity: .5 !important;
+}
+
+/*------------------------------------
+ * Icons
+ *-----------------------------------*/
+
+[class|=cf-icon]{
+    display: inline-block;
+    height: .8em; // Should be an em
+    margin: 0 .1ex;
+}
+
+.cf-icon-missing {
+    vertical-align: -.15ex;
+    width: .8em;
+
+    path {
+        fill: $color-secondary-dark;
+    }
+}
+
+.cf-icon-found {
+    width: 1em;
+
+    path {
+        fill: $color-green;
+    }
+}
+
+/*--- Appeal button ---*/
+
+.usa-cf-apppeal-id {
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid $color-gray;
+    color: $color-gray;
+    padding: 1rem;
+
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        border-bottom: 2px solid $color-gray;
+
+        path {
+            fill: $color-white;
+        }
+    }
+}
+
+.cf-icon-appeal-id {
+    display: inline-block;
+    margin-left: .25rem;
+    vertical-align: -1px;
 }
 
 /*-----------------------------------*
@@ -146,7 +195,7 @@ h1,h2,h3,h4,h5,h6 {
 *   from refills.bourbon.io/unstyled/
 *-----------------------------------*/
 body {
-    background: $color-gray-lightest;
+    background: $caseflow-background;
 }
 
 /* ===========================*
@@ -179,24 +228,24 @@ body {
     width: 90%;
 }
 
+.cf-app-segment,
 .usa-cf_app-segment {
-    @include clearfix();
-
-    & + .usa-cf_app-segment {
-        margin-top: rem(30px);
+    &::before, &::after {
+        content: ' ';
+        display: block;
+        clear:both;
     }
 
-    &--v-pad {
-        padding-top: rem(30px);
-        padding-bottom: rem(30px);
-    }
-    &--h-pad {
-        padding-left: rem(30px);
-        padding-right: rem(30px);
-    }
     &--alt {
         background: $color-white;
+        border: 1px solid $color-gray-lighter;
+        padding: rem(30px);
     }
+}
+
+* + .cf-app-segment,
+* + .usa-cf_app-segment {
+    margin-top: rem(30px);
 }
 
 [id=certifications-header] {
@@ -209,8 +258,9 @@ body {
 
     > * {
         display: table-cell;
+        padding: 1.5rem;
+        vertical-align: middle;
         width: 33%;
-        padding: rem(30px);
     }
 
     &--bordered {
@@ -228,13 +278,17 @@ body {
     &-text {
         font-weight: 600;
         margin-bottom: 0;
+        margin-top: 1rem;
     }
 }
 
 .usa-cf_app-footer {
-    border-top: 1px solid $color-gray-lighter;
-    padding-top: rem(55px);
     margin-top: rem(55px);
+
+    p {
+        border-top: 1px solid $color-gray-lighter;
+        padding-top: rem(55px);
+    }
 }
 
 /*------ Dropdowns --------*/
@@ -243,7 +297,12 @@ body {
   display: inline-block;
   position: relative;
 
-  &-trigger {
+  a {
+     color: inherit;
+  }
+}
+
+.dropdown-trigger {
     cursor: pointer;
 
     &::after {
@@ -259,46 +318,196 @@ body {
     &:hover {
         text-decoration: none;
     }
-  }
+}
 
-  &-button:after {
-    display: block;
-    position: absolute;
-  }
-  &-menu {
+.dropdown-menu {
     @include unstyled-list();
     @include transition (all 0.2s ease-in-out);
     background: $color-white;
     border: 1px solid $color-gray-lighter;
     cursor: pointer;
-    display: none;
     padding: rem(10px);
     position: absolute;
     text-align: left;
     top: 2em;
     width: 18rem;
     z-index: 1;
-  }
-  &-show {
-    display: block;
-  }
+ }
 
-  a {
-     color: inherit;
-  }
+
+/*------ Buttons --------*/
+
+// I hate using !important, but web design standards
+// form buttons have high specificity.
+// Keep an eye on https://github.com/18F/web-design-standards/issues/891
+[type="submit"],
+[type="button"] {
+    margin: 0 !important;
 }
 
-/*------ Appeal button --------*/
+// Overrides web design standards
+label {
+    max-width: 100%;
+}
 
-.usa-cf--apppeal-id {
-    box-sizing: border-box;
+.cf-btn-link {
     background: transparent;
-    border: 2px solid $color-gray;
-    color: $color-gray;
+    color: $color-primary;
+    font-weight: normal;
+    line-height: 1;
+    // I hate using !important, but web design standards
+    // form buttons have high specificity.
+    // Keep an eye on https://github.com/18F/web-design-standards/issues/891
+    -webkit-font-smoothing: inherit;
+    padding: 1rem 0 !important;
+
+    // Removes padding, so that these links can be placed inline.
+    &--inline {
+        padding: 0 !important;
+    }
 
     &:hover {
-        color: $color-white;
-        background: $color-gray;
-        border-bottom: 2px solid $color-gray;
+        background-color: inherit;
+        color: $color-primary-darker;
+        text-decoration: underline;
     }
+}
+
+/*--- Alerts ---*/
+.usa-alert-error {
+    background-image: url(asset-path('icons/alerts/error.svg'));
+}
+
+.usa-alert-success {
+    background-image: url(asset-path('icons/alerts/success.svg'));
+}
+
+/*--- Table styles ---*/
+.usa-cf_app-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+
+    table {
+        min-width: rem(400px);
+        width: 100%;
+    }
+}
+// Overrides table th, table td classes
+// from web design standards
+.usa-table-borderless {
+    th, td {
+        border-width: 0;
+    }
+    tr  {
+        border-bottom: 2px solid $color-gray-lightest;
+    }
+}
+
+/* ===========================*
+* Form-related states
+* ============================*/
+
+.required {
+    strong, b {
+        &::after {
+            content: '* ';
+            color: $color-secondary-dark;
+        }
+    }
+
+    &-msg {
+        &::before {
+            content: '* ';
+        }
+        @extend .usa-input-error-message;
+    }
+}
+
+.usa-cf_app-form {
+    header {
+        border-bottom: 1px solid $color-gray-lighter;
+        margin-bottom: rem(30px);
+    }
+
+    label {
+        margin-top: inherit;
+    }
+    fieldset {
+        margin-bottom: rem(45px);
+
+        fieldset {
+            margin-bottom: 0
+        }
+    }
+
+    .cf-btn-forward {
+        display: inline-block;
+        margin-right: 0;
+    }
+}
+
+.usa-cf_app-form-3-col {
+    @include clearfix;
+    margin-top: rem(30px);
+    margin-bottom: rem(30px);
+    padding: .25rem;
+    white-space: nowrap;
+
+    .usa-width-one-third {
+        margin-right: 0;
+    }
+}
+.form8-text-input {
+    @include clearfix;
+    clear: both;
+}
+.form8-two-radio {
+    &-item {
+        display: inline-block;
+        padding-right: 2rem;
+        margin: 1rem 0;
+    }
+}
+/*========================
+Certified success page
+==========================*/
+
+.usa-cf_app-success-heading {
+    text-align: center;
+    font-size: rem(52px);
+    margin-bottom: 1rem;
+}
+
+.usa-cf_app-success-deck {
+    text-align: center;
+    font-size: rem(20px);
+    font-weight: normal;
+    color: $color-gray;
+}
+
+.usa-cf_app-checklist {
+    margin: 5rem auto 6.5rem;
+    list-style-type: none;
+
+    li::before {
+        content: '';
+    }
+    .fa-check {
+        font-size: 2.5rem;
+        margin-right: 1.8rem;
+    }
+}
+
+.space-left {
+  margin-left: 20px;
+}
+
+.cf-example-text {
+  font-style: italic;
+  color: $color-gray;
+  vertical-align: middle;
+}
+
+.cf-login-input {
+  display: inline !important;
 }

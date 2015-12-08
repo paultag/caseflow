@@ -29,7 +29,7 @@ gem 'httpclient', '~> 2.6.0'
 gem 'ruby-saml', '~> 1.1.0'
 # TODO: Waiting on https://github.com/PracticallyGreen/omniauth-saml/pull/50 and
 #                  https://github.com/PracticallyGreen/omniauth-saml/pull/62
-gem 'omniauth-saml', git: 'https://github.com/alex/omniauth-saml', branch: 'patch-1'
+gem 'omniauth-saml', git: 'https://github.com/Vodeclic/omniauth-saml'
 gem 'omniauth-saml-va', git: 'https://github.com/department-of-veterans-affairs/omniauth-saml-va'
 
 gem 'connect_vbms', path: './vendor/gems/connect_vbms'

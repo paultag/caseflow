@@ -1,4 +1,17 @@
 module Caseflow
+  CENTRAL_OFFICE_HEARING_ACTION = '1'
+  TRAVEL_BOARD_HEARING_ACTION = '2'
+  VIDEO_HEARING_HEARING_ACTION = '6'
+  HEARING_ACTION_WITH_HEARING = [
+    CENTRAL_OFFICE_HEARING_ACTION,
+    TRAVEL_BOARD_HEARING_ACTION,
+    VIDEO_HEARING_HEARING_ACTION
+  ]
+
+  def self.hearing_requested?(kase)
+    kase.bfha && HEARING_ACTION_WITH_HEARING.include?(kase.bfha)
+  end
+
   def self.format_issue_description(desc)
     desc.reject(&:nil?).reject(&:empty?).join(" - ")
   end
@@ -41,13 +54,13 @@ module Caseflow
     }
 
     if fields['5A_SERVICE_CONNECTION_FOR'].present?
-      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+      fields['5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec_date
     end
     if fields['6A_INCREASED_RATING_FOR'].present?
-      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+      fields['6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec_date
     end
     if fields['7A_OTHER'].present?
-      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfd19_date
+      fields['7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED'] = kase.bfdrodec_date
     end
 
     fields
@@ -138,7 +151,7 @@ class Case < ActiveRecord::Base
   }
   FULL_VSO_NAMES.default = FULL_VSO_NAMES['O']
 
-  [:bfdnod, :bfd19, :bfdsoc, :bfssoc1, :bfssoc2, :bfssoc3, :bfssoc4, :bfssoc5].each do |name|
+  [:bfdnod, :bfdrodec, :bfd19, :bfdsoc, :bfssoc1, :bfssoc2, :bfssoc3, :bfssoc4, :bfssoc5].each do |name|
     define_method("#{name}_date") do
       if value = self.send(name)
         value.to_s(:va_date)
@@ -212,7 +225,7 @@ class Case < ActiveRecord::Base
     if vso.nil?
       "None"
     else
-      vso.join(' - ')
+      vso[0]
     end
   end
 
@@ -293,11 +306,7 @@ class Case < ActiveRecord::Base
   end
 
   def hearing_requested?
-    if bfha && ['1', '2', '6'].include?(bfha)
-      true
-    else
-      false
-    end
+    Caseflow.hearing_requested?(self)
   end
 
   def hearing_transcripts_present?

@@ -1,48 +1,50 @@
+<% content_for :page_title do %>Login<% end %>
+
 <%= form_tag(action: :login_ro_submit) do %>
+
   <% if @error_message %>
-    <div class="row">
-      <div class="col col-md-6">
-        <div class="alert alert-danger">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" role="alert"></span>
-          <%= @error_message %>
-        </div>
-      </div>
+
+  <div class="usa-alert usa-alert-error usa-cf_app-segment" role="alert">
+    <div class="usa-alert-body">
+      <h3 class="usa-alert-heading"><%= @error_message %></h3>
     </div>
+  </div>
   <% end %>
 
-  <div class="row">
+  <div class=" usa-cf_app-segment">
     <div class="col col-md-2">
     </div>
     <div class="col col-md-6">
       <h1>Welcome to Caseflow!</h1>
       <p>Caseflow helps certify an appeal by verifying documents
       in the eFolder and helping you fill out an electronic Form 8.
-      Please log in using your VACOLS credentals.</p>
+      Please log in using your <strong>VACOLS credentials.</strong></p>
     </div>
     <div id="login-login-form" class="col col-md-3">
       <% username_input_id = 'username_input_id' %>
       <div class="row">
         <div class="col col-md-3">
-          <label for="<%= username_input_id %>">Username</label>
+          <label for="<%= username_input_id %>"><strong>VACOLS Login ID</strong></label>
         </div>
       </div>
 
       <div class="row">
         <div class="col col-md-3">
-          <input name="username" type="text" id="<%= username_input_id %>" autofocus="autofocus" />
+          <input name="username" type="text" id="<%= username_input_id %>" class="cf-login-input" autofocus="autofocus"/>
+          <span class="cf-example-text space-left">Example: RO06</span>
         </div>
       </div>
 
       <% password_input_id = 'password_input_id' %>
       <div class="row">
         <div class="col col-md-3">
-          <label for="<%= password_input_id %>">Password</label>
+          <label for="<%= password_input_id %>"><strong>VACOLS Password</strong></label>
         </div>
       </div>
 
       <div class="row">
         <div class="col col-md-3">
-          <input name="password" type="password" id="<%= password_input_id %>"/>
+          <input name="password" type="password" id="<%= password_input_id %>" class="cf-login-input"/>
         </div>
       </div>
 

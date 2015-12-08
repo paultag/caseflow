@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Caseflow</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -14,29 +13,30 @@
 <body>
       <header>
           <div class="pilot-warning">
-              Caseflow is a pilot stage project
+              <strong>Caseflow is a pilot stage project.</strong>
+              Have a question, feature improvement, or problem?
+              <a target="_blank" href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx">Send feedback</a>
           </div>
 
           <nav class="usa-cf_app-nav">
               <div class="usa-grid-full">
-                  <b class="usa-cf_app-logo">Caseflow</b>
-                  <span class="cf-application-title">Title Placeholder</span>
+                  <strong class="usa-cf_app-logo">Caseflow</strong>
+                  <span class="cf-application-title"><%= yield :page_title %></span>
 
-                  <div class="dropdown">
                       <% if session[:ro] || session[:username] %>
+                       <div class="dropdown">
                           <a href="#menu" class="dropdown-trigger">
                               <% if session[:username] %>
                               <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
                               <%= session[:ro] %>
                               <% end %>
-                              <span class="caret"></span>
                           </a>
-                          <% end %>
-                        <ul id="menu" class="dropdown-menu">
-                          <li><a href="/caseflow/logout">Sign out</a></li>
-                        </ul>
-                  </div>
+                          <ul id="menu" class="dropdown-menu" hidden>
+                            <li><a href="/caseflow/logout">Sign out</a></li>
+                          </ul>
+                        </div>
+                    <% end %>
               </div>
           </nav>
 
@@ -51,12 +51,11 @@
   </main>
 
     <footer class="text-center usa-grid usa-cf_app-footer">
-        <p>
-            Built with <abbr title="love">&#9825;</abbr> by the <a href="http://www.va.gov/ds/">Digital Service at the <abbr title="Department of Veterans Affairs">VA</abbr></a>.
+        <p class="usa-cf_app">
+            Built with <abbr title="love">&#9825;</abbr> by the <a href="http://www.va.gov/ds/">Digital Service at the <abbr title="Department of Veterans Affairs">VA</abbr></a>. <a target="_blank" href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx">Send feedback</a>
         </p>
     </footer>
 
-  <%= javascript_include_tag 'clipboard' %>
   <%= javascript_include_tag 'application' %>
 
 </body>

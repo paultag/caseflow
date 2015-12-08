@@ -83,7 +83,8 @@ class WebController < ApplicationController
     # TODO Add a check for the two required params, sending the user back to `questions` with an error message if not there (maybe do this in a separate branch, since this wasn't there before and needs some design)
 
     fields = @kase.initial_fields
-    fields.merge!(params)
+    params.each{|k, v| fields[k] = v }
+
 
     # Prepare fields for PDF generation
     certification_date = Time.now.to_s(:va_date)
@@ -223,15 +224,7 @@ class WebController < ApplicationController
 
   def logout
     reset_session
-    # If SSOi is enabled, redirect to their non-SAML logout page. Otherwise just
-    # go to the login page.
-    if ssoi_configured
-      # Get the URI that is the SAML endpoint
-      host = ENV['SSOI_SAML_LOGOUT_HOST']
-      redirect_to "https://#{host}/centrallogin/centrallanding.aspx"
-    elsif
-      redirect_to action: 'login'
-    end
+    redirect_to action: 'login'
   end
 
   # -- Action filter --
