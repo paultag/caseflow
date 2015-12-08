@@ -68,7 +68,7 @@ $(function(){
 });
 
 $(function(){
-    $('fieldset').on('change', function(e){
+    $('fieldset').on('change', function(e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
 
@@ -82,5 +82,14 @@ $(function(){
         } else {
             $(whichEl).openItem();
         }
+    });
+
+    $('#13_Specify_Other').on('input', function(e) {
+        /*
+         Replaces white space with '' so we don't get
+         blank responses
+        */
+        $other = $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER');
+        $other.prop('checked', (/\w/).test( $(e.target).val() ));
     });
 });
