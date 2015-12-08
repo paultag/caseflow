@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Usage: pull.rb output-file.json [bfcorlid...]
+# Usage: pull.rb [bfcorlid...]
 #
 # Pull cases from VACOLS and put them into a JSON format that the Caseflow
 # Fakes models can import as test data.
@@ -25,7 +25,9 @@ def dateize(date)
 end
 
 def main(argv)
-  file_path = argv.shift
+  file_path = "imported-production-data-mocks.json"
+  # The goal here is to be as anoying as we can with the filename.
+
   puts "Writing to #{file_path}"
   puts ""
   puts "export CASEFLOW_FAKES=\"#{file_path}\""
