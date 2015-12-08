@@ -144,6 +144,7 @@ module Caseflow
       # Create a new case from the JSON Fakes format, in particular, we need
       # to hydrate the object with real Date objects, a real Folder object, and
       # a real Correspondent object.
+      data = data.symbolize_keys
       Caseflow::Fakes::Case::DATE_FIELDS.each do |field|
         if data.has_key?(field)
           data[field] = Date.parse(data[field])
@@ -164,7 +165,7 @@ module Caseflow
       end
 
       File.open(fakes, "r") do |f|
-        data = JSON.load(f).deep_symbolize_keys
+        data = JSON.load(f)
         data.map {|k, v| [k.to_s, Caseflow::Fakes::case_from_json(v)]}.to_h
       end
     end
