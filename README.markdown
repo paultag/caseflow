@@ -125,4 +125,10 @@ To enable this, add this environment variable:
 CASEFLOW_TEST=true
 ```
 
-You can add new fake data in `app/models/fakes.rb`.
+You can add new fake data in `app/fixtures/cases.json`.
+
+## Advanced Testing
+
+In addition, you can import production data into the fakes data by
+using the `lib/sources/caseflow/pull.rb` script. Read the header of that
+file for information on usage and handling of that data.
