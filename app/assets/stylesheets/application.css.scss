@@ -118,7 +118,8 @@ abbr[title] {
 h1,h2,h3,h4,h5,h6 {
     &:not(.usa-alert-heading) {
         font-family: inherit;
-        margin: 0;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -258,8 +259,13 @@ body {
     margin-top: rem(30px);
 }
 
-[id=certifications-header] {
-    margin-top: rem(40px);
+// TODO: Refactor out .usa-cf_app* classes
+.usa-cf_app, .cf-app {
+    .usa-cf_app-segment, .cf-app-segment {
+        &:first-child {
+            margin-top: rem(40px);
+        }
+    }
 }
 
 .usa-cf_app-3-up {
@@ -482,8 +488,7 @@ label {
 Certified success page
 ==========================*/
 
-.cf-msg-screen-heading,
-.usa-cf_app-message-heading {
+.cf-msg-screen-heading {
     text-align: center;
     font-size: rem(52px);
     margin-bottom: 1rem;
@@ -494,6 +499,14 @@ Certified success page
     font-size: rem(20px);
     font-weight: normal;
     color: $color-gray;
+    line-height: 1.5;
+    margin-left: auto;
+    margin-right: auto;
+    // TODO: Refactor h1,h2,h3,h4,h5,h6 { &:not(.usa-alert-heading)}
+    // so that we don't have to use !important here.
+    margin-bottom: rem(65px) !important;
+    margin-top: rem(15px) !important;
+    width: 65%;
 }
 
 .cf-list-checklist {

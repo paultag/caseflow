@@ -163,7 +163,7 @@ class WebController < ApplicationController
     @kase.bfms = nil
     @kase.save
 
-    render 'error'
+    render 'error', layout: 'basic'
   end
 
   def show_form
