@@ -13,7 +13,7 @@
       <header>
           <h2>Complete Electronic Form 8</h2>
           <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
-          <p class="required-msg usa-input-error-message">Required</p>
+          <p class="cf-required-msg usa-input-error-message">Required</p>
       </header>
 
       <%= render partial: 'form8_text', locals: {
@@ -36,6 +36,7 @@
 
       <%= render partial: 'form8_text', locals: {
           div_id: '2-file-no',
+          div_class: 'cf-form-disabled',
           question: "File no.",
           question_num: '2',
           input_name: '2_FILE_NO',
@@ -73,7 +74,6 @@
         } %>
 
         <%= render partial: 'form8_text', locals: {
-             div_class: 'cf-form-disabled',
              div_id: '5b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '5B',
@@ -332,6 +332,7 @@
                max_length: 40,
                required: true,
                disabled: true,
+               div_class: 'cf-form-disabled',
                value: @kase.regional_office_full,
        } %>
 
@@ -342,6 +343,7 @@
                max_length: 40,
                required: true,
                disabled: true,
+               div_class: 'cf-form-disabled',
                value: @kase.bfregoff,
        } %>
 
@@ -368,6 +370,7 @@
                   required: true,
                   value: Time.now.strftime('%Y-%m-%d'),
                   disabled: true,
+                  div_class: 'cf-form-disabled',
               } %>
   </div>
 
