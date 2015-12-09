@@ -52,6 +52,29 @@ $(function() {
     });
 });
 
+/* Reusable 'modal' pattern */
+$(function() {
+    $('.cf-action-openmodal').on('click', function(e) {
+        var toopen = $(e.target).attr('href');
+        $(toopen).openItem();
+    });
+
+    $('.cf-action-close').on('click', function(e) {
+        var toclose = $(e.target).data('controls');
+        $(toclose).closeItem();
+
+        /*
+        Since this may be a modal shown using :target,
+        we should update the hash to close it.
+        */
+
+        if(window.location.hash) {
+            window.location.hash = '';
+        }
+    });
+});
+
+
 $(function(){
     /* Trigger for the dropdown */
     $(".dropdown-trigger").on('click', function(e) {
