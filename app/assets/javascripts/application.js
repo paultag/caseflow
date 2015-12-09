@@ -112,11 +112,10 @@ $(function(){
 
     // TODO: Try to abstract this into a reusable pattern
     $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
-        /*
-         Replaces white space with '' so we don't get
-         blank responses
-        */
         $other = $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER');
+        /*
+         Tests for presence of word characters. Spaces will never pass
+        */
         $other.prop('checked', (/\w/).test( $(e.target).val() ));
     });
 
