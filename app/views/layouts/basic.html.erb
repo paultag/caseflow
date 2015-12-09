@@ -24,8 +24,8 @@
                   <span class="cf-application-title"><%= yield :page_title %></span>
 
                       <% if session[:ro] || session[:username] %>
-                       <div class="dropdown">
-                          <a href="#menu" class="dropdown-trigger" title="Get help or sign out" id="menu-trigger">
+                       <div class="dropdown"
+                          <a href="#menu" class="dropdown-trigger" title="Open menu to sign out" id="menu-trigger">
                               <% if session[:username] %>
                               <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
