@@ -1,0 +1,65 @@
+// These are Caseflow-specific modal styles. Included here instead of in
+// application.css.scss, so that they are more easily replaced with a U.S.
+// Web Design Standards partial. (Swapping one line of CSS)
+// TODO: Keep an eye on https://github.com/18F/web-design-standards/issues/911
+// Migrate to that modal when available.
+
+.cf-modal {
+    background: rgba(0,0,0,.4);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.cf-modal:target {
+    display: block;
+}
+
+.cf-modal-contents {
+    @include transform(translateY(-50%));
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 50%;
+    width: 90%;
+}
+
+.cf-modal-body {
+    background: $color-white;
+    box-shadow: 0 0 2rem -3px rgba($color-base, .8);
+    color: $color-gray;
+    padding: 4.5rem;
+    position: relative;
+}
+
+.cf-modal-title {
+    font-size: rem(50px);
+    text-align: center;
+}
+
+.cf-modal-text,
+.cf-modal-controls {
+    margin: auto;
+    width: 60%;
+}
+
+.cf-modal-text {
+    font-size: rem(20px);
+    line-height: 2;
+    text-align: center;
+}
+
+.cf-btn-close {
+    position: absolute;
+    right: rem(20px);
+    top: rem(20px);
+}
+
+.cf-modal-controls {
+    position: relative;
+    bottom: 0;
+    margin-top: rem(60px);
+}
