@@ -1,4 +1,17 @@
 module Caseflow
+  CENTRAL_OFFICE_HEARING_ACTION = '1'
+  TRAVEL_BOARD_HEARING_ACTION = '2'
+  VIDEO_HEARING_HEARING_ACTION = '6'
+  HEARING_ACTION_WITH_HEARING = [
+    CENTRAL_OFFICE_HEARING_ACTION,
+    TRAVEL_BOARD_HEARING_ACTION,
+    VIDEO_HEARING_HEARING_ACTION
+  ]
+
+  def self.hearing_requested?(kase)
+    kase.bfha && HEARING_ACTION_WITH_HEARING.include?(kase.bfha)
+  end
+
   def self.format_issue_description(desc)
     desc.reject(&:nil?).reject(&:empty?).join(" - ")
   end
@@ -212,7 +225,7 @@ class Case < ActiveRecord::Base
     if vso.nil?
       "None"
     else
-      vso.join(' - ')
+      vso[0]
     end
   end
 
@@ -293,11 +306,7 @@ class Case < ActiveRecord::Base
   end
 
   def hearing_requested?
-    if bfha && ['1', '2', '6'].include?(bfha)
-      true
-    else
-      false
-    end
+    Caseflow.hearing_requested?(self)
   end
 
   def hearing_transcripts_present?

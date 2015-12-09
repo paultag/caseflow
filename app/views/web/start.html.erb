@@ -4,17 +4,17 @@
 %>
 <% content_for :page_title do %>Mismatched Documents<% end %>
 
-
 <div id="certifications-start">
 
-    <div class="usa-alert usa-alert-error cf-app-segment" role="alert">
+    <div class="usa-alert usa-alert-error usa-cf_app-segment" role="alert">
       <div class="usa-alert-body">
         <h3 class="usa-alert-heading">Cannot find documents in VBMS</h3>
         <p class="usa-alert-text">Some of the files listed in VACOLS could not be found in VBMS.</p>
       </div>
     </div>
 
-  <div class="cf-app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
+
+  <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
       <h2>Find missing documents</h2>
 
       <p>
@@ -33,7 +33,6 @@
         <strong>This case cannot be certified</strong> link below.
       </p>
 
-
       <div class="usa-cf_app-table-wrap">
           <table class="usa-table-borderless">
             <caption class="usa-sr-only">
@@ -48,7 +47,6 @@
               </tr>
             </thead>
             <tbody>
-
                 <%= render partial: 'table_row', locals: {field_name: 'NOD', vacols_field: @kase.bfdnod_date, vbms_field: @kase.efolder_nod_date} %>
                 <%= render partial: 'table_row', locals: {field_name: 'SOC', vacols_field: @kase.bfdsoc_date, vbms_field: @kase.efolder_soc_date} %>
                 <%= render partial: 'table_row', locals: {field_name: 'SSOC 1', vacols_field: @kase.bfssoc1_date, vbms_field: @kase.efolder_ssoc1_date} %>
@@ -64,11 +62,20 @@
 
     <div class="usa-cf_app-segment">
 
-    <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link pull-left' %>
+    <a href="#confirm-cancel-certification" class="cf-action-openmodal cf-btn-link">Cancel certification</a>
     <button type="button" class="btn btn-primary push-right cf-action-refresh">
         Refresh Page
     </button>
 
 </div>
-
 </div>
+
+<%= render partial: 'modal', locals: {
+        modal_id: 'confirm-cancel-certification',
+        modal_title: 'Cancel certification?',
+        modal_text: "Are you sure you can't certify this case? Any changes you made in Caseflow will not be saved and the certification date will not be set in VACOLS.",
+        modal_html: '<div class="cf-push-row cf-modal-controls">
+            <button type="button" class="usa-button-outline cf-action-close cf-push-left" data-controls="#confirm-cancel-certification">Go back</button>
+            <a href="./error" class="cf-push-right cf-btn-link cf-btn-link--confirm" autofocus>Yes, I\'m sure</a>
+        </div>'
+    } %>

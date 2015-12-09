@@ -15,20 +15,33 @@
     The following are optional arguments:
     - div_id: The ID attribute of the containing div
     - div_class: The class attribute of the containing div
+    - option1_checked: If the first option should be pre-selected
+    - option2_checked: If the second option should be pre-selected
 %>
 
 <%
 if defined?(show_when)
-  show_when = "data-showwhen=#{show_when}"
+  show_when = " data-showwhen=\"#{show_when}\""
 end
+
+if defined?(linked)
+  linked = " data-linkedto=\"#{linked}\" "
+end
+
+if defined?(div_id) && div_id
+  div_id = " id=\"#{div_id}\" "
+end
+
 %>
 
 
-<fieldset class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
+<fieldset class="form8-two-radio <%= div_class if defined?(div_class) %>"<%=raw div_id if defined?(div_id) && div_id %><%= ' hidden ' if defined?(hidden) && hidden %><%=raw show_when if defined?(show_when) && show_when %><%=raw linked if defined?(linked) && linked %>>
+
   <legend <%= ' class=required' if defined?(required) && required %> >
       <strong><%= question_num %></strong>
       <%= question %>
   </legend>
+
   <p class="form8-two-radio-item">
       <input<%= ' required' if defined?(required) && required %> type="radio" name="<%= input_name %>" value="<%= option1_value %>" id="<%= input_name %>__<%= option1_value %>" <%= ' checked' if defined?(option1_checked) && option1_checked %>>
       <label class="radio-inline" for="<%= input_name %>__<%= option1_value %>">
