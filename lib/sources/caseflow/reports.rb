@@ -94,7 +94,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE", "HAS HEARING PENDING"]
+        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATCHED DATES", "CERT DATE", "HAS HEARING PENDING"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -123,7 +123,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATHCED DATES", "CERT DATE", "HAS HEARING PENDING"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "CERT DATE", "HAS HEARING PENDING"]
       end
 
       def spreadsheet_cells(vacols_case)

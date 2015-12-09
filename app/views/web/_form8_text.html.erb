@@ -16,10 +16,17 @@
 %>
 
 <% input_id = "#{input_name}_input_id" %>
-<% show_when = "data-showwhen=#{show_when}" %>
+<%
+if defined?(div_id) && div_id
+    div_id = "id=\"#{div_id}\""
+end
 
+if defined?(show_when) && show_when
+    show = "data-showwhen=\"#{show_when}\""
+end
+%>
 
-<p class="form8-text-input <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
+<p class="form8-text-input <%= div_class if defined?(div_class) %>" <%=raw div_id if defined?(div_id) %><%= 'hidden' if defined?(hidden) && hidden %> <%= show if defined?(show) && show %>>
     <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
         <%=raw question %>

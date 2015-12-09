@@ -161,6 +161,7 @@
                 option3_label: '<abbr title="not applicable">N/A</abbr>',
                 option3_value: 'NOT_APPLICABLE',
                 required: true,
+                close_fieldset: true,
             } %>
 
 
@@ -185,7 +186,7 @@
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Was hearing requested?',
               question_num: '10A',
-              input_name: '10A_WAS_HEARING_REQUESTED_YES',
+              input_name: '10A_WAS_HEARING_REQUESTED',
               option1_label: 'Yes',
               option1_value: 'yes',
               option2_label: 'No',
@@ -250,13 +251,13 @@
       <%= render partial: 'form8_two_radio', locals: {
               question: 'Supplemental statement of the case',
               question_num: '12B',
-              input_name: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED',
+              input_name: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE',
               div_id: '12b',
               option1_label: 'Required and furnished',
-              option1_value: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_REQUIRED_AND_FURNISHED',
+              option1_value: 'yes',
               option1_checked: @kase.ssoc_required?,
               option2_label: 'Not required',
-              option2_value: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE_NOT_REQUIRED',
+              option2_value: 'no',
               option2_checked: !@kase.ssoc_required?,
               close_fieldset: true,
               required: true,
@@ -294,7 +295,6 @@
                   label5_text: 'X-RAYS',
                   input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
               } %>
-
           <%= render partial: 'form8_checkbox_column', locals: {
                   label1_text: 'SLIDES',
                   input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES',
@@ -307,12 +307,12 @@
                   label5_text: 'OTHER',
                   input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
               } %>
-
+        </div>
           <%= render partial: 'form8_text', locals: {
                   question: 'Specify Other',
                   question_num: '',
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
-                  div_id: '13',
+                  div_id: '13_Specify_Other',
               } %>
 
     </fieldset>
