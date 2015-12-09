@@ -121,7 +121,7 @@ $(function(){
 
     $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER').on('change', function(e) {
         if ( !$(e.target).prop('checked') ) {
-            $('#13_Specify_Other input').clearField();
+            $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
         }
     });
 });
