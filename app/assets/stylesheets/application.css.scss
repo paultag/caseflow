@@ -33,7 +33,11 @@ $caseflow-background: #f9f9f9;
 @import '_scss/components/forms';
 @import '_scss/components/alerts';
 
+@import '_scss/caseflow-components/modals';
 
+html,body {
+  min-height: 100%;
+}
 body {
   padding-bottom: 70px;
 }
@@ -66,7 +70,7 @@ label {
   height: 80vh;
 }
 
-.col-no-right-pad>.col {
+.col-no-right-pad > .col {
   padding-right: 0px;
 }
 
@@ -94,11 +98,25 @@ label {
 .text-center {
     text-align: center;
 }
+
+.cf-text-right,
 .text-right {
     text-align: right;
 }
+.cf-text-left {
+    text-align: left;
+}
 .text-uc {
     text-transform: uppercase;
+}
+
+/*
+Use cf-push-row to wrap elements that float to the left
+or right
+*/
+
+.cf-push-row {
+    @include clearfix;
 }
 
 .cf-push-left,
@@ -133,6 +151,14 @@ legend {
 [disabled] {
     background: $color-gray-lightest !important;
     opacity: .5 !important;
+}
+
+.cf-position-fixed {
+    position: fixed;
+}
+
+.cf-layout-inline-block {
+    display: inline-block !important;
 }
 
 /*------------------------------------
@@ -223,7 +249,8 @@ body {
     margin-right: rem(20px);
 }
 
-.usa-cf_app {
+.usa-cf_app,
+.cf-app-screen {
     margin: auto;
     width: 90%;
 }
@@ -334,9 +361,16 @@ body {
     z-index: 1;
  }
 
+/*===========================
+ * Form controls
+ * =========================*/
+
+/* Overrides USWDS */
+textarea {
+    max-width: 100% !important;
+}
 
 /*------ Buttons --------*/
-
 // I hate using !important, but web design standards
 // form buttons have high specificity.
 // Keep an eye on https://github.com/18F/web-design-standards/issues/891
@@ -345,21 +379,18 @@ body {
     margin: 0 !important;
 }
 
-// Overrides web design standards
-label {
-    max-width: 100%;
-}
-
 .cf-btn-link {
     background: transparent;
     color: $color-primary;
+    display: inline-block;
     font-weight: normal;
     line-height: 1;
     // I hate using !important, but web design standards
     // form buttons have high specificity.
     // Keep an eye on https://github.com/18F/web-design-standards/issues/891
     -webkit-font-smoothing: inherit;
-    padding: 1rem 0 !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
 
     // Removes padding, so that these links can be placed inline.
     &--inline {
@@ -370,6 +401,20 @@ label {
         background-color: inherit;
         color: $color-primary-darker;
         text-decoration: underline;
+    }
+
+    &--confirm {
+        &:visited {
+            color: $color-secondary-dark;
+        }
+        color: $color-secondary-dark;
+        font-weight: bold;
+    }
+    &--cancel {
+        display: inline-block;
+        font-weight: bold;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
