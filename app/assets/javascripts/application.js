@@ -4,12 +4,6 @@
  */
  //= require_self
 
- (function () {
-     "use strict";
-     /* Copies appeals ID to clipboard */
-     new Clipboard('[data-clipboard-text]');
- })();
-
 /*
 Extends jQuery to add a toggleAttr method
 https://gist.github.com/mathiasbynens/298591
@@ -38,50 +32,51 @@ $.fn.extend({
     }
 });
 
-$(function(){
+/* Copies appeals ID to clipboard */
+(function () {
+     "use strict";
+     new Clipboard('[data-clipboard-text]');
+ })();
 
-    // --- START: JS for questions.html.erb ---
+/* Reusable 'go back one page' pattern */
+ $(function() {
+    $('.cf-action-back').on('click', function(evt) {
+        window.history.back();
+    });
+ });
 
-    /**
-    * Show a linked text field when a particular checkbox or radio input is selected
-    *
-    * 1. Requires inputs and related text fields to be grouped within the same fieldset
-         (which is the best way to mark it up anyway).
-    * 2. Requires the revealed item to have a data-showwhen attribute. The value for this
-    *    attribute should match that of the item that triggers the reveal. I.e., if the
-    *    element should be triggered on when 'Yes' is selected, use data-showwhen="yes".
-    */
+/* Reusable 'refresh' pattern */
+$(function() {
+    $('.cf-action-refresh').on('click', function(evt) {
+        location.reload(); return false;
+    });
+});
 
-    /* Change event bubbles up, so we can wait until it hits fieldset */
-    $('fieldset').on('change', function(e){
-        /*
-        If this is a checkbox, toggle the visibility of
-        its sibling.
-        */
-
-        if( $(e.target).attr('type') == 'checkbox' ) {
-            $(this).find('[data-showwhen]').toggleItem();
-        }
-
-        /*
-        Otherwise, assume it's a radio button. Find the element that should be
-        triggered when that value is selected. If the value of showwhen matches
-        the value of the selected item, show that item.
-        */
-
-        else if(
-            $(this).find('[data-showwhen]').length &&
-            $(this).find('[data-showwhen]').data('showwhen') == $(e.target).attr('value')
-        ) {
-            $(this).find('[data-showwhen]').openItem('hidden');
-        } else {
-            $(this).find('[data-showwhen]').closeItem('hidden', 'hidden');
-        }
-
+/* Reusable 'modal' pattern */
+$(function() {
+    $('.cf-action-openmodal').on('click', function(e) {
+        var toopen = $(e.target).attr('href');
+        $(toopen).openItem();
     });
 
-    // --- END: JS for questions.html.erb ---
+    $('.cf-action-close').on('click', function(e) {
+        var toclose = $(e.target).data('controls');
+        $(toclose).closeItem();
 
+        /*
+        Since this may be a modal shown using :target,
+        we should update the hash to close it.
+        */
+
+        if(window.location.hash) {
+            window.location.hash = '';
+        }
+    });
+});
+
+
+$(function(){
+    /* Trigger for the dropdown */
     $(".dropdown-trigger").on('click', function(e) {
          e.preventDefault(); // Prevent page jump
          var dropdownMenu = $(this).attr('href');
@@ -91,6 +86,24 @@ $(function(){
     $(":not(.dropdown)").on('click', function(e){
         if( !$(e.target).parents('.dropdown').length ) {
             $('.dropdown-menu').closeItem();
+        }
+    });
+});
+
+$(function(){
+    $('fieldset').on('change', function(e){
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        var whichEl = $(this).data('linkedto'),
+            showwhen = $(this).data('showwhen');
+
+        if( showwhen == $(e.target).attr('id') ||
+            showwhen == $(e.target).attr('name') ){
+            $(whichEl).closeItem();
+            $(whichEl).find('input').prop('checked', false);
+        } else {
+            $(whichEl).openItem();
         }
     });
 });

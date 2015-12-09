@@ -1,5 +1,6 @@
-// Vendor -------------- //
+$caseflow-background: #f9f9f9;
 
+// Vendor -------------- //
 @import '_scss/lib/bourbon/bourbon';
 @import '_scss/lib/neat/neat';
 @import '_scss/lib/normalize';
@@ -19,26 +20,24 @@
 // Styles basic html elements
 
 @import '_scss/elements/typography';
-@import '_scss/elements/list';
 @import '_scss/elements/inputs';
 @import '_scss/elements/buttons';
 @import '_scss/elements/table';
-@import '_scss/elements/figure';
 @import '_scss/elements/labels';
 
 
 // Components -------------- //
 
 @import '_scss/components/skipnav';
-@import '_scss/components/disclaimer';
-@import '_scss/components/sidenav';
 @import '_scss/components/footer';
 @import '_scss/components/forms';
-@import '_scss/components/search';
 @import '_scss/components/alerts';
-@import '_scss/components/accordions';
 
+@import '_scss/caseflow-components/modals';
 
+html,body {
+  min-height: 100%;
+}
 body {
   padding-bottom: 70px;
 }
@@ -49,8 +48,9 @@ body {
   border-bottom: 1px solid #eee;
 }
 
-.success {
-  color: #009245;
+.success,
+.usa-cf_app-success {
+  color: #2e8540;
 }
 
 .error {
@@ -70,7 +70,7 @@ label {
   height: 80vh;
 }
 
-.col-no-right-pad>.col {
+.col-no-right-pad > .col {
   padding-right: 0px;
 }
 
@@ -98,15 +98,32 @@ label {
 .text-center {
     text-align: center;
 }
+
+.cf-text-right,
 .text-right {
     text-align: right;
+}
+.cf-text-left {
+    text-align: left;
 }
 .text-uc {
     text-transform: uppercase;
 }
+
+/*
+Use cf-push-row to wrap elements that float to the left
+or right
+*/
+
+.cf-push-row {
+    @include clearfix;
+}
+
+.cf-push-left,
 .push-left {
     float: left;
 }
+.cf-push-right,
 .push-right {
     float: right;
 }
@@ -115,14 +132,87 @@ abbr[title] {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: inherit;
-    margin: 0;
+    &:not(.usa-alert-heading) {
+        font-family: inherit;
+        margin: 0;
+    }
 }
 
 [hidden] {
     display: none !important;
 }
 
+legend {
+    display: table; /* Causes text to wrap in IE */
+    font: inherit;
+    white-space: normal;
+}
+
+[disabled] {
+    background: $color-gray-lightest !important;
+    opacity: .5 !important;
+}
+
+.cf-position-fixed {
+    position: fixed;
+}
+
+.cf-layout-inline-block {
+    display: inline-block !important;
+}
+
+/*------------------------------------
+ * Icons
+ *-----------------------------------*/
+
+[class|=cf-icon]{
+    display: inline-block;
+    height: .8em; // Should be an em
+    margin: 0 .1ex;
+}
+
+.cf-icon-missing {
+    vertical-align: -.15ex;
+    width: .8em;
+
+    path {
+        fill: $color-secondary-dark;
+    }
+}
+
+.cf-icon-found {
+    width: 1em;
+
+    path {
+        fill: $color-green;
+    }
+}
+
+/*--- Appeal button ---*/
+
+.usa-cf-apppeal-id {
+    box-sizing: border-box;
+    background: transparent;
+    border: 2px solid $color-gray;
+    color: $color-gray;
+    padding: 1rem;
+
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        border-bottom: 2px solid $color-gray;
+
+        path {
+            fill: $color-white;
+        }
+    }
+}
+
+.cf-icon-appeal-id {
+    display: inline-block;
+    margin-left: .25rem;
+    vertical-align: -1px;
+}
 
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
@@ -131,7 +221,7 @@ h1,h2,h3,h4,h5,h6 {
 *   from refills.bourbon.io/unstyled/
 *-----------------------------------*/
 body {
-    background: $color-gray-lightest;
+    background: $caseflow-background;
 }
 
 /* ===========================*
@@ -159,11 +249,13 @@ body {
     margin-right: rem(20px);
 }
 
-.usa-cf_app {
+.usa-cf_app,
+.cf-app-screen {
     margin: auto;
     width: 90%;
 }
 
+.cf-app-segment,
 .usa-cf_app-segment {
     &::before, &::after {
         content: ' ';
@@ -171,20 +263,14 @@ body {
         clear:both;
     }
 
-    &--v-pad {
-        padding-top: rem(30px);
-        padding-bottom: rem(30px);
-    }
-    &--h-pad {
-        padding-left: rem(30px);
-        padding-right: rem(30px);
-    }
     &--alt {
         background: $color-white;
         border: 1px solid $color-gray-lighter;
+        padding: rem(30px);
     }
 }
 
+* + .cf-app-segment,
 * + .usa-cf_app-segment {
     margin-top: rem(30px);
 }
@@ -199,8 +285,9 @@ body {
 
     > * {
         display: table-cell;
+        padding: 1.5rem;
+        vertical-align: middle;
         width: 33%;
-        padding: rem(30px);
     }
 
     &--bordered {
@@ -218,6 +305,7 @@ body {
     &-text {
         font-weight: 600;
         margin-bottom: 0;
+        margin-top: 1rem;
     }
 }
 
@@ -273,35 +361,16 @@ body {
     z-index: 1;
  }
 
+/*===========================
+ * Form controls
+ * =========================*/
 
-/*--- Appeal button ---*/
-
-.usa-cf-apppeal-id {
-    box-sizing: border-box;
-    background: transparent;
-    border: 2px solid $color-gray;
-    color: $color-gray;
-    padding: 1rem;
-
-    &:hover {
-        color: $color-white;
-        background: $color-gray;
-        border-bottom: 2px solid $color-gray;
-
-        path {
-            fill: $color-white;
-        }
-    }
-}
-
-.usa-cf-apppeal-id-icon {
-    display: inline-block;
-    margin-left: 1rem;
-    vertical-align: middle;
+/* Overrides USWDS */
+textarea {
+    max-width: 100% !important;
 }
 
 /*------ Buttons --------*/
-
 // I hate using !important, but web design standards
 // form buttons have high specificity.
 // Keep an eye on https://github.com/18F/web-design-standards/issues/891
@@ -310,31 +379,58 @@ body {
     margin: 0 !important;
 }
 
-.usa-cf-btn--link {
+.cf-btn-link {
     background: transparent;
     color: $color-primary;
+    display: inline-block;
     font-weight: normal;
     line-height: 1;
     // I hate using !important, but web design standards
     // form buttons have high specificity.
     // Keep an eye on https://github.com/18F/web-design-standards/issues/891
-    padding: 1rem 0 !important;
+    -webkit-font-smoothing: inherit;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+
+    // Removes padding, so that these links can be placed inline.
+    &--inline {
+        padding: 0 !important;
+    }
 
     &:hover {
         background-color: inherit;
         color: $color-primary-darker;
+        text-decoration: underline;
+    }
+
+    &--confirm {
+        &:visited {
+            color: $color-secondary-dark;
+        }
+        color: $color-secondary-dark;
+        font-weight: bold;
+    }
+    &--cancel {
+        display: inline-block;
+        font-weight: bold;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
 /*--- Alerts ---*/
 .usa-alert-error {
-    background-image: url(asset-path('icons/error.svg'));
+    background-image: url(asset-path('icons/alerts/error.svg'));
+}
+
+.usa-alert-success {
+    background-image: url(asset-path('icons/alerts/success.svg'));
 }
 
 /*--- Table styles ---*/
 .usa-cf_app-table-wrap {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
 
     table {
         min-width: rem(400px);
@@ -373,15 +469,11 @@ body {
 }
 
 .usa-cf_app-form {
-
     header {
         border-bottom: 1px solid $color-gray-lighter;
         margin-bottom: rem(30px);
     }
 
-    legend {
-        font: inherit;
-    }
     label {
         margin-top: inherit;
     }
@@ -393,7 +485,7 @@ body {
         }
     }
 
-    .usa-cf_app-btn-forward {
+    .cf-btn-forward {
         display: inline-block;
         margin-right: 0;
     }
@@ -420,4 +512,47 @@ body {
         padding-right: 2rem;
         margin: 1rem 0;
     }
+}
+/*========================
+Certified success page
+==========================*/
+
+.usa-cf_app-success-heading {
+    text-align: center;
+    font-size: rem(52px);
+    margin-bottom: 1rem;
+}
+
+.usa-cf_app-success-deck {
+    text-align: center;
+    font-size: rem(20px);
+    font-weight: normal;
+    color: $color-gray;
+}
+
+.usa-cf_app-checklist {
+    margin: 5rem auto 6.5rem;
+    list-style-type: none;
+
+    li::before {
+        content: '';
+    }
+    .fa-check {
+        font-size: 2.5rem;
+        margin-right: 1.8rem;
+    }
+}
+
+.space-left {
+  margin-left: 20px;
+}
+
+.cf-example-text {
+  font-style: italic;
+  color: $color-gray;
+  vertical-align: middle;
+}
+
+.cf-login-input {
+  display: inline !important;
 }

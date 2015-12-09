@@ -9,6 +9,7 @@
  The following are optional arguments:
  - div_id: The ID attribute of the containing div
  - div_class: The class attribute of the containing div
+ - selected: bool, true means 'Yes' should be pre-selected, false if 'No' should be pre-selected
 %>
 
 <% yes_no_locals = {
@@ -36,12 +37,28 @@
      yes_no_locals[:required] = required
    end
 
+   if defined?(linked)
+     yes_no_locals[:linked] = linked
+   end
+
    if defined?(show_when)
      yes_no_locals[:show_when] = show_when
    end
 
    if defined?(hidden)
      yes_no_locals[:hidden] = hidden
+   end
+
+   if defined?(close_fieldset)
+     yes_no_locals[:close_fieldset] = close_fieldset
+   end
+
+   if defined?(selected)
+     if selected
+       yes_no_locals[:option1_checked] = true
+     else
+       yes_no_locals[:option2_checked] = true
+     end
    end
 
 
