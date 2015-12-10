@@ -49,11 +49,12 @@ body {
 }
 
 .success,
-.usa-cf_app-success {
+.cf-success {
   color: #2e8540;
 }
 
-.error {
+.error,
+.cf-error {
   color: $color-secondary-dark;
 }
 
@@ -95,7 +96,8 @@ label {
 /*----------------------------------*
 * Globals, Resets, and overrides
 *-----------------------------------*/
-.text-center {
+.text-center,
+.cf-text-center {
     text-align: center;
 }
 
@@ -134,7 +136,8 @@ abbr[title] {
 h1,h2,h3,h4,h5,h6 {
     &:not(.usa-alert-heading) {
         font-family: inherit;
-        margin: 0;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -186,6 +189,14 @@ legend {
     path {
         fill: $color-green;
     }
+}
+
+.cf-icon-success--bg {
+    background: url(asset-path('icons/icon-check.svg')) bottom no-repeat;
+    background-size: auto 2rem;
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
 }
 
 /*--- Appeal button ---*/
@@ -275,8 +286,13 @@ body {
     margin-top: rem(30px);
 }
 
-[id=certifications-header] {
-    margin-top: rem(40px);
+// TODO: Refactor out .usa-cf_app* classes
+.usa-cf_app, .cf-app {
+    .usa-cf_app-segment, .cf-app-segment {
+        &:first-child {
+            margin-top: rem(40px);
+        }
+    }
 }
 
 .usa-cf_app-3-up {
@@ -517,27 +533,37 @@ textarea {
 Certified success page
 ==========================*/
 
-.usa-cf_app-success-heading {
+.cf-msg-screen-heading {
     text-align: center;
     font-size: rem(52px);
     margin-bottom: 1rem;
 }
 
-.usa-cf_app-success-deck {
+.cf-msg-screen-deck {
     text-align: center;
     font-size: rem(20px);
     font-weight: normal;
     color: $color-gray;
+    line-height: 1.5;
+    margin-left: auto;
+    margin-right: auto;
+    // TODO: Refactor h1,h2,h3,h4,h5,h6 { &:not(.usa-alert-heading)}
+    // so that we don't have to use !important here.
+    margin-bottom: rem(65px) !important;
+    margin-top: rem(15px) !important;
+    width: 65%;
 }
 
-.usa-cf_app-checklist {
-    margin: 5rem auto 6.5rem;
+.cf-list-checklist {
     list-style-type: none;
+    margin: 5rem auto 6.5rem;
+    position: relative;
+    width: 50%;
 
     li::before {
         content: '';
     }
-    .fa-check {
+    .cf-icon-success--bg {
         font-size: 2.5rem;
         margin-right: 1.8rem;
     }

@@ -21,12 +21,17 @@
 
 <%
 if defined?(show_when)
-  show_when = "data-showwhen=#{show_when}"
+  show_when = " data-showwhen=#{show_when} "
 end
+
+if defined?(div_id) && div_id
+  div_id = " id=\"#{div_id}\" "
+end
+
 %>
 
 
-<fieldset class="form8-two-radio <%= div_class if defined?(div_class) %>" id="<%= div_id if defined?(div_id) %>" <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
+<fieldset class="form8-two-radio <%= div_class if defined?(div_class) %>"<%= div_id if defined?(div_id) %><%=' hidden="hidden" ' if defined?(hidden) && hidden %><%= show_when if defined?(show_when) && show_when %>>
   <legend <%= ' class=required' if defined?(required) && required %> >
       <strong><%= question_num %></strong>
       <%= question %>

@@ -125,9 +125,11 @@ class WebController < ApplicationController
       end
     end
 
-    unless fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER']
-      fields.delete('13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS')
+    if !fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS'].blank?
+      fields['13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER'] = true
     end
+
+
 
     # This check will never be reached if front-end validation works (not ideal,
     # because it loses all the values in the form)
@@ -172,7 +174,7 @@ class WebController < ApplicationController
     @kase.bfms = nil
     @kase.save
 
-    render 'error'
+    render 'error', layout: 'basic'
   end
 
   def show_form

@@ -162,6 +162,7 @@
                 option3_label: '<abbr title="not applicable">N/A</abbr>',
                 option3_value: 'NOT_APPLICABLE',
                 required: true,
+                close_fieldset: true,
             } %>
 
 
@@ -295,7 +296,6 @@
                   label5_text: 'X-RAYS',
                   input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_XRAYS',
               } %>
-
           <%= render partial: 'form8_checkbox_column', locals: {
                   label1_text: 'SLIDES',
                   input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_SLIDES',
@@ -308,12 +308,12 @@
                   label5_text: 'OTHER',
                   input5_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER',
               } %>
-
+        </div>
           <%= render partial: 'form8_text', locals: {
                   question: 'Specify Other',
                   question_num: '',
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
-                  div_id: '13',
+                  div_id: '13_Specify_Other',
               } %>
 
     </fieldset>
