@@ -123,7 +123,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "CERT DATE", "HAS HEARING PENDING"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -133,7 +133,8 @@ module Caseflow
           vacols_case.regional_office_full,
           Caseflow::Reports.mismatched_dates(vacols_case),
           vacols_case.bf41stat,
-          Caseflow::Reports.hearing_pending(vacols_case)
+          Caseflow::Reports.hearing_pending(vacols_case),
+          vacols_case.bfcorlid,
         ]
       end
     end
