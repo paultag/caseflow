@@ -32,6 +32,13 @@ $.fn.extend({
     },
     clearField: function(){
         $(this).val('');
+    },
+    closeModal: function(event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        if( $(event.target).hasClass('cf-modal') ) {
+            $(event.target).closeItem();
+        }
     }
 });
 
@@ -75,6 +82,17 @@ $(function() {
             window.location.hash = '';
         }
     });
+
+    $('.cf-modal').on('click', function(e){
+        $(this).closeModal(e);
+    });
+
+    $(window).on('keydown', function(e){
+        var escKey = (e.which == 27);
+        if(escKey) {
+            $('.cf-modal').trigger('click')
+        }
+    })
 });
 
 
