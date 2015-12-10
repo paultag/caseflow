@@ -20,14 +20,6 @@
     }
 }
 
-.cf-modal:target::before {
-    display: block;
-}
-
-.cf-modal:target[hidden] {
-    display: block !important;
-}
-
 .cf-modal-body {
     @include transform(translateY(-50%));
     top: 50%;
