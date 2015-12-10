@@ -29,6 +29,9 @@ $.fn.extend({
     },
     closeItem: function(){
         $(this).attr('hidden', 'hidden');
+    },
+    clearField: function(){
+        $(this).val('');
     }
 });
 
@@ -107,12 +110,18 @@ $(function(){
         }
     });
 
-    $('#13_Specify_Other').on('input', function(e) {
-        /*
-         Replaces white space with '' so we don't get
-         blank responses
-        */
+    // TODO: Try to abstract this into a reusable pattern
+    $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
         $other = $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER');
+        /*
+         Tests for presence of word characters. Spaces will never pass
+        */
         $other.prop('checked', (/\w/).test( $(e.target).val() ));
+    });
+
+    $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER').on('change', function(e) {
+        if ( !$(e.target).prop('checked') ) {
+            $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
+        }
     });
 });
