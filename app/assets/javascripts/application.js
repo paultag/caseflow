@@ -29,6 +29,16 @@ $.fn.extend({
     },
     closeItem: function(){
         $(this).attr('hidden', 'hidden');
+    },
+    clearField: function(){
+        $(this).val('');
+    },
+    closeModal: function(event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        if( $(event.target).hasClass('cf-modal') ) {
+            $(event.target).closeItem();
+        }
     }
 });
 
@@ -72,6 +82,17 @@ $(function() {
             window.location.hash = '';
         }
     });
+
+    $('.cf-modal').on('click', function(e){
+        $(this).closeModal(e);
+    });
+
+    $(window).on('keydown', function(e){
+        var escKey = (e.which == 27);
+        if(escKey) {
+            $('.cf-modal').trigger('click')
+        }
+    })
 });
 
 
@@ -107,12 +128,18 @@ $(function(){
         }
     });
 
-    $('#13_Specify_Other').on('input', function(e) {
-        /*
-         Replaces white space with '' so we don't get
-         blank responses
-        */
+    // TODO: Try to abstract this into a reusable pattern
+    $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
         $other = $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER');
+        /*
+         Tests for presence of word characters. Spaces will never pass
+        */
         $other.prop('checked', (/\w/).test( $(e.target).val() ));
+    });
+
+    $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER').on('change', function(e) {
+        if ( !$(e.target).prop('checked') ) {
+            $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
+        }
     });
 });
