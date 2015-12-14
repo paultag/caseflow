@@ -45,4 +45,5 @@ end
 
 # Libraries and dependencies for front end
 gem 'jquery-rails', '~> 4.0', '>= 4.0.5'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'clipboard-rails'

@@ -1,8 +1,10 @@
 /*
- * = require jquery
- * = require clipboard
- */
- //= require_self
+// = require jquery
+// = require clipboard
+// = require jquery-ui/datepicker
+
+*/
+//= require_self
 
 /*
 Extends jQuery to add a toggleAttr method
@@ -17,10 +19,42 @@ jQuery.fn.toggleAttr = function(attr) {
 
 
 /* --------------------------------
-Reusable open/close Item methods
- -------------------------------- */
+Reusable methods
+------------------ */
 
 $.fn.extend({
+    /* Format dates in yyyy-mm-dd */
+    dateYYYYMMDD: function () {
+        var ts, d, dArr;
+
+        arguments[0] ? ts = Date.parse(arguments[0]) : ts = Date.parse( $(this).val() );
+        d = new Date(ts) ;
+        dArr = [];
+
+        dArr[0] = d.getFullYear();
+        dArr[1] = $.fn.zeroPadLeft(d.getMonth() + 1);
+        dArr[2] = $.fn.zeroPadLeft(d.getDate());
+
+        return dArr.join('-');
+    },
+    /* Left zero-pad a numeric string */
+    zeroPadLeft: function () {
+        var zero = '0', pad = '', len, padded, inp, extract;
+
+        inp = arguments[0] + '';
+
+        /* If we have a 2nd argument, use it. Default is 2 */
+        arguments[1] ? len = arguments[1] : len = 2;
+
+        /* Save the length in extract for later */
+        extract = len;
+
+        while(len--){
+            pad += zero;
+        }
+        padded = pad + inp;
+        return padded.substr(padded.length - extract);
+    },
     openItem: function() {
         $(this).removeAttr('hidden');
     },
@@ -142,4 +176,40 @@ $(function(){
             $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
         }
     });
+});
+/*
+Adding date picker _only_ when the date type is
+unsupported. Format of this input will be
+mm/dd/yyyy, which matches browsers in which the
+input[type=date] is supported.
+*/
+$(function() {
+	if( $("[type=date]")[0].type == 'text'){
+        $("[type=date]").datepicker();
+
+        /*
+        Clone date type inputs and make them
+        hidden so that we can send dates in yyyy-mm-dd
+        format
+        */
+
+        $("[type=date]").each(function(ind,inp){
+            var $hiddenDate = $(this).clone(true);
+            $hiddenDate.attr('type','hidden');
+            $hiddenDate.insertAfter(this);
+            /*
+            Remove the name from the original item so
+            Only the hidden value gets sent
+            */
+            $(this).removeAttr('name');
+        });
+
+        /*
+        Rewrite the format of the hidden input as yyyy-mm-dd
+        whenever the date field changes
+        */
+        $("[type=date]").on('change', function(e) {
+            $(this).next('[type=hidden]').val($(this).dateYYYYMMDD());
+        });
+    }
 });
