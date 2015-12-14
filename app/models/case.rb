@@ -199,6 +199,10 @@ class Case < ActiveRecord::Base
     Caseflow.required_fields_for_case(self)
   end
 
+  def merged?
+    self.bfdc == 'M'
+  end
+
   def ready_to_certify?
     Caseflow.ready_to_certify?(self)
   end
