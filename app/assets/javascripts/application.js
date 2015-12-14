@@ -32,10 +32,24 @@ $.fn.extend({
         dArr = [];
 
         dArr[0] = d.getFullYear();
-        dArr[1] = $.fn.zeroPadLeft(d.getMonth() + 1);
-        dArr[2] = $.fn.zeroPadLeft(d.getDate());
+        dArr[1] = $.fn.zeroPadLeft(d.getUTCMonth() + 1);
+        dArr[2] = $.fn.zeroPadLeft(d.getUTCDate());
 
         return dArr.join('-');
+    },
+    /* Format dates in mm/mm/yyyy */
+    dateMMDDYYYY: function () {
+        var ts, d, dArr;
+
+        arguments[0] ? ts = Date.parse(arguments[0]) : ts = Date.parse( $(this).val() );
+        d = new Date(ts) ;
+        dArr = [];
+
+        dArr[0] = $.fn.zeroPadLeft(d.getUTCMonth()+1);
+        dArr[1] = $.fn.zeroPadLeft(d.getUTCDate());
+        dArr[2] = d.getFullYear();
+
+        return dArr.join('/');
     },
     /* Left zero-pad a numeric string */
     zeroPadLeft: function () {
@@ -187,6 +201,18 @@ $(function() {
 	if( $("[type=date]")[0].type == 'text'){
         $("[type=date]").datepicker();
 
+        $("[type=date]").on('change', function(e) {
+            $(this).next('[type=hidden]').val($(this).dateYYYYMMDD());
+        });
+
+        $("[type=date]").each(function(ind,inp){
+            if( !!$(this).val() ) {
+                console.log($(this).val());
+                console.log( $(this).val( $(this).dateMMDDYYYY() ) );
+            }
+        })
+
+
         /*
         Clone date type inputs and make them
         hidden so that we can send dates in yyyy-mm-dd
@@ -199,9 +225,12 @@ $(function() {
             $hiddenDate.insertAfter(this);
             /*
             Remove the name from the original item so
-            Only the hidden value gets sent
+            Only the hidden value gets sent. Also remove
+            the id attribute from the hidden field so
+            there's no label confusion.
             */
             $(this).removeAttr('name');
+            $hiddenDate.removeAttr('id');
         });
 
         /*
