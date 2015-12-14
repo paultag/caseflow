@@ -191,6 +191,7 @@ $(function(){
         }
     });
 });
+
 /*
 Adding date picker _only_ when the date type is
 unsupported. Format of this input will be
@@ -199,18 +200,15 @@ input[type=date] is supported.
 */
 $(function() {
 	if( $("[type=date]")[0].type == 'text'){
+
         $("[type=date]").datepicker();
 
-        $("[type=date]").on('change', function(e) {
-            $(this).next('[type=hidden]').val($(this).dateYYYYMMDD());
-        });
-
-        $("[type=date]").each(function(ind,inp){
+        /* Rewrite dates to mm/dd/yyy format*/
+        $("[type=date]").each(function(){
             if( !!$(this).val() ) {
-                console.log($(this).val());
-                console.log( $(this).val( $(this).dateMMDDYYYY() ) );
+                $(this).val( $(this).dateMMDDYYYY() );
             }
-        })
+        });
 
 
         /*
@@ -218,7 +216,6 @@ $(function() {
         hidden so that we can send dates in yyyy-mm-dd
         format
         */
-
         $("[type=date]").each(function(ind,inp){
             var $hiddenDate = $(this).clone(true);
             $hiddenDate.attr('type','hidden');
@@ -231,14 +228,23 @@ $(function() {
             */
             $(this).removeAttr('name');
             $hiddenDate.removeAttr('id');
+            $hiddenDate.removeAttr('disabled');
         });
 
         /*
         Rewrite the format of the hidden input as yyyy-mm-dd
-        whenever the date field changes
+        whenever the date field changes.
         */
         $("[type=date]").on('change', function(e) {
             $(this).next('[type=hidden]').val($(this).dateYYYYMMDD());
         });
+
+        /* Rewrite the value of 17C_Date to yyyy-mm-dd format */
+        $("[disabled] + [type=hidden]").each(function(){
+            if( !!$(this).val() ) {
+                $(this).val( $(this).dateYYYYMMDD() );
+            }
+        });
+
     }
 });
