@@ -236,7 +236,7 @@ body {
 /* ===========================*
 * Application navigation bar  *
 * ============================*/
-.usa-cf_app-nav {
+.cf-nav {
     background: $color-white;
     color: $color-gray;
     padding: rem(30px) 0;
@@ -253,12 +253,11 @@ body {
     }
 }
 
-.usa-cf_app-logo {
+.cf-logo {
     color: $color-gray-dark;
     margin-right: rem(20px);
 }
 
-.usa-cf_app,
 .cf-app-screen {
     margin: auto;
     width: 90%;
@@ -485,7 +484,7 @@ textarea {
     }
 }
 
-.usa-cf_app-form {
+.cf-form {
     header {
         border-bottom: 1px solid $color-gray-lighter;
         margin-bottom: rem(30px);
@@ -508,14 +507,14 @@ textarea {
     }
 }
 
-.usa-cf_app-form-3-col {
+.cf-form-3-col {
     @include clearfix;
     margin-top: rem(30px);
     margin-bottom: rem(30px);
     padding: .25rem;
     white-space: nowrap;
 
-    .usa-width-one-third {
+    > div, section {
         margin-right: 0;
     }
 }
