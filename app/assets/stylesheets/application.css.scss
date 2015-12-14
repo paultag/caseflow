@@ -321,12 +321,17 @@ body {
     }
 }
 
-.usa-cf_app-footer {
+.cf-app-footer {
+    @include clearfix;
+    border-top: 1px solid $color-gray-lighter;
     margin-top: rem(55px);
+    width: 100%;
 
-    p {
-        border-top: 1px solid $color-gray-lighter;
+    > * {
         padding-top: rem(55px);
+    }
+    p {
+        margin: 0;
     }
 }
 
