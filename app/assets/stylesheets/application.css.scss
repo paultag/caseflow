@@ -445,7 +445,7 @@ textarea {
 }
 
 /*--- Table styles ---*/
-.usa-cf_app-table-wrap {
+.cf-table-wrap {
     width: 100%;
     overflow-x: auto;
 
@@ -456,7 +456,7 @@ textarea {
 }
 // Overrides table th, table td classes
 // from web design standards
-.usa-table-borderless {
+.cf-table-borderless {
     th, td {
         border-width: 0;
     }
