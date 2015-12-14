@@ -121,12 +121,10 @@ or right
     @include clearfix;
 }
 
-.cf-push-left,
-.push-left {
+.cf-push-left {
     float: left;
 }
-.cf-push-right,
-.push-right {
+.cf-push-right {
     float: right;
 }
 abbr[title] {
@@ -266,8 +264,7 @@ body {
     width: 90%;
 }
 
-.cf-app-segment,
-.usa-cf_app-segment {
+.cf-app-segment {
     &::before, &::after {
         content: ' ';
         display: block;
@@ -281,14 +278,13 @@ body {
     }
 }
 
-* + .cf-app-segment,
-* + .usa-cf_app-segment {
+* + .cf-app-segment {
     margin-top: rem(30px);
 }
 
 // TODO: Refactor out .usa-cf_app* classes
 .usa-cf_app, .cf-app {
-    .usa-cf_app-segment, .cf-app-segment {
+    .cf-app-segment, .cf-app-segment {
         &:first-child {
             margin-top: rem(40px);
         }
