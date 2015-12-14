@@ -1,6 +1,6 @@
 <% content_for :page_title do %>Complete Electronic Form 8<% end %>
 
-<%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
+<%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'usa-cf_app-form cf-app-segment'}) do %>
 
 <div class="usa-alert usa-alert-success cf-app-segment" role="alert">
   <div class="usa-alert-body">
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-  <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
+  <div class="cf-app-segment cf-app-segment--v-pad cf-app-segment--h-pad cf-app-segment--alt">
       <header>
           <h2>Complete Electronic Form 8</h2>
           <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
@@ -372,7 +372,7 @@
               } %>
   </div>
 
-  <div class="usa-cf_app-segment">
+  <div class="cf-app-segment">
 
       <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link cf-push-left' %>
       <button type="submit" class="cf-push-right">Preview Completed Form 8</button>

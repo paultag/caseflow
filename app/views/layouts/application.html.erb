@@ -5,9 +5,9 @@
 
 <% content_for :content do %>
 
-<div id="certifications-header" class="usa-cf_app-segment">
-    <h2 class="push-left"><%= @kase.correspondent.full_name %></h2>
-    <div class="text-uc usa-cf-apppeal-id-control push-right">
+<div id="certifications-header" class="cf-app-segment">
+    <h2 class="cf-push-left"><%= @kase.correspondent.full_name %></h2>
+    <div class="text-uc usa-cf-apppeal-id-control cf-push-right">
       Appeal ID &nbsp;
       <button type="submit" title="Copy to clipboard" class="usa-cf-apppeal-id" data-clipboard-text="<%= @kase.bfcorlid %>">
           <%= @kase.bfcorlid %>
@@ -16,7 +16,7 @@
     </div>
 </div>
 
-  <div class="usa-cf_app-segment">
+  <div class="cf-app-segment">
     <div class="usa-cf_app-3-up usa-cf_app-3-up--bordered text-center">
         <section>
           <h4 class="text-uc usa-cf_app-3-up-title">Appeal Type</h4>

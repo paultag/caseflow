@@ -189,5 +189,29 @@
       "Joe Snuffy", "Self", "Joe Snuffy", "Joe", "", "Snuffy"
     ],
     "bfha": "1"
+  },
+  "merged": {
+    "bfkey": "merged",
+    "bfdc": "M",
+    "bfcorlid": "22222222C",
+    "bfac": "3",
+    "bfmpro": "ADV",
+    "bfpdnum": "123ABC",
+    "bfregoff": "DSUSER",
+    "bfdrodec": "2015-09-01",
+    "bfdnod": "2015-09-01",
+    "bfd19": "2015-09-01",
+    "bfdsoc": "2015-09-01",
+    "efolder_nod": "2015-09-01",
+    "efolder_form9": "2015-09-01",
+    "efolder_soc": "2015-09-01",
+    "efolder_appellant_id": "22222222",
+    "appeal_type": "Post Remand",
+    "vso_full": "Disabled American Veterans",
+    "regional_office_full": "Philadelphia, PA",
+    "folder": "VBMS",
+    "correspondent": [
+      "Joe Snuffy", "Self", "Joe Snuffy", "Joe", "", "Snuffy"
+    ]
   }
 }
