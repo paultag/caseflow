@@ -281,14 +281,12 @@ body {
     margin-top: rem(30px);
 }
 
-// TODO: Refactor out .usa-cf_app* classes
-.usa-cf_app, .cf-app {
-    .cf-app-segment, .cf-app-segment {
-        &:first-child {
-            margin-top: rem(40px);
-        }
+.cf-app-segment {
+    &:first-child {
+        margin-top: rem(40px);
     }
 }
+
 
 .usa-cf_app-3-up {
     display: table;
