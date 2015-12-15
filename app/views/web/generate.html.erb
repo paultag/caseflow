@@ -10,7 +10,7 @@
         button and the Form 8 will automatically be uploaded to VBMS.
       </p>
 
-      <embed class="embedded-document cf-app-segment" src="/caseflow/files/forms/<%= @file_name %>"></embed>
+      <iframe class="embedded-document cf-app-segment" src="<%= pdfjs.full_path(file: "/caseflow/files/forms/" + @file_name); =%>" ></iframe>
 
 <%= form_tag({action: :certify}, {class: 'cf-form cf-app-segment'}) do %>
     <input type="hidden" value="<%= @file_name %>" name="file_name">
