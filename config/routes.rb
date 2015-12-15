@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     get '/logout', to: 'web#logout'
 
     post '/users/auth/saml/callback', to: 'web#ssoi_saml_callback'
+
+    mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
   end
 
   get '/404', to: 'web#http_404_not_found', code: 404
