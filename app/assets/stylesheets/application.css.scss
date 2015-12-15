@@ -507,17 +507,6 @@ textarea {
     }
 }
 
-.cf-form-3-col {
-    @include clearfix;
-    margin-top: rem(30px);
-    margin-bottom: rem(30px);
-    padding: .25rem;
-    white-space: nowrap;
-
-    > div, section {
-        margin-right: 0;
-    }
-}
 .form8-text-input {
     @include clearfix;
     clear: both;
