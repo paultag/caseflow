@@ -281,16 +281,16 @@ body {
     margin-top: rem(30px);
 }
 
-// TODO: Refactor out .usa-cf_app* classes
-.usa-cf_app, .cf-app {
-    .cf-app-segment, .cf-app-segment {
-        &:first-child {
-            margin-top: rem(40px);
-        }
+
+.cf-app-segment {
+    &:first-child {
+        margin-top: rem(40px);
     }
 }
 
-.usa-cf_app-3-up {
+
+.cf-layout-3-up {
+    border: 1px solid $color-gray-lighter;
     display: table;
     width: 100%;
 
@@ -300,15 +300,11 @@ body {
         vertical-align: middle;
         width: 33%;
     }
-
-    &--bordered {
-        border: 1px solid $color-gray-lighter;
-
-        > *:nth-child(even) {
-            border-left: 1px solid $color-gray-lighter;
-            border-right: 1px solid $color-gray-lighter;
-        }
+    > *:nth-child(even) {
+        border-left: 1px solid $color-gray-lighter;
+        border-right: 1px solid $color-gray-lighter;
     }
+
     &-title {
         color: $color-gray;
         font-weight: inherit;
@@ -528,6 +524,7 @@ Certified success page
     margin-bottom: 1rem;
 }
 
+// "deck" is newspaper speak for "subhead"
 .cf-msg-screen-deck {
     text-align: center;
     font-size: rem(20px);
