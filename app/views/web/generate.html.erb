@@ -10,14 +10,14 @@
         button and the Form 8 will automatically be uploaded to VBMS.
       </p>
 
-      <embed class="embedded-document usa-cf_app-segment" src="/caseflow/files/forms/<%= @file_name %>"></embed>
+      <iframe class="embedded-document cf-app-segment" src="<%= pdfjs.full_path(file: "/caseflow/files/forms/" + @file_name); =%>" ></iframe>
 
-<%= form_tag({action: :certify}, {class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
+<%= form_tag({action: :certify}, {class: 'cf-form cf-app-segment'}) do %>
     <input type="hidden" value="<%= @file_name %>" name="file_name">
     <input type="hidden" value="<%= @certification_date %>" name="certification_date">
 
     <button type="button" class="usa-button-gray cf-action-back cf-push-left">&laquo; Go back and make edits</button>
     <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link space-left pull-left' %><!-- TODO: Make this more responsive friendly later -->
-    <button type="submit" class="btn btn-primary push-right">Upload and Certify</button>
+    <button type="submit" class="btn btn-primary cf-push-right">Upload and Certify</button>
 
 <% end %>

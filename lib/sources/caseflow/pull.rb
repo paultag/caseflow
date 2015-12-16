@@ -38,6 +38,7 @@ def main(argv)
     |el| [el.bfkey, {bfkey: el.bfkey,
                      bfcorlid: el.bfcorlid,
                      bfac: el.bfac,
+                     bfdc: el.bfdc,
                      bfmpro: el.bfmpro,
                      bfpdnum: el.bfpdnum,
                      bfregoff: "DSUSER", # We're going to move them into our RO
