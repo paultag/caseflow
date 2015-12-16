@@ -36,9 +36,18 @@ $.fn.extend({
     closeModal: function(event) {
         event.stopPropagation();
         event.stopImmediatePropagation();
-        if( $(event.target).hasClass('cf-modal') ) {
-            $(event.target).closeItem();
+
+        if( $(event.target).hasClass('cf-modal') || $(event.target).hasClass('cf-action-closemodal') ) {
+            $(event.currentTarget).closeItem();
         }
+
+        if(window.location.hash) {
+            window.location.hash = '';
+        }
+    },
+    openModal: function(e) {
+        var toopen = $(e.target).attr('href');
+        $(toopen).openItem();
     }
 });
 
@@ -64,33 +73,14 @@ $(function() {
 
 /* Reusable 'modal' pattern */
 $(function() {
-    $('.cf-action-openmodal').on('click', function(e) {
-        var toopen = $(e.target).attr('href');
-        $(toopen).openItem();
-    });
+    $('.cf-action-openmodal').on('click', $.fn.openModal);
+    $('.cf-modal').on('click', $.fn.closeModal);
 
-    $('.cf-action-close').on('click', function(e) {
-        var toclose = $(e.target).data('controls');
-        $(toclose).closeItem();
-
-        /*
-        Since this may be a modal shown using :target,
-        we should update the hash to close it.
-        */
-
-        if(window.location.hash) {
-            window.location.hash = '';
-        }
-    });
-
-    $('.cf-modal').on('click', function(e){
-        $(this).closeModal(e);
-    });
-
+    /* Triggers click event user presses Escape key */
     $(window).on('keydown', function(e){
         var escKey = (e.which == 27);
         if(escKey) {
-            $('.cf-modal').trigger('click')
+            $('.cf-modal').trigger('click');
         }
     })
 });
