@@ -39,6 +39,24 @@ $.fn.extend({
         if( $(event.target).hasClass('cf-modal') ) {
             $(event.target).closeItem();
         }
+    },
+    showLinkedTextField: function(e){
+        var $linked = $(e.currentTarget).find('[data-linkedto]');
+
+        if($linked.length && $linked.data('linkedto') ) {
+            var reqSelector = $linked.data('linkedto'),
+                $reqParent = $(reqSelector).parent();
+
+            if( (/\w/).test($linked.val()) ) {
+                $(reqSelector).attr('required','required');
+                $reqParent.addClass('required');
+                $reqParent.removeAttr('hidden');
+            } else {
+                $(reqSelector).removeAttr('required');
+                $reqParent.removeClass('required');
+                $reqParent.attr('hidden', 'hidden');
+            }
+        }
     }
 });
 
@@ -143,23 +161,9 @@ $(function(){
         }
     });
 
-    $('.cf-form-cond-req').on('input', function(e){
-        var $linked = $(e.currentTarget).find('[data-linkedto]');
-
-        if($linked.length && $linked.data('linkedto') ) {
-            var reqSelector = $linked.data('linkedto'),
-                $reqParent = $(reqSelector).parent();
-
-            if( (/\w/).test($linked.val()) ) {
-                $(reqSelector).attr('required','required');
-                $reqParent.addClass('required');
-                $reqParent.removeAttr('hidden');
-            } else {
-                $(reqSelector).removeAttr('required');
-                $reqParent.removeClass('required');
-                $reqParent.attr('hidden', 'hidden');
-            }
-        }
-
-    })
+    $('.cf-form-cond-req').on('input', $.fn.showLinkedTextField);
 });
+
+$(document).on('ready', function(){
+    $('.cf-form-cond-req').trigger('input');
+})
