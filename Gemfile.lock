@@ -124,6 +124,9 @@ GEM
     pdf-forms (1.0.0)
       cliver (~> 0.3.2)
       safe_shell (>= 1.0.3, < 2.0)
+    pdfjs_viewer-rails (0.0.6)
+      rails (~> 4.2.0)
+      sass-rails (~> 5.0)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
     pry (0.10.3-java)
@@ -242,6 +245,7 @@ DEPENDENCIES
   omniauth-saml-va!
   parallel (~> 1.6.1)
   pdf-forms (~> 1.0.0)
+  pdfjs_viewer-rails
   pry
   pry-rails
   puma

@@ -1,6 +1,6 @@
 <% content_for :page_title do %>Complete Electronic Form 8<% end %>
 
-<%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
+<%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'cf-form cf-app-segment'}) do %>
 
 <div class="usa-alert usa-alert-success cf-app-segment" role="alert">
   <div class="usa-alert-body">
@@ -273,7 +273,7 @@
           Records to be forwarded to Board of Veterans' Appeals
         </legend>
 
-        <div class="usa-grid-full usa-cf_app-form-3-col">
+        <div class="usa-grid-full">
           <%= render partial: 'form8_checkbox_column', locals: {
                   label1_text: 'CF OR XCF',
                   input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
@@ -316,7 +316,7 @@
                   question_num: '',
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
                   div_id: '13_Specify_Other',
-              } %>
+          } %>
 
     </fieldset>
 
@@ -377,7 +377,7 @@
               } %>
   </div>
 
-  <div class="usa-cf_app-segment">
+  <div class="cf-app-segment">
 
       <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link cf-push-left' %>
       <button type="submit" class="cf-push-right">Preview Completed Form 8</button>

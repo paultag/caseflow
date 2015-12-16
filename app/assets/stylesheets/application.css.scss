@@ -121,12 +121,10 @@ or right
     @include clearfix;
 }
 
-.cf-push-left,
-.push-left {
+.cf-push-left {
     float: left;
 }
-.cf-push-right,
-.push-right {
+.cf-push-right {
     float: right;
 }
 abbr[title] {
@@ -238,7 +236,7 @@ body {
 /* ===========================*
 * Application navigation bar  *
 * ============================*/
-.usa-cf_app-nav {
+.cf-nav {
     background: $color-white;
     color: $color-gray;
     padding: rem(30px) 0;
@@ -255,19 +253,17 @@ body {
     }
 }
 
-.usa-cf_app-logo {
+.cf-logo {
     color: $color-gray-dark;
     margin-right: rem(20px);
 }
 
-.usa-cf_app,
 .cf-app-screen {
     margin: auto;
     width: 90%;
 }
 
-.cf-app-segment,
-.usa-cf_app-segment {
+.cf-app-segment {
     &::before, &::after {
         content: ' ';
         display: block;
@@ -281,19 +277,16 @@ body {
     }
 }
 
-* + .cf-app-segment,
-* + .usa-cf_app-segment {
+* + .cf-app-segment {
     margin-top: rem(30px);
 }
 
-// TODO: Refactor out .usa-cf_app* classes
-.usa-cf_app, .cf-app {
-    .usa-cf_app-segment, .cf-app-segment {
-        &:first-child {
-            margin-top: rem(40px);
-        }
+.cf-app-segment {
+    &:first-child {
+        margin-top: rem(40px);
     }
 }
+
 
 .usa-cf_app-3-up {
     display: table;
@@ -325,12 +318,17 @@ body {
     }
 }
 
-.usa-cf_app-footer {
+.cf-app-footer {
+    @include clearfix;
+    border-top: 1px solid $color-gray-lighter;
     margin-top: rem(55px);
+    width: 100%;
 
-    p {
-        border-top: 1px solid $color-gray-lighter;
+    > * {
         padding-top: rem(55px);
+    }
+    p {
+        margin: 0;
     }
 }
 
@@ -444,7 +442,7 @@ textarea {
 }
 
 /*--- Table styles ---*/
-.usa-cf_app-table-wrap {
+.cf-table-wrap {
     width: 100%;
     overflow-x: auto;
 
@@ -455,7 +453,7 @@ textarea {
 }
 // Overrides table th, table td classes
 // from web design standards
-.usa-table-borderless {
+.cf-table-borderless {
     th, td {
         border-width: 0;
     }
@@ -484,7 +482,7 @@ textarea {
     }
 }
 
-.usa-cf_app-form {
+.cf-form {
     header {
         border-bottom: 1px solid $color-gray-lighter;
         margin-bottom: rem(30px);
@@ -507,17 +505,6 @@ textarea {
     }
 }
 
-.usa-cf_app-form-3-col {
-    @include clearfix;
-    margin-top: rem(30px);
-    margin-bottom: rem(30px);
-    padding: .25rem;
-    white-space: nowrap;
-
-    .usa-width-one-third {
-        margin-right: 0;
-    }
-}
 .form8-text-input {
     @include clearfix;
     clear: both;
