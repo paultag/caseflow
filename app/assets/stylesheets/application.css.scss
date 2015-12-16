@@ -500,12 +500,18 @@ textarea {
         display: inline-block;
         margin-right: 0;
     }
+
+    &-textarea-wrap {
+        max-width: rem(455px);
+    }
 }
 
 .form8-text-input {
     @include clearfix;
     clear: both;
+    max-width: rem(380px);
 }
+
 .form8-two-radio {
     &-item {
         display: inline-block;
