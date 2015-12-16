@@ -452,8 +452,16 @@ textarea {
     padding: 1rem 2rem;
     text-decoration: none;
 
+    &:active {
+        background: $color-primary-darkest;
+    }
+    &:hover {
+        background: $color-primary-darker;
+    }
+
     &--secondary {
         background: $color-secondary;
+
         &:active {
             background: $color-secondary-darkest;
         }
