@@ -11,22 +11,14 @@
     - div_class: The class attribute of the containing div
     - max_length: The number of characters a response can maximally include. 45 is default.
     - required: true/false, if a field is required (default: false)
+    - requirecond: true/false, if a field is part of a conditionally-required fieldset.
     - close_fieldset: Whether this fieldset should be closed (default: false)
 
 %>
 
 <% input_id = "#{input_name}_input_id" %>
-<%
-if defined?(div_id) && div_id
-    div_id = "id=\"#{div_id}\""
-end
 
-if defined?(show_when) && show_when
-    show = "data-showwhen=\"#{show_when}\""
-end
-%>
-
-<p class="form8-text-input <%= div_class if defined?(div_class) %>" <%=raw div_id if defined?(div_id) %><%= 'hidden' if defined?(hidden) && hidden %> <%= show if defined?(show) && show %>>
+<p class="form8-text-input <%= div_class if defined?(div_class) %>" <% 'id=#{div_id}' if defined?(div_id) %><%= 'hidden' if defined?(hidden) && hidden %> <%= 'data-showwhen="#{show_when}"' if defined?(show_when) && show_when %>>
     <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
         <%=raw question %>
