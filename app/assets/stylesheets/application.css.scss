@@ -75,7 +75,7 @@ label {
   padding-right: 0px;
 }
 
-.pilot-warning {
+.cf-notice {
   padding: 8px 20px 8px;
   text-align: center;
   background-color: $color-primary;
@@ -263,7 +263,13 @@ body {
     width: 90%;
 }
 
+/*
+.cf-app-segment represents a chunk of an application's
+page Should be an immediate child of .cf-app. Avoid
+making .cf-app-segment a grandchild element of .cf-app.
+*/
 .cf-app-segment {
+    // Clearfix
     &::before, &::after {
         content: ' ';
         display: block;
@@ -277,10 +283,14 @@ body {
     }
 }
 
+// Adds top margin when .cf-app-segment
+// is preceded by an element
 * + .cf-app-segment {
     margin-top: rem(30px);
 }
 
+// Make the top margin larger whenever
+// cf-app-segment is the first-child
 .cf-app-segment {
     &:first-child {
         margin-top: rem(40px);
@@ -390,6 +400,7 @@ textarea {
     margin: 0 !important;
 }
 
+/* Make a button look like a link */
 .cf-btn-link {
     background: transparent;
     color: $color-primary;
@@ -432,7 +443,45 @@ textarea {
     }
 }
 
+/* Make a link that looks like a button */
+.cf-btn-faux {
+    -webkit-font-smoothing: antialiased;
+    color: $color-white;
+    display: inline-block;
+    background: $color-primary;
+    border-radius: 0.3rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 1rem 2rem;
+    text-decoration: none;
+
+    &:active {
+        background: $color-primary-darkest;
+    }
+    &:hover {
+        background: $color-primary-darker;
+    }
+
+    &--secondary {
+        background: $color-secondary;
+
+        &:active {
+            background: $color-secondary-darkest;
+        }
+        &:hover {
+            background: $color-secondary-dark;
+        }
+    }
+
+    &:visited, &:hover, &:active {
+        color: $color-white;
+        text-decoration: none;
+    }
+}
+
+
 /*--- Alerts ---*/
+/* Overrides/fixes USA Web Design Guideline paths */
 .usa-alert-error {
     background-image: url(asset-path('icons/alerts/error.svg'));
 }
@@ -503,12 +552,18 @@ textarea {
         display: inline-block;
         margin-right: 0;
     }
+
+    &-textarea-wrap {
+        max-width: rem(455px);
+    }
 }
 
 .form8-text-input {
     @include clearfix;
     clear: both;
+    max-width: rem(380px);
 }
+
 .form8-two-radio {
     &-item {
         display: inline-block;

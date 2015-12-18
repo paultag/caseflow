@@ -13,7 +13,7 @@
       <header>
           <h2>Complete Electronic Form 8</h2>
           <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
-          <p class="required-msg usa-input-error-message">Required</p>
+          <p class="cf-required-msg usa-input-error-message">Required</p>
       </header>
 
       <%= render partial: 'form8_text', locals: {
@@ -33,9 +33,9 @@
            value: @kase.correspondent.appellant_relationship,
        } %>
 
-
       <%= render partial: 'form8_text', locals: {
           div_id: '2-file-no',
+          div_class: 'cf-form-disabled',
           question: "File no.",
           question_num: '2',
           input_name: '2_FILE_NO',
@@ -63,33 +63,34 @@
        } %>
 
 
-    <div class="cf-row">
+    <fieldset class="cf-form-cond-req">
        <%= render partial: 'form8_textarea', locals: {
             div_id: '5a-service-connection-for',
             question: "Service connection for:",
             question_num: '5A',
             input_name: '5A_SERVICE_CONNECTION_FOR',
             value: Caseflow.format_issues(@kase, 'service connection'),
+            linkedto: '#5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id',
         } %>
 
         <%= render partial: 'form8_text', locals: {
-             div_class: 'cf-form-disabled',
              div_id: '5b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '5B',
              input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
              value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec_date : '',
+             hidden: true,
          } %>
+    </fieldset>
 
-    </div>
-
-    <div class="cf-row">
+    <fieldset class="cf-form-cond-req">
        <%= render partial: 'form8_textarea', locals: {
             div_id: '6a-increased-rating',
             question: "Increased rating for",
             question_num: '6A',
             input_name: '6A_INCREASED_RATING_FOR',
             value: Caseflow.format_issues(@kase, 'increased rating'),
+            linkedto: "#6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
         <%= render partial: 'form8_text', locals: {
@@ -98,16 +99,18 @@
              question_num: '6B',
              input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
              value: Caseflow.format_issues(@kase, 'increased rating') != '' ? @kase.bfdrodec_date : '',
+             hidden: true,
          } %>
-    </div>
+    </fieldset>
 
-    <div class="cf-row">
+    <fieldset class="cf-form-cond-req">
        <%= render partial: 'form8_textarea', locals: {
             div_id: '7a-increased-rating',
             question: "Other",
             question_num: '7A',
             input_name: '7A_OTHER',
             value: Caseflow.format_issues(@kase, 'other'),
+            linkedto: "#7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
         <%= render partial: 'form8_text', locals: {
@@ -116,9 +119,9 @@
              question_num: '7B',
              input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
              value: Caseflow.format_issues(@kase, 'other') != '' ? @kase.bfdrodec_date : '',
+             hidden: true,
          } %>
-
-    </div>
+    </fieldset>
 
     <%= render partial: 'form8_text', locals: {
          div_id: '8a-appellant-rep',
@@ -140,7 +143,6 @@
             } %>
 
         <%= render partial: 'form8_text', locals: {
-                div_class: 'cf-wrap-flex',
                 div_id: '8b-explanation',
                 question: '<em>Specify file if applicable</em>',
                 question_num: '',
@@ -332,6 +334,7 @@
                max_length: 40,
                required: true,
                disabled: true,
+               div_class: 'cf-form-disabled',
                value: @kase.regional_office_full,
        } %>
 
@@ -342,6 +345,7 @@
                max_length: 40,
                required: true,
                disabled: true,
+               div_class: 'cf-form-disabled',
                value: @kase.bfregoff,
        } %>
 
@@ -368,6 +372,7 @@
                   required: true,
                   value: Time.now.strftime('%Y-%m-%d'),
                   disabled: true,
+                  div_class: 'cf-form-disabled',
               } %>
   </div>
 
