@@ -39,6 +39,7 @@ group :development, :test do
   gem 'pry-rails'
 
   gem 'brakeman'
+  gem 'bundler-audit'
 
   gem 'activerecord-jdbcsqlite3-adapter'
 end
