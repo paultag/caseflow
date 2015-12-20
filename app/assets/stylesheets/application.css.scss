@@ -49,11 +49,12 @@ body {
 }
 
 .success,
-.usa-cf_app-success {
+.cf-success {
   color: #2e8540;
 }
 
-.error {
+.error,
+.cf-error {
   color: $color-secondary-dark;
 }
 
@@ -74,7 +75,7 @@ label {
   padding-right: 0px;
 }
 
-.pilot-warning {
+.cf-notice {
   padding: 8px 20px 8px;
   text-align: center;
   background-color: $color-primary;
@@ -95,7 +96,8 @@ label {
 /*----------------------------------*
 * Globals, Resets, and overrides
 *-----------------------------------*/
-.text-center {
+.text-center,
+.cf-text-center {
     text-align: center;
 }
 
@@ -119,12 +121,10 @@ or right
     @include clearfix;
 }
 
-.cf-push-left,
-.push-left {
+.cf-push-left {
     float: left;
 }
-.cf-push-right,
-.push-right {
+.cf-push-right {
     float: right;
 }
 abbr[title] {
@@ -134,7 +134,8 @@ abbr[title] {
 h1,h2,h3,h4,h5,h6 {
     &:not(.usa-alert-heading) {
         font-family: inherit;
-        margin: 0;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -188,6 +189,14 @@ legend {
     }
 }
 
+.cf-icon-success--bg {
+    background: url(asset-path('icons/icon-check.svg')) bottom no-repeat;
+    background-size: auto 2rem;
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
+}
+
 /*--- Appeal button ---*/
 
 .usa-cf-apppeal-id {
@@ -227,7 +236,7 @@ body {
 /* ===========================*
 * Application navigation bar  *
 * ============================*/
-.usa-cf_app-nav {
+.cf-nav {
     background: $color-white;
     color: $color-gray;
     padding: rem(30px) 0;
@@ -244,19 +253,23 @@ body {
     }
 }
 
-.usa-cf_app-logo {
+.cf-logo {
     color: $color-gray-dark;
     margin-right: rem(20px);
 }
 
-.usa-cf_app,
 .cf-app-screen {
     margin: auto;
     width: 90%;
 }
 
-.cf-app-segment,
-.usa-cf_app-segment {
+/*
+.cf-app-segment represents a chunk of an application's
+page Should be an immediate child of .cf-app. Avoid
+making .cf-app-segment a grandchild element of .cf-app.
+*/
+.cf-app-segment {
+    // Clearfix
     &::before, &::after {
         content: ' ';
         display: block;
@@ -270,16 +283,23 @@ body {
     }
 }
 
-* + .cf-app-segment,
-* + .usa-cf_app-segment {
+// Adds top margin when .cf-app-segment
+// is preceded by an element
+* + .cf-app-segment {
     margin-top: rem(30px);
 }
 
-[id=certifications-header] {
-    margin-top: rem(40px);
+// Make the top margin larger whenever
+// cf-app-segment is the first-child
+.cf-app-segment {
+    &:first-child {
+        margin-top: rem(40px);
+    }
 }
 
-.usa-cf_app-3-up {
+
+.cf-layout-3-up {
+    border: 1px solid $color-gray-lighter;
     display: table;
     width: 100%;
 
@@ -289,15 +309,11 @@ body {
         vertical-align: middle;
         width: 33%;
     }
-
-    &--bordered {
-        border: 1px solid $color-gray-lighter;
-
-        > *:nth-child(even) {
-            border-left: 1px solid $color-gray-lighter;
-            border-right: 1px solid $color-gray-lighter;
-        }
+    > *:nth-child(even) {
+        border-left: 1px solid $color-gray-lighter;
+        border-right: 1px solid $color-gray-lighter;
     }
+
     &-title {
         color: $color-gray;
         font-weight: inherit;
@@ -309,12 +325,17 @@ body {
     }
 }
 
-.usa-cf_app-footer {
+.cf-app-footer {
+    @include clearfix;
+    border-top: 1px solid $color-gray-lighter;
     margin-top: rem(55px);
+    width: 100%;
 
-    p {
-        border-top: 1px solid $color-gray-lighter;
+    > * {
         padding-top: rem(55px);
+    }
+    p {
+        margin: 0;
     }
 }
 
@@ -379,6 +400,7 @@ textarea {
     margin: 0 !important;
 }
 
+/* Make a button look like a link */
 .cf-btn-link {
     background: transparent;
     color: $color-primary;
@@ -418,7 +440,45 @@ textarea {
     }
 }
 
+/* Make a link that looks like a button */
+.cf-btn-faux {
+    -webkit-font-smoothing: antialiased;
+    color: $color-white;
+    display: inline-block;
+    background: $color-primary;
+    border-radius: 0.3rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 1rem 2rem;
+    text-decoration: none;
+
+    &:active {
+        background: $color-primary-darkest;
+    }
+    &:hover {
+        background: $color-primary-darker;
+    }
+
+    &--secondary {
+        background: $color-secondary;
+
+        &:active {
+            background: $color-secondary-darkest;
+        }
+        &:hover {
+            background: $color-secondary-dark;
+        }
+    }
+
+    &:visited, &:hover, &:active {
+        color: $color-white;
+        text-decoration: none;
+    }
+}
+
+
 /*--- Alerts ---*/
+/* Overrides/fixes USA Web Design Guideline paths */
 .usa-alert-error {
     background-image: url(asset-path('icons/alerts/error.svg'));
 }
@@ -428,7 +488,7 @@ textarea {
 }
 
 /*--- Table styles ---*/
-.usa-cf_app-table-wrap {
+.cf-table-wrap {
     width: 100%;
     overflow-x: auto;
 
@@ -439,7 +499,7 @@ textarea {
 }
 // Overrides table th, table td classes
 // from web design standards
-.usa-table-borderless {
+.cf-table-borderless {
     th, td {
         border-width: 0;
     }
@@ -468,7 +528,7 @@ textarea {
     }
 }
 
-.usa-cf_app-form {
+.cf-form {
     header {
         border-bottom: 1px solid $color-gray-lighter;
         margin-bottom: rem(30px);
@@ -489,23 +549,18 @@ textarea {
         display: inline-block;
         margin-right: 0;
     }
-}
 
-.usa-cf_app-form-3-col {
-    @include clearfix;
-    margin-top: rem(30px);
-    margin-bottom: rem(30px);
-    padding: .25rem;
-    white-space: nowrap;
-
-    .usa-width-one-third {
-        margin-right: 0;
+    &-textarea-wrap {
+        max-width: rem(455px);
     }
 }
+
 .form8-text-input {
     @include clearfix;
     clear: both;
+    max-width: rem(380px);
 }
+
 .form8-two-radio {
     &-item {
         display: inline-block;
@@ -517,27 +572,38 @@ textarea {
 Certified success page
 ==========================*/
 
-.usa-cf_app-success-heading {
+.cf-msg-screen-heading {
     text-align: center;
     font-size: rem(52px);
     margin-bottom: 1rem;
 }
 
-.usa-cf_app-success-deck {
+// "deck" is newspaper speak for "subhead"
+.cf-msg-screen-deck {
     text-align: center;
     font-size: rem(20px);
     font-weight: normal;
     color: $color-gray;
+    line-height: 1.5;
+    margin-left: auto;
+    margin-right: auto;
+    // TODO: Refactor h1,h2,h3,h4,h5,h6 { &:not(.usa-alert-heading)}
+    // so that we don't have to use !important here.
+    margin-bottom: rem(65px) !important;
+    margin-top: rem(15px) !important;
+    width: 65%;
 }
 
-.usa-cf_app-checklist {
-    margin: 5rem auto 6.5rem;
+.cf-list-checklist {
     list-style-type: none;
+    margin: 5rem auto 6.5rem;
+    position: relative;
+    width: 50%;
 
     li::before {
         content: '';
     }
-    .fa-check {
+    .cf-icon-success--bg {
         font-size: 2.5rem;
         margin-right: 1.8rem;
     }

@@ -21,7 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'parallel', '~> 1.6.1'
 gem 'ruby-progressbar', '~> 1.7.0'
 
-gem 'nokogiri', '~> 1.6.6.2'
+gem 'nokogiri'
 gem 'httpclient', '~> 2.6.0'
 
 # For SAML SSO
@@ -39,6 +39,7 @@ group :development, :test do
   gem 'pry-rails'
 
   gem 'brakeman'
+  gem 'bundler-audit'
 
   gem 'activerecord-jdbcsqlite3-adapter'
 end
@@ -46,3 +47,6 @@ end
 # Libraries and dependencies for front end
 gem 'jquery-rails', '~> 4.0', '>= 4.0.5'
 gem 'clipboard-rails'
+
+# PDF.js
+gem 'pdfjs_viewer-rails'

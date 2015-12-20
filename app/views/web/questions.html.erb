@@ -1,6 +1,6 @@
 <% content_for :page_title do %>Complete Electronic Form 8<% end %>
 
-<%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'usa-cf_app-form usa-cf_app-segment'}) do %>
+<%= form_tag({action: :questions_submit}, {id: 'question-form', class: 'cf-form cf-app-segment'}) do %>
 
 <div class="usa-alert usa-alert-success cf-app-segment" role="alert">
   <div class="usa-alert-body">
@@ -9,11 +9,11 @@
   </div>
 </div>
 
-  <div class="usa-cf_app-segment usa-cf_app-segment--v-pad usa-cf_app-segment--h-pad usa-cf_app-segment--alt">
+  <div class="cf-app-segment cf-app-segment--alt">
       <header>
           <h2>Complete Electronic Form 8</h2>
           <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
-          <p class="required-msg usa-input-error-message">Required</p>
+          <p class="cf-required-msg usa-input-error-message">Required</p>
       </header>
 
       <%= render partial: 'form8_text', locals: {
@@ -33,9 +33,9 @@
            value: @kase.correspondent.appellant_relationship,
        } %>
 
-
       <%= render partial: 'form8_text', locals: {
           div_id: '2-file-no',
+          div_class: 'cf-form-disabled',
           question: "File no.",
           question_num: '2',
           input_name: '2_FILE_NO',
@@ -63,33 +63,34 @@
        } %>
 
 
-    <div class="cf-row">
+    <fieldset class="cf-form-cond-req">
        <%= render partial: 'form8_textarea', locals: {
             div_id: '5a-service-connection-for',
             question: "Service connection for:",
             question_num: '5A',
             input_name: '5A_SERVICE_CONNECTION_FOR',
             value: Caseflow.format_issues(@kase, 'service connection'),
+            linkedto: '#5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id',
         } %>
 
         <%= render partial: 'form8_text', locals: {
-             div_class: 'cf-form-disabled',
              div_id: '5b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '5B',
              input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
              value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec_date : '',
+             hidden: true,
          } %>
+    </fieldset>
 
-    </div>
-
-    <div class="cf-row">
+    <fieldset class="cf-form-cond-req">
        <%= render partial: 'form8_textarea', locals: {
             div_id: '6a-increased-rating',
             question: "Increased rating for",
             question_num: '6A',
             input_name: '6A_INCREASED_RATING_FOR',
             value: Caseflow.format_issues(@kase, 'increased rating'),
+            linkedto: "#6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
         <%= render partial: 'form8_text', locals: {
@@ -98,16 +99,18 @@
              question_num: '6B',
              input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
              value: Caseflow.format_issues(@kase, 'increased rating') != '' ? @kase.bfdrodec_date : '',
+             hidden: true,
          } %>
-    </div>
+    </fieldset>
 
-    <div class="cf-row">
+    <fieldset class="cf-form-cond-req">
        <%= render partial: 'form8_textarea', locals: {
             div_id: '7a-increased-rating',
             question: "Other",
             question_num: '7A',
             input_name: '7A_OTHER',
             value: Caseflow.format_issues(@kase, 'other'),
+            linkedto: "#7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
         <%= render partial: 'form8_text', locals: {
@@ -116,9 +119,9 @@
              question_num: '7B',
              input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
              value: Caseflow.format_issues(@kase, 'other') != '' ? @kase.bfdrodec_date : '',
+             hidden: true,
          } %>
-
-    </div>
+    </fieldset>
 
     <%= render partial: 'form8_text', locals: {
          div_id: '8a-appellant-rep',
@@ -140,7 +143,6 @@
             } %>
 
         <%= render partial: 'form8_text', locals: {
-                div_class: 'cf-wrap-flex',
                 div_id: '8b-explanation',
                 question: '<em>Specify file if applicable</em>',
                 question_num: '',
@@ -270,7 +272,7 @@
           Records to be forwarded to Board of Veterans' Appeals
         </legend>
 
-        <div class="usa-grid-full usa-cf_app-form-3-col">
+        <div class="usa-grid-full">
           <%= render partial: 'form8_checkbox_column', locals: {
                   label1_text: 'CF OR XCF',
                   input1_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_CF_OR_XCF',
@@ -313,7 +315,7 @@
                   question_num: '',
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
                   div_id: '13_Specify_Other',
-              } %>
+          } %>
 
     </fieldset>
 
@@ -332,6 +334,7 @@
                max_length: 40,
                required: true,
                disabled: true,
+               div_class: 'cf-form-disabled',
                value: @kase.regional_office_full,
        } %>
 
@@ -342,6 +345,7 @@
                max_length: 40,
                required: true,
                disabled: true,
+               div_class: 'cf-form-disabled',
                value: @kase.bfregoff,
        } %>
 
@@ -368,10 +372,11 @@
                   required: true,
                   value: Time.now.strftime('%Y-%m-%d'),
                   disabled: true,
+                  div_class: 'cf-form-disabled',
               } %>
   </div>
 
-  <div class="usa-cf_app-segment">
+  <div class="cf-app-segment">
 
       <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link cf-push-left' %>
       <button type="submit" class="cf-push-right">Preview Completed Form 8</button>
