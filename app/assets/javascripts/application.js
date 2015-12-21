@@ -48,6 +48,24 @@ $.fn.extend({
     openModal: function(e) {
         var toopen = $(e.target).attr('href');
         $(toopen).openItem();
+    },
+    showLinkedTextField: function(e){
+        var $linked = $(e.currentTarget).find('[data-linkedto]');
+
+        if($linked.length && $linked.data('linkedto') ) {
+            var reqSelector = $linked.data('linkedto'),
+                $reqParent = $(reqSelector).parent();
+
+            if( (/\w/).test($linked.val()) ) {
+                $(reqSelector).attr('required','required');
+                $reqParent.addClass('required');
+                $reqParent.removeAttr('hidden');
+            } else {
+                $(reqSelector).removeAttr('required');
+                $reqParent.removeClass('required');
+                $reqParent.attr('hidden', 'hidden');
+            }
+        }
     }
 });
 
@@ -132,4 +150,10 @@ $(function(){
             $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
         }
     });
+
+    $('.cf-form-cond-req').on('input', $.fn.showLinkedTextField);
 });
+
+$(document).on('ready', function(){
+    $('.cf-form-cond-req').trigger('input');
+})
