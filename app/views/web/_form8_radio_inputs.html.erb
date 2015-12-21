@@ -1,12 +1,11 @@
 <%#
-    Use for radio button inputs. Locals variable should be an array of
-    question objects.
+    Use for radio button inputs.
 
     Required variables:
     - question: (string) Text of the question
     - question_num: (string) Number or label of the question: e.g. 1A, 8C
     - input_name: (string) The value of the name attribute
-    - options: (array of objects) An array of hashes containing the label
+    - options: (array) An array of hashes/objects containing the label
       text and value/id of each option.
       . label: (string) The text for the <label> tag.
       . id: (string)  The input ID. Used to set the for attribute of <label>
@@ -28,8 +27,6 @@
 
 
 %>
-
-<h1 style="color:green">** <%=selected if defined?(selected) && selected %></h1>
 
 <fieldset class="<%= parent_class.join(' ') if defined?(parent_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %><%=' hidden=hidden ' if defined?(hidden) && hidden %><%= show_when if defined?(show_when) && show_when %>>
     <legend<%= ' class=required' if defined?(required) && required %>>
