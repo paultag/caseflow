@@ -41,12 +41,9 @@ $.fn.extend({
         if( $(event.target).hasClass('cf-modal') || $(event.target).hasClass('cf-action-closemodal') ) {
             $(event.currentTarget).closeItem();
         }
-
-        if(window.location.hash) {
-            window.location.hash = '_';
-        }
     },
     openModal: function(e) {
+        e.preventDefault();
         var toopen = $(e.target).attr('href');
         $(toopen).openItem();
     },
