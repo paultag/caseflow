@@ -9,7 +9,7 @@
       </p>
   </div>
 
-  <iframe class="embedded-document cf-app-segment" src="<%= pdfjs.full_path(file: "/caseflow/files/forms/" + @file_name); =%>"></iframe>
+  <iframe class="cf-doc-embed cf-app-segment" src="<%= pdfjs.full_path(file: "/caseflow/files/forms/" + @file_name); =%>"></iframe>
 
 
 <%= form_tag({action: :certify}, {class: 'cf-form cf-app-segment'}) do %>
