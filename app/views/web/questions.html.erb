@@ -230,8 +230,9 @@
               input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
               required: true,
               toggle: true,
-              linked: '#11b',
-              show_when: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE__no'
+              parent_class: ['cf-form-radio-inline'],
+              linked: '#Q11B',
+              show_when: '11A_NO'
           } %>
 
 
@@ -239,8 +240,9 @@
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Have the requirements of 38 U.S.C. 7105A been followed for all contested claims?',
               question_num: '11B',
+              parent_class: ['cf-form-radio-inline'],
               input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
-              div_id: '11b',
+              parent_id: 'Q11B',
               close_fieldset: true,
           } %>
 
