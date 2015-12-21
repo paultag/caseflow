@@ -25,9 +25,9 @@
                        <div class="dropdown">
                           <a href="#menu" class="dropdown-trigger" title="Open menu to sign out" id="menu-trigger">
                               <% if session[:username] %>
-                              <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
+                                <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
-                              <%= session[:ro] %>
+                                <%= session[:ro] %>
                               <% end %>
                           </a>
                           <ul id="menu" class="dropdown-menu" hidden aria-labeledby="menu-trigger">
