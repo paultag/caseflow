@@ -413,7 +413,8 @@ textarea {
 // form buttons have high specificity.
 // Keep an eye on https://github.com/18F/web-design-standards/issues/891
 [type="submit"],
-[type="button"] {
+[type="button"],
+.usa-button {
     margin: 0 !important;
 }
 
@@ -459,43 +460,6 @@ textarea {
         padding-right: 1rem;
     }
 }
-
-/* Make a link that looks like a button */
-.cf-btn-faux {
-    -webkit-font-smoothing: antialiased;
-    color: $color-white;
-    display: inline-block;
-    background: $color-primary;
-    border-radius: 0.3rem;
-    font-weight: bold;
-    line-height: 1;
-    padding: 1rem 2rem;
-    text-decoration: none;
-
-    &:active {
-        background: $color-primary-darkest;
-    }
-    &:hover {
-        background: $color-primary-darker;
-    }
-
-    &--secondary {
-        background: $color-secondary;
-
-        &:active {
-            background: $color-secondary-darkest;
-        }
-        &:hover {
-            background: $color-secondary-dark;
-        }
-    }
-
-    &:visited, &:hover, &:active {
-        color: $color-white;
-        text-decoration: none;
-    }
-}
-
 
 /*--- Alerts ---*/
 /* Overrides/fixes USA Web Design Guideline paths */
