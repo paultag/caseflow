@@ -396,7 +396,8 @@ textarea {
 // form buttons have high specificity.
 // Keep an eye on https://github.com/18F/web-design-standards/issues/891
 [type="submit"],
-[type="button"] {
+[type="button"],
+[class*="usa-button"] {
     margin: 0 !important;
 }
 
@@ -587,8 +588,4 @@ Certified success page
 
 .cf-login-input {
   display: inline !important;
-}
-
-.cf-button-no-margin {
-  margin: 0;
 }
