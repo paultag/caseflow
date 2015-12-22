@@ -397,7 +397,7 @@ textarea {
 // Keep an eye on https://github.com/18F/web-design-standards/issues/891
 [type="submit"],
 [type="button"],
-[class*="usa-button"] {
+.usa-button {
     margin: 0 !important;
 }
 
