@@ -1,23 +1,24 @@
 <% content_for :page_title do %>Review Completed Form 8<% end %>
 
-<div id="certifications-generate">
-  <div class="row">
-    <div class="col col-md-10 col-md-offset-1">
+  <div class="cf-app-segment cf-app-segment--alt">
       <h2>Review Form 8 Before Upload</h2>
       <p>
         Review the completed Form 8 below and verify all fields are accurate.
         If the form looks correct, click the Upload and Certify
         button and the Form 8 will automatically be uploaded to VBMS.
       </p>
+  </div>
 
-      <iframe class="embedded-document cf-app-segment" src="<%= pdfjs.full_path(file: "/caseflow/files/forms/" + @file_name); =%>" ></iframe>
+  <iframe class="cf-doc-embed cf-app-segment" src="<%= pdfjs.full_path(file: "/caseflow/files/forms/" + @file_name); =%>"></iframe>
+
 
 <%= form_tag({action: :certify}, {class: 'cf-form cf-app-segment'}) do %>
     <input type="hidden" value="<%= @file_name %>" name="file_name">
     <input type="hidden" value="<%= @certification_date %>" name="certification_date">
 
     <button type="button" class="usa-button-gray cf-action-back cf-push-left">&laquo; Go back and make edits</button>
-    <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link space-left pull-left' %><!-- TODO: Make this more responsive friendly later -->
+    <a href="#confirm-cancel-certification" class="cf-action-openmodal space-left cf-btn-link">Cancel certification</a>
     <button type="submit" class="btn btn-primary cf-push-right">Upload and Certify</button>
-
 <% end %>
+
+<%= render partial: 'cancel_cert_modal' %>

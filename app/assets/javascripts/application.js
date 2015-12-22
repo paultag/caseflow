@@ -34,10 +34,36 @@ $.fn.extend({
         $(this).val('');
     },
     closeModal: function(event) {
+        //
         event.stopPropagation();
         event.stopImmediatePropagation();
-        if( $(event.target).hasClass('cf-modal') ) {
-            $(event.target).closeItem();
+
+        if( $(event.target).hasClass('cf-modal') || $(event.target).hasClass('cf-action-closemodal') ) {
+            event.preventDefault();
+            $(event.currentTarget).closeItem();
+        }
+    },
+    openModal: function(e) {
+        e.preventDefault();
+        var toopen = $(e.target).attr('href');
+        $(toopen).openItem();
+    },
+    showLinkedTextField: function(e){
+        var $linked = $(e.currentTarget).find('[data-linkedto]');
+
+        if($linked.length && $linked.data('linkedto') ) {
+            var reqSelector = $linked.data('linkedto'),
+                $reqParent = $(reqSelector).parent();
+
+            if( (/\w/).test($linked.val()) ) {
+                $(reqSelector).attr('required','required');
+                $reqParent.addClass('required');
+                $reqParent.removeAttr('hidden');
+            } else {
+                $(reqSelector).removeAttr('required');
+                $reqParent.removeClass('required');
+                $reqParent.attr('hidden', 'hidden');
+            }
         }
     }
 });
@@ -64,39 +90,20 @@ $(function() {
 
 /* Reusable 'modal' pattern */
 $(function() {
-    $('.cf-action-openmodal').on('click', function(e) {
-        var toopen = $(e.target).attr('href');
-        $(toopen).openItem();
-    });
+    $('.cf-action-openmodal').on('click', $.fn.openModal);
+    $('.cf-modal').on('click', $.fn.closeModal);
 
-    $('.cf-action-close').on('click', function(e) {
-        var toclose = $(e.target).data('controls');
-        $(toclose).closeItem();
-
-        /*
-        Since this may be a modal shown using :target,
-        we should update the hash to close it.
-        */
-
-        if(window.location.hash) {
-            window.location.hash = '';
-        }
-    });
-
-    $('.cf-modal').on('click', function(e){
-        $(this).closeModal(e);
-    });
-
+    /* Triggers click event user presses Escape key */
     $(window).on('keydown', function(e){
         var escKey = (e.which == 27);
         if(escKey) {
-            $('.cf-modal').trigger('click')
+            $('.cf-modal').trigger('click');
         }
     })
 });
 
 
-$(function(){
+$(function() {
     /* Trigger for the dropdown */
     $(".dropdown-trigger").on('click', function(e) {
          e.preventDefault(); // Prevent page jump
@@ -104,14 +111,14 @@ $(function(){
          $(dropdownMenu).toggleItem();
     });
 
-    $(":not(.dropdown)").on('click', function(e){
-        if( !$(e.target).parents('.dropdown').length ) {
+    $(":not(.dropdown)").on('click', function(e) {
+        if(!$(e.target).parents('.dropdown').length) {
             $('.dropdown-menu').closeItem();
         }
     });
 });
 
-$(function(){
+$(function() {
     $('fieldset').on('change', function(e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
@@ -142,4 +149,10 @@ $(function(){
             $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
         }
     });
+
+    $('.cf-form-cond-req').on('input', $.fn.showLinkedTextField);
 });
+
+$(document).on('ready', function() {
+    $('.cf-form-cond-req').trigger('input');
+})
