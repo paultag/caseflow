@@ -34,11 +34,19 @@ $.fn.extend({
         $(this).val('');
     },
     closeModal: function(event) {
+        //
         event.stopPropagation();
         event.stopImmediatePropagation();
-        if( $(event.target).hasClass('cf-modal') ) {
-            $(event.target).closeItem();
+
+        if( $(event.target).hasClass('cf-modal') || $(event.target).hasClass('cf-action-closemodal') ) {
+            event.preventDefault();
+            $(event.currentTarget).closeItem();
         }
+    },
+    openModal: function(e) {
+        e.preventDefault();
+        var toopen = $(e.target).attr('href');
+        $(toopen).openItem();
     },
     showLinkedTextField: function(e){
         var $linked = $(e.currentTarget).find('[data-linkedto]');
@@ -82,29 +90,10 @@ $(function() {
 
 /* Reusable 'modal' pattern */
 $(function() {
-    $('.cf-action-openmodal').on('click', function(e) {
-        var toopen = $(e.target).attr('href');
-        $(toopen).openItem();
-    });
+    $('.cf-action-openmodal').on('click', $.fn.openModal);
+    $('.cf-modal').on('click', $.fn.closeModal);
 
-    $('.cf-action-close').on('click', function(e) {
-        var toclose = $(e.target).data('controls');
-        $(toclose).closeItem();
-
-        /*
-        Since this may be a modal shown using :target,
-        we should update the hash to close it.
-        */
-
-        if(window.location.hash) {
-            window.location.hash = '';
-        }
-    });
-
-    $('.cf-modal').on('click', function(e){
-        $(this).closeModal(e);
-    });
-
+    /* Triggers click event user presses Escape key */
     $(window).on('keydown', function(e){
         var escKey = (e.which == 27);
         if(escKey) {
@@ -114,7 +103,7 @@ $(function() {
 });
 
 
-$(function(){
+$(function() {
     /* Trigger for the dropdown */
     $(".dropdown-trigger").on('click', function(e) {
          e.preventDefault(); // Prevent page jump
@@ -122,14 +111,14 @@ $(function(){
          $(dropdownMenu).toggleItem();
     });
 
-    $(":not(.dropdown)").on('click', function(e){
-        if( !$(e.target).parents('.dropdown').length ) {
+    $(":not(.dropdown)").on('click', function(e) {
+        if(!$(e.target).parents('.dropdown').length) {
             $('.dropdown-menu').closeItem();
         }
     });
 });
 
-$(function(){
+$(function() {
     $('fieldset').on('change', function(e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
@@ -164,6 +153,6 @@ $(function(){
     $('.cf-form-cond-req').on('input', $.fn.showLinkedTextField);
 });
 
-$(document).on('ready', function(){
+$(document).on('ready', function() {
     $('.cf-form-cond-req').trigger('input');
 })
