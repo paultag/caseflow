@@ -27,10 +27,10 @@ $.fn.extend({
     toggleItem: function() {
         $(this).toggle(50);
     },
-    closeItem: function(){
+    closeItem: function() {
         $(this).hide(50);
     },
-    clearField: function(){
+    clearField: function() {
         $(this).val('');
     },
     closeModal: function(event) {
