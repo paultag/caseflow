@@ -22,13 +22,13 @@ Reusable open/close Item methods
 
 $.fn.extend({
     openItem: function() {
-        $(this).removeAttr('hidden');
+        $(this).show(50);
     },
     toggleItem: function() {
-        $(this).toggleAttr('hidden','hidden');
+        $(this).toggle(50);
     },
     closeItem: function(){
-        $(this).attr('hidden', 'hidden');
+        $(this).hide(50);
     },
     clearField: function(){
         $(this).val('');
@@ -48,13 +48,13 @@ $.fn.extend({
                 $reqParent = $(reqSelector).parent();
 
             if( (/\w/).test($linked.val()) ) {
-                $(reqSelector).attr('required','required');
+                $(reqSelector).attr('required', 'required');
                 $reqParent.addClass('required');
-                $reqParent.removeAttr('hidden');
+                $reqParent.openItem();
             } else {
                 $(reqSelector).removeAttr('required');
                 $reqParent.removeClass('required');
-                $reqParent.attr('hidden', 'hidden');
+                $reqParent.closeItem();
             }
         }
     }
