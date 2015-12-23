@@ -1,6 +1,6 @@
 <% content_for :page_title do %>Case not ready!<% end %>
 
-<div class="cf-app-segment cf-app-segment--alt">
+<div class="cf-app-msg-screen cf-app-segment cf-app-segment--alt">
 
   <% if @reason == :not_ready %>
     <h1 class="cf-msg-screen-heading">Case not ready!</h1>
@@ -8,7 +8,7 @@
     <p class="cf-text-center">Try opening another appeal in VACOLS.</p>
 
   <% elsif @reason == :paper %>
-    <h1 class="cf-error cf-msg-screen-heading">Paper cases not supported!</h1>
+    <h1 class="cf-msg-screen-heading">Paper cases not supported!</h1>
     <h2 class="cf-msg-screen-deck">Caseflow cannot be used for Paper or Virtual VA cases</h2>
   <% end %>
 
