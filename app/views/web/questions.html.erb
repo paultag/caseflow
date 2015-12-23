@@ -141,7 +141,7 @@
          {
              label: 'Service organization',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_SERVICE_ORGANIZATION',
-             id:'8A_POWER_OF_ATTORNEY',
+             id:'8A_SERVICE_ORGANIZATION',
          },
          {
              label: 'No representative',
@@ -167,6 +167,7 @@
                     value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
                     id: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
                 }],
+                hidden: true,
             } %>
 
         <%= render partial: 'form8_text', locals: {
@@ -175,6 +176,7 @@
                 question_num: '',
                 input_name: '8B_REMARKS',
                 close_fieldset: true,
+
             } %>
       <% end %>
 
@@ -185,14 +187,18 @@
                 parent_class: ['cf-form-radio-inline'],
                 required: true,
                 close_fieldset: true,
+                hidden: true,
+
        } %>
 
+   </fieldset><!--Close question 8 fieldset-->
 
      <%= render partial: 'form8_yes_no_radio', locals: {
             question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
             question_num: '9A',
             input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
             parent_class: ['cf-form-radio-inline'],
+            hidden: true,
      } %>
 
      <%= render partial: 'form8_text', locals: {
