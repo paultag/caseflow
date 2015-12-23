@@ -569,11 +569,14 @@ textarea {
 /*========================
 Certified success page
 ==========================*/
+.cf-app-msg-screen {
+    color: $color-gray;
+}
 
 .cf-msg-screen-heading {
-    text-align: center;
     font-size: rem(52px);
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 // "deck" is newspaper speak for "subhead"
