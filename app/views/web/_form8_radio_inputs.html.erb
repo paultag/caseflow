@@ -1,0 +1,47 @@
+<%#
+    Use for radio button inputs.
+
+    Required variables:
+    - question: (string) Text of the question
+    - question_num: (string) Number or label of the question: e.g. 1A, 8C
+    - input_name: (string) The value of the name attribute
+    - options: (array) An array of hashes/objects containing the label
+      text and value/id of each option.
+      . label: (string) The text for the <label> tag.
+      . id: (string)  The input ID. Used to set the for attribute of <label>
+      . value: (string) The value of the radio option.
+      . checked: (boolean, true/false) whether the attribute should be checked
+        initially. Default is true.
+
+
+
+    Optional variables:
+    - required: (boolean, true/false) Whether this field is required.
+      Default is false.
+    - parent_class: (array). List of class names for the parent container
+    - parent_id: (string). ID attribute value for parent container
+    - hidden: (boolean, true/false). Whether the field should initially be hidden
+      Default is false.
+    - close_fieldset: (boolean, true/false). Indicates whether the parent
+      fieldset should be closed. Default is false.
+%>
+
+<fieldset class="<%= parent_class.join(' ') if defined?(parent_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %> <%='hidden=hidden' if defined?(hidden) && hidden %> <%=raw %Q(data-showwhen="#{show_when}") if defined?(show_when) && show_when %> <%=raw %Q( data-linkedto="#{linked}") if defined?(linked) && linked %>>
+
+    <legend<%= ' class=required' if defined?(required) && required %>>
+        <strong><%= question_num %></strong>
+        <%= question %>
+    </legend>
+
+<% for option in options %>
+    <p class="cf-form-radio-option">
+        <input type="radio" name="<%=input_name%>" id="<%=option[:id]%>" value="<%=option[:value]%>" <%= " required" if defined?(required) && required %> <%= ' checked' if defined?(option[:checked]) && option[:checked] %>>
+        <label for="<%=option[:id]%>">
+           <%=option[:label]%>
+        </label>
+    </p>
+<% end %>
+
+<% if defined?(close_fieldset) && close_fieldset %>
+</fieldset>
+<% end %>

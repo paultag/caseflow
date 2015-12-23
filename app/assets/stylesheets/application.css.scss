@@ -544,6 +544,15 @@ textarea {
     }
 }
 
+.cf-form-radio-inline {
+    clear: both;
+    
+    .cf-form-radio-option {
+        float: left;
+        padding-right: rem(30px);
+    }
+}
+
 .form8-text-input {
     @include clearfix;
     clear: both;
