@@ -125,13 +125,32 @@
          } %>
     </fieldset>
 
-    <%= render partial: 'form8_text', locals: {
-         div_id: '8a-appellant-rep',
-         question: "Appellant represented in this appeal by (name of organization, attorney or agent)",
+    <%= render partial: 'form8_radio_inputs', locals: {
+         question: "Specify appellant representative",
          question_num: '8A',
          input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY',
-         value: @kase.vso_full,
          required: true,
+         options: [{
+             label: 'Power of attorney',
+             input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_POWER_OF_ATTORNEY',
+             id:'8A_POWER_OF_ATTORNEY',
+         },
+         {
+             label: 'Agent',
+             input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_AGENT',
+             id:'8A_AGENT',
+         },
+         {
+             label: 'Service organization',
+             input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_SERVICE_ORGANIZATION',
+             id:'8A_POWER_OF_ATTORNEY',
+         },
+         {
+             label: 'No representative',
+             input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_NO_REPRESENTATIVE',
+             id:'8A_NO_REPRESENTATIVE',
+         }
+        ]
      } %>
 
       <% if @kase.required_fields[:show_8b] %>
