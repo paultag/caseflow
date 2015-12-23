@@ -1,10 +1,9 @@
 <% content_for :page_title do %>Case Not found<% end %>
 
-<div id="certifications-error">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <h1>Case not found</h1>
-      <p>There is no case in VACOLS with the ID you provided.</p>
-    </div>
-  </div>
+<% content_for :content do %>
+<div class="cf-app-msg-screen cf-app-segment cf-app-segment--alt">
+    <h1 class="cf-msg-screen-heading">Case not found</h1>
+    <h2 class="cf-msg-screen-deck">There is no case in VACOLS with the ID you provided.</h2>
+    <p class="cf-text-center">You can close this page and open another case in VACOLS.</p>
 </div>
+<% end %>
