@@ -128,35 +128,45 @@
          question_num: '8A',
          input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY',
          required: true,
+         parent_id: 'Q8A',
          options: [{
              label: 'Power of attorney',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_POWER_OF_ATTORNEY',
              id:'8A_POWER_OF_ATTORNEY',
+             hidden: true,
+             showthese: '#Q8B',
+             hidethese: '#Q8C, #Q9A',
          },
          {
              label: 'Agent',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_AGENT',
              id:'8A_AGENT',
+             showthese: '#Q8C',
+             hidethese: '#Q8B, #Q9A',
          },
          {
              label: 'Service organization',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_SERVICE_ORGANIZATION',
              id:'8A_SERVICE_ORGANIZATION',
+             showthese: '#Q9A',
+             hidethese: '#Q8B,#Q8C',
          },
          {
              label: 'No representative',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_NO_REPRESENTATIVE',
              id:'8A_NO_REPRESENTATIVE',
+             hidethese: '#Q8B,#Q8C,#Q9A'
          }
         ]
      } %>
 
-      <% if @kase.required_fields[:show_8b] %>
-        <%= render partial: 'form8_radio_inputs', locals: {
+    <%= render partial: 'form8_radio_inputs', locals: {
                 question: 'Veteran has chosen a power of attorney, the authority recognizing such is',
                 question_num: '8B',
                 input_name: '8B_POWER_OF_ATTORNEY',
                 parent_class: ['cf-form-radio-inline'],
+                parent_id: 'Q8B',
+                hidden: true,
                 options: [{
                     label: 'Located in the veteran\'s appeal file',
                     value: '8B_POWER_OF_ATTORNEY',
@@ -167,27 +177,27 @@
                     value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
                     id: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
                 }],
-                hidden: true,
-            } %>
 
-        <%= render partial: 'form8_text', locals: {
-                div_id: '8b-explanation',
+        } %>
+
+      <%= render partial: 'form8_text', locals: {
+                div_id: '8B-explanation',
                 question: '<em>Specify file if applicable</em>',
                 question_num: '',
                 input_name: '8B_REMARKS',
                 close_fieldset: true,
+        } %>
 
-            } %>
-      <% end %>
 
       <%= render partial: 'form8_yes_no_radio', locals: {
                 question: 'The agent designated, is he/she on accredited list',
                 question_num: '8C',
+                parent_id: 'Q8C',
                 input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST',
                 parent_class: ['cf-form-radio-inline'],
                 required: true,
-                close_fieldset: true,
                 hidden: true,
+                close_fieldset: true,
 
        } %>
 
@@ -198,7 +208,9 @@
             question_num: '9A',
             input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
             parent_class: ['cf-form-radio-inline'],
+            parent_id: 'Q9A',
             hidden: true,
+
      } %>
 
      <%= render partial: 'form8_text', locals: {
@@ -256,6 +268,7 @@
               required: true,
               toggle: true,
               parent_class: ['cf-form-radio-inline'],
+              parent_id:'Q11A',
               linked: '#Q11B',
               show_when: '11A_NO'
           } %>
