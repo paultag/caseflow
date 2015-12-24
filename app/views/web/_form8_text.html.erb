@@ -23,7 +23,11 @@
         <strong><%= question_num %></strong>
         <%=raw question %>
     </label>
-    <input type="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>" <% if defined?(value) && value %> value="<%=value%>" <% end %> class="form-control" <%= 'required' if defined?(required) && required %> id="<%= input_id %>" <%= 'disabled' if defined?(disabled) && disabled %>>
+    <input type="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>"
+    <%= %Q(value=#{value}) if defined?(value) && value %>
+    <%= 'required' if defined?(required) && required %> id="<%= input_id %>"
+    <%= 'disabled' if defined?(disabled) && disabled %>
+    <%= 'data-requiredifshown' if defined?(requiredifshown) && requiredifshown %>>
 </div>
 <% if defined?(close_fieldset) && close_fieldset %>
 </fieldset>

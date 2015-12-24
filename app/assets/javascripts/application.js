@@ -188,6 +188,10 @@ $(function() {
 
         $(showThis).openItem();
         $(hideThese).closeItem();
+        $(showThis).find(':not([hidden]) [data-requiredifshown]').each(function(){
+            $(this).attr('required','required');
+        })
+        $(hideThese).find('input').removeAttr('required');
     })
 
     // TODO: Try to abstract this into a reusable pattern
