@@ -525,6 +525,7 @@ textarea {
         margin-bottom: rem(45px);
 
         fieldset {
+            margin-top: rem(45px);
             margin-bottom: 0
         }
     }
@@ -541,7 +542,7 @@ textarea {
 
 .cf-form-radio-inline {
     clear: both;
-    
+
     .cf-form-radio-option {
         float: left;
         padding-right: rem(30px);

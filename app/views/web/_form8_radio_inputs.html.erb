@@ -35,7 +35,11 @@
 
 <% for option in options %>
     <p class="cf-form-radio-option">
-        <input type="radio" name="<%=input_name%>" id="<%=option[:id]%>" value="<%=option[:value]%>" <%= " required" if defined?(required) && required %> <%= ' checked' if defined?(option[:checked]) && option[:checked] %><%=raw %Q( data-show="#{option[:showthese]}") if defined?(option[:showthese]) && option[:showthese] %><%=raw %Q( data-hide="#{option[:hidethese]}") if defined?(option[:hidethese]) && option[:hidethese] %>>
+        <input type="radio" name="<%=input_name%>" id="<%=option[:id]%>"
+        value="<%=option[:value]%>" <%= " required" if defined?(required) && required %><%= ' checked' if defined?(option[:checked]) && option[:checked] %>
+          <%=raw %Q( data-show="#{option[:showthese]}") if defined?(option[:showthese]) && option[:showthese] %>
+          <%=raw %Q( data-hide="#{option[:hidethese]}") if defined?(option[:hidethese]) && option[:hidethese] %>
+          <%= 'data-requiredifshown' if defined?(requiredifshown) && requiredifshown %>>
         <label for="<%=option[:id]%>">
            <%=option[:label]%>
         </label>
