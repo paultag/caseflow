@@ -27,6 +27,7 @@
 %>
 
 <fieldset class="<%= parent_class.join(' ') if defined?(parent_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %> <%='hidden=hidden' if defined?(hidden) && hidden %> <%=raw %Q(data-showwhen="#{show_when}") if defined?(show_when) && show_when %> <%=raw %Q( data-linkedto="#{linked}") if defined?(linked) && linked %>>
+
     <legend<%= ' class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
         <%= question %>
@@ -34,7 +35,7 @@
 
 <% for option in options %>
     <div class="cf-form-radio-option">
-        <input type="radio" name="<%=input_name%>" id="<%=option[:id]%>" value="<%=option[:value]%>" <%= " required" if defined?(required) && required %> <%= ' checked' if defined?(option[:checked]) && option[:checked] %>>
+        <input type="radio" name="<%=input_name%>" id="<%=option[:id]%>" value="<%=option[:value]%>" <%= " required" if defined?(required) && required %> <%= ' checked' if defined?(option[:checked]) && option[:checked] %><%=raw %Q( data-show="#{option[:showthese]}") if defined?(option[:showthese]) && option[:showthese] %><%=raw %Q( data-hide="#{option[:hidethese]}") if defined?(option[:hidethese]) && option[:hidethese] %>>
         <label for="<%=option[:id]%>">
            <%=option[:label]%>
         </label>

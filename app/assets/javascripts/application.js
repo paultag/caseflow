@@ -82,7 +82,6 @@ $.fn.extend({
         $(this).val('');
     },
     closeModal: function(event) {
-        //
         event.stopPropagation();
         event.stopImmediatePropagation();
 
@@ -167,7 +166,7 @@ $(function() {
 });
 
 $(function() {
-    $('fieldset').on('change', function(e) {
+    $('#Q11A').on('change', function(e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
 
@@ -182,6 +181,14 @@ $(function() {
             $(whichEl).openItem();
         }
     });
+
+    $('#Q8A').on('change', function(e){
+        var showThis = $(e.target).data('show'),
+            hideThese = $(e.target).data('hide');
+
+        $(showThis).openItem();
+        $(hideThese).closeItem();
+    })
 
     // TODO: Try to abstract this into a reusable pattern
     $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
