@@ -83,7 +83,7 @@
              value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec_date : '',
              hidden: true,
          } %>
-    </fieldset>
+   </fieldset>
 
     <fieldset class="cf-form-cond-req">
        <%= render partial: 'form8_textarea', locals: {
@@ -131,6 +131,7 @@
          input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY',
          required: true,
          parent_id: 'Q8A',
+         parent_class: ['cf-form-showhide-radio'],
          options: [{
              label: 'Power of attorney',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_POWER_OF_ATTORNEY',
@@ -166,7 +167,7 @@
                 question: 'Veteran has chosen a power of attorney, the authority recognizing such is',
                 question_num: '8B',
                 input_name: '8B_POWER_OF_ATTORNEY',
-                parent_class: ['cf-form-radio-inline'],
+                parent_class: ['cf-form-radio-inline','cf-form-showhide-radio'],
                 parent_id: 'Q8B',
                 hidden: true,
                 requiredifshown: true,
@@ -174,17 +175,19 @@
                     label: 'Located in the veteran\'s appeal file',
                     value: '8B_POWER_OF_ATTORNEY',
                     id: '8B_POWER_OF_ATTORNEY',
+                    hidethese: '#8B-Explanation',
                 },
                 {
                     label: 'Located in another VA file',
                     value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
                     id: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
+                    showthese: '#8B-Explanation',
                 }],
 
         } %>
 
       <%= render partial: 'form8_text', locals: {
-                div_id: '8B-explanation',
+                parent_id: '8B-Explanation',
                 question: '<em>Specify file if applicable</em>',
                 question_num: '',
                 input_name: '8B_REMARKS',
@@ -200,47 +203,76 @@
                 parent_id: 'Q8C',
                 input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST',
                 parent_class: ['cf-form-radio-inline'],
-                required: true,
+                requiredifshown: true,
                 hidden: true,
                 close_fieldset: true,
-
        } %>
 
    </fieldset><!--Close question 8 fieldset-->
 
-     <%= render partial: 'form8_yes_no_radio', locals: {
+     <%= render partial: 'form8_radio_inputs', locals: {
             question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
             question_num: '9A',
             input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
-            parent_class: ['cf-form-radio-inline'],
+            parent_class: ['cf-form-radio-inline','cf-form-showhide-radio'],
             parent_id: 'Q9A',
             hidden: true,
+            requiredifshown: true,
+            options: [{
+                label: 'Yes',
+                value: 'yes',
+                id: '9A_YES',
+                hidethese: '#Q9B'
+            },
+            {
+                label: 'No',
+                value: 'no',
+                id: '9A_NO',
+                showthese: '#Q9B',
+            }]
 
      } %>
 
      <%= render partial: 'form8_text', locals: {
-            div_id: '9b',
+            parent_id: 'Q9B',
             question: 'If VA form 646 is not of record, explain',
             question_num: '9B',
             input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN',
             close_fieldset: true,
+            hidden: true,
+            requiredifshown: true,
         } %>
 
 
-    <%= render partial: 'form8_yes_no_radio', locals: {
+    <%= render partial: 'form8_radio_inputs', locals: {
+           parent_id: 'Q10A',
            question: 'Was hearing requested?',
            question_num: '10A',
            input_name: '10A_WAS_HEARING_REQUESTED',
-           parent_class: ['cf-form-radio-inline'],
+           parent_class: ['cf-form-radio-inline','cf-form-showhide-radio'],
            required: true,
-           selected: @kase.hearing_requested?
+           selected: @kase.hearing_requested?,
+           options: [{
+               label: 'Yes',
+               value: 'yes',
+               id: '10A_YES',
+               showthese: '#Q10B, #Q10C',
+           },
+           {
+               label: 'No',
+               value: 'no',
+               id: '10A_NO',
+               hidethese: '#Q10B, #Q10C',
+           }]
      } %>
 
 
-    <% render partial: 'form8_radio_inputs', locals: {
+    <%= render partial: 'form8_radio_inputs', locals: {
+            parent_id: 'Q10B',
             question: 'If the hearing was held, is transcript on file?',
             question_num: '10B',
             input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
+            hidden: true,
             options: [{
                 label: 'Yes',
                 value: 'yes',
@@ -250,32 +282,39 @@
                 label: 'No',
                 value: 'no',
                 id: '10B_NO',
-            },
-            {
-                label: 'N/A',
-                value: '10B_NOT_APPLICABLE',
-                id: '10B_NOT_APPLICABLE',
             }],
+
         } %>
 
       <%= render partial: 'form8_text', locals: {
-              div_id: '10c',
+              parent_id: 'Q10C',
               question: 'If requested, but not held, explain',
               question_num: '10C',
               input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
+              hidden: true,
               close_fieldset: true,
           } %>
 
-      <%= render partial: 'form8_yes_no_radio', locals: {
+
+      <%= render partial: 'form8_radio_inputs', locals: {
               question: 'Are contested claims procedures applicable in this case?',
               question_num: '11A',
               input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
               required: true,
-              toggle: true,
-              parent_class: ['cf-form-radio-inline'],
-              parent_id:'Q11A',
-              linked: '#Q11B',
-              show_when: '11A_NO'
+              parent_class: ['cf-form-radio-inline','cf-form-showhide-radio'],
+              parent_id: 'Q11A',
+              options: [{
+                  label: 'Yes',
+                  value: 'yes',
+                  id: '11A_YES',
+                  showthese: '#Q11B'
+              },
+              {
+                  label: 'No',
+                  value: 'no',
+                  id: '11B_NO',
+                  hidethese: '#Q11B'
+              }],
           } %>
 
 
@@ -283,14 +322,13 @@
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Have the requirements of 38 U.S.C. 7105A been followed for all contested claims?',
               question_num: '11B',
+              parent_id: 'Q11B',
               parent_class: ['cf-form-radio-inline'],
               input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
-              parent_id: 'Q11B',
+              hidden: true,
               close_fieldset: true,
           } %>
 
-      </fieldset><%# Closes nested fieldset for question 11b %>
-  </fieldset><%# Closes nested fieldset parent (Question 11a) %>
 
    <%= render partial: 'form8_date', locals: {
           div_id: '12A-date',
@@ -323,7 +361,7 @@
           } %>
 
 
-      <fieldset>
+      <fieldset id="Q13">
         <legend>
           <strong>13</strong>
           Records to be forwarded to Board of Veterans' Appeals
@@ -372,9 +410,10 @@
                   question_num: '',
                   input_name: '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS',
                   div_id: '13_Specify_Other',
+                  close_fieldset: true,
           } %>
 
-    </fieldset>
+
 
 
       <%= render partial: 'form8_textarea', locals: {
