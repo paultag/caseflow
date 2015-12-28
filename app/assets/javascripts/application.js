@@ -48,20 +48,19 @@ $.fn.extend({
         $(toopen).openItem();
     },
     showLinkedTextField: function(e){
-        var $linked = $(e.currentTarget).find('[data-linkedto]');
+        var $linked = $(this).find('[data-linkedto]');
 
-        if($linked.length && $linked.data('linkedto') ) {
-            var reqSelector = $linked.data('linkedto'),
-                $reqParent = $(reqSelector).parent();
+        if( !!$linked.length && $linked.data('linkedto')) {
+            var reqSelector = $linked.data('linkedto');
 
             if( (/\w/).test($linked.val()) ) {
-                $(reqSelector).attr('required','required');
-                $reqParent.addClass('required');
-                $reqParent.removeAttr('hidden');
+                $(reqSelector).find('input').attr('required','required');
+                $(reqSelector).addClass('required');
+                $(reqSelector).removeAttr('hidden');
             } else {
-                $(reqSelector).removeAttr('required');
-                $reqParent.removeClass('required');
-                $reqParent.attr('hidden', 'hidden');
+                $(reqSelector).find('input').removeAttr('required');
+                $(reqSelector).removeClass('required');
+                $(reqSelector).attr('hidden', 'hidden');
             }
         }
     },
@@ -79,7 +78,6 @@ $.fn.extend({
                 $(this).attr('required','required');
             });
         }
-        console.log('showFieldLinkedFromRadio')
     }
 });
 
@@ -135,28 +133,18 @@ $(function() {
 
 $(function() {
 
-    // TODO: Try to abstract this into a reusable pattern
-    /*$('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
-        $other = $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER');
-
-         Tests for presence of word characters. Spaces will never pass
-
-        $other.prop('checked', (/\w/).test( $(e.target).val() ));
-    });
-
-    $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER').on('change', function(e) {
-        if ( !$(e.target).prop('checked') ) {
-            $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
-        }
-    });*/
-
     $('#Q13').on('change', function(e){
-        console.log(e);
+        if( $(e.target).attr('id') == 'CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER') {
+            if($(e.target).prop('checked')) {
+                $('#13_Specify_Other').removeAttr('hidden');
+            } else {
+                $('#13_Specify_Other').attr('hidden','hidden');
+            }
+        }
     })
 
     /* Adds conditional show/hide based on radio buttons. */
     $('.cf-form-showhide-radio').on('change', $.fn.showFieldLinkedFromRadio);
-
     $('.cf-form-cond-req').on('input', $.fn.showLinkedTextField);
 });
 

@@ -497,10 +497,13 @@ textarea {
 * ============================*/
 
 .required {
-    strong, b {
+    strong, b, em {
         &::after {
             content: '* ';
             color: $color-secondary-dark;
+            font-family: inherit;
+            font-weight: bold;
+            font-style: normal;
         }
     }
 
