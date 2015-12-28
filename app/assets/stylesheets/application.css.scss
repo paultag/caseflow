@@ -542,7 +542,7 @@ textarea {
 
 .cf-form-radio-inline {
     clear: both;
-    
+
     .cf-form-radio-option {
         float: left;
         padding-right: rem(30px);
@@ -589,6 +589,13 @@ Certified success page
     margin-bottom: rem(65px) !important;
     margin-top: rem(15px) !important;
     width: 65%;
+}
+
+.cf-msg-screen-text {
+    width: 65%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cf-list-checklist {
