@@ -67,7 +67,7 @@ label {
   background-color: #ffffff;
 }
 
-.embedded-document {
+.cf-doc-embed {
   width: 100%;
   height: 80vh;
 }
@@ -76,7 +76,7 @@ label {
   padding-right: 0px;
 }
 
-.pilot-warning {
+.cf-notice {
   padding: 8px 20px 8px;
   text-align: center;
   background-color: $color-primary;
@@ -190,6 +190,23 @@ legend {
     }
 }
 
+.cf-icon-close {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+
+    path {
+        fill: $color-gray-light;
+    }
+
+    &:hover {
+        path {
+            fill: $color-gray-dark;
+        }
+    }
+}
+
 .cf-icon-success--bg {
     background: url(asset-path('icons/icon-check.svg')) bottom no-repeat;
     background-size: auto 2rem;
@@ -237,7 +254,7 @@ body {
 /* ===========================*
 * Application navigation bar  *
 * ============================*/
-.usa-cf_app-nav {
+.cf-nav {
     background: $color-white;
     color: $color-gray;
     padding: rem(30px) 0;
@@ -254,18 +271,23 @@ body {
     }
 }
 
-.usa-cf_app-logo {
+.cf-logo {
     color: $color-gray-dark;
     margin-right: rem(20px);
 }
 
-.usa-cf_app,
 .cf-app-screen {
     margin: auto;
     width: 90%;
 }
 
+/*
+.cf-app-segment represents a chunk of an application's
+page Should be an immediate child of .cf-app. Avoid
+making .cf-app-segment a grandchild element of .cf-app.
+*/
 .cf-app-segment {
+    // Clearfix
     &::before, &::after {
         content: ' ';
         display: block;
@@ -279,20 +301,23 @@ body {
     }
 }
 
+// Adds top margin when .cf-app-segment
+// is preceded by an element
 * + .cf-app-segment {
     margin-top: rem(30px);
 }
 
-// TODO: Refactor out .usa-cf_app* classes
-.usa-cf_app, .cf-app {
-    .cf-app-segment, .cf-app-segment {
-        &:first-child {
-            margin-top: rem(40px);
-        }
+// Make the top margin larger whenever
+// cf-app-segment is the first-child
+.cf-app-segment {
+    &:first-child {
+        margin-top: rem(40px);
     }
 }
 
-.usa-cf_app-3-up {
+
+.cf-layout-3-up {
+    border: 1px solid $color-gray-lighter;
     display: table;
     width: 100%;
 
@@ -302,15 +327,11 @@ body {
         vertical-align: middle;
         width: 33%;
     }
-
-    &--bordered {
-        border: 1px solid $color-gray-lighter;
-
-        > *:nth-child(even) {
-            border-left: 1px solid $color-gray-lighter;
-            border-right: 1px solid $color-gray-lighter;
-        }
+    > *:nth-child(even) {
+        border-left: 1px solid $color-gray-lighter;
+        border-right: 1px solid $color-gray-lighter;
     }
+
     &-title {
         color: $color-gray;
         font-weight: inherit;
@@ -393,10 +414,12 @@ textarea {
 // form buttons have high specificity.
 // Keep an eye on https://github.com/18F/web-design-standards/issues/891
 [type="submit"],
-[type="button"] {
+[type="button"],
+.usa-button {
     margin: 0 !important;
 }
 
+/* Make a button look like a link */
 .cf-btn-link {
     background: transparent;
     color: $color-primary;
@@ -410,6 +433,9 @@ textarea {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
 
+    &:visited {
+        color: $color-primary;
+    }
     // Removes padding, so that these links can be placed inline.
     &--inline {
         padding: 0 !important;
@@ -437,6 +463,7 @@ textarea {
 }
 
 /*--- Alerts ---*/
+/* Overrides/fixes USA Web Design Guideline paths */
 .usa-alert-error {
     background-image: url(asset-path('icons/alerts/error.svg'));
 }
@@ -486,7 +513,7 @@ textarea {
     }
 }
 
-.usa-cf_app-form {
+.cf-form {
     header {
         border-bottom: 1px solid $color-gray-lighter;
         margin-bottom: rem(30px);
@@ -507,23 +534,27 @@ textarea {
         display: inline-block;
         margin-right: 0;
     }
-}
 
-.usa-cf_app-form-3-col {
-    @include clearfix;
-    margin-top: rem(30px);
-    margin-bottom: rem(30px);
-    padding: .25rem;
-    white-space: nowrap;
-
-    .usa-width-one-third {
-        margin-right: 0;
+    &-textarea-wrap {
+        max-width: rem(455px);
     }
 }
+
+.cf-form-radio-inline {
+    clear: both;
+    
+    .cf-form-radio-option {
+        float: left;
+        padding-right: rem(30px);
+    }
+}
+
 .form8-text-input {
     @include clearfix;
     clear: both;
+    max-width: rem(380px);
 }
+
 .form8-two-radio {
     &-item {
         display: inline-block;
@@ -534,13 +565,17 @@ textarea {
 /*========================
 Certified success page
 ==========================*/
-
-.cf-msg-screen-heading {
-    text-align: center;
-    font-size: rem(52px);
-    margin-bottom: 1rem;
+.cf-app-msg-screen {
+    color: $color-gray;
 }
 
+.cf-msg-screen-heading {
+    font-size: rem(52px);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+// "deck" is newspaper speak for "subhead"
 .cf-msg-screen-deck {
     text-align: center;
     font-size: rem(20px);

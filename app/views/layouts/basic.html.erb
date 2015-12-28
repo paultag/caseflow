@@ -10,24 +10,24 @@
 
 <body>
       <header>
-          <div class="pilot-warning">
+          <div class="cf-notice">
               <strong>Caseflow is a pilot stage project.</strong>
               Have a question, feature improvement, or problem?
               <a target="_blank" href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx">Send feedback</a>
           </div>
 
-          <nav class="usa-cf_app-nav">
+          <nav class="cf-nav">
               <div class="usa-grid-full">
-                  <strong class="usa-cf_app-logo">Caseflow</strong>
+                  <strong class="cf-logo">Caseflow</strong>
                   <span class="cf-application-title"><%= yield :page_title %></span>
 
                       <% if session[:ro] || session[:username] %>
                        <div class="dropdown">
                           <a href="#menu" class="dropdown-trigger" title="Open menu to sign out" id="menu-trigger">
                               <% if session[:username] %>
-                              <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
+                                <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
-                              <%= session[:ro] %>
+                                <%= session[:ro] %>
                               <% end %>
                           </a>
                           <ul id="menu" class="dropdown-menu" hidden aria-labeledby="menu-trigger">
@@ -42,19 +42,19 @@
 
 
   <main class="usa-grid">
-      <div class="usa-cf_app">
+      <div class="cf-app">
           <%= yield(:content) if content_for?(:content) %>
           <%= yield %>
       </div>
   </main>
 
     <footer class="cf-text-center usa-grid cf-app-footer">
-        <p class="cf-push-left">
+        <div class="cf-push-left">
             Built with <abbr title="love">&#9825;</abbr> by the <a href="http://www.va.gov/ds/">Digital Service at the <abbr title="Department of Veterans Affairs">VA</abbr></a>.
-        </p>
-        <p class="cf-push-right">
+        </div>
+        <div class="cf-push-right">
             <a target="_blank" href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx">Send feedback</a>
-        </p>
+        </div>
     </footer>
 
   <%= javascript_include_tag 'application' %>
