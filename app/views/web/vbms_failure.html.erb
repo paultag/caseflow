@@ -6,15 +6,14 @@
 %>
 <% content_for :page_title do %>VBMS Error<% end %>
 
-<div id="certifications-error">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <h1>VBMS Failure</h1>
-      <p>The VBMS system is not replying to requests, and we're unable to
-          check on the status of the files for this case in VBMS. Please
-          give VBMS a few moments to come back online, and
-          <a href="<%= url_for :controller => 'web', :action => 'start' %>">Restart the certification process</a>.
-      </p>
-    </div>
-  </div>
+<div class="cf-app-msg-screen cf-app-segment cf-app-segment--alt">
+    <h1 class="cf-msg-screen-heading">VBMS Failure</h1>
+    <h2 class="cf-msg-screen-deck">The VBMS system is not replying to requests</h2>
+
+
+    <p class="cf-text-center">We're unable to
+     check on the status of the files for this case in VBMS. Please
+     give VBMS a few moments to come back online, and
+     <a href="<%= url_for :controller => 'web', :action => 'start' %>">Restart the certification process</a>.
+    </p>
 </div>
