@@ -64,6 +64,22 @@ $.fn.extend({
                 $reqParent.attr('hidden', 'hidden');
             }
         }
+    },
+    showFieldLinkedFromRadio: function(e){
+        var showThis = $(e.target).data('show'),
+            hideThese = $(e.target).data('hide');
+
+        $(showThis).openItem();
+        $(hideThese).closeItem();
+        $(hideThese).find('input').removeAttr('required');
+
+        if( $(showThis).data('requiredifshown') !== undefined ) {
+            $(showThis).addClass('required');
+            $(showThis).find('input').filter(':visible').each(function(){
+                $(this).attr('required','required');
+            });
+        }
+        console.log('showFieldLinkedFromRadio')
     }
 });
 
@@ -118,40 +134,13 @@ $(function() {
 });
 
 $(function() {
-    $('#Q11A').on('change', function(e) {
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-
-        var whichEl = $(this).data('linkedto'),
-            showwhen = $(this).data('showwhen');
-
-        if( showwhen == $(e.target).attr('id') ||
-            showwhen == $(e.target).attr('name') ){
-            $(whichEl).closeItem();
-            $(whichEl).find('input').prop('checked', false);
-        } else {
-            $(whichEl).openItem();
-        }
-    });
-
-    $('#Q8A').on('change', function(e){
-        var showThis = $(e.target).data('show'),
-            hideThese = $(e.target).data('hide');
-
-        $(showThis).openItem();
-        $(hideThese).closeItem();
-        $(showThis).find(':not([hidden]) [data-requiredifshown]').each(function(){
-            $(this).attr('required','required');
-        })
-        $(hideThese).find('input').removeAttr('required');
-    })
 
     // TODO: Try to abstract this into a reusable pattern
-    $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
+    /*$('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
         $other = $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER');
-        /*
+
          Tests for presence of word characters. Spaces will never pass
-        */
+
         $other.prop('checked', (/\w/).test( $(e.target).val() ));
     });
 
@@ -159,7 +148,14 @@ $(function() {
         if ( !$(e.target).prop('checked') ) {
             $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
         }
-    });
+    });*/
+
+    $('#Q13').on('change', function(e){
+        console.log(e);
+    })
+
+    /* Adds conditional show/hide based on radio buttons. */
+    $('.cf-form-showhide-radio').on('change', $.fn.showFieldLinkedFromRadio);
 
     $('.cf-form-cond-req').on('input', $.fn.showLinkedTextField);
 });

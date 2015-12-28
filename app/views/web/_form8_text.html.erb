@@ -18,7 +18,7 @@
 
 <% input_id = "#{input_name}_input_id" %>
 
-<p class="form8-text-input <%= div_class if defined?(div_class) %>" <% 'id=#{div_id}' if defined?(div_id) %><%= 'hidden' if defined?(hidden) && hidden %> <%= 'data-showwhen="#{show_when}"' if defined?(show_when) && show_when %>>
+<p class="form8-text-input <%= div_class if defined?(div_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %><%= ' hidden' if defined?(hidden) && hidden %> <%= 'data-showwhen="#{show_when}"' if defined?(show_when) && show_when %> <%= 'data-requiredifshown' if defined?(requiredifshown) && requiredifshown %>>
     <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
         <%=raw question %>
@@ -26,9 +26,9 @@
     <input type="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>"
     <%= %Q(value=#{value}) if defined?(value) && value %>
     <%= 'required' if defined?(required) && required %> id="<%= input_id %>"
-    <%= 'disabled' if defined?(disabled) && disabled %>
-    <%= 'data-requiredifshown' if defined?(requiredifshown) && requiredifshown %>>
+    <%= 'disabled' if defined?(disabled) && disabled %>>
 </p>
 <% if defined?(close_fieldset) && close_fieldset %>
+   </fieldset>
 </fieldset>
 <% end %>
