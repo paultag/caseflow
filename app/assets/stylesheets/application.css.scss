@@ -234,7 +234,7 @@ legend {
     }
 }
 
-.cf-icon-appeal-id {
+.usa-cf-icon-appeal-id {
     display: inline-block;
     margin-left: .25rem;
     vertical-align: -1px;
@@ -264,7 +264,7 @@ body {
         position: relative;
     }
 
-    .cf-dropdown {
+    .dropdown {
         position: absolute;
         right: rem(112px);
     }
@@ -358,7 +358,7 @@ making .cf-app-segment a grandchild element of .cf-app.
 
 /*------ Dropdowns --------*/
 .cf-dropdown {
-  $large-screen: em(640px) !default;
+  $large-screen: em(640) !default;
   display: inline-block;
   position: relative;
 
@@ -407,9 +407,6 @@ making .cf-app-segment a grandchild element of .cf-app.
 textarea {
     max-width: 100% !important;
 }
-
-
-
 
 /*------ Buttons --------*/
 // I hate using !important, but web design standards
