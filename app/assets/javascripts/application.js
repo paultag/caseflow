@@ -112,7 +112,7 @@ $(function() {
     });
 
     $(":not(.cf-dropdown)").on('click', function(e){
-        if( !$(e.target).parents('.cf-dropdown').length ) {
+        if(!$(e.target).parents('.cf-dropdown').length) {
             $('.cf-dropdown-menu').closeItem();
         }
     });
