@@ -216,7 +216,7 @@ legend {
 
 /*--- Appeal button ---*/
 
-.usa-cf-apppeal-id {
+.cf-apppeal-id {
     box-sizing: border-box;
     background: transparent;
     border: 2px solid $color-gray;
@@ -234,7 +234,7 @@ legend {
     }
 }
 
-.usa-cf-icon-appeal-id {
+.cf-icon-appeal-id {
     display: inline-block;
     margin-left: .25rem;
     vertical-align: -1px;
@@ -264,7 +264,7 @@ body {
         position: relative;
     }
 
-    .dropdown {
+    .cf-dropdown {
         position: absolute;
         right: rem(112px);
     }
