@@ -73,11 +73,13 @@
             linkedto: '#5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id',
         } %>
 
-        <%= render partial: 'form8_text', locals: {
+        <%= render partial: 'form8_date', locals: {
+             div_class: 'cf-form-disabled',
              div_id: '5b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '5B',
              input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? Date.parse(@kase.bfdrodec_date) : '',
              value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec_date : '',
              hidden: true,
          } %>
@@ -93,12 +95,12 @@
             linkedto: "#6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
-        <%= render partial: 'form8_text', locals: {
+        <%= render partial: 'form8_date', locals: {
              div_id: '6b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '6B',
              input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: Caseflow.format_issues(@kase, 'increased rating') != '' ? @kase.bfdrodec_date : '',
+             value: Caseflow.format_issues(@kase, 'increased rating') != '' ? Date.parse(@kase.bfdrodec_date) : '',
              hidden: true,
          } %>
     </fieldset>
@@ -113,12 +115,12 @@
             linkedto: "#7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
-        <%= render partial: 'form8_text', locals: {
+        <%= render partial: 'form8_date', locals: {
              div_id: '7b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '7B',
              input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: Caseflow.format_issues(@kase, 'other') != '' ? @kase.bfdrodec_date : '',
+             value: Caseflow.format_issues(@kase, 'other') != '' ? Date.parse(@kase.bfdrodec_date) : '',
              hidden: true,
          } %>
     </fieldset>
@@ -249,13 +251,13 @@
       </fieldset><%# Closes nested fieldset for question 11b %>
   </fieldset><%# Closes nested fieldset parent (Question 11a) %>
 
-   <%= render partial: 'form8_text', locals: {
+   <%= render partial: 'form8_date', locals: {
           div_id: '12A-date',
           question: 'Date of statement of the case furnished',
           question_num: '12A',
           input_name: '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED',
           required: true,
-          value: @kase.bfdsoc_date,
+          value: Date.parse(@kase.bfdsoc_date),
       } %>
 
       <%= render partial: 'form8_radio_inputs', locals: {
