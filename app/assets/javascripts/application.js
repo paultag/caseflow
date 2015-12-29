@@ -111,7 +111,7 @@ $(function() {
          $(dropdownMenu).toggleItem();
     });
 
-    $(":not(.cf-dropdown)").on('click', function(e){
+    $(":not(.cf-dropdown)").on('click', function(e) {
         if(!$(e.target).parents('.cf-dropdown').length) {
             $('.cf-dropdown-menu').closeItem();
         }

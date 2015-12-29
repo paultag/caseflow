@@ -408,43 +408,7 @@ textarea {
     max-width: 100% !important;
 }
 
-/*----------------------------------
- * Icons
- *--------------------------------*/
-// TODO: Convert to SVG icon
-.cf-icon-x {
-    &::before {
-        color: $color-secondary-dark;
-        content: '\00D7';
-        font-size: 130%;
-        line-height: inherit;
-        vertical-align: middle;
-    }
-}
 
-.cf-apppeal-id {
-    box-sizing: border-box;
-    background: transparent;
-    border: 2px solid $color-gray;
-    color: $color-gray;
-    padding: 1rem;
-
-    &:hover {
-        color: $color-white;
-        background: $color-gray;
-        border-bottom: 2px solid $color-gray;
-
-        path {
-            fill: $color-white;
-        }
-    }
-}
-
-.cf-apppeal-id-icon {
-    display: inline-block;
-    margin-left: .25rem;
-    vertical-align: -3px;
-}
 
 
 /*------ Buttons --------*/
