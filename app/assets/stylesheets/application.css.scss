@@ -216,7 +216,7 @@ legend {
 
 /*--- Appeal button ---*/
 
-.usa-cf-apppeal-id {
+.cf-apppeal-id {
     box-sizing: border-box;
     background: transparent;
     border: 2px solid $color-gray;
@@ -264,7 +264,7 @@ body {
         position: relative;
     }
 
-    .dropdown {
+    .cf-dropdown {
         position: absolute;
         right: rem(112px);
     }
@@ -357,7 +357,7 @@ making .cf-app-segment a grandchild element of .cf-app.
 }
 
 /*------ Dropdowns --------*/
-.dropdown {
+.cf-dropdown {
   $large-screen: em(640) !default;
   display: inline-block;
   position: relative;
@@ -367,7 +367,7 @@ making .cf-app-segment a grandchild element of .cf-app.
   }
 }
 
-.dropdown-trigger {
+.cf-dropdown-trigger {
     cursor: pointer;
 
     &::after {
@@ -385,7 +385,7 @@ making .cf-app-segment a grandchild element of .cf-app.
     }
 }
 
-.dropdown-menu {
+.cf-dropdown-menu {
     @include unstyled-list();
     @include transition (all 0.2s ease-in-out);
     background: $color-white;
