@@ -42,18 +42,10 @@ body {
   padding-bottom: 70px;
 }
 
-.border-bottom {
-  padding-bottom: 9px;
-  margin: 0 0 20px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.success,
 .cf-success {
   color: $color-green;
 }
 
-.error,
 .cf-error {
   color: $color-secondary-dark;
 }
@@ -62,17 +54,9 @@ label {
   font-weight: normal !important;
 }
 
-.navbar-default {
-  background-color: #ffffff;
-}
-
 .cf-doc-embed {
   width: 100%;
   height: 80vh;
-}
-
-.col-no-right-pad > .col {
-  padding-right: 0px;
 }
 
 .cf-notice {
@@ -96,19 +80,16 @@ label {
 /*----------------------------------*
 * Globals, Resets, and overrides
 *-----------------------------------*/
-.text-center,
-.cf-text-center {
+.cf-txt-c {
     text-align: center;
 }
-
-.cf-text-right,
-.text-right {
+.cf-txt-r {
     text-align: right;
 }
-.cf-text-left {
+.cf-txt-l {
     text-align: left;
 }
-.text-uc {
+.cf-txt-uc {
     text-transform: uppercase;
 }
 
@@ -221,7 +202,7 @@ dd {
 
 /*--- Appeal button ---*/
 
-.usa-cf-apppeal-id {
+.cf-apppeal-id {
     box-sizing: border-box;
     background: transparent;
     border: 2px solid $color-gray;
@@ -269,7 +250,7 @@ body {
         position: relative;
     }
 
-    .dropdown {
+    .cf-dropdown {
         position: absolute;
         right: rem(112px);
     }
@@ -362,7 +343,7 @@ making .cf-app-segment a grandchild element of .cf-app.
 }
 
 /*------ Dropdowns --------*/
-.dropdown {
+.cf-dropdown {
   $large-screen: em(640) !default;
   display: inline-block;
   position: relative;
@@ -372,7 +353,7 @@ making .cf-app-segment a grandchild element of .cf-app.
   }
 }
 
-.dropdown-trigger {
+.cf-dropdown-trigger {
     cursor: pointer;
 
     &::after {
@@ -390,7 +371,7 @@ making .cf-app-segment a grandchild element of .cf-app.
     }
 }
 
-.dropdown-menu {
+.cf-dropdown-menu {
     @include unstyled-list();
     @include transition (all 0.2s ease-in-out);
     background: $color-white;
