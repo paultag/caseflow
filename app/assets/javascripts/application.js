@@ -118,15 +118,15 @@ $(function() {
 
 $(function() {
     /* Trigger for the dropdown */
-    $(".dropdown-trigger").on('click', function(e) {
+    $(".cf-dropdown-trigger").on('click', function(e) {
          e.preventDefault(); // Prevent page jump
          var dropdownMenu = $(this).attr('href');
          $(dropdownMenu).toggleItem();
     });
 
-    $(":not(.dropdown)").on('click', function(e) {
-        if(!$(e.target).parents('.dropdown').length) {
-            $('.dropdown-menu').closeItem();
+    $(":not(.cf-dropdown)").on('click', function(e) {
+        if(!$(e.target).parents('.cf-dropdown').length) {
+            $('.cf-dropdown-menu').closeItem();
         }
     });
 });
