@@ -80,19 +80,16 @@ label {
 /*----------------------------------*
 * Globals, Resets, and overrides
 *-----------------------------------*/
-.text-center,
-.cf-text-center {
+.cf-txt-c {
     text-align: center;
 }
-
-.cf-text-right,
-.text-right {
+.cf-txt-r {
     text-align: right;
 }
-.cf-text-left {
+.cf-txt-l {
     text-align: left;
 }
-.text-uc {
+.cf-txt-uc {
     text-transform: uppercase;
 }
 
