@@ -19,12 +19,12 @@ class ReportsTest < ActiveSupport::TestCase
     assert_equal Caseflow::Reports.mismatched_dates(f), "NOD, Form 9, SOC"
   end
 
-  test "SeamReport.spreadsheet_cells doesn't error"
+  test "SeamReport.spreadsheet_cells doesn't error" do
     c = Caseflow::Fakes::Case.new
     SeamReport.new.spreadsheet_cells(c)
   end
 
-  test "MismatchedDocumentsReport.spreadsheet_cells doesn't error"
+  test "MismatchedDocumentsReport.spreadsheet_cells doesn't error" do
     c = Caseflow::Fakes::Case.new
     MismatchedDocumentsReport.new.spreadsheet_cells(c)
   end
