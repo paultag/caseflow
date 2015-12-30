@@ -21,11 +21,11 @@ class ReportsTest < ActiveSupport::TestCase
 
   test "SeamReport.spreadsheet_cells doesn't error" do
     c = Caseflow::Fakes::Case.new
-    SeamReport.new.spreadsheet_cells(c)
+    Caseflow::Reports::SeamReport.new.spreadsheet_cells(c)
   end
 
   test "MismatchedDocumentsReport.spreadsheet_cells doesn't error" do
     c = Caseflow::Fakes::Case.new
-    MismatchedDocumentsReport.new.spreadsheet_cells(c)
+    Caseflow::Reports::MismatchedDocumentsReport.new.spreadsheet_cells(c)
   end
 end
