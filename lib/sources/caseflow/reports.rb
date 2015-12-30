@@ -104,7 +104,7 @@ module Caseflow
           vacols_case.folder.file_type,
           vacols_case.regional_office_full,
           Caseflow::Reports.mismatched_dates(vacols_case),
-          vacols_case.bbfdnod,
+          vacols_case.bfdnod,
           vacols_case.bf41stat,
           Caseflow::Reports.hearing_pending(vacols_case),
           vacols_case.bfcorlid
