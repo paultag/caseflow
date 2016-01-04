@@ -213,7 +213,7 @@ class WebController < ApplicationController
       session[:ro] = params[:username].upcase
       redirect_to_case
     else
-      redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
+      redirect_to action: 'login', params: {error_message: 'Login ID and password did not work. Please try again.'}
     end
   end
 
