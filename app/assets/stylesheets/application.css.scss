@@ -88,6 +88,13 @@ label {
     text-transform: uppercase;
 }
 
+.cf-txt-example {
+  font-style: italic;
+  color: $color-gray;
+  vertical-align: middle;
+}
+
+
 /*
 Use cf-push-row to wrap elements that float to the left
 or right
@@ -290,7 +297,6 @@ making .cf-app-segment a grandchild element of .cf-app.
     }
 }
 
-
 .cf-layout-3-up {
     border: 1px solid $color-gray-lighter;
     display: table;
@@ -391,7 +397,13 @@ textarea {
 [type="submit"],
 [type="button"],
 .usa-button {
-    margin: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-right: rem(20px);
+
+    &:last-child {
+        margin-right: 0 !important;
+    }
 }
 
 /* Make a button look like a link */
@@ -588,20 +600,13 @@ Certified success page
     }
 }
 
-.space-left {
-  margin-left: 20px;
-}
-
-.cf-example-text {
-  font-style: italic;
-  color: $color-gray;
-  vertical-align: middle;
-}
-
 .cf-login-input {
   display: inline !important;
 }
 
+[id=username_input_id] ~ .cf-txt-example {
+    margin-left: rem(20px);
+}
 
 /*---------------------------
 Date picker overrides
@@ -643,7 +648,7 @@ Date picker overrides
 
     &-calendar{
         margin: 0;
-        
+
         th {
             background: $color-gray-light;
             color: $color-gray-dark;
