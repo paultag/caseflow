@@ -188,6 +188,7 @@ $(function() {
                 $('#13_Specify_Other').removeAttr('hidden');
             } else {
                 $('#13_Specify_Other').attr('hidden','hidden');
+                $('#13_Specify_Other').find('input').val('');
             }
         }
     })
