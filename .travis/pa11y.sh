@@ -3,6 +3,10 @@
 set -e
 set -x
 
+# Array of URLs to check for 508 compliance
+URLS=(/caseflow/login)
+
+
 ./bin/rails s &
 RAILS_PID=$!
 
@@ -10,8 +14,6 @@ RAILS_PID=$!
 while ! nc -z -w1 localhost 3000 > /dev/null; do
   sleep 1
 done
-
-URLS=(/caseflow/login)
 
 for url in "${URLS[@]}"; do
   pa11y --standard=Section508 --level=warning "http://localhost:3000$url"
