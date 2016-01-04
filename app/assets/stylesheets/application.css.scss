@@ -1,5 +1,6 @@
 $caseflow-background: #f9f9f9;
 
+
 // Vendor -------------- //
 @import '_scss/lib/bourbon/bourbon';
 @import '_scss/lib/neat/neat';
@@ -70,12 +71,6 @@ label {
     text-decoration: underline;
   }
 }
-
-/* Login view */
-#login-login-button {
-  padding-top: 1em;
-}
-
 
 /*----------------------------------*
 * Globals, Resets, and overrides
@@ -302,7 +297,6 @@ making .cf-app-segment a grandchild element of .cf-app.
     }
 }
 
-
 .cf-layout-3-up {
     border: 1px solid $color-gray-lighter;
     display: table;
@@ -406,7 +400,7 @@ textarea {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     margin-right: rem(20px);
-    
+
     &:last-child {
         margin-right: 0 !important;
     }
@@ -612,4 +606,72 @@ Certified success page
 
 [id=username_input_id] ~ .cf-txt-example {
     margin-left: rem(20px);
+}
+
+/*---------------------------
+Date picker overrides
+----------------------------*/
+.ui-datepicker {
+    background: $caseflow-background;
+    box-shadow: 0 0 30px rgba($color-base, .8);
+
+    &-header {
+        background: $color-gray;
+        color: $color-white;
+        text-align: center;
+        padding: 1rem;
+        position: relative;
+        width: 100%;
+    }
+
+    &-title {
+        font-weight: bold;
+    }
+
+    &-prev, &-next {
+        color: $color-white;
+        cursor: pointer;
+        font-size: .85em;
+        line-height: 1.6;
+        position: absolute;
+
+        &:hover {
+            color: $color-white;
+        }
+    }
+    &-prev {
+        left: 1rem;
+    }
+    &-next {
+        right: 1rem;
+    }
+
+    &-calendar{
+        margin: 0;
+
+        th {
+            background: $color-gray-light;
+            color: $color-gray-dark;
+            padding: 1rem;
+            border-color: $color-gray;
+
+            &:first-child {
+                border-left-color: $color-gray-light;
+            }
+            &:last-child {
+                border-right-color: $color-gray-light;
+            }
+
+        }
+        td {
+            background: $caseflow-background;
+            border-color: $color-gray-light;
+            padding: 0;
+            text-align: right;
+        }
+        .ui-state-default {
+            display: block;
+            padding: 1rem;
+        }
+    }
 }
