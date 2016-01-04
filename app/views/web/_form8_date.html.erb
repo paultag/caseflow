@@ -12,7 +12,8 @@ if defined?(div_id) && div_id
 end
 %>
 
-<div class="form8-text-input <%= div_class if defined?(div_class) %>" <%= div_id if defined?(div_id) %> <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
+
+<div class="form8-text-input <%= div_class if defined?(div_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %> <%= 'hidden' if defined?(hidden) && hidden %> <%= show_when if defined?(show_when) && show_when %>>
     <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
         <%= question %>

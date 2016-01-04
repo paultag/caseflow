@@ -98,6 +98,7 @@ $.fn.extend({
     showLinkedTextField: function(e){
         var $linked = $(this).find('[data-linkedto]');
 
+
         if( !!$linked.length && $linked.data('linkedto')) {
             var reqSelector = $linked.data('linkedto');
 
@@ -251,3 +252,8 @@ $(function() {
         });
     }
 });
+
+
+$(document).on('ready', function(e){
+    $('.cf-form-cond-req').trigger('input');
+})
