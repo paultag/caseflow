@@ -13,14 +13,14 @@
 
   <div class="cf-app-segment">
      <h1>Welcome to Caseflow!</h1>
-      <p>Caseflow helps certify an appeal by verifying documents
+      <p><b>Caseflow</b> helps certify an appeal by verifying documents
       in the eFolder and helping you fill out an electronic Form 8.
       Please log in using your <strong>VACOLS credentials.</strong></p>
-  
+
       <% username_input_id = 'username_input_id' %>
       <div>
           <label for="<%= username_input_id %>"><strong>VACOLS Login ID</strong></label>
-       
+
           <input name="username" type="text" id="<%= username_input_id %>" class="cf-login-input" autofocus="autofocus"/>
           <span class="cf-txt-example">Example: RO06</span>
       </div>
@@ -34,6 +34,6 @@
       <p>
             <input type="submit" value="Login"/>
       </p>
-   
+
   </div>
 <% end %>
