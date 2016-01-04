@@ -117,10 +117,17 @@ $.fn.extend({
         var showThis = $(e.target).data('show'),
             hideThese = $(e.target).data('hide');
 
-        $(showThis).openItem();
         $(hideThese).closeItem();
-        $(hideThese).find('input').removeAttr('required');
 
+        $(hideThese).find('input').removeAttr('required');
+        /* Deselect radio buttons, checkboxes */
+        $(hideThese).find('[type=radio], [type=checkbox]').prop('checked', false);
+
+        /* Clear other text fields */
+        $(hideThese).find('input').val('');
+
+        $(showThis).openItem();
+        
         if( $(showThis).data('requiredifshown') !== undefined ) {
             $(showThis).addClass('required');
             $(showThis).find('input').filter(':visible').each(function(){
