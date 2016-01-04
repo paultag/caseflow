@@ -675,35 +675,3 @@ Date picker overrides
         }
     }
 }
-
-
-/*==================================
-* Tabbed component
-*=================================*/
-
-.cf-tab-group {
-    position: relative;
-    background: darken(azure, 20%);
-}
-
-.cf-tabs {
-    position: relative;
-    background: salmon;
-}
-
-.cf-tab {
-    position: absolute;
-    background: yellow;
-    left: 0;
-    width: 100%;
-}
-
-.cf-tab-nav {
-    margin: 0;
-    padding-left: 0;
-    position: relative;
-    
-    li {
-        display: inline-block;
-    }
-}
