@@ -256,3 +256,7 @@ $(function() {
         });
     }
 });
+
+$(document).on('ready', function() {
+    $('.cf-form-cond-req').trigger('input');
+})

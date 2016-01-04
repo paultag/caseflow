@@ -4,6 +4,24 @@
 %>
 <% content_for :page_title do %>Mismatched Documents<% end %>
 
+    <div class="cf-tab-group">
+        <ul class="cf-tab-nav">
+            <li>
+                <a href="#tab1">TAB 1</a>
+                <section class="cf-tab" id="tab1">
+                    THIS IS TAB 1
+                </section>
+            </li>
+            <li>
+                <a href="#tab2">TAB 2</a>
+                 <section class="cf-tab" id="tab2">
+                THIS IS TAB 2
+                </section>
+            </li>
+        </ul>
+       
+    </div>
+   
     <div class="usa-alert usa-alert-error cf-app-segment" role="alert">
       <div class="usa-alert-body">
         <h3 class="usa-alert-heading">Cannot find documents in VBMS</h3>
