@@ -13,7 +13,7 @@ done
 
 URLS=(/caseflow/login)
 
-for url in in ${URLS[@]}; do
+for url in in "${URLS[@]}"; do
   pa11y --standard=Section508 --level=warning "http://localhost:3000$url"
 done
 
