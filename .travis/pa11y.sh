@@ -6,6 +6,7 @@ set -x
 ./bin/rails s &
 RAILS_PID=$!
 
+# Wait for the server to come online
 while ! nc -z -w1 localhost 3000 > /dev/null; do
   sleep 1
 done
