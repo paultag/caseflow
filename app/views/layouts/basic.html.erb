@@ -3,8 +3,6 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Caseflow</title>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -12,31 +10,33 @@
 
 <body>
       <header>
-          <div class="pilot-warning">
+          <div class="cf-notice">
               <strong>Caseflow is a pilot stage project.</strong>
               Have a question, feature improvement, or problem?
               <a target="_blank" href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx">Send feedback</a>
           </div>
 
-          <nav class="usa-cf_app-nav">
+          <nav class="cf-nav">
               <div class="usa-grid-full">
-                  <strong class="usa-cf_app-logo">Caseflow</strong>
+                  <strong class="cf-logo">Caseflow</strong>
                   <span class="cf-application-title"><%= yield :page_title %></span>
 
-                      <% if session[:ro] || session[:username] %>
-                       <div class="dropdown"
-                          <a href="#menu" class="dropdown-trigger" title="Open menu to sign out" id="menu-trigger">
+                 <% if session[:ro] || session[:username] %>
+                  <div class="cf-dropdown">
+                       <a href="#menu" class="cf-dropdown-trigger" id="menu-trigger">
                               <% if session[:username] %>
-                              <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
+                                <%= session[:username] %><% if session[:ro] %> (<%= session[:ro] %>)<% end %>
                               <% else %>
-                              <%= session[:ro] %>
+                                <%= session[:ro] %>
                               <% end %>
-                          </a>
-                          <ul id="menu" class="dropdown-menu" hidden aria-labeledby="menu-trigger">
-                            <li><a href="/caseflow/logout">Sign out</a></li>
-                          </ul>
-                        </div>
-                    <% end %>
+                        </a>
+                       
+                        <ul id="menu" class="cf-dropdown-menu" hidden aria-labeledby="menu-trigger">
+                          <li><a href="/caseflow/logout">Sign out</a></li>
+                        </ul>
+                     
+                  </div>
+                 <% end %>
               </div>
           </nav>
 
@@ -44,16 +44,19 @@
 
 
   <main class="usa-grid">
-      <div class="usa-cf_app">
+      <div class="cf-app">
           <%= yield(:content) if content_for?(:content) %>
           <%= yield %>
       </div>
   </main>
 
-    <footer class="text-center usa-grid usa-cf_app-footer">
-        <p class="usa-cf_app">
-            Built with <abbr title="love">&#9825;</abbr> by the <a href="http://www.va.gov/ds/">Digital Service at the <abbr title="Department of Veterans Affairs">VA</abbr></a>. <a target="_blank" href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx">Send feedback</a>
-        </p>
+    <footer class="cf-txt-c usa-grid cf-app-footer">
+        <div class="cf-push-left">
+            Built with <abbr title="love">&#9825;</abbr> by the <a href="http://www.va.gov/ds/">Digital Service at the <abbr title="Department of Veterans Affairs">VA</abbr></a>.
+        </div>
+        <div class="cf-push-right">
+            <a target="_blank" href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx">Send feedback</a>
+        </div>
     </footer>
 
   <%= javascript_include_tag 'application' %>

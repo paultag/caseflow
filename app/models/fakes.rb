@@ -3,8 +3,8 @@ module Caseflow
     class Case
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :bfdrodec, :bfdnod, :bfd19, :bfdsoc, :efolder_appellant_id, :appeal_type,
-        :vso_full, :regional_office_full, :folder, :correspondent,
-        :save_successful, :issue_breakdown, :bfso, :bfha)
+        :vso_full, :regional_office_full, :folder, :correspondent, :bfdc,
+        :save_successful, :issue_breakdown, :bfso, :bfha, :bfhr)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
@@ -22,7 +22,8 @@ module Caseflow
                      efolder_form9: nil, efolder_soc: nil,
                      efolder_appellant_id: nil, appeal_type: nil, vso_full: nil,
                      regional_office_full: nil, folder: nil, correspondent: nil,
-                     save_successful: true, issue_breakdown: [], bfso: nil, bfha: nil)
+                     save_successful: true, issue_breakdown: [], bfso: nil,
+                     bfha: nil, bfdc: nil, bfhr: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -30,6 +31,7 @@ module Caseflow
         @bfpdnum = bfpdnum
         @bfregoff = bfregoff
         @bfdrodec = bfdrodec
+        @bfdc = bfdc
 
         @bfdnod = bfdnod
         @bfd19 = bfd19
@@ -51,6 +53,7 @@ module Caseflow
         @regional_office_full = regional_office_full
         @bfso = bfso
         @bfha = bfha
+        @bfhr = bfhr
       end
 
       DATE_FIELDS = [
@@ -78,6 +81,10 @@ module Caseflow
       end
 
       def bfms=(value)
+      end
+
+      def merged?
+        @bfdc == "M"
       end
 
       def hearing_requested?
