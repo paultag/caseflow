@@ -20,12 +20,12 @@ class ReportsTest < ActiveSupport::TestCase
   end
 
   test "SeamReport.spreadsheet_cells doesn't error" do
-    c = Caseflow::Fakes::Case.new
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
     Caseflow::Reports::SeamReport.new.spreadsheet_cells(c)
   end
 
   test "MismatchedDocumentsReport.spreadsheet_cells doesn't error" do
-    c = Caseflow::Fakes::Case.new
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
     Caseflow::Reports::MismatchedDocumentsReport.new.spreadsheet_cells(c)
   end
 end
