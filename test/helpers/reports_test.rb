@@ -18,4 +18,14 @@ class ReportsTest < ActiveSupport::TestCase
     f = Caseflow::Fakes::Case.new(bfdnod: t1, bfd19: t2, efolder_soc: t2)
     assert_equal Caseflow::Reports.mismatched_dates(f), "NOD, Form 9, SOC"
   end
+
+  test "SeamReport.spreadsheet_cells doesn't error" do
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("Paper"))
+    Caseflow::Reports::SeamReport.new.spreadsheet_cells(c)
+  end
+
+  test "MismatchedDocumentsReport.spreadsheet_cells doesn't error" do
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
+    Caseflow::Reports::MismatchedDocumentsReport.new.spreadsheet_cells(c)
+  end
 end

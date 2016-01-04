@@ -40,6 +40,25 @@
     text-align: center;
 }
 
+.cf-modal-close {
+    background: transparent;
+    height: 1.5rem;
+    padding: .1rem;
+    position: absolute;
+    right: rem(20px);
+    top: rem(20px);
+    width: 1.5rem;
+
+    &:hover, &:focus, &:active {
+        background: transparent;
+
+        path {
+            fill: $color-gray-dark;
+        }
+    }
+}
+
+
 .cf-modal-text,
 .cf-modal-controls {
     margin: auto;
@@ -50,12 +69,6 @@
     font-size: rem(20px);
     line-height: 2;
     text-align: center;
-}
-
-.cf-btn-close {
-    position: absolute;
-    right: rem(20px);
-    top: rem(20px);
 }
 
 .cf-modal-controls {

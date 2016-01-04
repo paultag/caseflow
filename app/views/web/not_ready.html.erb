@@ -1,15 +1,15 @@
-<% content_for :page_title do %>Case Not Ready<% end %>
+<% content_for :page_title do %>Case not ready!<% end %>
 
-<div id="certifications-error">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <% if @reason == :not_ready %>
-        <h1>Not ready!</h1>
-        <p>This case is not ready ready for certification!</p>
-      <% elsif @reason == :paper %>
-        <h1>Paper cases not supported!</h1>
-        <p>Caseflow cannot be used for Paper or Virtual VA cases</p>
-      <% end %>
-    </div>
-  </div>
+<div class="cf-app-msg-screen cf-app-segment cf-app-segment--alt">
+
+  <% if @reason == :not_ready %>
+    <h1 class="cf-msg-screen-heading">Case not ready!</h1>
+    <h2 class="cf-msg-screen-deck">This case is not ready for certification yet.</h2>
+    <p class="cf-txt-c">Try opening another appeal in VACOLS.</p>
+
+  <% elsif @reason == :paper %>
+    <h1 class="cf-msg-screen-heading">Paper cases not supported!</h1>
+    <h2 class="cf-msg-screen-deck">Caseflow cannot be used for Paper or Virtual VA cases</h2>
+  <% end %>
+
 </div>

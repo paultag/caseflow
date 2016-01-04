@@ -11,8 +11,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'pdf-forms', '~> 1.0.0'
 gem 'kramdown'
 
-gem 'sdoc', '~> 0.4.0', group: :doc
-
 # Needed for asset compilation
 gem 'therubyrhino'
 gem 'uglifier', '>= 1.3.0'
@@ -46,6 +44,7 @@ end
 
 # Libraries and dependencies for front end
 gem 'jquery-rails', '~> 4.0', '>= 4.0.5'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'clipboard-rails'
 
 # PDF.js

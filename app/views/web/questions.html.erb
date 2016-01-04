@@ -13,7 +13,7 @@
       <header>
           <h2>Complete Electronic Form 8</h2>
           <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
-          <p class="cf-required-msg usa-input-error-message">Required</p>
+          <p class="cf-required-msg">Fields marked with a <strong class="cf-error">*</strong> are required.</p>
       </header>
 
       <%= render partial: 'form8_text', locals: {
@@ -73,11 +73,13 @@
             linkedto: '#5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id',
         } %>
 
-        <%= render partial: 'form8_text', locals: {
+        <%= render partial: 'form8_date', locals: {
+             div_class: 'cf-form-disabled',
              div_id: '5b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '5B',
              input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? Date.parse(@kase.bfdrodec_date) : '',
              value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec_date : '',
              hidden: true,
          } %>
@@ -93,12 +95,12 @@
             linkedto: "#6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
-        <%= render partial: 'form8_text', locals: {
+        <%= render partial: 'form8_date', locals: {
              div_id: '6b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '6B',
              input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: Caseflow.format_issues(@kase, 'increased rating') != '' ? @kase.bfdrodec_date : '',
+             value: Caseflow.format_issues(@kase, 'increased rating') != '' ? Date.parse(@kase.bfdrodec_date) : '',
              hidden: true,
          } %>
     </fieldset>
@@ -113,12 +115,12 @@
             linkedto: "#7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED_input_id",
         } %>
 
-        <%= render partial: 'form8_text', locals: {
+        <%= render partial: 'form8_date', locals: {
              div_id: '7b-date-notice',
              question: "Date of notification of action appealed",
              question_num: '7B',
              input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: Caseflow.format_issues(@kase, 'other') != '' ? @kase.bfdrodec_date : '',
+             value: Caseflow.format_issues(@kase, 'other') != '' ? Date.parse(@kase.bfdrodec_date) : '',
              hidden: true,
          } %>
     </fieldset>
@@ -129,17 +131,25 @@
          question_num: '8A',
          input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY',
          value: @kase.vso_full,
+         required: true,
      } %>
 
       <% if @kase.required_fields[:show_8b] %>
-        <%= render partial: 'form8_two_radio', locals: {
+        <%= render partial: 'form8_radio_inputs', locals: {
                 question: 'Veteran has chosen a power of attorney, the authority recognizing such is',
                 question_num: '8B',
                 input_name: '8B_POWER_OF_ATTORNEY',
-                option1_label: 'Located in the veteran\'s appeal file',
-                option1_value: '8B_POWER_OF_ATTORNEY',
-                option2_label: 'Located in another VA file',
-                option2_value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
+                parent_class: ['cf-form-radio-inline'],
+                options: [{
+                    label: 'Located in the veteran\'s appeal file',
+                    value: '8B_POWER_OF_ATTORNEY',
+                    id: '8B_POWER_OF_ATTORNEY',
+                },
+                {
+                    label: 'Located in another VA file',
+                    value: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
+                    id: '8B_CERTIFICATION_THAT_VALID_POWER_OF_ATTORNEY_IS_IN_ANOTHER_VA_FILE',
+                }],
             } %>
 
         <%= render partial: 'form8_text', locals: {
@@ -151,72 +161,70 @@
             } %>
       <% end %>
 
-
-        <%= render partial: 'form8_multi_radio', locals: {
+      <%= render partial: 'form8_yes_no_radio', locals: {
                 question: 'The agent designated, is he/she on accredited list',
                 question_num: '8C',
                 input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST',
-                option1_label: 'Yes',
-                option1_value: 'yes',
-                option2_label: 'No',
-                option2_value: 'no',
-                option3_label: '<abbr title="not applicable">N/A</abbr>',
-                option3_value: 'NOT_APPLICABLE',
+                parent_class: ['cf-form-radio-inline'],
                 required: true,
                 close_fieldset: true,
-            } %>
+       } %>
 
 
-         <%= render partial: 'form8_two_radio', locals: {
-                question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
-                question_num: '9A',
-                input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
-                option1_label: 'Yes',
-                option1_value: 'yes',
-                option2_label: 'No',
-                option2_value: 'no',
-            } %>
-        <%= render partial: 'form8_text', locals: {
-                div_id: '9b',
-                question: 'If VA form 646 is not of record, explain',
-                question_num: '9B',
-                input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN',
-                close_fieldset: true,
-            } %>
+     <%= render partial: 'form8_yes_no_radio', locals: {
+            question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
+            question_num: '9A',
+            input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
+            parent_class: ['cf-form-radio-inline'],
+     } %>
+
+     <%= render partial: 'form8_text', locals: {
+            div_id: '9b',
+            question: 'If VA form 646 is not of record, explain',
+            question_num: '9B',
+            input_name: '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN',
+            close_fieldset: true,
+        } %>
 
 
-      <%= render partial: 'form8_yes_no_radio', locals: {
-              question: 'Was hearing requested?',
-              question_num: '10A',
-              input_name: '10A_WAS_HEARING_REQUESTED',
-              option1_label: 'Yes',
-              option1_value: 'yes',
-              option2_label: 'No',
-              option2_value: 'no',
-              required: true,
-              selected: @kase.hearing_requested?
+    <%= render partial: 'form8_yes_no_radio', locals: {
+           question: 'Was hearing requested?',
+           question_num: '10A',
+           input_name: '10A_WAS_HEARING_REQUESTED',
+           parent_class: ['cf-form-radio-inline'],
+           required: true,
+           selected: @kase.hearing_requested?
+     } %>
+
+
+    <% render partial: 'form8_radio_inputs', locals: {
+            question: 'If the hearing was held, is transcript on file?',
+            question_num: '10B',
+            input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
+            options: [{
+                label: 'Yes',
+                value: 'yes',
+                id: '10B_YES',
+            },
+            {
+                label: 'No',
+                value: 'no',
+                id: '10B_NO',
+            },
+            {
+                label: 'N/A',
+                value: '10B_NOT_APPLICABLE',
+                id: '10B_NOT_APPLICABLE',
+            }],
+        } %>
+
+      <%= render partial: 'form8_text', locals: {
+              div_id: '10c',
+              question: 'If requested, but not held, explain',
+              question_num: '10C',
+              input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
+              close_fieldset: true,
           } %>
-
-
-        <%= render partial: 'form8_multi_radio', locals: {
-                question: 'A hearing was requested, if held, is transcript on file?',
-                question_num: '10B',
-                input_name: '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE',
-                option1_label: 'Yes',
-                option1_value: 'yes',
-                option2_label: 'No',
-                option2_value: 'no',
-                option3_label: '<abbr title="not applicable">N/A</abbr>',
-                option3_value: 'NOT_APPLICABLE',
-            } %>
-
-          <%= render partial: 'form8_text', locals: {
-                  div_id: '10c',
-                  question: 'If requested, but not held, explain',
-                  question_num: '10C',
-                  input_name: '10C_IF_REQUESTED_BUT_NOT_HELD_EXPLAIN',
-                  close_fieldset: true,
-              } %>
 
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Are contested claims procedures applicable in this case?',
@@ -224,8 +232,9 @@
               input_name: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE',
               required: true,
               toggle: true,
-              linked: '#11b',
-              show_when: '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE__no'
+              parent_class: ['cf-form-radio-inline'],
+              linked: '#Q11B',
+              show_when: '11A_NO'
           } %>
 
 
@@ -233,36 +242,43 @@
       <%= render partial: 'form8_yes_no_radio', locals: {
               question: 'Have the requirements of 38 U.S.C. 7105A been followed for all contested claims?',
               question_num: '11B',
+              parent_class: ['cf-form-radio-inline'],
               input_name: '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED',
-              div_id: '11b',
+              parent_id: 'Q11B',
               close_fieldset: true,
           } %>
 
       </fieldset><%# Closes nested fieldset for question 11b %>
   </fieldset><%# Closes nested fieldset parent (Question 11a) %>
 
-   <%= render partial: 'form8_text', locals: {
+   <%= render partial: 'form8_date', locals: {
           div_id: '12A-date',
           question: 'Date of statement of the case furnished',
           question_num: '12A',
           input_name: '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED',
           required: true,
-          value: @kase.bfdsoc_date,
+          value: Date.parse(@kase.bfdsoc_date),
       } %>
 
-      <%= render partial: 'form8_two_radio', locals: {
+      <%= render partial: 'form8_radio_inputs', locals: {
               question: 'Supplemental statement of the case',
               question_num: '12B',
               input_name: '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE',
-              div_id: '12b',
-              option1_label: 'Required and furnished',
-              option1_value: 'yes',
-              option1_checked: @kase.ssoc_required?,
-              option2_label: 'Not required',
-              option2_value: 'no',
-              option2_checked: !@kase.ssoc_required?,
+              parent_id: '12B',
               close_fieldset: true,
               required: true,
+              options: [{
+                  label: 'Required and furnished',
+                  value: '12B_REQUIRED_AND_FURNISHED',
+                  id: '12B_REQUIRED_AND_FURNISHED',
+                  checked: @kase.ssoc_required?,
+              },
+              {
+                  label: 'Not required',
+                  value: '12B_NOT_REQUIRED',
+                  id: '12B_NOT_REQUIRED',
+                  checked: !@kase.ssoc_required?,
+              }]
           } %>
 
 
@@ -377,9 +393,10 @@
   </div>
 
   <div class="cf-app-segment">
-
-      <%= link_to "Can't certify", :not_certified, class: 'cf-btn-link cf-push-left' %>
+      <a href="#confirm-cancel-certification" class="cf-action-openmodal cf-btn-link">Cancel certification</a>
       <button type="submit" class="cf-push-right">Preview Completed Form 8</button>
-
   </div>
+
+  <%= render partial: 'cancel_cert_modal' %>
+
 <% end %>
