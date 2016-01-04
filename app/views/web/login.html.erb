@@ -11,52 +11,29 @@
   </div>
   <% end %>
 
-  <div class=" cf-app-segment">
-    <div class="col col-md-2">
-    </div>
-    <div class="col col-md-6">
-      <h1>Welcome to Caseflow!</h1>
+  <div class="cf-app-segment">
+     <h1>Welcome to Caseflow!</h1>
       <p>Caseflow helps certify an appeal by verifying documents
       in the eFolder and helping you fill out an electronic Form 8.
       Please log in using your <strong>VACOLS credentials.</strong></p>
-    </div>
-    <div id="login-login-form" class="col col-md-3">
+  
       <% username_input_id = 'username_input_id' %>
-      <div class="row">
-        <div class="col col-md-3">
+      <div>
           <label for="<%= username_input_id %>"><strong>VACOLS Login ID</strong></label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col col-md-3">
+       
           <input name="username" type="text" id="<%= username_input_id %>" class="cf-login-input" autofocus="autofocus"/>
-          <span class="cf-example-text space-left">Example: RO06</span>
-        </div>
+          <span class="cf-txt-example">Example: RO06</span>
       </div>
 
       <% password_input_id = 'password_input_id' %>
-      <div class="row">
-        <div class="col col-md-3">
-          <label for="<%= password_input_id %>"><strong>VACOLS Password</strong></label>
-        </div>
+      <div>
+           <label for="<%= password_input_id %>"><strong>VACOLS Password</strong></label>
+           <input name="password" type="password" id="<%= password_input_id %>" class="cf-login-input"/>
       </div>
 
-      <div class="row">
-        <div class="col col-md-3">
-          <input name="password" type="password" id="<%= password_input_id %>" class="cf-login-input"/>
-        </div>
-      </div>
-
-      <div id="login-login-button" class="row">
-        <div class="col col-md-3">
-          <div class="input-group">
-            <input type="submit" value="Login" class="btn btn-primary"/>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col col-md-1">
-    </div>
+      <p>
+            <input type="submit" value="Login"/>
+      </p>
+   
   </div>
 <% end %>
