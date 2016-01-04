@@ -33,12 +33,7 @@ script:
     - bundle exec bundle-audit update
     - bundle exec bundle-audit check
     - ./bin/rake assets:precompile
-    - ./bin/rails s &
-    - |
-        while ! nc -z -w1 localhost 3000 > /dev/null; do
-            sleep 1
-        done
-    - "pa11y --standard=Section508 --level=warning http://localhost:3000/caseflow/login"
+    - ./.travis/pa11y.sh
 
 notifications:
     email: false
