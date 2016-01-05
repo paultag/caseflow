@@ -8,13 +8,13 @@ if ! which zopflipng > /dev/null; then
   exit 1
 fi
 
-root=$(dirname "$0")/../
-mkdir $root/pngtmp/
+root=$(dirname "$(dirname "$0")")
+mkdir "$root/pngtmp/"
 
-for f in $(ls $root/app/assets/images/*/*.png); do
-  name=(basename $f)
-  zopflipng $f $root/pngtmp/$name
-  mv $root/pngtmp/$name $f
+for f in $root/app/assets/images/*/*.png; do
+  name=$(basename "$f")
+  zopflipng "$f" "$root/pngtmp/$name"
+  mv "$root/pngtmp/$name" "$f"
 done
 
-rm -rf $root/pngtmp/
+rm -rf "$root/pngtmp"
