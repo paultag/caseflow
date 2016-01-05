@@ -34,12 +34,12 @@
     </legend>
 
 <% for option in options %>
-    <p class="cf-form-radio-option">
+    <div class="cf-form-radio-option">
         <input type="radio" name="<%=input_name%>" id="<%=option[:id]%>" value="<%=option[:value]%>" <%= " required" if defined?(required) && required %> <%= ' checked' if defined?(option[:checked]) && option[:checked] %>>
         <label for="<%=option[:id]%>">
            <%=option[:label]%>
         </label>
-    </p>
+    </div>
 <% end %>
 
 <% if defined?(close_fieldset) && close_fieldset %>
