@@ -512,25 +512,14 @@ textarea {
         margin-bottom: rem(30px);
     }
 
-    label {
-        margin-top: inherit;
-    }
-    fieldset {
-        margin-bottom: rem(45px);
-
-        fieldset {
-            margin-bottom: 0
-        }
-    }
-
     .cf-btn-forward {
         display: inline-block;
         margin-right: 0;
     }
+}
 
-    &-textarea-wrap {
-        max-width: rem(455px);
-    }
+.cf-form-textarea-wrap {
+    max-width: rem(455px);
 }
 
 .cf-form-radio-inline {
