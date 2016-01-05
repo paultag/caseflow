@@ -583,7 +583,9 @@ fieldset {
     margin-bottom: rem(20px);
 }
 .cf-form-checkbox {
-    margin-bottom: rem(10px);
+    &:not(:last-child){
+        margin-bottom: rem(10px);
+    }
 }
 
 /*========================
