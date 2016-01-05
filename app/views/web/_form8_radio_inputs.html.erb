@@ -27,7 +27,6 @@
 %>
 
 <fieldset class="<%= parent_class.join(' ') if defined?(parent_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %> <%='hidden=hidden' if defined?(hidden) && hidden %> <%=raw %Q(data-showwhen="#{show_when}") if defined?(show_when) && show_when %> <%=raw %Q( data-linkedto="#{linked}") if defined?(linked) && linked %>>
-
     <legend<%= ' class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
         <%= question %>
