@@ -53,6 +53,12 @@ body {
 
 label {
   font-weight: normal !important;
+  margin-top: 0; /* Override USWDS */
+}
+
+p {
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
 }
 
 .cf-doc-embed {
@@ -518,19 +524,36 @@ textarea {
     }
 }
 
+.cf-form-text {
+    clear: both;
+    &::before {
+        content: ' ';
+        display: block;
+    }
+}
 .cf-form-textarea {
+    clear: both;
     max-width: rem(455px);
+}
+
+.cf-form-radio-option {
+    margin-top: rem(20px);
 }
 
 .cf-form-radio-inline {
     clear: both;
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
 
     .cf-form-radio-option {
         float: left;
         padding-right: rem(30px);
     }
 }
-
+.cf-form-cond-req {
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
+}
 .form8-text-input {
     @include clearfix;
     clear: both;
