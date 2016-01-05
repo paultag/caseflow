@@ -248,7 +248,7 @@ class Case < ActiveRecord::Base
         'RO43' => ['Oakland', 'CA'],
         'RO29' => ['Detroit', 'MI'],
         'RO20' => ['Nashville', 'TN'],
-        'RO19' => ['Columbia', 'OH'],
+        'RO19' => ['Columbia', 'SC'],
         'RO48' => ['Portland', 'OR'],
         'RO46' => ['Seattle', 'WA'],
         'RO51' => ['Muskogee', 'OK'],
