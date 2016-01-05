@@ -406,7 +406,9 @@ input[type="month"],
 input[type="time"],
 input[type="week"],
 textarea,
-select {
+select,
+input[type="checkbox"] + label,
+input[type="radio"] + label {
     margin-bottom: 0;
 }
 /* Overrides USWDS */
@@ -565,16 +567,23 @@ fieldset {
     margin-top: rem(10px);
 }
 
+.cf-form-radio-option {
+    margin-bottom: rem(20px);
+}
 .cf-form-radio-inline {
     .cf-form-radio-option {
         float: left;
         padding-right: rem(30px);
+        margin-bottom: 0;
     }
 }
 .cf-form-checkboxes,
 .cf-form-cond-req {
     margin-top: rem(20px);
     margin-bottom: rem(20px);
+}
+.cf-form-checkbox {
+    margin-bottom: rem(10px);
 }
 
 /*========================
