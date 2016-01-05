@@ -397,6 +397,24 @@ making .cf-app-segment a grandchild element of .cf-app.
  * Form controls
  * =========================*/
 
+input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="file"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+textarea,
+select {
+    margin-bottom: 0;
+}
 /* Overrides USWDS */
 textarea {
     max-width: 100% !important;
@@ -524,49 +542,47 @@ textarea {
     }
 }
 
-.cf-form-text {
-    clear: both;
-    &::before {
-        content: ' ';
-        display: block;
+fieldset {
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
+
+    > *,
+    .form8-text-input {
+        margin-bottom: 0;
     }
 }
+
+* + .form8-text-input {
+    @include clearfix;
+    // clear: both;
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
+    max-width: rem(380px);
+}
+
 .cf-form-textarea {
     clear: both;
     max-width: rem(455px);
 }
 
-.cf-form-radio-option {
-    margin-top: rem(20px);
+/* Wrapping element for each option */
+.cf-form-radio-options {
+    @include clearfix;
+    margin-top: rem(10px);
 }
 
 .cf-form-radio-inline {
-    clear: both;
-    margin-top: rem(20px);
-    margin-bottom: rem(20px);
-
     .cf-form-radio-option {
         float: left;
         padding-right: rem(30px);
     }
 }
+.cf-form-checkboxes,
 .cf-form-cond-req {
     margin-top: rem(20px);
     margin-bottom: rem(20px);
 }
-.form8-text-input {
-    @include clearfix;
-    clear: both;
-    max-width: rem(380px);
-}
 
-.form8-two-radio {
-    &-item {
-        display: inline-block;
-        padding-right: 2rem;
-        margin: 1rem 0;
-    }
-}
 /*========================
 Certified success page
 ==========================*/
