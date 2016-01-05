@@ -8,7 +8,7 @@ if ! which zopflipng > /dev/null; then
   exit 1
 fi
 
-root=$(dirname $(dirname "$0"))
+root=$(dirname "$(dirname "$0")")
 mkdir "$root/pngtmp/"
 
 for f in $root/app/assets/images/*/*.png; do
