@@ -212,7 +212,7 @@ mm/dd/yyyy, which matches browsers in which the
 input[type=date] is supported.
 */
 $(function() {
-	if( $("<input type='date'>")[0].type == 'text'){
+	if( $("[type=date]")[0].type == 'text'){
 
         $("[type=date]").datepicker();
 
