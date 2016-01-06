@@ -31,7 +31,7 @@ class WebController < ApplicationController
   XA_ROLLOVER_CAP = 159
 
   sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
-  non_case_actions = sessionless_actions + %w/show_form http_404_not_found/
+  non_case_actions = sessionless_actions + %w/show_form http_404_not_found help/
 
   # Check authentication
   before_action 'login_check', except: sessionless_actions
@@ -237,6 +237,11 @@ class WebController < ApplicationController
     reset_session
     redirect_to action: 'login'
   end
+
+  def help
+    render 'help', layout: 'basic'
+  end
+
 
   # -- Action filter --
 
