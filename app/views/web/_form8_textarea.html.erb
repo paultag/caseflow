@@ -15,13 +15,13 @@
     - linkedto: the selector of the field affected when this one changes.
 %>
 
-<p class="cf-form-textarea-wrap">
+<div class="cf-form-textarea">
     <label for="<%= input_name %>">
       <strong><%= question_num %></strong> <%= question %>
     </label>
     <textarea name="<%= input_name %>" rows="3" class="form-control" id="<%= input_name %>" <%= 'required' if defined?(required) && required %> <%= "data-linkedto=#{linkedto}" if defined?(linkedto) && linkedto %>>
 <%=value if defined?(value) && value %></textarea>
-</p>
+</div>
 
 <% if defined?(close_fieldset) && close_fieldset %>
 </fieldset>
