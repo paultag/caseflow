@@ -491,7 +491,7 @@ textarea {
 * ============================*/
 
 .required {
-    strong, b, em {
+    strong, b {
         &::after {
             content: '* ';
             color: $color-secondary-dark;

@@ -24,7 +24,7 @@
         <%=raw question %>
     </label>
     <input type="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>"
-    <%= %Q(value=#{value}) if defined?(value) && value %>
+    value="<%= value if defined?(value) && value %>"
     <%= 'required' if defined?(required) && required %> id="<%= input_id %>"
     <%= 'disabled' if defined?(disabled) && disabled %>
     <%= 'data-requiredifshown' if defined?(requiredifshown) && requiredifshown %>>
