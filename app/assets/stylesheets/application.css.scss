@@ -384,13 +384,26 @@ making .cf-app-segment a grandchild element of .cf-app.
     @include transition (all 0.2s ease-in-out);
     background: $color-white;
     border: 1px solid $color-gray-lighter;
+    box-shadow: 0 0 10px -3px $color-gray;
     cursor: pointer;
-    padding: rem(10px);
     position: absolute;
     text-align: left;
     top: 2em;
     width: 18rem;
     z-index: 1;
+  	padding: rem(10px) rem(20px);
+  	
+  	a {
+  		display: block;
+  	}
+  	
+  	li {
+  		padding: rem(10px) 0;
+  		
+  		&:last-child {
+  			border-top: 1px solid $color-gray-lighter;
+  		}
+  	}  
  }
 
 /*===========================
