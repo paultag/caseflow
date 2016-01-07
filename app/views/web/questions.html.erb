@@ -12,7 +12,7 @@
   <div class="cf-app-segment cf-app-segment--alt">
       <header>
           <h2>Complete Electronic Form 8</h2>
-          <p>Caseflow pre-fills a Form 8 using data from VACOLS and VBMS. Answer the remaining questions below and click continue.</p>
+          <p>Caseflow pre-fills a Form 8 for each case using data from VACOLS and VBMS. To finish the form, answer the remaining questions. When you are done, click <strong>continue</strong>.</p>
           <p class="cf-required-msg">Fields marked with a <strong class="cf-error">*</strong> are required.</p>
       </header>
 
@@ -162,7 +162,7 @@
       <% end %>
 
       <%= render partial: 'form8_yes_no_radio', locals: {
-                question: 'The agent designated, is he/she on accredited list',
+                question: 'If an agent is designated, is he/she on accredited list?',
                 question_num: '8C',
                 input_name: '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST',
                 parent_class: ['cf-form-radio-inline'],
@@ -366,7 +366,7 @@
        } %>
 
       <%= render partial: 'form8_text', locals: {
-              question: 'Name of Certifying Official',
+              question: 'Name of certifying official',
               question_num: '17A',
               input_name: '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL',
               max_length: 40,
@@ -375,7 +375,7 @@
       } %>
 
       <%= render partial: 'form8_text', locals: {
-              question: 'Title of Certifying Official',
+              question: 'Title of certifying official',
               question_num: '17B',
               input_name: '17B_TITLE',
               required: true,
