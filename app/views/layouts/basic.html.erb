@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Caseflow</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Merriweather" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -29,14 +30,13 @@
                               <% else %>
                                 <%= session[:ro] %>
                               <% end %>
-                        </a>
-
-                        <ul id="menu" class="cf-dropdown-menu" hidden aria-labeledby="menu-trigger">
-                          <li><a href="/caseflow/logout">Sign out</a></li>
-                        </ul>
-
-                  </div>
-                 <% end %>
+                          </a>
+                          <ul id="menu" class="cf-dropdown-menu" hidden aria-labeledby="menu-trigger">
+                            <li><a href="/caseflow/help">Help</a></li>
+                            <li><a href="/caseflow/logout">Sign out</a></li>
+                          </ul>
+                        </div>
+                    <% end %>
               </div>
           </nav>
 

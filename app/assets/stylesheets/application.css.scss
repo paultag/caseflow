@@ -53,6 +53,12 @@ body {
 
 label {
   font-weight: normal !important;
+  margin-top: 0; /* Override USWDS */
+}
+
+p {
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
 }
 
 .cf-doc-embed {
@@ -112,6 +118,7 @@ or right
 }
 abbr[title] {
     border: 0;
+    text-decoration: none;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -137,6 +144,10 @@ legend {
     opacity: .5 !important;
 }
 
+dd {
+    margin-left: 0;
+}
+
 .cf-position-fixed {
     position: fixed;
 }
@@ -144,6 +155,7 @@ legend {
 .cf-layout-inline-block {
     display: inline-block !important;
 }
+
 
 /*------------------------------------
  * Icons
@@ -385,6 +397,26 @@ making .cf-app-segment a grandchild element of .cf-app.
  * Form controls
  * =========================*/
 
+input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="file"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+textarea,
+select,
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+    margin-bottom: 0;
+}
 /* Overrides USWDS */
 textarea {
     max-width: 100% !important;
@@ -506,49 +538,62 @@ textarea {
         margin-bottom: rem(30px);
     }
 
-    label {
-        margin-top: inherit;
-    }
-    fieldset {
-        margin-bottom: rem(45px);
-
-        fieldset {
-            margin-bottom: 0
-        }
-    }
-
     .cf-btn-forward {
         display: inline-block;
         margin-right: 0;
     }
+}
 
-    &-textarea-wrap {
-        max-width: rem(455px);
+fieldset {
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
+
+    > *,
+    .form8-text-input {
+        margin-bottom: 0;
     }
 }
 
-.cf-form-radio-inline {
-    clear: both;
-
-    .cf-form-radio-option {
-        float: left;
-        padding-right: rem(30px);
-    }
-}
-
-.form8-text-input {
+* + .form8-text-input {
     @include clearfix;
-    clear: both;
+    // clear: both;
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
     max-width: rem(380px);
 }
 
-.form8-two-radio {
-    &-item {
-        display: inline-block;
-        padding-right: 2rem;
-        margin: 1rem 0;
+.cf-form-textarea {
+    clear: both;
+    max-width: rem(455px);
+}
+
+/* Wrapping element for each option */
+.cf-form-radio-options {
+    @include clearfix;
+    margin-top: rem(10px);
+}
+
+.cf-form-radio-option {
+    margin-bottom: rem(20px);
+}
+.cf-form-radio-inline {
+    .cf-form-radio-option {
+        float: left;
+        padding-right: rem(30px);
+        margin-bottom: 0;
     }
 }
+.cf-form-checkboxes,
+.cf-form-cond-req {
+    margin-top: rem(20px);
+    margin-bottom: rem(20px);
+}
+.cf-form-checkbox {
+    &:not(:last-child){
+        margin-bottom: rem(10px);
+    }
+}
+
 /*========================
 Certified success page
 ==========================*/
@@ -608,6 +653,28 @@ Certified success page
     margin-left: rem(20px);
 }
 
+//------------------------------
+// Help page
+// -------------------------------
+
+[id=help-page] {
+    dt {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin: 3rem auto 0rem;
+    }
+    dd p {
+        margin-top: 0;
+    }
+    img {
+        box-shadow: 0 0 20px -5px rgba(#000, .5);
+        clear: both;
+        display: block;
+        margin: 2rem;
+        max-width: 60rem;
+        height: auto;
+    }
+}
 /*---------------------------
 Date picker overrides
 ----------------------------*/
