@@ -392,18 +392,18 @@ making .cf-app-segment a grandchild element of .cf-app.
     width: 18rem;
     z-index: 1;
   	padding: rem(10px) rem(20px);
-  	
+
   	a {
-  		display: block;
+        display: block;
   	}
-  	
+
   	li {
-  		padding: rem(10px) 0;
-  		
-  		&:last-child {
-  			border-top: 1px solid $color-gray-lighter;
-  		}
-  	}  
+        padding: rem(10px) 0;
+
+        &:last-child {
+            border-top: 1px solid $color-gray-lighter;
+        }
+    }  
  }
 
 /*===========================
