@@ -32,6 +32,7 @@
         <%= question %>
     </legend>
 
+<div class="cf-form-radio-options">    
 <% for option in options %>
     <div class="cf-form-radio-option">
         <input type="radio" name="<%=input_name%>" id="<%=option[:id]%>"
@@ -41,8 +42,9 @@
         <label for="<%=option[:id]%>">
            <%=option[:label]%>
         </label>
-    </div>
-<% end %>
+	</div>
+    <% end %>
+</div>
 
 <% if defined?(close_fieldset) && close_fieldset %>
   </fieldset>
