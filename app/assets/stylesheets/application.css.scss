@@ -591,6 +591,9 @@ textarea {
         &::after {
             content: '* ';
             color: $color-secondary-dark;
+            font-family: inherit;
+            font-weight: bold;
+            font-style: normal;
         }
     }
 
@@ -644,6 +647,7 @@ fieldset {
 }
 
 .cf-form-radio-option {
+ 	@include clearfix;
     margin-bottom: rem(20px);
 }
 .cf-form-radio-inline {
