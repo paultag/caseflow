@@ -163,14 +163,12 @@ $(function() {
             $('.cf-dropdown-menu').closeItem();
         }
     });
-});
 
-/*
-JavaScript that toggles hidden attribute for tooltips.
-Not strictly necessary, but better accessibilty support
-that display:none/display:block alone.
-*/
-$(function() {
+    /*
+    JavaScript that toggles hidden attribute for tooltips.
+    Not strictly necessary, but better accessibilty support
+    than display:none/display:block alone.
+    */
     $(".cf-tooltip-trigger").on('mouseenter', function() {
          $(this).siblings('.cf-tooltip-text').openItem();
     });
