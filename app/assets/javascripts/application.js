@@ -73,7 +73,7 @@ $.fn.extend({
         $(this).removeAttr('hidden');
     },
     toggleItem: function() {
-        $(this).toggleAttr('hidden','hidden');
+        $(this).toggleAttr('hidden', 'hidden');
     },
     closeItem: function(){
         $(this).attr('hidden', 'hidden');
@@ -82,7 +82,6 @@ $.fn.extend({
         $(this).val('');
     },
     closeModal: function(event) {
-        //
         event.stopPropagation();
         event.stopImmediatePropagation();
 
@@ -163,6 +162,21 @@ $(function() {
         if(!$(e.target).parents('.cf-dropdown').length) {
             $('.cf-dropdown-menu').closeItem();
         }
+    });
+});
+
+/*
+JavaScript that toggles hidden attribute for tooltips.
+Not strictly necessary, but better accessibilty support
+that display:none/display:block alone.
+*/
+$(function() {
+    $(".cf-tooltip-trigger").on('mouseenter', function() {
+         $(this).siblings('.cf-tooltip-text').openItem();
+    });
+
+    $(".cf-tooltip-trigger").on('mouseleave', function(e) {
+        $(this).siblings('.cf-tooltip-text').closeItem();
     });
 });
 
