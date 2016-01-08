@@ -68,6 +68,10 @@
      end
    end
 
+   if defined?(requiredifshown)
+     yes_no_locals[:requiredifshown] = true 
+   end
+
 
 %>
 <%= render partial: 'form8_radio_inputs', locals: yes_no_locals %>
