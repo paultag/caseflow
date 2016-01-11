@@ -94,7 +94,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATCHED DATES", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
+        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -104,6 +104,7 @@ module Caseflow
           vacols_case.folder.file_type,
           vacols_case.regional_office_full,
           Caseflow::Reports.mismatched_dates(vacols_case),
+          vacols_case.bfdnod,
           vacols_case.bf41stat,
           Caseflow::Reports.hearing_pending(vacols_case),
           vacols_case.bfcorlid
@@ -124,7 +125,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -133,6 +134,7 @@ module Caseflow
           TYPE_ACTION[vacols_case.bfac],
           vacols_case.regional_office_full,
           Caseflow::Reports.mismatched_dates(vacols_case),
+          vacols_case.bfdnod,
           vacols_case.bf41stat,
           Caseflow::Reports.hearing_pending(vacols_case),
           vacols_case.bfcorlid

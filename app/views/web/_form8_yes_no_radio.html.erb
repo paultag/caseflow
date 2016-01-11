@@ -13,24 +13,31 @@
 %>
 
 <% yes_no_locals = {
-  # Same for all things using this partial
-  option1_label: 'Yes',
-  option1_value: 'yes',
-  option2_label: 'No',
-  option2_value: 'no',
-
-  # Fill in local varialbes passed to this partial
+  # Fill in local variables passed to this partial
   question: question,
   question_num: question_num,
   input_name: input_name,
 }
 
+  yes_no_locals[:options] = [
+    {
+       label: 'Yes',
+       value: 'yes',
+       id: "#{question_num}_YES"
+    },
+    {
+       label: 'No',
+       value: 'no',
+       id: "#{question_num}_NO"
+    }
+  ]
    # Optional arguments
-   if defined?(div_id)
-     yes_no_locals[:div_id] = div_id
+
+   if defined?(parent_id)
+     yes_no_locals[:parent_id] = parent_id
    end
-   if defined?(div_class)
-     yes_no_locals[:div_class] = div_class
+   if defined?(parent_class)
+     yes_no_locals[:parent_class] = parent_class
    end
 
    if defined?(required)
@@ -55,12 +62,16 @@
 
    if defined?(selected)
      if selected
-       yes_no_locals[:option1_checked] = true
+       yes_no_locals[:options][0][:checked] = true
      else
-       yes_no_locals[:option2_checked] = true
+       yes_no_locals[:options][1][:checked] = true
      end
+   end
+
+   if defined?(requiredifshown)
+     yes_no_locals[:requiredifshown] = true 
    end
 
 
 %>
-<%= render partial: 'form8_two_radio', locals: yes_no_locals %>
+<%= render partial: 'form8_radio_inputs', locals: yes_no_locals %>

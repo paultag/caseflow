@@ -31,7 +31,7 @@ class WebController < ApplicationController
   XA_ROLLOVER_CAP = 159
 
   sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
-  non_case_actions = sessionless_actions + %w/show_form http_404_not_found/
+  non_case_actions = sessionless_actions + %w/show_form http_404_not_found help/
 
   # Check authentication
   before_action 'login_check', except: sessionless_actions
@@ -213,7 +213,7 @@ class WebController < ApplicationController
       session[:ro] = params[:username].upcase
       redirect_to_case
     else
-      redirect_to action: 'login', params: {error_message: 'Username and password did not work.'}
+      redirect_to action: 'login', params: {error_message: 'Login ID and password did not work. Please try again.'}
     end
   end
 
@@ -237,6 +237,11 @@ class WebController < ApplicationController
     reset_session
     redirect_to action: 'login'
   end
+
+  def help
+    render 'help', layout: 'basic'
+  end
+
 
   # -- Action filter --
 
