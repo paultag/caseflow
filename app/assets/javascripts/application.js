@@ -86,6 +86,11 @@ $.fn.extend({
             $(this).before(text);
         }
     },
+    showDateError: function(text) {
+        if( !$(this).siblings('.usa-input-error-message').length ) {
+            $(this).before(text);
+        }
+    },
     showRadioError: function (text) {
         if( !$(this).parents('fieldset').find('.usa-input-error-message').length ) {
             $(this).parents('fieldset').find('legend').after(text);
@@ -228,7 +233,7 @@ input[type=date] is supported.
 $(function() {
 
 	if( $("<input type='date'>")[0].type == 'text'){
-
+        /* Add the date picker UI */
         $("[type=date]").datepicker();
 
         /* Rewrite dates to mm/dd/yyy format*/
@@ -254,9 +259,10 @@ $(function() {
             the id attribute from the hidden field so
             there's no label confusion.
             */
-            $(this).removeAttr('name');
+            // $(this).removeAttr('name');
             $hiddenDate.removeAttr('id');
             $hiddenDate.removeAttr('disabled');
+            $hiddenDate.val($(this).dateYYYYMMDD());
         });
 
         /*
@@ -319,11 +325,18 @@ $(function(){
         $(e.target).parents('fieldset').trigger('invalidfield');
     });
 
-    $('[type=text], [type=date]').on('invalid', function(e){
+    $('[type=text]').on('invalid', function(e){
         e.preventDefault(); /* Prevents error bubbles */
         $(e.target).showTextError(ERROR_MESSAGES[e.target.name]);
         /* Dispatch an event on the parent element */
         $(e.target).parents('fieldset, .form8-text-input').trigger('invalidfield');
+        $(e.target).attr('id');
+    });
+
+    $('[type=date]').on('invalid', function(e){
+        e.preventDefault();
+        $(e.target).showDateError(ERROR_MESSAGES[e.target.name]);
+        $(e.target).parents('.form8-text-input').trigger('invalidfield');
     });
 
     $('[type=radio]').on('change', function(e){
