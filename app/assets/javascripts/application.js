@@ -124,7 +124,10 @@ $.fn.extend({
         $(hideThese).find('[type=radio], [type=checkbox]').prop('checked', false);
 
         /* Clear other text fields */
-        $(hideThese).find('input').val('');
+        $(hideThese).find('[type=text], textarea').val('');
+
+        /* Unset radio buttons and checkboxes */
+        $(hideThese).find('[type=checkbox], [type=radio]').prop('checked', false);
 
         $(showThis).openItem();
 
