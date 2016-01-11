@@ -76,7 +76,7 @@ $.fn.extend({
         $(this).toggle(50);
     },
     closeItem: function() {
-        $(this).hide(50);
+        $(this).hide(500);
     },
     clearField: function() {
         $(this).val('');
@@ -104,12 +104,12 @@ $.fn.extend({
 
             if( (/\w/).test($linked.val()) ) {
                 $(reqSelector).find('input').attr('required','required');
-                $reqParent.addClass('required');
-                $reqParent.openItem();
+                $(reqSelector).addClass('required');
+                $(reqSelector).openItem();
             } else {
                 $(reqSelector).find('input').removeAttr('required');
-                $reqParent.removeClass('required');
-                $reqParent.closeItem();
+                $(reqSelector).removeClass('required');
+                $(reqSelector).closeItem();
             }
         }
     },
