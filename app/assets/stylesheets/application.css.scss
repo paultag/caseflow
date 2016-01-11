@@ -37,23 +37,23 @@ $caseflow-background: #f9f9f9;
 @import '_scss/caseflow-components/modals';
 
 html,body {
-  min-height: 100%;
+    min-height: 100%;
 }
 body {
-  padding-bottom: 70px;
+    padding-bottom: 70px;
 }
 
 .cf-success {
-  color: $color-green;
+    color: $color-green;
 }
 
 .cf-error {
-  color: $color-secondary-dark;
+    color: $color-secondary-dark;
 }
 
 label {
-  font-weight: normal !important;
-  margin-top: 0; /* Override USWDS */
+    font-weight: normal !important;
+    margin-top: 0; /* Override USWDS */
 }
 
 p {
@@ -62,20 +62,20 @@ p {
 }
 
 .cf-doc-embed {
-  width: 100%;
-  height: 80vh;
+    width: 100%;
+    height: 80vh;
 }
 
 .cf-notice {
-  padding: 8px 20px 8px;
-  text-align: center;
-  background-color: $color-primary;
-  color: $color-white;
-
-  a {
+    padding: 8px 20px 8px;
+    text-align: center;
+    background-color: $color-primary;
     color: $color-white;
-    text-decoration: underline;
-  }
+
+    a {
+        color: $color-white;
+        text-decoration: underline;
+    }
 }
 
 /*----------------------------------*
@@ -95,9 +95,9 @@ p {
 }
 
 .cf-txt-example {
-  font-style: italic;
-  color: $color-gray;
-  vertical-align: middle;
+    font-style: italic;
+    color: $color-gray;
+    vertical-align: middle;
 }
 
 
@@ -352,13 +352,13 @@ making .cf-app-segment a grandchild element of .cf-app.
 
 /*------ Dropdowns --------*/
 .cf-dropdown {
-  $large-screen: em(640) !default;
-  display: inline-block;
-  position: relative;
+    $large-screen: em(640) !default;
+    display: inline-block;
+    position: relative;
 
-  a {
-     color: inherit;
-  }
+    a {
+       color: inherit;
+    }
 }
 
 .cf-dropdown-trigger {
@@ -384,13 +384,26 @@ making .cf-app-segment a grandchild element of .cf-app.
     @include transition (all 0.2s ease-in-out);
     background: $color-white;
     border: 1px solid $color-gray-lighter;
+    box-shadow: 0 0 10px -3px $color-gray;
     cursor: pointer;
-    padding: rem(10px);
     position: absolute;
     text-align: left;
     top: 2em;
     width: 18rem;
     z-index: 1;
+    padding: rem(10px) rem(20px);
+
+    a {
+        display: block;
+    }
+
+    li {
+        padding: rem(10px) 0;
+
+        &:last-child {
+            border-top: 1px solid $color-gray-lighter;
+        }
+    }
  }
 
 /*===========================
@@ -521,6 +534,9 @@ textarea {
         &::after {
             content: '* ';
             color: $color-secondary-dark;
+            font-family: inherit;
+            font-weight: bold;
+            font-style: normal;
         }
     }
 
@@ -574,6 +590,7 @@ fieldset {
 }
 
 .cf-form-radio-option {
+ 	@include clearfix;
     margin-bottom: rem(20px);
 }
 .cf-form-radio-inline {
@@ -646,7 +663,7 @@ Certified success page
 }
 
 .cf-login-input {
-  display: inline !important;
+    display: inline !important;
 }
 
 [id=username_input_id] ~ .cf-txt-example {

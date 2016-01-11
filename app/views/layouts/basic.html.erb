@@ -32,8 +32,9 @@
                               <% end %>
                           </a>
                           <ul id="menu" class="cf-dropdown-menu" hidden aria-labeledby="menu-trigger">
-                            <li><a href="/caseflow/help">Help</a></li>
-                            <li><a href="/caseflow/logout">Sign out</a></li>
+                            <li><a href="<%= url_for(controller: 'web', action: 'help') %>">Help</a></li>
+                            <li><a href="https://vaww.vaco.portal.va.gov/sites/BVA/olkm/DigitalService/Lists/Feedback/NewForm.aspx" target="_blank">Send Feedback</a></li>
+                            <li><a href="<%= url_for(controller: 'web', action: 'logout') %>">Sign out</a></li>
                           </ul>
                         </div>
                     <% end %>
