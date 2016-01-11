@@ -262,7 +262,6 @@ $(function() {
             the id attribute from the hidden field so
             there's no label confusion.
             */
-            // $(this).removeAttr('name');
             $hiddenDate.removeAttr('id');
             $hiddenDate.removeAttr('disabled');
             $hiddenDate.val($(this).dateYYYYMMDD());
@@ -322,7 +321,7 @@ $(function(){
     });
 
     $('[type=radio]').on('invalid', function(e){
-        e.preventDefault(); /* Prevents error bubbles */
+        e.preventDefault(); /* Prevents native error bubbles */
         $(e.target).showRadioError(ERROR_MESSAGES[e.target.name]);
         /* Dispatch an event on the parent element */
         $(e.target).parents('fieldset').trigger('invalidfield');
