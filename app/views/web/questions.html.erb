@@ -134,29 +134,34 @@
          options: [{
              label: 'Power of attorney',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_POWER_OF_ATTORNEY',
-             id:'8A_POWER_OF_ATTORNEY',
+             id: '8A_POWER_OF_ATTORNEY',
+             value: '8A_POWER_OF_ATTORNEY',
              hidden: true,
              showthese: '#Q8B',
              hidethese: '#Q8C, #Q9A',
+           
          },
          {
              label: 'Agent',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_AGENT',
-             id:'8A_AGENT',
+             id: '8A_AGENT',
+             value: '8A_AGENT',
              showthese: '#Q8C',
              hidethese: '#Q8B, #Q9A',
          },
          {
              label: 'Service organization',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_SERVICE_ORGANIZATION',
-             id:'8A_SERVICE_ORGANIZATION',
+             id: '8A_SERVICE_ORGANIZATION',
+             value: '8A_SERVICE_ORGANIZATION',
              showthese: '#Q9A',
              hidethese: '#Q8B,#Q8C',
          },
          {
              label: 'No representative',
              input_name: '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_NO_REPRESENTATIVE',
-             id:'8A_NO_REPRESENTATIVE',
+             id: '8A_NO_REPRESENTATIVE',
+             value: '8A_NO_REPRESENTATIVE',
              hidethese: '#Q8B,#Q8C,#Q9A'
          }
         ]
@@ -172,8 +177,8 @@
                 requiredifshown: true,
                 options: [{
                     label: 'Located in the veteran\'s appeal file',
-                    value: '8B_POWER_OF_ATTORNEY',
-                    id: '8B_POWER_OF_ATTORNEY',
+                    value: '8B_VETERANS_APPEAL_FILE',
+                    id: '8B_VETERANS_APPEAL_FILE',
                     hidethese: '#8B-Explanation',
                 },
                 {
@@ -207,7 +212,7 @@
        } %>
 
 
-     <%= render partial: 'form8_radio_inputs', locals: {
+     <%= render partial: 'form8_yes_no_radio', locals: {
             question: 'Representative is service organization, is VA Form 646, or equivalent, of record?',
             question_num: '9A',
             input_name: '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646',
@@ -215,18 +220,6 @@
             parent_id: 'Q9A',
             hidden: true,
             requiredifshown: true,
-            options: [{
-                label: 'Yes',
-                value: 'yes',
-                id: '9A_YES',
-                hidethese: '#Q9B'
-            },
-            {
-                label: 'No',
-                value: 'no',
-                id: '9A_NO',
-                showthese: '#Q9B',
-            }]
 
      } %>
 
