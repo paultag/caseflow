@@ -384,10 +384,11 @@ making .cf-app-segment a grandchild element of .cf-app.
 
 .cf-dropdown-menu {
     @include unstyled-list();
-    @include transition (all 0.2s ease-in-out);
+    // @include transition (all 0.2s ease-in-out);
     background: $color-white;
     border: 1px solid $color-gray-lighter;
     box-shadow: 0 0 10px -3px $color-gray;
+    display: none;
     cursor: pointer;
     position: absolute;
     text-align: left;
@@ -591,6 +592,9 @@ textarea {
         &::after {
             content: '* ';
             color: $color-secondary-dark;
+            font-family: inherit;
+            font-weight: bold;
+            font-style: normal;
         }
     }
 
@@ -644,6 +648,7 @@ fieldset {
 }
 
 .cf-form-radio-option {
+ 	@include clearfix;
     margin-bottom: rem(20px);
 }
 .cf-form-radio-inline {

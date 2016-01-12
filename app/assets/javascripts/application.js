@@ -70,15 +70,15 @@ $.fn.extend({
         return padded.substr(padded.length - extract);
     },
     openItem: function() {
-        $(this).removeAttr('hidden');
+        $(this).show(50);
     },
     toggleItem: function() {
-        $(this).toggleAttr('hidden', 'hidden');
+        $(this).toggle(50);
     },
-    closeItem: function(){
-        $(this).attr('hidden', 'hidden');
+    closeItem: function() {
+        $(this).hide(500);
     },
-    clearField: function(){
+    clearField: function() {
         $(this).val('');
     },
     closeModal: function(event) {
@@ -96,21 +96,46 @@ $.fn.extend({
         $(toopen).openItem();
     },
     showLinkedTextField: function(e){
-        var $linked = $(e.currentTarget).find('[data-linkedto]');
+        var $linked = $(this).find('[data-linkedto]');
 
-        if($linked.length && $linked.data('linkedto') ) {
-            var reqSelector = $linked.data('linkedto'),
-                $reqParent = $(reqSelector).parent();
+
+        if( !!$linked.length && $linked.data('linkedto')) {
+            var reqSelector = $linked.data('linkedto');
 
             if( (/\w/).test($linked.val()) ) {
-                $(reqSelector).attr('required','required');
-                $reqParent.addClass('required');
-                $reqParent.removeAttr('hidden');
+                $(reqSelector).find('input').attr('required','required');
+                $(reqSelector).addClass('required');
+                $(reqSelector).openItem();
             } else {
-                $(reqSelector).removeAttr('required');
-                $reqParent.removeClass('required');
-                $reqParent.attr('hidden', 'hidden');
+                $(reqSelector).find('input').removeAttr('required');
+                $(reqSelector).removeClass('required');
+                $(reqSelector).closeItem();
             }
+        }
+    },
+    showFieldLinkedFromRadio: function(e){
+        var showThis = $(e.target).data('show'),
+            hideThese = $(e.target).data('hide');
+
+        $(hideThese).closeItem();
+
+        $(hideThese).find('input').removeAttr('required');
+        /* Deselect radio buttons, checkboxes */
+        $(hideThese).find('[type=radio], [type=checkbox]').prop('checked', false);
+
+        /* Clear other text fields */
+        $(hideThese).find('[type=text], textarea').val('');
+
+        /* Unset radio buttons and checkboxes */
+        $(hideThese).find('[type=checkbox], [type=radio]').prop('checked', false);
+
+        $(showThis).openItem();
+
+        if( $(showThis).data('requiredifshown') !== undefined ) {
+            $(showThis).addClass('required');
+            $(showThis).find('input').filter(':visible').each(function(){
+                $(this).attr('required','required');
+            });
         }
     }
 });
@@ -179,37 +204,20 @@ $(function() {
 });
 
 $(function() {
-    $('fieldset').on('change', function(e) {
-        e.stopPropagation();
-        e.stopImmediatePropagation();
 
-        var whichEl = $(this).data('linkedto'),
-            showwhen = $(this).data('showwhen');
-
-        if( showwhen == $(e.target).attr('id') ||
-            showwhen == $(e.target).attr('name') ){
-            $(whichEl).closeItem();
-            $(whichEl).find('input').prop('checked', false);
-        } else {
-            $(whichEl).openItem();
+    $('#Q13').on('change', function(e){
+        if( $(e.target).attr('id') == 'CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER') {
+            if($(e.target).prop('checked')) {
+                $('#13_Specify_Other').removeAttr('hidden');
+            } else {
+                $('#13_Specify_Other').attr('hidden','hidden');
+                $('#13_Specify_Other').find('input').val('');
+            }
         }
-    });
+    })
 
-    // TODO: Try to abstract this into a reusable pattern
-    $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').on('input', function(e) {
-        $other = $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER');
-        /*
-         Tests for presence of word characters. Spaces will never pass
-        */
-        $other.prop('checked', (/\w/).test( $(e.target).val() ));
-    });
-
-    $('#CHECK__13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER').on('change', function(e) {
-        if ( !$(e.target).prop('checked') ) {
-            $('#13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS_input_id').clearField();
-        }
-    });
-
+    /* Adds conditional show/hide based on radio buttons. */
+    $('.cf-form-showhide-radio').on('change', $.fn.showFieldLinkedFromRadio);
     $('.cf-form-cond-req').on('input', $.fn.showLinkedTextField);
 });
 
@@ -269,3 +277,8 @@ $(function() {
         });
     }
 });
+
+
+$(document).on('ready', function(e){
+    $('.cf-form-cond-req').trigger('input');
+})

@@ -30,8 +30,8 @@ class WebController < ApplicationController
   SEE_PAGE_2 = ' (see continued remarks page 2)'
   XA_ROLLOVER_CAP = 159
 
-  sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout/
-  non_case_actions = sessionless_actions + %w/show_form http_404_not_found help/
+  sessionless_actions = %w/login login_ro_submit ssoi_saml_callback logout help/
+  non_case_actions = sessionless_actions + %w/show_form http_404_not_found/
 
   # Check authentication
   before_action 'login_check', except: sessionless_actions

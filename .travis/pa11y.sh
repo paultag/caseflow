@@ -4,7 +4,7 @@ set -e
 set -x
 
 # Array of URLs to check for 508 compliance
-URLS=(/caseflow/login)
+URLS=(/caseflow/login /caseflow/help)
 
 
 ./bin/rails s &
