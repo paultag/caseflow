@@ -70,15 +70,15 @@ $.fn.extend({
         return padded.substr(padded.length - extract);
     },
     openItem: function() {
-        $(this).removeAttr('hidden');
+        $(this).show(50);
     },
     toggleItem: function() {
-        $(this).toggleAttr('hidden','hidden');
+        $(this).toggle(50);
     },
-    closeItem: function(){
-        $(this).attr('hidden', 'hidden');
+    closeItem: function() {
+        $(this).hide(500);
     },
-    clearField: function(){
+    clearField: function() {
         $(this).val('');
     },
     showTextError: function(text) {
@@ -124,11 +124,11 @@ $.fn.extend({
             if( (/\w/).test($linked.val()) ) {
                 $(reqSelector).find('input').attr('required','required');
                 $(reqSelector).addClass('required');
-                $(reqSelector).removeAttr('hidden');
+                $(reqSelector).openItem();
             } else {
                 $(reqSelector).find('input').removeAttr('required');
                 $(reqSelector).removeClass('required');
-                $(reqSelector).attr('hidden', 'hidden');
+                $(reqSelector).closeItem();
             }
         }
     },
