@@ -81,23 +81,14 @@ $.fn.extend({
     clearField: function() {
         $(this).val('');
     },
-    showTextError: function(text) {
-        if( !$(this).siblings('.usa-input-error-message').length ) {
-            $(this).before(text);
-        }
+    showTextError: function(msg) {
+        $(this).siblings('label').find('.usa-input-error-message').text(msg);
     },
-    showDateError: function(text) {
-        if( !$(this).siblings('.usa-input-error-message').length ) {
-            $(this).before(text);
-        }
-    },
-    showRadioError: function (text) {
-        if( !$(this).parents('fieldset').find('.usa-input-error-message').length ) {
-            $(this).parents('fieldset').find('legend').after(text);
-        }
+    showRadioError: function (msg) {
+        $(this).parents('fieldset').find('.usa-input-error-message').text(msg);
     },
     clearError: function() {
-        $(this).parents('.usa-input-error').find('.usa-input-error-message').remove();
+        $(this).parents('.usa-input-error').find('.usa-input-error-message').text('');
         $(this).parents('.usa-input-error').removeClass('usa-input-error');
     },
     closeModal: function(event) {
@@ -246,7 +237,6 @@ $(function() {
             }
         });
 
-
         /*
         Clone date type inputs and make them
         hidden so that we can send dates in yyyy-mm-dd
@@ -295,24 +285,24 @@ $(document).on('ready', function(e){
  * ----------------------------------*/
 $(function(){
     var ERROR_MESSAGES = {
-        '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN': '<div class="usa-input-error-message">Please enter the veteran\'s full name.</div>',
-        '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'<div class="usa-input-error-message">Please enter the date of notification.</div>',
-        '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'<div class="usa-input-error-message">Please enter the date of notification.</div>',
-        '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'<div class="usa-input-error-message">Please enter the date of notification.</div>',
-        '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '8B_POWER_OF_ATTORNEY': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '8B_REMARKS': '<div class="usa-input-error-message">Please provide the location</p>',
-        '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '10A_WAS_HEARING_REQUESTED': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE': '<div class="usa-input-error-message">Oops! Looks like you missed one! Please select one of these options.</div>',
-        '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS': '<span class="usa-input-error-message">Please tell us which records will be forwarded.</span>',
-        '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL': '<span class="usa-input-error-message">Please enter the name of the Certifying Official (usually your name).</span>',
-        '17B_TITLE': '<span class="usa-input-error-message">Please enter the title of the Certifying Official (e.g. Decision Review Officer).</span>'
+        '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN': "Please enter the veteran's full name.",
+        '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'Please enter the date of notification.',
+        '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'Please enter the date of notification.',
+        '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'Please enter the date of notification.',
+        '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY': 'Oops! Looks like you missed one! Please select one of these options.',
+        '8B_POWER_OF_ATTORNEY': 'Oops! Looks like you missed one! Please select one of these options.',
+        '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST': 'Oops! Looks like you missed one! Please select one of these options.',
+        '8B_REMARKS': 'Please provide the location.',
+        '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN': 'Oops! Looks like you missed one! Please select one of these options.',
+        '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646': 'Oops! Looks like you missed one! Please select one of these options.',
+        '10A_WAS_HEARING_REQUESTED': 'Oops! Looks like you missed one! Please select one of these options.',
+        '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE': 'Oops! Looks like you missed one! Please select one of these options.',
+        '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE': 'Oops! Looks like you missed one! Please select one of these options.',
+        '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED': 'Oops! Looks like you missed one! Please select one of these options.',
+        '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE': 'Oops! Looks like you missed one! Please select one of these options.',
+        '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS': 'Please tell us which records will be forwarded.',
+        '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL': 'Please enter the name of the Certifying Official (usually your name).',
+        '17B_TITLE': 'Please enter the title of the Certifying Official (e.g. Decision Review Officer).'
     };
 
     /* Handles the invalidfield error triggered when an invalid error is. */
@@ -337,7 +327,7 @@ $(function(){
 
     $('[type=date]').on('invalid', function(e){
         e.preventDefault();
-        $(e.target).showDateError(ERROR_MESSAGES[e.target.name]);
+        $(e.target).showTextError(ERROR_MESSAGES[e.target.name]);
         $(e.target).parents('.form8-text-input').trigger('invalidfield');
     });
 
