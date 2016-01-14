@@ -22,7 +22,9 @@
     <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
         <strong><%= question_num if defined?(question_num) && question_num %></strong>
         <%=raw question %>
+        <span class="usa-input-error-message"></span>
     </label>
+
     <input type="text" name="<%= input_name %>" maxlength="<%= defined?(max_length) ? max_length : 45 %>"
     value="<%= value if defined?(value) && value %>"
     <%= 'required' if defined?(required) && required %> id="<%= input_id %>"
