@@ -18,7 +18,7 @@
 
 <% input_id = "#{input_name}_input_id" %>
 
-<div class="form8-text-input <%= div_class if defined?(div_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %><%= ' hidden' if defined?(hidden) && hidden %> <%= 'data-showwhen="#{show_when}"' if defined?(show_when) && show_when %> <%= 'data-requiredifshown' if defined?(requiredifshown) && requiredifshown %>>
+<div class="cf-form-textinput <%= div_class if defined?(div_class) %>" <%= %Q(id=#{parent_id}) if defined?(parent_id) %><%= ' hidden' if defined?(hidden) && hidden %> <%= 'data-showwhen="#{show_when}"' if defined?(show_when) && show_when %> <%= 'data-requiredifshown' if defined?(requiredifshown) && requiredifshown %>>
     <label for="<%= input_id %>" <%= 'class=required' if defined?(required) && required %>>
         <strong><%= question_num if defined?(question_num) && question_num %></strong>
         <%=raw question %>
