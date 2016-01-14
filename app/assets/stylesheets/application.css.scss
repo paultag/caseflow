@@ -565,12 +565,12 @@ fieldset {
     margin-bottom: rem(20px);
 
     > *,
-    .form8-text-input {
+    .cf-form-textinput {
         margin-bottom: 0;
     }
 }
 
-* + .form8-text-input {
+* + ..cf-form-textinput {
     @include clearfix;
     // clear: both;
     margin-top: rem(20px);
