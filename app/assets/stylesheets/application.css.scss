@@ -570,7 +570,7 @@ fieldset {
     }
 }
 
-* + ..cf-form-textinput {
+* + .cf-form-textinput {
     @include clearfix;
     // clear: both;
     margin-top: rem(20px);
