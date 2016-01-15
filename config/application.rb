@@ -1,16 +1,12 @@
+$CASEFLOW_TEST_MODE = ENV.has_key?('CASEFLOW_TEST') && !ENV['CASEFLOW_TEST'].empty?
+
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-
-# DEMO: uncomment
-# require "action_controller/railtie"
-# require "action_mailer/railtie"
-# require "sprockets/railtie"
-# require "rails/test_unit/railtie"
-
+require './lib/sources/caseflow'
 require './app/models/fakes'
 
-require './lib/sources/caseflow'
+
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
