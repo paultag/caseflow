@@ -7,7 +7,6 @@ gem 'activerecord-jdbc-adapter'
 gem 'composite_primary_keys'
 gem 'squeel'
 gem 'sass-rails', '~> 5.0.0'
-gem 'jbuilder', '~> 2.0'
 gem 'pdf-forms', '~> 1.0.0'
 gem 'kramdown'
 
