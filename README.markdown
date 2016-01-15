@@ -21,7 +21,7 @@ Next, you'll need the Java Cryptography Extension (JCE) that is required by JRub
 
 ### JRuby Setup
 
-Install `rbenv`, which is a tool that helps install/manage versions of Ruby:
+Install `rbenv`, which is a tool that helps install/manage versions of Ruby (*Note:* make sure and follow the brew's post-install instructions):
 
 `$ brew install rbenv`
 
