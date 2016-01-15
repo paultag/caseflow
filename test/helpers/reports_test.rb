@@ -28,4 +28,30 @@ class ReportsTest < ActiveSupport::TestCase
     c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
     Caseflow::Reports::MismatchedDocumentsReport.new.spreadsheet_cells(c)
   end
+
+  test "SeamReport.spreadsheet_cells includes merged" do
+    report = Caseflow::Reports::SeamReport.new
+    idx = report.spreadsheet_columns.find_index("IS MERGED")
+
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfdc: "M")
+    cells = report.spreadsheet_cells(c)
+    assert_equal cells[idx], "Y"
+
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
+    cells = report.spreadsheet_cells(c)
+    assert_equal cells[idx], "N"
+  end
+
+  test "MismatchedDocumentsReport.spreadsheet_cells includes merged" do
+    report = Caseflow::Reports::MismatchedDocumentsReport.new
+    idx = report.spreadsheet_columns.find_index("IS MERGED")
+
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfdc: "M")
+    cells = report.spreadsheet_cells(c)
+    assert_equal cells[idx], "Y"
+
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
+    cells = report.spreadsheet_cells(c)
+    assert_equal cells[idx], "N"
+  end
 end
