@@ -30,7 +30,7 @@ class ReportsTest < ActiveSupport::TestCase
   end
 
   test "SeamReport.spreadsheet_cells includes merged" do
-    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfhr: "M")
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfdc: "M")
     cells = Caseflow::Reports::SeamReport.new.spreadsheet_cells(c)
     assert_equal cells[10], "Y"
 
@@ -40,7 +40,7 @@ class ReportsTest < ActiveSupport::TestCase
   end
 
   test "MismatchedDocumentsReport.spreadsheet_cells includes merged" do
-    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfhr: "M")
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfdc: "M")
     cells = Caseflow::Reports::MismatchedDocumentsReport.new.spreadsheet_cells(c)
     assert_equal cells[8], "Y"
 
