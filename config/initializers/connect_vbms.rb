@@ -13,5 +13,8 @@ class CaseflowLogger
   end
 end
 
-$vbms = VBMS::Client.from_env_vars(logger: CaseflowLogger.new, env_name: ENV["CONNECT_VBMS_ENV"])
-
+if $CASEFLOW_TEST_MODE
+  $vbms = nil
+else
+  $vbms = VBMS::Client.from_env_vars(logger: CaseflowLogger.new, env_name: ENV["CONNECT_VBMS_ENV"])
+end
