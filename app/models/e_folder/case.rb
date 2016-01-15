@@ -35,10 +35,8 @@ module EFolder
     def upload_form8(first_name, middle_init, last_name, file_name)
       path = (Rails.root + 'tmp' + 'forms' + file_name).to_s
 
-      unless $CASEFLOW_TEST_MODE
-        request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, FORM_8_DOC_TYPE_ID, 'VACOLS', true)
-        $vbms.send(request)
-      end
+      request = VBMS::Requests::UploadDocumentWithAssociations.new(@id, Time.now, first_name, middle_init, last_name, 'Form 8', path, FORM_8_DOC_TYPE_ID, 'VACOLS', true)
+      $vbms.send(request)
 
       File.delete(path)
     end
