@@ -48,10 +48,10 @@ class ReportsTest < ActiveSupport::TestCase
 
     c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfdc: "M")
     cells = report.spreadsheet_cells(c)
-    assert_equal cells[idex], "Y"
+    assert_equal cells[idx], "Y"
 
     c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
     cells = report.spreadsheet_cells(c)
-    assert_equal cells[idex], "N"
+    assert_equal cells[idx], "N"
   end
 end
