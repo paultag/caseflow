@@ -30,21 +30,21 @@ class ReportsTest < ActiveSupport::TestCase
   end
 
   test "SeamReport.spreadsheet_cells includes merged" do
-    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfhr: "M"))
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfhr: "M")
     cells = Caseflow::Reports::SeamReport.new.spreadsheet_cells(c)
     assert_equal cells[11], "Y"
 
-    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS")))
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
     cells = Caseflow::Reports::SeamReport.new.spreadsheet_cells(c)
     assert_equal cells[11], "N"
   end
 
   test "MismatchedDocumentsReport.spreadsheet_cells includes merged" do
-    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfhr: "M"))
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"), bfhr: "M")
     cells = Caseflow::Reports::MismatchedDocumentsReport.new.spreadsheet_cells(c)
     assert_equal cells[9], "Y"
 
-    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS")))
+    c = Caseflow::Fakes::Case.new(folder: Caseflow::Fakes::Folder.new("VBMS"))
     cells = Caseflow::Reports::MismatchedDocumentsReport.new.spreadsheet_cells(c)
     assert_equal cells[9], "N"
   end
