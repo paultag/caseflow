@@ -2,7 +2,7 @@
 
 Caseflow is a web application to move appealed claims from an AOJ (Area of Jurisdiction) to the BVA (Board of Veterans Appeals).
 
-## First Time Setup
+## First Time Development Setup
 
 These are things you'll have to do the first time that you setup the application. For parts where it asks you to enter commands, do these in a terminal window. (Note: Instructions assume the developer is using Mac OS X 10.10 or above.)
 
@@ -37,15 +37,48 @@ Then use it to install dependencies:
 
 `> bundle install`
 
+### PDFTK
+
+To generate Form 8 PDFs, Caseflow uses a library called PDFTK. [Download this from PDF Labs](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/pdftk_server-2.02-mac_osx-10.6-setup.pkg), then install it.
+
+## Everytime Developer Setup
+
+After the initial configuration is performed, you only have to do the following things each time you want to run the application
+
+### Enable Test Mode
+
+Set the `CASEFLOW_TEST` environment variable to anything:
+
+```
+> export CASEFLOW_TEST=1
+```
+
+### Launch the Application
+
+Then to launch the application, run:
+
+```
+> rails s
+```
+
+### Test URLs
+
+There are several test veterans that can be used to hit the application:
+
+- VACOLS/VBMS documents match: [`http://127.0.0.1:3000/caseflow/certifications/joe-snuffy/start`](http://127.0.0.1:3000/caseflow/certifications/joe-snuffy/start)
+- VACOLS/VBMS documents **do not** Match: [`http://127.0.0.1:3000/caseflow/certifications/janice-snuffy/start`](http://127.0.0.1:3000/caseflow/certifications/janice-snuffy/start)
+- All VACOLS-derived VA form 8 fields + matching documents: [`http://127.0.0.1:3000/caseflow/certifications/janice-snuffy/start`](http://127.0.0.1:3000/caseflow/certifications/full-form8/start)
+
+
+## Production Setup
+
+These steps only need to be performed if you are configuring the application run in production.
+
 ### Oracle Setup
 
 You'll need Oracle Database drivers so that you can connect to the VACOLS database. [Get these from Oracle](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html), by downloading ojdbc6.jar.
 
 From here you'll need to find your JRuby installation (`which jruby` helps or going to `~/.rvm/rubies/jruby-1.7.22` if you used RVM). Place ojdbc6.jar into the `lib` directory.
-
-### PDFTK
-
-To generate Form 8 PDFs, Caseflow uses a library called PDFTK. [Download this from PDF Labs](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/pdftk_server-2.02-mac_osx-10.6-setup.pkg), then install it.
 
 ### Connect VBMS
 
@@ -85,15 +118,7 @@ For *production* (you may need to uncomment them):
 - `production/username`: VACOLS database username
 - Create an environment variable called CASEFLOW_DATABASE_PASSWORD with the production database password
 
-## Everytime Setup
-
-Make sure you're using the correct environment variables. 
-
-```
-> source env.sh
-```
-
-Then to launch the application, run:
+### Launch the Application
 
 ```
 > rails s

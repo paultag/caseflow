@@ -50,7 +50,7 @@ class WebController < ApplicationController
   def handle_vbms_errors(&block)
     begin
       return block.call
-    rescue VBMS::ClientError => e
+    rescue VBMS::ClientError
       return render 'vbms_failure', layout: 'basic', status: 502
     end
   end
