@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def get_case(bfkey)
-    if ENV.has_key?('CASEFLOW_TEST') && !ENV['CASEFLOW_TEST'].empty?
+    if $CASEFLOW_TEST_MODE
       Caseflow::Fakes::Case.find(bfkey)
     else
       Case.find(bfkey)
@@ -18,16 +18,18 @@ class ApplicationController < ActionController::Base
   end
 
   def is_ro_credentials_valid?(username, password)
-    
-    db_url = Rails.application.config.database_configuration[Rails.env]['url']
 
-    begin
-      # throws exception if login fails
-      connection = DriverManager.getConnection(db_url, username, password)
-    rescue SQLException
-      return false
+    unless $CASEFLOW_TEST_MODE
+      db_url = Rails.application.config.database_configuration[Rails.env]['url']
+
+      begin
+        # throws exception if login fails
+        connection = DriverManager.getConnection(db_url, username, password)
+      rescue SQLException
+        return false
+      end
+      connection.close
     end
-    connection.close
     return true
   end
 
