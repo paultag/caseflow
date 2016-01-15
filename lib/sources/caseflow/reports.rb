@@ -30,14 +30,18 @@ module Caseflow
       mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
     end
 
+    def self.bool_cell(value)
+      if value
+        "Y"
+      else
+        "Y"
+      end
+    end
+
     def self.hearing_pending(c)
       # bfhr: Hearing requested ("1" -> Central Office, "2" -> Travel Board)
       # bfha: Hearing action (NULL -> No hearing happened)
-      if (c.bfhr == "1" || c.bfhr == "2") && c.bfha.nil?
-        "Y"
-      else
-        "N"
-      end
+      bool_cell((c.bfhr == "1" || c.bfhr == "2") && c.bfha.nil?)
     end
 
     TYPE_ACTION = {
@@ -94,7 +98,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
+        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -107,7 +111,8 @@ module Caseflow
           vacols_case.bfdnod,
           vacols_case.bf41stat,
           Caseflow::Reports.hearing_pending(vacols_case),
-          vacols_case.bfcorlid
+          vacols_case.bfcorlid,
+          Caseflow::Reports.bool_cell(vacols_case.merged?),
         ]
       end
     end
@@ -125,7 +130,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -137,7 +142,8 @@ module Caseflow
           vacols_case.bfdnod,
           vacols_case.bf41stat,
           Caseflow::Reports.hearing_pending(vacols_case),
-          vacols_case.bfcorlid
+          vacols_case.bfcorlid,
+          Caseflow::Reports.bool_cell(vacols_case.merged?),
         ]
       end
     end
