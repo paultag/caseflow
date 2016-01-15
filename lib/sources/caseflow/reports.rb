@@ -34,7 +34,7 @@ module Caseflow
       if value
         "Y"
       else
-        "Y"
+        "N"
       end
     end
 
