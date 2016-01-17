@@ -386,6 +386,7 @@ making .cf-app-segment a grandchild element of .cf-app.
     border: 1px solid $color-gray-lighter;
     box-shadow: 0 0 10px -3px $color-gray;
     cursor: pointer;
+    display: none;
     position: absolute;
     text-align: left;
     top: 2em;
