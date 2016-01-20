@@ -178,10 +178,8 @@ def main(argv)
     end
 
     opts.on("--exclusions") do |e|
-      # TODO: decide on a format for excluded, currently thinking a CSV with one
-      # column, and one row per BFKEY.
-      CSV.readlines(e) do |row|
-        excluded_bfkeys.add(row[0])
+      CSV.foreach(e, headers: true) do |row|
+        excluded_bfkeys.add(row.field("BFKEY"))
       end
     end
 
