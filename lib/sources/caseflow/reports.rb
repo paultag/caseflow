@@ -167,7 +167,7 @@ def main(argv)
   excluded_bfkeys = Set.new
 
   OptionParser.new do |opts|
-    opts.banner = "Usage: reports.rb [--concurrency=n] --report-name=<report-name> --output=<output.csv>"
+    opts.banner = "Usage: reports.rb [--concurrency=n] [--exclusions=path] --report-name=<report-name> --output=<output.csv>"
 
     opts.on("--concurrency=[n]") do |c|
       concurrency = c.to_i
