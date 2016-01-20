@@ -2,6 +2,7 @@
 
 require 'csv'
 require 'optparse'
+require 'set'
 
 require 'parallel'
 
@@ -163,9 +164,10 @@ def main(argv)
   concurrency = 1
   report_name = nil
   output_path = nil
+  excluded_bfkeys = Set.new
 
   OptionParser.new do |opts|
-    opts.banner = "Usage: reports.rb [--concurrency=n] --report-name=<report-name> --output=<output.csv>"
+    opts.banner = "Usage: reports.rb [--concurrency=n] [--exclusions=path] --report-name=<report-name> --output=<output.csv>"
 
     opts.on("--concurrency=[n]") do |c|
       concurrency = c.to_i
@@ -173,6 +175,12 @@ def main(argv)
 
     opts.on("--report-name=", Caseflow::REPORTS.keys) do |r|
       report_name = r
+    end
+
+    opts.on("--exclusions") do |e|
+      CSV.foreach(e, headers: true) do |row|
+        excluded_bfkeys.add(row.field("BFKEY"))
+      end
     end
 
     opts.on("--output=") do |o|
@@ -192,6 +200,7 @@ def main(argv)
   report = Caseflow::REPORTS[report_name].new
 
   vacols_cases = report.find_vacols_cases().to_a
+  vacols_cases = vacols_cases.reject { |c| excluded_bfkeys.include?(c.bfkey) }
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
 
   # For now only process cases whose efolder_appellant_id's length is >= 8
