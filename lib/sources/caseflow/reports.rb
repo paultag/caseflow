@@ -177,7 +177,7 @@ def main(argv)
       report_name = r
     end
 
-    opts.on("--exclusions") do |e|
+    opts.on("--exclusions=") do |e|
       CSV.foreach(e, headers: true) do |row|
         excluded_bfkeys.add(row.field("BFKEY"))
       end
