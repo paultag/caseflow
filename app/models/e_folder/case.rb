@@ -7,6 +7,8 @@ module EFolder
     SSOC_DOC_TYPE_ID = 97
     FORM_9_DOC_TYPE_ID = 179
     FORM_8_DOC_TYPE_ID = 178
+    # TODO: Figure out what this is.
+    GENERAL_CORRESPONDENCE_DOC_TYPE_ID = 999999
 
     def initialize(id)
       @id = id

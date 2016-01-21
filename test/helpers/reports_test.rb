@@ -96,4 +96,28 @@ class ReportsTest < ActiveSupport::TestCase
     )
     assert_equal Caseflow::Reports.potential_date_alternatives(c), ["Form 9: 01/02/2016"]
   end
+
+  test "potential_label_alternatives" do
+    t1 = Date.parse('2016-01-01')
+
+    c = Caseflow::Fakes::Case.new(
+      bfdnod: t1,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(
+          doc_type: EFolder::Case::GENERAL_CORRESPONDENCE_DOC_TYPE_ID, received_at: t1
+        )
+      ]),
+    )
+    assert_equal Caseflow::Reports.potential_label_alternatives(c), ["NOD: General Correspondence"]
+
+    c = Caseflow::Fakes::Case.new(
+      bfdnod: t1,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(
+          doc_type: EFolder::Case::FORM_9_DOC_TYPE_ID, received_at: t1
+        )
+      ]),
+    )
+    assert_equal Caseflow::Reports.potential_label_alternatives(c), []
+  end
 end

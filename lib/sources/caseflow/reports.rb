@@ -56,6 +56,31 @@ module Caseflow
       alternatives
     end
 
+    def self.potential_label_alternatives(c)
+      alternative_doc_types = [EFolder::Case::GENERAL_CORRESPONDENCE_DOC_TYPE_ID]
+      label_full_name = {
+        EFolder::Case::GENERAL_CORRESPONDENCE_DOC_TYPE_ID => "General Correspondence",
+      }
+
+      alternatives = []
+      mismatched_docs = mismatched_dates(c)
+      [["NOD", :bfdnod], ["Form 9", :bdf19]].each do |name, field|
+        if mismatched_docs.include?(name)
+          alt = c.efolder_case.documents.detect do |doc|
+            alternative_doc_types.include?(doc.doc_type.try(:to_i)) &&
+              doc.received_at.try(:beginning_of_day) == c.send(field).beginning_of_day
+          end
+
+          if !alt.nil?
+            # TODO: convert doc.doc_type to words
+            alternatives << "#{name}: #{label_full_name[alt.doc_type.to_i]}"
+          end
+        end
+      end
+
+      alternatives
+    end
+
     def self.bool_cell(value)
       if value
         "Y"
