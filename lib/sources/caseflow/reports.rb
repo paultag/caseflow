@@ -35,14 +35,20 @@ module Caseflow
 
     def self.potential_alternatives(c)
       alternatives = []
-      if mismatched_dates(c).include?("NOD")
-        alt = c.efolder_case.documents.detect do |doc|
-          # Do we have an NOD from within 3 days of what VACOLS shows?
-          doc.doc_type.try(:to_i) == EFolder::Case::NOD_DOC_TYPE_ID &&
-            doc.received_at && (doc.received_at.beginning_of_day - c.bfdnod.beginning_of_day).to_i < ALTERNATIVE_AGE_THRESHOLD
-        end
-        if !alt.nil?
-          alternatives << "NOD: #{alt.received_at.beginning_of_day.to_s(:va_date)}"
+      mismatched_docs = mismatched_dates(c)
+      [
+        ["NOD", :bfdnod, EFolder::Case::NOD_DOC_TYPE_ID],
+        ["Form 9", :bfd19, EFolder::Case::FORM_9_DOC_TYPE_ID],
+      ].each do |name, field, type_id|
+        if mismatched_docs.include?(name)
+          alt = c.efolder_case.documents.detect do |doc|
+            # Do we have an NOD from within 3 days of what VACOLS shows?
+            doc.doc_type.try(:to_i) == type_id && doc.received_at &&
+              (doc.received_at.beginning_of_day - c.send(field).beginning_of_day).to_i < ALTERNATIVE_AGE_THRESHOLD
+          end
+          if !alt.nil?
+            alternatives << "#{name}: #{alt.received_at.beginning_of_day.to_s(:va_date)}"
+          end
         end
       end
 

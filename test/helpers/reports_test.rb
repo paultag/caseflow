@@ -86,5 +86,14 @@ class ReportsTest < ActiveSupport::TestCase
       ])
     )
     assert_equal Caseflow::Reports.potential_alternatives(c), []
+
+    c = Caseflow::Fakes::Case.new(
+      bfd19: t1,
+      efolder_form9: t2,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(doc_type: EFolder::Case::FORM_9_DOC_TYPE_ID, received_at: t2)
+      ])
+    )
+    assert_equal Caseflow::Reports.potential_alternatives(c), ["Form 9: 01/02/2016"]
   end
 end
