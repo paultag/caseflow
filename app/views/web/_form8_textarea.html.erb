@@ -19,6 +19,7 @@
     <label for="<%= input_name %>">
       <strong><%= question_num %></strong> <%= question %>
     </label>
+    <span class="usa-input-error-message"></span>
     <textarea name="<%= input_name %>" rows="3" class="form-control" id="<%= input_name %>" <%= 'required' if defined?(required) && required %> <%= "data-linkedto=#{linkedto}" if defined?(linkedto) && linkedto %>>
 <%=value if defined?(value) && value %></textarea>
 </div>
