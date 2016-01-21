@@ -119,7 +119,7 @@ GEM
     mime-types (2.99)
     minitest (5.8.3)
     multi_json (1.11.2)
-    nokogiri (1.6.7.1-java)
+    nokogiri (1.6.7.2-java)
     omniauth (1.3.1)
       hashie (>= 1.2, < 4)
       rack (>= 1.0, < 3)
