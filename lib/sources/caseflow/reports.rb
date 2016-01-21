@@ -2,6 +2,7 @@
 
 require 'csv'
 require 'optparse'
+require 'set'
 
 require 'parallel'
 
@@ -30,14 +31,18 @@ module Caseflow
       mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
     end
 
-    def self.hearing_pending(c)
-      # bfhr: Hearing requested ("1" -> Central Office, "2" -> Travel Board)
-      # bfha: Hearing action (NULL -> No hearing happened)
-      if (c.bfhr == "1" || c.bfhr == "2") && c.bfha.nil?
+    def self.bool_cell(value)
+      if value
         "Y"
       else
         "N"
       end
+    end
+
+    def self.hearing_pending(c)
+      # bfhr: Hearing requested ("1" -> Central Office, "2" -> Travel Board)
+      # bfha: Hearing action (NULL -> No hearing happened)
+      bool_cell((c.bfhr == "1" || c.bfhr == "2") && c.bfha.nil?)
     end
 
     TYPE_ACTION = {
@@ -94,7 +99,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
+        ["BFKEY", "TYPE", "FILE TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -107,7 +112,8 @@ module Caseflow
           vacols_case.bfdnod,
           vacols_case.bf41stat,
           Caseflow::Reports.hearing_pending(vacols_case),
-          vacols_case.bfcorlid
+          vacols_case.bfcorlid,
+          Caseflow::Reports.bool_cell(vacols_case.merged?),
         ]
       end
     end
@@ -125,7 +131,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -137,7 +143,8 @@ module Caseflow
           vacols_case.bfdnod,
           vacols_case.bf41stat,
           Caseflow::Reports.hearing_pending(vacols_case),
-          vacols_case.bfcorlid
+          vacols_case.bfcorlid,
+          Caseflow::Reports.bool_cell(vacols_case.merged?),
         ]
       end
     end
@@ -157,9 +164,10 @@ def main(argv)
   concurrency = 1
   report_name = nil
   output_path = nil
+  excluded_bfkeys = Set.new
 
   OptionParser.new do |opts|
-    opts.banner = "Usage: reports.rb [--concurrency=n] --report-name=<report-name> --output=<output.csv>"
+    opts.banner = "Usage: reports.rb [--concurrency=n] [--exclusions=path] --report-name=<report-name> --output=<output.csv>"
 
     opts.on("--concurrency=[n]") do |c|
       concurrency = c.to_i
@@ -167,6 +175,12 @@ def main(argv)
 
     opts.on("--report-name=", Caseflow::REPORTS.keys) do |r|
       report_name = r
+    end
+
+    opts.on("--exclusions=") do |e|
+      CSV.foreach(e, headers: true) do |row|
+        excluded_bfkeys.add(row.field("BFKEY"))
+      end
     end
 
     opts.on("--output=") do |o|
@@ -186,6 +200,7 @@ def main(argv)
   report = Caseflow::REPORTS[report_name].new
 
   vacols_cases = report.find_vacols_cases().to_a
+  vacols_cases = vacols_cases.reject { |c| excluded_bfkeys.include?(c.bfkey) }
   puts "Found #{vacols_cases.length} relevant cases in VACOLS"
 
   # For now only process cases whose efolder_appellant_id's length is >= 8

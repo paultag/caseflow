@@ -78,7 +78,7 @@
              question: "Date of notification of action appealed",
              question_num: '5B',
              input_name: '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: Caseflow.format_issues(@kase, 'service connection') != '' ? Date.parse(@kase.bfdrodec_date) : '',
+             value: Caseflow.format_issues(@kase, 'service connection') != '' ? @kase.bfdrodec : '',
 
          } %>
    </fieldset>
@@ -98,7 +98,7 @@
              question: "Date of notification of action appealed",
              question_num: '6B',
              input_name: '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: Caseflow.format_issues(@kase, 'increased rating') != '' ? Date.parse(@kase.bfdrodec_date) : '',
+             value: Caseflow.format_issues(@kase, 'increased rating') != '' ? @kase.bfdrodec : '',
 
          } %>
     </fieldset>
@@ -119,7 +119,7 @@
              question: "Date of notification of action appealed",
              question_num: '7B',
              input_name: '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED',
-             value: Caseflow.format_issues(@kase, 'other') != '' ? Date.parse(@kase.bfdrodec_date) : '',
+             value: Caseflow.format_issues(@kase, 'other') != '' ? @kase.bfdrodec : '',
 
          } %>
     </fieldset>
@@ -326,7 +326,7 @@
           question_num: '12A',
           input_name: '12A_DATE_STATEMENT_OF_THE_CASE_FURNISHED',
           required: true,
-          value: Date.parse(@kase.bfdsoc_date),
+          value: @kase.bfdsoc,
       } %>
 
       <%= render partial: 'form8_radio_inputs', locals: {
