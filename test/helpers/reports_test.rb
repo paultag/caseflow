@@ -55,7 +55,7 @@ class ReportsTest < ActiveSupport::TestCase
     assert_equal cells[idx], "N"
   end
 
-  test "potential_alternatives" do
+  test "potential_date_alternatives" do
     t1 = Date.parse('2016-01-01')
     t2 = Date.parse('2016-01-02')
     t3 = Date.parse('2016-03-01')
@@ -67,7 +67,7 @@ class ReportsTest < ActiveSupport::TestCase
         Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t2)
       ]),
     )
-    assert_equal Caseflow::Reports.potential_alternatives(c), ["NOD: 01/02/2016"]
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: 01/02/2016"]
 
     c = Caseflow::Fakes::Case.new(
       bfdnod: t2,
@@ -76,7 +76,7 @@ class ReportsTest < ActiveSupport::TestCase
         Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t1)
       ]),
     )
-    assert_equal Caseflow::Reports.potential_alternatives(c), ["NOD: 01/01/2016"]
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: 01/01/2016"]
 
     c = Caseflow::Fakes::Case.new(
       bfdnod: t1,
@@ -85,7 +85,7 @@ class ReportsTest < ActiveSupport::TestCase
         Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t3)
       ])
     )
-    assert_equal Caseflow::Reports.potential_alternatives(c), []
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), []
 
     c = Caseflow::Fakes::Case.new(
       bfd19: t1,
@@ -94,6 +94,6 @@ class ReportsTest < ActiveSupport::TestCase
         Caseflow::Fakes::Document.new(doc_type: EFolder::Case::FORM_9_DOC_TYPE_ID, received_at: t2)
       ])
     )
-    assert_equal Caseflow::Reports.potential_alternatives(c), ["Form 9: 01/02/2016"]
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["Form 9: 01/02/2016"]
   end
 end

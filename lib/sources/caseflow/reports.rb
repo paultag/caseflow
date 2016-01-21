@@ -33,7 +33,7 @@ module Caseflow
       mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
     end
 
-    def self.potential_alternatives(c)
+    def self.potential_date_alternatives(c)
       alternatives = []
       mismatched_docs = mismatched_dates(c)
       [
@@ -46,6 +46,7 @@ module Caseflow
             doc.doc_type.try(:to_i) == type_id && doc.received_at &&
               (doc.received_at.beginning_of_day - c.send(field).beginning_of_day).to_i < ALTERNATIVE_AGE_THRESHOLD
           end
+
           if !alt.nil?
             alternatives << "#{name}: #{alt.received_at.beginning_of_day.to_s(:va_date)}"
           end
@@ -155,7 +156,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED", "POTENTIAL ALTERNATIVES"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED", "POTENTIAL DATE ALTERNATIVES"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -169,7 +170,7 @@ module Caseflow
           Caseflow::Reports.hearing_pending(vacols_case),
           vacols_case.bfcorlid,
           Caseflow::Reports.bool_cell(vacols_case.merged?),
-          Caseflow::Reports.potential_alternatives(vacols_case).join(", "),
+          Caseflow::Reports.potential_date_alternatives(vacols_case).join(", "),
         ]
       end
     end
