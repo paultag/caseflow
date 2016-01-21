@@ -181,7 +181,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED", "POTENTIAL DATE ALTERNATIVES"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED", "POTENTIAL DATE ALTERNATIVES", "POTENTIAL LABEL ALTERNATIVES"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -196,6 +196,7 @@ module Caseflow
           vacols_case.bfcorlid,
           Caseflow::Reports.bool_cell(vacols_case.merged?),
           Caseflow::Reports.potential_date_alternatives(vacols_case).join(", "),
+          Caseflow::Reports.potential_label_alternatives(vacols_case).join(", "),
         ]
       end
     end
