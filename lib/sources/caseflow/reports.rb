@@ -19,6 +19,8 @@ module Caseflow
       ["bfssoc4_date", "efolder_ssoc4_date", "SSOC4"],
       ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
     ]
+    # 3 days
+    ALTERNATIVE_AGE_THRESHOLD = 3 * 24 * 60 * 60
 
     class ConcurrentCSV < ::CSV
       include JRuby::Synchronized
@@ -29,6 +31,22 @@ module Caseflow
         c.send(vacols_field) != c.send(vbms_field)
       end
       mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
+    end
+
+    def self.potential_alternatives(c)
+      alternatives = []
+      if mismatched_dates(c).include?("NOD")
+        alt = c.efolder_case.documents.detect do |doc|
+          # Do we have an NOD from within 3 days of what VACOLS shows?
+          doc.doc_type.try(:to_i) == EFolder::Case::NOD_DOC_TYPE_ID &&
+            doc.received_at && (doc.received_at.beginning_of_day - c.bfdnod.beginning_of_day).to_i < ALTERNATIVE_AGE_THRESHOLD
+        end
+        if !alt.nil?
+          alternatives << "NOD: #{alt.received_at.beginning_of_day.to_s(:va_date)}"
+        end
+      end
+
+      alternatives
     end
 
     def self.bool_cell(value)
@@ -131,7 +149,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED", "POTENTIAL ALTERNATIVES"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -145,6 +163,7 @@ module Caseflow
           Caseflow::Reports.hearing_pending(vacols_case),
           vacols_case.bfcorlid,
           Caseflow::Reports.bool_cell(vacols_case.merged?),
+          Caseflow::Reports.potential_alternatives(vacols_case).join(", "),
         ]
       end
     end

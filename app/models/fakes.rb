@@ -4,7 +4,7 @@ module Caseflow
       attr_reader(:bfkey, :bfcorlid, :bfac, :bfmpro, :bfpdnum, :bfregoff,
         :bfdrodec, :bfdnod, :bfd19, :bfdsoc, :efolder_appellant_id, :appeal_type,
         :vso_full, :regional_office_full, :folder, :correspondent, :bfdc,
-        :save_successful, :issue_breakdown, :bfso, :bfha, :bfhr)
+        :save_successful, :issue_breakdown, :bfso, :bfha, :bfhr, :efolder_case)
       attr_accessor :bf41stat
 
       def self.find(bfkey)
@@ -23,7 +23,7 @@ module Caseflow
                      efolder_appellant_id: nil, appeal_type: nil, vso_full: nil,
                      regional_office_full: nil, folder: nil, correspondent: nil,
                      save_successful: true, issue_breakdown: [], bfso: nil,
-                     bfha: nil, bfdc: nil, bfhr: nil)
+                     bfha: nil, bfdc: nil, bfhr: nil, efolder_case: nil)
         @bfkey = bfkey
         @bfcorlid = bfcorlid
         @bfac = bfac
@@ -54,6 +54,8 @@ module Caseflow
         @bfso = bfso
         @bfha = bfha
         @bfhr = bfhr
+
+        @efolder_case = efolder_case
       end
 
       DATE_FIELDS = [
@@ -68,10 +70,6 @@ module Caseflow
             value.to_s(:va_date)
           end
         end
-      end
-
-      def efolder_case
-        Caseflow::Fakes::EFolderCase.new
       end
 
       def bfdcertool=(value)
@@ -143,7 +141,22 @@ module Caseflow
     end
 
     class EFolderCase
+      attr_reader :documents
+
+      def initialize(documents)
+        @documents = documents
+      end
+
       def upload_form8(first_name, middle_initial, last_name, file_name)
+      end
+    end
+
+    class Document
+      attr_reader :doc_type, :received_at
+
+      def initialize(doc_type: nil, received_at: nil)
+        @doc_type = doc_type
+        @received_at = received_at
       end
     end
 
