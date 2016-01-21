@@ -30,8 +30,8 @@
     <legend<%= ' class=required' if defined?(required) && required %>>
         <strong><%= question_num %></strong>
         <%= question %>
+        <span class="usa-input-error-message"></span>
     </legend>
-
 <div class="cf-form-radio-options">
 <% for option in options %>
     <div class="cf-form-radio-option">

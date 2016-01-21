@@ -81,6 +81,16 @@ $.fn.extend({
     clearField: function() {
         $(this).val('');
     },
+    showTextError: function(msg) {
+        $(this).siblings('label').find('.usa-input-error-message').text(msg);
+    },
+    showRadioError: function (msg) {
+        $(this).parents('fieldset').find('.usa-input-error-message').text(msg);
+    },
+    clearError: function() {
+        $(this).parents('.usa-input-error').find('.usa-input-error-message').text('');
+        $(this).parents('.usa-input-error').removeClass('usa-input-error');
+    },
     closeModal: function(event) {
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -230,7 +240,7 @@ input[type=date] is supported.
 $(function() {
 
 	if( $("<input type='date'>")[0].type == 'text'){
-
+        /* Add the date picker UI */
         $("[type=date]").datepicker();
 
         /* Rewrite dates to mm/dd/yyy format*/
@@ -239,7 +249,6 @@ $(function() {
                 $(this).val( $(this).dateMMDDYYYY() );
             }
         });
-
 
         /*
         Clone date type inputs and make them
@@ -256,9 +265,9 @@ $(function() {
             the id attribute from the hidden field so
             there's no label confusion.
             */
-            $(this).removeAttr('name');
             $hiddenDate.removeAttr('id');
             $hiddenDate.removeAttr('disabled');
+            $hiddenDate.val($(this).dateYYYYMMDD());
         });
 
         /*
@@ -282,3 +291,69 @@ $(function() {
 $(document).on('ready', function(e){
     $('.cf-form-cond-req').trigger('input');
 })
+
+
+/*----------------------------------
+ * Error handling for questions form
+ * ----------------------------------*/
+$(function(){
+    var ERROR_MESSAGES = {
+        '3_LAST_NAME_FIRST_NAME_MIDDLE_NAME_OF_VETERAN': "Please enter the veteran's full name.",
+        '5B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'Please enter the date of notification.',
+        '6B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'Please enter the date of notification.',
+        '7B_DATE_OF_NOTIFICATION_OF_ACTION_APPEALED':'Please enter the date of notification.',
+        '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY': 'Oops! Looks like you missed one! Please select one of these options.',
+        '8B_POWER_OF_ATTORNEY': 'Oops! Looks like you missed one! Please select one of these options.',
+        '8C_IF_AGENT_DESIGNATED_IS_HE_SHE_ON_ACCREDITED_LIST': 'Oops! Looks like you missed one! Please select one of these options.',
+        '8B_REMARKS': 'Please provide the location.',
+        '9B_IF_VA_FORM_646_IS_NOT_OF_RECORD_EXPLAIN': 'Oops! Looks like you missed one! Please select one of these options.',
+        '9A_IF_REPRESENTATIVE_IS_SERVICE_ORGANIZATION_IS_VA_FORM_646': 'Oops! Looks like you missed one! Please select one of these options.',
+        '10A_WAS_HEARING_REQUESTED': 'Oops! Looks like you missed one! Please select one of these options.',
+        '10B_IF_HELD_IS_TRANSCRIPT_IN_FILE': 'Oops! Looks like you missed one! Please select one of these options.',
+        '11A_ARE_CONTESTED_CLAIMS_PROCEDURES_APPLICABLE_IN_THIS_CASE': 'Oops! Looks like you missed one! Please select one of these options.',
+        '11B_HAVE_THE_REQUIREMENTS_OF_38_USC_BEEN_FOLLOWED': 'Oops! Looks like you missed one! Please select one of these options.',
+        '12B_SUPPLEMENTAL_STATEMENT_OF_THE_CASE': 'Oops! Looks like you missed one! Please select one of these options.',
+        '13_RECORDS_TO_BE_FORWARDED_TO_BOARD_OF_VETERANS_APPEALS_OTHER_REMARKS': 'Please tell us which records will be forwarded.',
+        '17A_SIGNATURE_OF_CERTIFYING_OFFICIAL': 'Please enter the name of the Certifying Official (usually your name).',
+        '17B_TITLE': 'Please enter the title of the Certifying Official (e.g. Decision Review Officer).'
+    };
+
+    /* Handles the invalidfield error triggered when an invalid error is. */
+    $('fieldset, .form8-text-input').on('invalidfield', function(e){
+        $(e.target).addClass('usa-input-error');
+    });
+
+    $('[type=radio]').on('invalid', function(e){
+        e.preventDefault(); /* Prevents native error bubbles */
+        $(e.target).showRadioError(ERROR_MESSAGES[e.target.name]);
+        /* Dispatch an event on the parent element */
+        $(e.target).parents('fieldset').trigger('invalidfield');
+    });
+
+    $('[type=text]').on('invalid', function(e){
+        e.preventDefault(); /* Prevents error bubbles */
+        $(e.target).showTextError(ERROR_MESSAGES[e.target.name]);
+        /* Dispatch an event on the parent element */
+        $(e.target).parents('fieldset, .form8-text-input').trigger('invalidfield');
+        $(e.target).attr('id');
+    });
+
+    $('[type=date]').on('invalid', function(e){
+        e.preventDefault();
+        $(e.target).showTextError(ERROR_MESSAGES[e.target.name]);
+        $(e.target).parents('.form8-text-input').trigger('invalidfield');
+    });
+
+    $('[type=radio]').on('change', function(e){
+        if(e.target.validity.valid) {
+            $(this).clearError();
+        }
+    });
+
+    $('[type=text]').on('input', function(e){
+        if(e.target.validity.valid) {
+            $(this).clearError();
+        }
+    });
+
+});

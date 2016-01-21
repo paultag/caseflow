@@ -18,3 +18,5 @@ upload.log.*
 doc/test/~$test_veterans.xlsx
 
 /imported-production-data-mocks.json
+caseflow_test.db
+

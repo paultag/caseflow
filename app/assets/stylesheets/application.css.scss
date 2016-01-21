@@ -390,6 +390,7 @@ making .cf-app-segment a grandchild element of .cf-app.
     box-shadow: 0 0 10px -3px $color-gray;
     display: none;
     cursor: pointer;
+    display: none;
     position: absolute;
     text-align: left;
     top: 2em;
@@ -630,10 +631,8 @@ fieldset {
 
 * + .cf-form-textinput {
     @include clearfix;
-    // clear: both;
     margin-top: rem(20px);
     margin-bottom: rem(20px);
-    max-width: rem(380px);
 }
 
 .cf-form-textarea {
@@ -669,6 +668,11 @@ fieldset {
     }
 }
 
+.usa-input-error {
+    [type="radio"]:invalid + label::before {
+        box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $color-secondary-dark, 0 0 3px 4px $color-secondary, 0 0 7px 4px $color-secondary-dark;
+    }
+}
 /*========================
 Certified success page
 ==========================*/
