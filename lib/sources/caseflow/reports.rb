@@ -57,8 +57,7 @@ module Caseflow
     end
 
     def self.potential_label_alternatives(c)
-      alternative_doc_types = [EFolder::Case::GENERAL_CORRESPONDENCE_DOC_TYPE_ID]
-      label_full_name = {
+      alternative_doc_types = {
         EFolder::Case::GENERAL_CORRESPONDENCE_DOC_TYPE_ID => "General Correspondence",
       }
 
@@ -73,7 +72,7 @@ module Caseflow
 
           if !alt.nil?
             # TODO: convert doc.doc_type to words
-            alternatives << "#{name}: #{label_full_name[alt.doc_type.to_i]}"
+            alternatives << "#{name}: #{alternative_doc_types[alt.doc_type.to_i]}"
           end
         end
       end
