@@ -48,7 +48,8 @@ module Caseflow
           end
 
           if !alt.nil?
-            alternatives << "#{name}: #{alt.received_at.beginning_of_day.to_s(:va_date)}"
+            days = alt.received_at.beginning_of_day - c.send(field).beginning_of_day / 86400
+            alternatives << "#{name}: #{days} days"
           end
         end
       end
@@ -71,7 +72,6 @@ module Caseflow
           end
 
           if !alt.nil?
-            # TODO: convert doc.doc_type to words
             alternatives << "#{name}: #{alternative_doc_types[alt.doc_type.to_i]}"
           end
         end

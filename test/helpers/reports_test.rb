@@ -67,7 +67,7 @@ class ReportsTest < ActiveSupport::TestCase
         Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t2)
       ]),
     )
-    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: 01/02/2016"]
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: +1 day"]
 
     c = Caseflow::Fakes::Case.new(
       bfdnod: t2,
@@ -76,7 +76,7 @@ class ReportsTest < ActiveSupport::TestCase
         Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t1)
       ]),
     )
-    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: 01/01/2016"]
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: -1 day"]
 
     c = Caseflow::Fakes::Case.new(
       bfdnod: t1,
@@ -94,7 +94,7 @@ class ReportsTest < ActiveSupport::TestCase
         Caseflow::Fakes::Document.new(doc_type: EFolder::Case::FORM_9_DOC_TYPE_ID, received_at: t2)
       ])
     )
-    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["Form 9: 01/02/2016"]
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["Form 9: +1 day"]
   end
 
   test "potential_label_alternatives" do
