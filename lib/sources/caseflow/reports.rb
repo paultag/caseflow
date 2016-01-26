@@ -48,7 +48,7 @@ module Caseflow
           end
 
           if !alt.nil?
-            days = alt.received_at.beginning_of_day - c.send(field).beginning_of_day / 86400
+            days = (alt.received_at.beginning_of_day - c.send(field).beginning_of_day) / 86400
             alternatives << "#{name}: #{days} days"
           end
         end
