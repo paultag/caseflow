@@ -59,7 +59,8 @@ module Caseflow
 
     def self.potential_label_alternatives(c)
       alternative_doc_types = {
-        EFolder::Case::GENERAL_CORRESPONDENCE_DOC_TYPE_ID => "General Correspondence",
+        EFolder::Case::STATEMENT_IN_SUPPORT_OF_CLAIM_DOC_TYPE_ID => "VA 21-4138 Statement In Support of Claim",
+        EFolder::Case::THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID => "Third Party Correspondence",
       }
 
       alternatives = []
