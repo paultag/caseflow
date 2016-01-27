@@ -61,7 +61,7 @@ module Caseflow
       alternative_doc_types = {
         EFolder::Case::STATEMENT_IN_SUPPORT_OF_CLAIM_DOC_TYPE_ID => "VA 21-4138 Statement In Support of Claim",
         EFolder::Case::THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID => "Third Party Correspondence",
-        Efolder::Case::CORRESPONDENCE_DOC_TYPE_ID => "Correspondence",
+        EFolder::Case::CORRESPONDENCE_DOC_TYPE_ID => "Correspondence",
       }
 
       alternatives = []
