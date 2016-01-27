@@ -104,11 +104,11 @@ class ReportsTest < ActiveSupport::TestCase
       bfdnod: t1,
       efolder_case: Caseflow::Fakes::EFolderCase.new([
         Caseflow::Fakes::Document.new(
-          doc_type: EFolder::Case::GENERAL_CORRESPONDENCE_DOC_TYPE_ID, received_at: t1
+          doc_type: EFolder::Case::THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID, received_at: t1
         )
       ]),
     )
-    assert_equal Caseflow::Reports.potential_label_alternatives(c), ["NOD: General Correspondence"]
+    assert_equal Caseflow::Reports.potential_label_alternatives(c), ["NOD: Third Party Correspondence"]
 
     c = Caseflow::Fakes::Case.new(
       bfdnod: t1,
