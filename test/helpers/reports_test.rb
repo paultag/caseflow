@@ -54,4 +54,70 @@ class ReportsTest < ActiveSupport::TestCase
     cells = report.spreadsheet_cells(c)
     assert_equal cells[idx], "N"
   end
+
+  test "potential_date_alternatives" do
+    t1 = Date.parse('2016-01-01')
+    t2 = Date.parse('2016-01-02')
+    t3 = Date.parse('2016-03-01')
+
+    c = Caseflow::Fakes::Case.new(
+      bfdnod: t1,
+      efolder_nod: t2,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t2)
+      ]),
+    )
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: +1 day"]
+
+    c = Caseflow::Fakes::Case.new(
+      bfdnod: t2,
+      efolder_nod: t1,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t1)
+      ]),
+    )
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["NOD: -1 day"]
+
+    c = Caseflow::Fakes::Case.new(
+      bfdnod: t1,
+      efolder_nod: t3,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(doc_type: EFolder::Case::NOD_DOC_TYPE_ID, received_at: t3)
+      ])
+    )
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), []
+
+    c = Caseflow::Fakes::Case.new(
+      bfd19: t1,
+      efolder_form9: t2,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(doc_type: EFolder::Case::FORM_9_DOC_TYPE_ID, received_at: t2)
+      ])
+    )
+    assert_equal Caseflow::Reports.potential_date_alternatives(c), ["Form 9: +1 day"]
+  end
+
+  test "potential_label_alternatives" do
+    t1 = Date.parse('2016-01-01')
+
+    c = Caseflow::Fakes::Case.new(
+      bfdnod: t1,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(
+          doc_type: EFolder::Case::THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID, received_at: t1
+        )
+      ]),
+    )
+    assert_equal Caseflow::Reports.potential_label_alternatives(c), ["NOD: Third Party Correspondence"]
+
+    c = Caseflow::Fakes::Case.new(
+      bfdnod: t1,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(
+          doc_type: EFolder::Case::FORM_9_DOC_TYPE_ID, received_at: t1
+        )
+      ]),
+    )
+    assert_equal Caseflow::Reports.potential_label_alternatives(c), []
+  end
 end
