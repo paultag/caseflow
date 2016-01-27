@@ -11,6 +11,8 @@ module EFolder
     STATEMENT_IN_SUPPORT_OF_CLAIM_DOC_TYPE_ID = 115
     # Third Party Correspondence
     THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID = 475
+    # Correspondence
+    CORRESPONDENCE_DOC_TYPE_ID = 34
 
     def initialize(id)
       @id = id
