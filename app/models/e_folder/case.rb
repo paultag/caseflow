@@ -7,6 +7,12 @@ module EFolder
     SSOC_DOC_TYPE_ID = 97
     FORM_9_DOC_TYPE_ID = 179
     FORM_8_DOC_TYPE_ID = 178
+    # VA 21-4138 Statement In Support of Claim
+    STATEMENT_IN_SUPPORT_OF_CLAIM_DOC_TYPE_ID = 115
+    # Third Party Correspondence
+    THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID = 475
+    # Correspondence
+    CORRESPONDENCE_DOC_TYPE_ID = 34
 
     def initialize(id)
       @id = id

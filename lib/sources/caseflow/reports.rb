@@ -19,6 +19,8 @@ module Caseflow
       ["bfssoc4_date", "efolder_ssoc4_date", "SSOC4"],
       ["bfssoc5_date", "efolder_ssoc5_date", "SSOC5"],
     ]
+    # 3 days
+    ALTERNATIVE_AGE_THRESHOLD = 3 * 24 * 60 * 60
 
     class ConcurrentCSV < ::CSV
       include JRuby::Synchronized
@@ -29,6 +31,55 @@ module Caseflow
         c.send(vacols_field) != c.send(vbms_field)
       end
       mismatched_fields.map {|_, _, field_name| field_name }.join(", ")
+    end
+
+    def self.potential_date_alternatives(c)
+      alternatives = []
+      mismatched_docs = mismatched_dates(c)
+      [
+        ["NOD", :bfdnod, EFolder::Case::NOD_DOC_TYPE_ID],
+        ["Form 9", :bfd19, EFolder::Case::FORM_9_DOC_TYPE_ID],
+      ].each do |name, field, type_id|
+        if mismatched_docs.include?(name)
+          alt = c.efolder_case.documents.detect do |doc|
+            # Do we have an NOD from within 3 days of what VACOLS shows?
+            doc.doc_type.try(:to_i) == type_id && doc.received_at &&
+              (doc.received_at.beginning_of_day - c.send(field).beginning_of_day).to_i < ALTERNATIVE_AGE_THRESHOLD
+          end
+
+          if !alt.nil?
+            days = (alt.received_at.beginning_of_day - c.send(field).beginning_of_day) / 86400
+            alternatives << "#{name}: #{'+' if days > 0}#{days.to_i} day#{'s' if days.abs > 1}"
+          end
+        end
+      end
+
+      alternatives
+    end
+
+    def self.potential_label_alternatives(c)
+      alternative_doc_types = {
+        EFolder::Case::STATEMENT_IN_SUPPORT_OF_CLAIM_DOC_TYPE_ID => "VA 21-4138 Statement In Support of Claim",
+        EFolder::Case::THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID => "Third Party Correspondence",
+        EFolder::Case::CORRESPONDENCE_DOC_TYPE_ID => "Correspondence",
+      }
+
+      alternatives = []
+      mismatched_docs = mismatched_dates(c)
+      [["NOD", :bfdnod], ["Form 9", :bdf19]].each do |name, field|
+        if mismatched_docs.include?(name)
+          alt = c.efolder_case.documents.detect do |doc|
+            alternative_doc_types.include?(doc.doc_type.try(:to_i)) &&
+              doc.received_at.try(:beginning_of_day) == c.send(field).beginning_of_day
+          end
+
+          if !alt.nil?
+            alternatives << "#{name}: #{alternative_doc_types[alt.doc_type.to_i]}"
+          end
+        end
+      end
+
+      alternatives
     end
 
     def self.bool_cell(value)
@@ -131,7 +182,7 @@ module Caseflow
       end
 
       def spreadsheet_columns
-        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED"]
+        ["BFKEY", "TYPE", "AOJ", "MISMATCHED DATES", "NOD DATE", "CERT DATE", "HAS HEARING PENDING", "CORLID", "IS MERGED", "POTENTIAL DATE ALTERNATIVES", "POTENTIAL LABEL ALTERNATIVES"]
       end
 
       def spreadsheet_cells(vacols_case)
@@ -145,6 +196,8 @@ module Caseflow
           Caseflow::Reports.hearing_pending(vacols_case),
           vacols_case.bfcorlid,
           Caseflow::Reports.bool_cell(vacols_case.merged?),
+          Caseflow::Reports.potential_date_alternatives(vacols_case).join(", "),
+          Caseflow::Reports.potential_label_alternatives(vacols_case).join(", "),
         ]
       end
     end
