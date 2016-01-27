@@ -63,7 +63,10 @@ Then to launch the application, run:
 
 ### Test URLs
 
-There are several test veterans that can be used to hit the application:
+First go to [http://127.0.0.1:3000/caseflow/login]() 
+and "login" using the username `DSUSER` and leaving the password blank.
+
+Then, there are several test veterans that can be used to hit the application:
 
 - VACOLS/VBMS documents match: [`http://127.0.0.1:3000/caseflow/certifications/joe-snuffy/start`](http://127.0.0.1:3000/caseflow/certifications/joe-snuffy/start)
 - VACOLS/VBMS documents **do not** Match: [`http://127.0.0.1:3000/caseflow/certifications/janice-snuffy/start`](http://127.0.0.1:3000/caseflow/certifications/janice-snuffy/start)
