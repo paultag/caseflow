@@ -9,6 +9,7 @@
 - [SVG and Icons](README.FRONTEND.md#svg)
     - [Creating SVG icons and images](README.FRONTEND.md#svg-making)
     - [SVG icon guidelines and tips](README.FRONTEND.md#svg-guidelines)
+- [Component patterns](#component-patterns)
 
 <span id="devnotes"></span>
 ## CSS Development Notes
@@ -102,8 +103,31 @@ After you create an SVG image, you'll need to tweak it a little bit by hand. It'
 
 - **Add a `.cf-icon-*` class name.** For example, `class="cf-icon-missing"`. Shared styles for all `.cf-icon-*` icons are in `application.css.scss`, (look for the `[class|=cf-icon]` selector). Update the CSS accordingly, setting the `fill` and/or `stroke-color` properties. _Use color variables defined in [U.S. Web Design Standards](https://playbook.cio.gov/designstandards/visual-style/#colors)._ Also note that only [some SVG properties]( http://www.w3.org/TR/SVG/styling.html#SVGStylingProperties) can be changed with CSS.
 
-	```
+    ```
     .cf-icon-missing {
         fill: $color-secondary-dark;
     }
     ```
+
+## Component patterns
+
+JavaScript and CSS patterns designed for reuse.
+
+### Tooltip
+
+_Example: `_help_text.html.erb`._ 
+
+Markup is simple. Use a `div` element with a `cf-tooltip` class. Add a child `button` element and add the `cf-tooltip-trigger` class name. Add a child element with the `cf-tooltip-text` class name. This child element should be a `p`, `div`, or `span` element. 
+
+	<div class="cf-tooltip">
+        <button type="button" class="cf-btn-help cf-tooltip-trigger" aria-describedby="elementid">...</button>
+        <div class="cf-tooltip-text" role="tooltip" id="elementid" hidden="hidden">...</div>
+    </div>
+    
+For accessibility's sake, also do the following:
+
+- Add `hidden` attribute, `role="tooltip"`, and an `id` attribute to the `.cf-tooltip-text` element.
+- Add the `aria-describedby` to the `.cf-tooltip-trigger` element. Make its value match the `id` attribute for `.cf-tooltip-text`.
+
+Use the contents of `icons/icon-help.svg` for the `button` text as an inline SVG image.
+

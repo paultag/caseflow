@@ -1,8 +1,18 @@
 <%#
     Partial requires the following variables:
-    - text: A string
+    - tipid: A string used for the id and aria-describedby attributes
+    - text: A help string
+
 %>
 
-<a role="button" tabindex="0" type="button" class="btn btn-link btn-xs" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<%= text %>' aria-label='<%= text %>'>
-  <span class="glyphicon glyphicon-question-sign"></span>
-</a>
+<div class="cf-tooltip">
+    <button type="button" class="cf-btn-help cf-tooltip-trigger" aria-describedby="<%=tipid %>">
+      <object data="<%=path_to_image "icons/icon-help.svg"%>" type="image/svg+xml" title="Get help">
+        <img src="<%=path_to_image "icons/icon-help.png"%>" />
+      </object>
+
+    </button>
+    <div class="cf-tooltip-text" role="tooltip" id="<%=tipid %>" hidden="hidden">
+        <%= text %>
+    </div>
+</div>
