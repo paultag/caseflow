@@ -134,7 +134,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 legend {
-    display: table; /* Causes text to wrap in IE */
+    display: table; /* Causes legend text to wrap in IE */
     font: inherit;
     white-space: normal;
 }
@@ -148,12 +148,8 @@ dd {
     margin-left: 0;
 }
 
-.cf-position-fixed {
+.cf-pos-fixed {
     position: fixed;
-}
-
-.cf-layout-inline-block {
-    display: inline-block !important;
 }
 
 
@@ -235,6 +231,63 @@ dd {
     vertical-align: -1px;
 }
 
+/*------ Dropdowns --------*/
+.cf-dropdown {
+    $large-screen: em(640) !default;
+    display: inline-block;
+    position: relative;
+
+    a {
+       color: inherit;
+    }
+}
+
+.cf-dropdown-trigger {
+    cursor: pointer;
+
+    &::after {
+        background: url(asset-path('icons/arrow-down.svg')) 50% 100% no-repeat;
+        background-size: 100% 100%;
+        content: ' ';
+        display: inline-block;
+        height: 1rem;
+        margin-left: 1rem;
+        width: 1rem;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.cf-dropdown-menu {
+    @include unstyled-list();
+    @include transition (all 0.2s ease-in-out);
+    background: $color-white;
+    border: 1px solid $color-gray-lighter;
+    box-shadow: 0 0 10px -3px $color-gray;
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    text-align: left;
+    top: 2em;
+    width: 18rem;
+    z-index: 1;
+    padding: rem(10px) rem(20px);
+
+    a {
+        display: block;
+    }
+
+    li {
+        padding: rem(10px) 0;
+
+        &:last-child {
+            border-top: 1px solid $color-gray-lighter;
+        }
+    }
+ }
+
 /*-----------------------------------*
 * CSS based on Web Design Guidelines.
 * - Uses Neat.bourbon.io as a grid
@@ -251,18 +304,19 @@ body {
 .cf-nav {
     background: $color-white;
     color: $color-gray;
+    margin: 0;
     padding: rem(30px) 0;
     position: relative;
     border-bottom: 1px solid $color-gray-lighter;
 
-    .usa-grid {
+    .usa-grid-full {
         position: relative;
     }
+}
 
-    .cf-dropdown {
-        position: absolute;
-        right: rem(112px);
-    }
+.cf-nav-dropdown {
+    position: absolute;
+    right: 0;
 }
 
 .cf-logo {
@@ -450,7 +504,6 @@ making .cf-app-segment a grandchild element of .cf-app.
         z-index: -1;
     }
 }
-
 
 /*===========================
  * Form controls
