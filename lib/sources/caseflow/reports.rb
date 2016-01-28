@@ -66,7 +66,7 @@ module Caseflow
 
       alternatives = []
       mismatched_docs = mismatched_dates(c)
-      [["NOD", :bfdnod], ["Form 9", :bdf19]].each do |name, field|
+      [["NOD", :bfdnod], ["Form 9", :bfd19]].each do |name, field|
         if mismatched_docs.include?(name)
           alt = c.efolder_case.documents.detect do |doc|
             alternative_doc_types.include?(doc.doc_type.try(:to_i)) &&
