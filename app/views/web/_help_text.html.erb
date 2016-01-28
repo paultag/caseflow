@@ -7,9 +7,10 @@
 
 <div class="cf-tooltip">
     <button type="button" class="cf-btn-help cf-tooltip-trigger" aria-describedby="<%=tipid %>">
-      <svg class="cf-icon-help" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.8 22" style="pointer-events:none;"><path d="M12.2 21.4c-5.8 0-10.6-4.7-10.6-10.6S6.4.3 12.2.3 22.8 5 22.8 10.8 18 21.4 12.2 21.4zm.3-17.6c-2.2 0-3.9 1-5.1 2.9-.1.2-.1.5.1.6l1.8 1.4c.1.1.2.1.3.1.1 0 .3-.1.3-.2.6-.8.9-1.1 1.2-1.3.2-.1.7-.3 1.2-.3.9 0 1.7.6 1.7 1.2 0 .7-.4 1.1-1.2 1.5-1 .4-2.3 1.6-2.3 2.9v.4c0 .2.2.4.4.4h2.6c.2 0 .4-.2.4-.4 0-.3.4-1 1-1.4 1-.6 2.5-1.4 2.5-3.5.1-2.4-2.6-4.3-4.9-4.3zm1.5 11c0-.2-.2-.4-.4-.4H11c-.2 0-.4.2-.4.4v2.6c0 .2.2.4.4.4h2.6c.2 0 .4-.2.4-.4v-2.6z"/>
-          <title>Get help</title>
-      </svg>
+      <object data="<%=path_to_image "icons/icon-help.svg"%>" type="image/svg+xml" title="Get help">
+        <img src="<%=path_to_image "icons/icon-help.png"%>" />
+      </object>
+
     </button>
     <div class="cf-tooltip-text" role="tooltip" id="<%=tipid %>" hidden="hidden">
         <%= text %>
