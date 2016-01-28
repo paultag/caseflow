@@ -111,6 +111,16 @@ class ReportsTest < ActiveSupport::TestCase
     assert_equal Caseflow::Reports.potential_label_alternatives(c), ["NOD: Third Party Correspondence"]
 
     c = Caseflow::Fakes::Case.new(
+      bfd19: t1,
+      efolder_case: Caseflow::Fakes::EFolderCase.new([
+        Caseflow::Fakes::Document.new(
+          doc_type: EFolder::Case::THIRD_PARTY_CORRESPONDENCE_DOC_TYPE_ID, received_at: t1
+        )
+      ]),
+    )
+    assert_equal Caseflow::Reports.potential_label_alternatives(c), ["Form 9: Third Party Correspondence"]
+
+    c = Caseflow::Fakes::Case.new(
       bfdnod: t1,
       efolder_case: Caseflow::Fakes::EFolderCase.new([
         Caseflow::Fakes::Document.new(
