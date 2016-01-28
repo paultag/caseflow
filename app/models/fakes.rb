@@ -55,7 +55,7 @@ module Caseflow
         @bfha = bfha
         @bfhr = bfhr
 
-        @efolder_case = efolder_case
+        @efolder_case = efolder_case || EFolderCase.new(documnets: [])
       end
 
       DATE_FIELDS = [
