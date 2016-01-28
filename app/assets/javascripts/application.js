@@ -70,13 +70,17 @@ $.fn.extend({
         return padded.substr(padded.length - extract);
     },
     openItem: function() {
-        $(this).show(50);
+        $(this).show(50, function(){
+            $(this).removeAttr('hidden')
+        });
     },
     toggleItem: function() {
         $(this).toggle(50);
     },
     closeItem: function() {
-        $(this).hide(500);
+        $(this).hide(500,function(){
+            $(this).attr('hidden', 'true')
+        });
     },
     clearField: function() {
         $(this).val('');
