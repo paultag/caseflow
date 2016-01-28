@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     post '/users/auth/saml/callback', to: 'web#ssoi_saml_callback'
 
     get '/help', to: 'web#help'
+    get '/updates', to: 'web#updates'
 
     mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
   end
