@@ -404,66 +404,7 @@ making .cf-app-segment a grandchild element of .cf-app.
     }
 }
 
-/*===========================
- * Dropdowns
- * =========================*/
 
-.cf-dropdown {
-    $large-screen: em(640) !default;
-    display: inline-block;
-    position: relative;
-
-    a {
-       color: inherit;
-    }
-}
-
-.cf-dropdown-trigger {
-    cursor: pointer;
-
-    &::after {
-        background: url(asset-path('icons/arrow-down.svg')) 50% 100% no-repeat;
-        background-size: 100% 100%;
-        content: ' ';
-        display: inline-block;
-        height: 1rem;
-        margin-left: 1rem;
-        width: 1rem;
-    }
-
-    &:hover {
-        text-decoration: none;
-    }
-}
-
-.cf-dropdown-menu {
-    @include unstyled-list();
-    // @include transition (all 0.2s ease-in-out);
-    background: $color-white;
-    border: 1px solid $color-gray-lighter;
-    box-shadow: 0 0 10px -3px $color-gray;
-    display: none;
-    cursor: pointer;
-    display: none;
-    position: absolute;
-    text-align: left;
-    top: 2em;
-    width: 18rem;
-    z-index: 1;
-    padding: rem(10px) rem(20px);
-
-    a {
-        display: block;
-    }
-
-    li {
-        padding: rem(10px) 0;
-
-        &:last-child {
-            border-top: 1px solid $color-gray-lighter;
-        }
-    }
- }
 
  /*===========================
   * Tooltip
