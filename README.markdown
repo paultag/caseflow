@@ -39,7 +39,7 @@ Then use it to install dependencies:
 
 ### PDFTK
 
-To generate Form 8 PDFs, Caseflow uses a library called PDFTK. [Download this from PDF Labs](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/pdftk_server-2.02-mac_osx-10.6-setup.pkg), then install it.
+To generate Form 8 PDFs, Caseflow uses a library called PDFTK. [Download this from PDF Labs](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/pdftk_server-2.02-mac_osx-10.11-setup.pkg), then install it.
 
 ## Everytime Developer Setup
 
