@@ -101,11 +101,11 @@ class WebController < ApplicationController
     poa_name = 'Unknown'
     if poa == '8A_POWER_OF_ATTORNEY'
         poa_name = 'Power of attorney'
-    elsif poa == '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_AGENT'
+    elsif poa == '8A_AGENT'
         poa_name = 'Agent'
-    elsif poa == '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_SERVICE_ORGANIZATION'
+    elsif poa == '8A_SERVICE_ORGANIZATION'
         poa_name = 'Service organization'
-    elsif poa = '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_NO_REPRESENTATIVE'
+    elsif poa = '8A_NO_REPRESENTATIVE'
         poa_name = 'No representative'
     end
     fields['8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY'] = poa_name
