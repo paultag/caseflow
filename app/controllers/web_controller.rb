@@ -98,7 +98,7 @@ class WebController < ApplicationController
     fields = fields.each{|key, value| fields.delete(key) if value == 'NOT_APPLICABLE' }
 
     poa = fields['8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY']
-    poa_name = ""
+    poa_name = 'Unknown'
     if poa == '8A_POWER_OF_ATTORNEY'
         poa_name = 'Power of attorney'
     elsif poa == '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_AGENT'
@@ -107,8 +107,6 @@ class WebController < ApplicationController
         poa_name = 'Service organization'
     elsif poa = '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_NO_REPRESENTATIVE'
         poa_name = 'No representative'
-    else
-        poa_name = 'Unknown'
     end
     fields['8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY'] = poa_name
 
