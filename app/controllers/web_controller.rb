@@ -97,6 +97,21 @@ class WebController < ApplicationController
     ## Clear not applicable fields
     fields = fields.each{|key, value| fields.delete(key) if value == 'NOT_APPLICABLE' }
 
+    poa = fields['8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY']
+    poa_name = ""
+    if poa == '8A_POWER_OF_ATTORNEY'
+        poa_name = 'Power of attorney'
+    elsif poa == '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_AGENT'
+        poa_name = 'Agent'
+    elsif poa == '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_SERVICE_ORGANIZATION'
+        poa_name = 'Service organization'
+    elsif poa = '8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY_NO_REPRESENTATIVE'
+        poa_name = 'No representative'
+    else
+        poa_name = 'Unknown'
+    end
+    fields['8A_APPELLANT_REPRESENTED_IN_THIS_APPEAL_BY'] = poa_name
+
 
     ## Ensure that values are not set when a dependent question makes the answer not applicable
     if fields['8B_POWER_OF_ATTORNEY'] == '8B_POWER_OF_ATTORNEY'
